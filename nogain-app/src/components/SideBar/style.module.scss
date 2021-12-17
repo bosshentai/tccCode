@@ -1,0 +1,30 @@
+.leftSideBar {
+  position: absolute;
+  height: 100%;
+  width: 20rem;
+  background-color: var(--blue);
+
+  font-family: Ubuntu, sans-serif;
+  font-size: 1.4rem;
+  color: var(--white);
+
+  .imageContainer {
+    // background: black;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      width: 180px;
+      height: 130px;
+    }
+  }
+
+  .navContainer {
+    
+    width: 100%;
+  
+    
+  }
+}
