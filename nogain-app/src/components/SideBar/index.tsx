@@ -26,6 +26,7 @@ type icon = {
 type item = {
   name: string;
   icon: icon;
+  linkPath: string;
 }
 
 export function SideBar() {
@@ -43,7 +44,8 @@ export function SideBar() {
     icon: {
       blueicon: blueClient,
       whiteicon: whiteClient,
-    }
+    },
+    linkPath: "/client",
   }
 
   const menuTrainingPlan: item = {
@@ -51,7 +53,8 @@ export function SideBar() {
     icon: {
       blueicon: blueTrainingPlan,
       whiteicon: whiteTrainingPlan,
-    }
+    },
+    linkPath: "/trainingPlan",
   }
 
 
@@ -60,7 +63,8 @@ export function SideBar() {
     icon: {
       blueicon: blueDiscount,
       whiteicon: whiteDiscount,
-    }
+    },
+    linkPath: "/discount",
   }
 
 
@@ -69,7 +73,8 @@ export function SideBar() {
     icon: {
       blueicon: blueEmployee,
       whiteicon: whiteEmployee,
-    }
+    },
+    linkPath: "/employee",
   }
 
   const menuPersonalTrainer: item = {
@@ -77,27 +82,28 @@ export function SideBar() {
     icon: {
       blueicon: bluePersonalTrainer,
       whiteicon: whitePersonalTrainer,
-    }
+    },
+    linkPath: "/personalTrainer",
   }
 
 
-  // const menuPersonalTrainerName = "Personal Trainer";
+
 
 
   
 
   return (
-    <div className={styles.leftSideBar}>
+    <header className={styles.leftSideBar}>
       <div className={styles.imageContainer}>
         <img src={logoImg} alt="logo" className={styles.logo} />
       </div>
       <nav className={styles.navContainer}>
-        <MenuItem name={menuClient.name} icon={menuClient.icon} />
-        <MenuItem name={menuTrainingPlan.name} icon={menuTrainingPlan.icon} />
-        <MenuItem name={menuDiscount.name} icon={menuTrainingPlan.icon} />
-        <MenuItem name={menuEmployee.name} icon={menuEmployee.icon} />
-        <MenuItem name={menuPersonalTrainer.name} icon={menuPersonalTrainer.icon} />
+        <MenuItem name={menuClient.name} icon={menuClient.icon} linkPath={menuClient.linkPath} />
+        <MenuItem name={menuTrainingPlan.name} icon={menuTrainingPlan.icon} linkPath={menuTrainingPlan.linkPath} />
+        <MenuItem name={menuDiscount.name} icon={menuTrainingPlan.icon} linkPath={menuDiscount.linkPath} />
+        <MenuItem name={menuEmployee.name} icon={menuEmployee.icon} linkPath={menuEmployee.linkPath} />
+        <MenuItem name={menuPersonalTrainer.name} icon={menuPersonalTrainer.icon} linkPath={menuPersonalTrainer.linkPath} />
       </nav>
-    </div>
+    </header>
   );
 }
