@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-// import {NavLink} from "react-router-dom";
+import React from "react";
+
 import styles from "./style.module.scss";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 type item = {
   name: string;
   icon: {
@@ -9,11 +9,12 @@ type item = {
     whiteicon: string;
   };
   linkPath: string;
+  
 };
 
 export const MenuItem = (props: item) => {
   const [isHover, setHover] = React.useState(false);
-  const [isActive, setActive] = React.useState(false);
+  // const [isActive, setActive] = React.useState(false);
 
   const name = props.name;
 
@@ -21,16 +22,16 @@ export const MenuItem = (props: item) => {
 
   const linkPath = props.linkPath;
 
-  useEffect(() => {
-    const location = window.location.pathname;
-    if (location === linkPath) {
-      setActive(true);
-      console.log(isActive);
-    } else {
-      setActive(false);
-      console.log(isActive);
-    }
-  }, [isActive]);
+  // useEffect(() => {
+  //   const location = window.location.pathname;
+  //   if (location === linkPath) {
+  //     setActive(true);
+  //     console.log(isActive);
+  //   } else {
+  //     setActive(false);
+  //     console.log(isActive);
+  //   }
+  // }, [isActive]);
 
   // console.log(icon)
 
