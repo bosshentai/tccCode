@@ -4,17 +4,23 @@
 
   height: 100%;
 
-  .main {
-    // background-color: red;
-    height: 44em;
-    width: 60em;
-    position: absolute;
+  .rightSide {
+    height: 100%;
 
+    width: calc(100% - 20em);
+
+    position: absolute;
     right: 0;
     bottom: 0;
 
-    // display: flex;
-    // text-align: center;
-    // justify-content: center;
+    .main {
+      //  background-color: red;
+
+      height: 44em;
+
+      display: flex;
+      text-align: center;
+      justify-content: center;
+    }
   }
 }

@@ -1,12 +1,19 @@
-import { Fragment } from "react"
-import { SideBar } from "../SideBar"
+// import { Fragment } from "react"
 
+import { Profile } from "../Profile";
 
-import style from "./style.module.scss"
+import { SideBar } from "../SideBar";
 
-export const Layout = (props:any) => {
-  return  <div className={style.container}>
-    <SideBar/>
-    <main className={style.main}>{props.children}</main>
-  </div>
-}
+import style from "./style.module.scss";
+
+export const Layout = (props: any) => {
+  return (
+    <div className={style.container}>
+      <SideBar />
+      <div className={style.rightSide}>
+        <Profile />
+        <main className={style.main}>{props.children}</main>
+      </div>
+    </div>
+  );
+};
