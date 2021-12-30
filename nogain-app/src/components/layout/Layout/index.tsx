@@ -2,14 +2,14 @@
 
 import { Profile } from "../Profile";
 
-import { SideBar } from "../SideBar";
+import { MainBar } from "../SideBar/MainBar";
 
 import style from "./style.module.scss";
 
 export const Layout = (props: any) => {
   return (
     <div className={style.container}>
-      <SideBar />
+      <MainBar />
       <div className={style.rightSide}>
         <Profile />
         <main className={style.main}>{props.children}</main>

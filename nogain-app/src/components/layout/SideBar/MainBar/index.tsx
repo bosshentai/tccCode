@@ -1,6 +1,6 @@
 import logoImg from "../../../assets/logo.svg";
 
-import { MenuItem } from "../../MenuItem";
+import { MenuItem } from "../MenuItem";
 
 // blue icon
 import blueClient from "../../../assets/icons/blueClient.svg";
@@ -31,7 +31,7 @@ type item = {
   
 };
 
-export function SideBar() {
+export function MainBar() {
   // console.log(typeof(whiteClient))
 
   // const menuClientName: string = "Cliente";
