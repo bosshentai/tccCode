@@ -1,20 +1,21 @@
-import logoImg from "../../../assets/logo.svg";
+
+import logoImg from "../../../../assets/logo.svg";
 
 import { MenuItem } from "../MenuItem";
 
 // blue icon
-import blueClient from "../../../assets/icons/blueClient.svg";
-import blueTrainingPlan from "../../../assets/icons/blueTrainingPlan.svg";
-import blueDiscount from "../../../assets/icons/blueDiscount.svg";
-import blueEmployee from "../../../assets/icons/blueEmployee.svg";
-import bluePersonalTrainer from "../../../assets/icons/bluePersonalTrainer.svg";
+import blueClient from "../../../../assets/icons/blueClient.svg";
+import blueTrainingPlan from "../../../../assets/icons/blueTrainingPlan.svg";
+import blueDiscount from "../../../../assets/icons/blueDiscount.svg";
+import blueEmployee from "../../../../assets/icons/blueEmployee.svg";
+import bluePersonalTrainer from "../../../../assets/icons/bluePersonalTrainer.svg";
 
 // white icon
-import whiteClient from "../../../assets/icons/whiteClient.svg";
-import whiteTrainingPlan from "../../../assets/icons/whiteTrainingPlan.svg";
-import whiteDiscount from "../../../assets/icons/whiteDiscount.svg";
-import whiteEmployee from "../../../assets/icons/whiteEmployee.svg";
-import whitePersonalTrainer from "../../../assets/icons/whitePersonalTrainer.svg";
+import whiteClient from "../../../../assets/icons/whiteClient.svg";
+import whiteTrainingPlan from "../../../../assets/icons/whiteTrainingPlan.svg";
+import whiteDiscount from "../../../../assets/icons/whiteDiscount.svg";
+import whiteEmployee from "../../../../assets/icons/whiteEmployee.svg";
+import whitePersonalTrainer from "../../../../assets/icons/whitePersonalTrainer.svg";
 
 import styles from "./style.module.scss";
 
