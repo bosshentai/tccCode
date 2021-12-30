@@ -33,13 +33,6 @@ type item = {
 };
 
 export function MainBar() {
-  // console.log(typeof(whiteClient))
-
-  // const menuClientName: string = "Cliente";
-  // const menuClientIcon: icon = {
-  //   blueicon: blueClient,
-  //   whiteicon: whiteClient,
-  // };
 
   const menuClient: item = {
     name: "Cliente",

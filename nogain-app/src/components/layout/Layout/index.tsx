@@ -11,7 +11,7 @@ export const Layout = (props: any) => {
     <div className={style.container}>
       <MainBar />
       <div className={style.rightSide}>
-        <Profile />
+        <Profile/>
         <main className={style.main}>{props.children}</main>
       </div>
     </div>
