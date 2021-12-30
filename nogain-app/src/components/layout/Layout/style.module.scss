@@ -1,8 +1,9 @@
-.container {
-  position: relative;
+.layoutContainer {
+  position: absolute;
   display: flex;
 
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 
   background-color: black;
 
@@ -16,9 +17,8 @@
     bottom: 0;
 
     .main {
-      // background-color: black;
-
-      height: 44em;
+      
+      height: calc(100% - 10em);
 
       display: flex;
       text-align: center;

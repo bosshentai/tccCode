@@ -1,9 +1,13 @@
-import styles from "./styles.module.scss";
+
+
+import { DefaultPage } from "../../components/layout/DefaultPage";
+
+// import styles from "./styles.module.scss";
 
 export const Welcome = () => {
   return (
-    <div className={styles.container}>
+    <DefaultPage>
       <h1>BEM-VINDO</h1>
-    </div>
+    </DefaultPage>
   );
 };

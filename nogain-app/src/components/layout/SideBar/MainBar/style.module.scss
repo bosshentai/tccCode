@@ -1,6 +1,6 @@
 .leftSideBar {
   
-  height: 100vh;
+  height: 100%;
   width: 20rem;
   background-color: var(--blue);
 
@@ -9,7 +9,7 @@
   color: var(--white);
 
   .imageContainer {
-    // background: black;
+    
     height: 10rem;
     display: flex;
     justify-content: center;

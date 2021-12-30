@@ -10,10 +10,22 @@
   --blue: #246ee3;
   --white: #ffffff;
   --lightBlue : rgba(36, 110, 227, 0.2);
+
+
 }
 
 body{
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
   width: 100%;
+
+
  
 }
+
+#root{
+  height: 100%;
+  width: 100%;
+}
+
+

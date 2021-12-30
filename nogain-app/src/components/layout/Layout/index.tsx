@@ -1,6 +1,6 @@
 // import { Fragment } from "react"
 
-import { Profile } from "../Profile";
+import { Profile } from "../../User/Profile";
 
 import { MainBar } from "../SideBar/MainBar";
 
@@ -8,7 +8,7 @@ import style from "./style.module.scss";
 
 export const Layout = (props: any) => {
   return (
-    <div className={style.container}>
+    <div className={style.layoutContainer}>
       <MainBar />
       <div className={style.rightSide}>
         <Profile/>
