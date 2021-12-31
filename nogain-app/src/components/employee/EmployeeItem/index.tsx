@@ -1,16 +1,26 @@
 import styles from "./styles.module.scss";
 
-export const EmployeeItem = () => {
+type employeeInfo ={
+  id : string
+  name: string;
+  email: string;
+  status: string;
+}
+
+export const EmployeeItem = (props: employeeInfo) => {
+
+  const {id, name, email, status} = props;
+
   return (
-    <li className={styles.employeeContainer}>
+    <li key={id} className={styles.employeeContainer}>
       <div className={styles.info}>
-        <p>Hernâni Baptista</p>
+        <p>{name}</p>
       </div>
       <div className={styles.info}>
-        <p>baptistamhernani@gmail.com</p>
+        <p>{email}</p>
       </div>
       <div>
-        <p>Ativo</p>
+        <p>{status}</p>
       </div>
     </li>
   );

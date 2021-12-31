@@ -1,64 +1,10 @@
-// .listEmptyContainer {
-//   display: flex;
-//   text-align: center;
-//   justify-content: center;
-//   flex-direction: column;
-// }
-// .p {
-//   color: var(--blue);
-// }
-// .table {
-//   width: 100%;
-//   height: 40rem;
-//   thead {
-//     height: 2rem;
-//     border-right: 1px solid var(--blue);
-//     th {
-//     }
-//   }
-// }
 
 
 
 .p{
   font-family: "Alfa Slab One", cursive;
+  color: var(--blue);
+  font-weight: normal;
+  font-size: 2.5rem;
 }
 
-.tableContainer {
-  //  background: red;
-
-  height: 40rem;
-  width: 100%;
-
-  font-family: 'Ubuntu', sans-serif;
-
-  .header {
-    display: flex;
-    // background: red;
-
-    height: 3rem;
-    width: 100%;
-
-    border: 2px solid var(--blue);
-
-    .title{
-      // background: red;
-
-      display: flex;
-      width: 25rem;
-      // border: 2px solid var(--blue);
-
-      text-align: center;    
-      align-items: center;
-      justify-content: space-around;
-    }
-
-    .title:nth-child(-n+2){
-      border-right: 2px solid var(--blue); 
-    }
-
-  }
-
-  // display: flex;
-  // flex-direction: row;
-}

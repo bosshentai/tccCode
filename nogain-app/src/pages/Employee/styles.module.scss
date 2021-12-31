@@ -1,0 +1,40 @@
+.tableContainer {
+  //  background: red;
+
+  height: 40rem;
+  width: 100%;
+
+  font-family: 'Ubuntu', sans-serif;
+
+  background: white;
+
+  .header {
+    display: flex;
+    // background: red;
+
+    height: 3rem;
+    width: 100%;
+
+    border: 2px solid var(--blue);
+
+    .title{
+      // background: red;
+
+      display: flex;
+      width: 34rem;
+      // border: 2px solid var(--blue);
+
+      text-align: center;    
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .title:nth-child(-n+2){
+      border-right: 2px solid var(--blue); 
+    }
+
+  }
+
+  // display: flex;
+  // flex-direction: row;
+}
