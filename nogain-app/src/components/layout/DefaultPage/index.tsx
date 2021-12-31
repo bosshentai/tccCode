@@ -2,7 +2,11 @@
 import styles from "./styles.module.scss";
 
 export const DefaultPage = (props: any) => {
-  return <div className={styles.pageContainer}> 
+
+
+  const classNameController = `${styles.pageContainer}  ${props.className}`;
+
+  return <div className={classNameController}> 
       {props.children}
   </div>
 }
