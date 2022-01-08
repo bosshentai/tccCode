@@ -9,6 +9,8 @@ import { Employee } from "./pages/Employee";
 import { TrainingPlan } from "./pages/TrainingPlan";
 import { PersonalTrainer } from "./pages/PersonalTrainer";
 
+// const Client = lazy(() => import ("./pages/Client"));
+
 function App() {
   return (
     <Layout>

@@ -41,4 +41,16 @@
   .info{
     color: black;
   }
+
+  .statusActive{
+    color: green;
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  .statusInactive{
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+  }
 }
