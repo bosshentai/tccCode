@@ -1,0 +1,8 @@
+{
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.suggest.completeFunctionCalls": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.parameterTypes.enabled": true
+}

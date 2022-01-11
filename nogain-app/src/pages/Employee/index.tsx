@@ -8,6 +8,10 @@ export const Employee = () => {
   const [listEmpty, setListEmpty] = useState(false);
 
   const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
+
+  
+
+
   return (
     <DefaultPage className={classDefaultController}>
       {listEmpty && <p className={styles.p}>Sem funcionarios</p>}
@@ -26,7 +30,9 @@ export const Employee = () => {
       )}
 
       <div className={styles.btnContainer}>
-        <button>Adicionar Funcionario</button>
+        <button>
+          <p>Adicionar Funcionario</p>
+        </button>
       </div>
     </DefaultPage>
   );

@@ -1,7 +1,10 @@
 .tableContainer {
   //  background: red;
 
-  height: 40rem;
+  max-height: 40rem;
+  height: calc(40rem - 2rem);
+  min-height: 38rem;
+
   width: 100%;
 
   font-family: "Ubuntu", sans-serif;
@@ -33,24 +36,41 @@
       border-right: 2px solid var(--blue);
     }
   }
-
 }
 
 .btnContainer {
-  // background: red;
+  //  background: red;
   width: 100%;
-  height: calc(100% - 40em);
+
+  max-height: calc(100% - 40em);
+
+  height: calc(100% - 42em);
+
+  min-height: calc(100% - 38rem);
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  button{
+  button {
     background: var(--blue);
     // width: calc(100% - 70rem);
-    width: 426px;
-    height: 4em;
+    max-width: 600px;
+    width: calc(600px - 15rem);
+    min-width: 200px;
+    height: 3em;
     border: none;
     border-radius: 13px;
     color: var(--white);
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+
+    &:hover {
+      background: rgba(36, 110, 227, 0.5);
+     transition: all 0.3s ease-in-out;
+    }
   }
 }
