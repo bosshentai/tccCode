@@ -19,14 +19,14 @@ export const EmployeeItem = (props: employeeInfo) => {
     } else {
       setIsActive(false);
     }
-  }, [isActive]);
+  }, [isActive,status]);
 
   const statusClasseControle = isActive
     ? styles.statusActive
     : styles.statusInactive;
 
   return (
-    <li key={id} className={styles.employeeContainer}>
+    <li key={id} id={id} className={styles.employeeContainer}>
       <div className={styles.info}>
         <p>{name}</p>
       </div>
