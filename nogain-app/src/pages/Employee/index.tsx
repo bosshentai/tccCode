@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { EmployeeList } from "../../components/employee/EmployeeList";
 import { DefaultPage } from "../../components/layout/DefaultPage";
+import { Backdrop } from "../../components/UI/Backdrop";
 
 import styles from "./styles.module.scss";
 
+const portalElement = document.getElementById("overlays") as HTMLElement;
 
-
-
+type employee = {
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+};
 
 const DUMMY_DATA = [
   {
@@ -24,40 +31,31 @@ const DUMMY_DATA = [
 ];
 
 export const Employee = () => {
-
   const [listEmpty, setListEmpty] = useState(true);
 
+  // const [addEmployeeIsShown, setEmployeeIsShown] = useState(false);
 
-  const [addEmployeeIsShown,setEmployeeIsShown] = useState(false);
-
-
-  // console.log(DUMMY_DATA.length)
+  const [listEmployee, setListEmployee] = useState<employee[]>(DUMMY_DATA);
 
   useEffect(() => {
-    if (DUMMY_DATA.length === 0) {
+    if (listEmployee.length === 0) {
       setListEmpty(true);
-      
-      
-    }else {
+    } else {
       setListEmpty(false);
     }
-  },[])
-
-
-  
-
-  
+  }, [listEmployee, setListEmployee]);
 
   const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
 
+  const showAddEmployeeHandler = () => {
+    // setEmployeeIsShown(true);
 
-  const showAddEmployeeHandler = () =>{
-    // console.log("Abriou");
-    setEmployeeIsShown(true);
-  }
-
-  
-
+    console.log("click");
+    console.log(portalElement);
+    // ReactDOM.createPortal(<Backdrop/>, portalElement)
+    ReactDOM.createPortal(<div>Teste</div>, portalElement);
+    console.log(portalElement);
+  };
 
   return (
     <DefaultPage className={classDefaultController}>
@@ -72,14 +70,14 @@ export const Employee = () => {
             <div className={styles.title}>Email</div>
             <div className={styles.title}>Status</div>
           </div>
-          <EmployeeList employees={DUMMY_DATA}/>
+          <EmployeeList employees={DUMMY_DATA} />
         </div>
       )}
 
       <div className={styles.btnContainer}>
         <button onClick={showAddEmployeeHandler}>
           <p>Adicionar Funcionario</p>
-        // </button> 
+        </button>
       </div>
     </DefaultPage>
   );
