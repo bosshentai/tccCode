@@ -1,11 +1,27 @@
+import React, { useState } from "react";
+
 import styles from "./styles.module.scss";
 
 import whiteCross from "../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../assets/icons/blueCross.svg";
-import { useState } from "react";
+
+import { validName } from "../../../util/validName";
 
 export const AddEmployee = () => {
   const [isHover, setHover] = useState(false);
+
+  const [enteredName, setEnteredName] = useState("");
+  // const [isNameValid, setNameValid] = useState();
+
+  const nameInputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    let isValid = validName.test(event.target.value);
+
+    if (isValid) {
+      setEnteredName(event.target.value);
+    }
+  };
 
   const hoverHandler = () => {
     setHover(true);
@@ -29,14 +45,18 @@ export const AddEmployee = () => {
           onMouseLeave={leaveHandler}
         >
           {/* <button>Close</button> */}
-          <img src={iconChange} />
+          <img src={iconChange} alt="close" />
         </button>
       </div>
 
       <div className={styles.formContainer}>
         <div className={styles.inputContainer}>
           <label>Nome Completo</label>
-          <input type="text" />
+          <input
+            value={enteredName}
+            onChange={nameInputChangeHandler}
+            type="text"
+          />
         </div>
         <div className={styles.twoinputrow}>
           <div className={styles.inputContainer}>
