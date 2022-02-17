@@ -1,8 +1,8 @@
 // import { Fragment } from "react"
 
-import { Profile } from "../../User/Profile";
+import { Profile } from "../../Profile";
 
-import { MainBar } from "../SideBar/MainBar";
+import { MainBar } from "../../Navigation/MainBar";
 
 import style from "./style.module.scss";
 

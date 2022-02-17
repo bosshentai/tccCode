@@ -115,27 +115,29 @@
           background-color: rgba(36, 110, 227, 0.06);
         }
 
-        
-          }
-         input[type="date"]{
-           color: #4b88e8 ;
-          cursor: pointer;
+        &::placeholder {
+          color: #4b88e8;
+        }
+      }
+      input[type="date"] {
+        color: #4b88e8;
+        cursor: pointer;
 
-          &::-webkit-calendar-picker-indicator{
+        &::-webkit-calendar-picker-indicator {
+          // adiciona 1 icon la direto
+          background: red;
+        }
+      }
 
-            // adiciona 1 icon la direto
-            background: red;
-            // color: #4b88e8;
-            // color-scheme: #246ee3;
-            // opacity: 0;
-          }
+      .invalidInput {
+        background-color: rgba(255, 0, 0, 0.13);
+        border-bottom: 2px solid #ff0000;
 
-          // &::-webkit-calendar-picker-indicator:hover{
-          //   // color: #4b88e8;
-          //   // color-scheme: #246ee3;
-          //   opacity: 1;
-          // }
-         } 
+        &:hover,
+        &:focus {
+          background: rgba(255, 0, 0, 0.13);
+        }
+      }
     }
 
     .btnSubmit {
@@ -151,6 +153,14 @@
       border-radius: 25px;
 
       color: white;
+      font-size: 24px;
+      line-height: 28px;
+
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(36, 110, 227, 0.5);
+      }
     }
   }
 }

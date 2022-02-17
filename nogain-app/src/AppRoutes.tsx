@@ -1,13 +1,13 @@
 
 import { Routes, Route } from "react-router-dom";
 
-import { Client } from "./pages/Client";
-import { Discount } from "./pages/Discount";
-import { Layout } from "./components/layout/Layout";
-import { Welcome } from "./pages/Welcome";
-import { Employee } from "./pages/Employee";
-import { TrainingPlan } from "./pages/TrainingPlan";
-import { PersonalTrainer } from "./pages/PersonalTrainer";
+import { Client } from "./Clients/page/Client";
+import { Discount } from "./Discount/page/Discount";
+import { Layout } from "./shared/components/layout/Layout";
+import { Welcome } from "./Welcome/page/Welcome";
+import { Employee } from "./Employee/page/Employee";
+import { TrainingPlan } from "./TrainingPlan/page/TrainingPlan";
+import { PersonalTrainer } from "./PersonalTrainer/page/PersonalTrainer";
 
 export function AppRoutes() {
   return (

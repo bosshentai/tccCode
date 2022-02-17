@@ -1,4 +1,4 @@
-import { DefaultPage } from "../../components/layout/DefaultPage";
+import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import styles from "./styles.module.scss";
 
 export const Welcome = () => {

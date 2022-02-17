@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { EmployeeList } from "../../components/employee/EmployeeList";
-import { DefaultPage } from "../../components/layout/DefaultPage";
-import { Backdrop } from "../../components/UI/Backdrop";
+import { EmployeeList } from "../../components/EmployeeList";
+import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 
 import styles from "./styles.module.scss";
 

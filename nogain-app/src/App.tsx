@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AppRoutes } from "./AppRoutes";
-import { AddEmployee } from "./components/employee/AddEmployee";
+import { AddEmployee } from "./Employee/components/AddEmployee";
 
 // const Client = lazy(() => import ("./pages/Client"));
 
