@@ -5,37 +5,28 @@ import styles from "./styles.module.scss";
 
 type ItemProps = {
   name: string;
-  icon: {
-    blueicon: string;
-    whiteicon: string;
-  };
-
   to: string;
-};
+}
+
 
 export const NavLinkItem = (props: ItemProps) => {
-  const [isHover, setIsHover] = React.useState(false);
 
-  const hoverHandler = () => {
-    setIsHover(!isHover);
-  };
 
-  const leaveHandler = () => {
-    setIsHover(false);
-  };
+  let classNameInactive = styles.navlink;
+  let classNameActive = styles.navlinkActive;
 
-  const iconController = !isHover ? props.icon.whiteicon : props.icon.blueicon;
 
   return (
     <li>
       <NavLink
-        to={props.to}
-        onMouseEnter={hoverHandler}
-        onMouseLeave={leaveHandler}
-        className={styles.navlink}
-      >
-        <img src={iconController} alt={props.name} /> <p>{props.name}</p>
+      className={({ isActive }) =>
+      isActive ? classNameActive : classNameInactive
+    }
+      to={props.to}>
+        <p>{props.name}</p>
       </NavLink>
     </li>
-  );
-};
+  )
+}
+
+

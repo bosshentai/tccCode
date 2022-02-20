@@ -5,6 +5,8 @@ import { MainHeader } from "../MainHeader";
 import styles from ".//styles.module.scss";
 
 import logo from "../../../../assets/logo.svg";
+// import { NavLinksV2 } from "../NavLinksV2";
+
 import { NavLinks } from "../NavLinks";
 
 

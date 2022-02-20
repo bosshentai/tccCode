@@ -1,5 +1,6 @@
+import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage"
 
 
 export const PersonalTrainer = () => {
-  return <h1>PersonalTrainer Page</h1>
+  return <DefaultPage>PersonalTrainer Page</DefaultPage>
 }

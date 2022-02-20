@@ -24,8 +24,8 @@ const DUMMY_DATA = [
   },
   {
     id: "2asxzad",
-    name: "Rania",
-    email: "rania@gmail.com",
+    name: "Hern",
+    email: "test@gmail.com",
     status: "Inativo",
   },
 ];

@@ -1,5 +1,6 @@
+import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage"
 
 
 export const Discount = () => {
-  return <h1> Discount Page</h1>
+  return <DefaultPage> Discount Page</DefaultPage>
 }

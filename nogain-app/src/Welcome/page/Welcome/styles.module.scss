@@ -4,12 +4,18 @@
 
 
   align-items: center;
+
+
+
   justify-content: center;
+
+  height: 80%;
 
   p {
     font-family: "Alfa Slab One", cursive;
     color: var(--blue);
-    // font-weight: 6rem;
-    font-size: 3.5rem;
+    font-weight: normal;
+    font-size: 72px;
+    line-height: 99px;
   }
 }
