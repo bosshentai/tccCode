@@ -9,12 +9,10 @@
 
   background-color: #f4f4f4;
   box-shadow: 10px 10px 20px rgba(36, 110, 227, 0.5);
+  z-index: 30;
 
   .headerContainer {
-    // font-size: 1.5rem;
-    // font-weight: bold;
-    // margin-bottom: 1rem;
-    // background-color: blue;
+ 
     display: flex;
 
     height: 83px;
@@ -125,7 +123,7 @@
 
         &::-webkit-calendar-picker-indicator {
           // adiciona 1 icon la direto
-          background: red;
+          background: none;
         }
       }
 

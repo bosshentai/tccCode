@@ -8,7 +8,14 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 import { validName } from "../../../util/validName";
 import { validEmail } from "../../../util/validEmail";
 
-export const AddEmployee = () => {
+
+type propsType = {
+  onClose: () => void;
+}
+
+
+
+export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
   // Name
@@ -135,7 +142,7 @@ export const AddEmployee = () => {
   // const emailEnteredController =
 
   return (
-    <div className={styles.addEmployeeContainer}>
+    <div className={styles.addEmployeeContainer} >
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <h1>Inscrição do Funcionario</h1>
@@ -144,8 +151,9 @@ export const AddEmployee = () => {
           className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
+          onClick={props.onClose}
         >
-          {/* <button>Close</button> */}
+
           <img src={iconChange} alt="close" />
         </button>
       </div>

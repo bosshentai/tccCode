@@ -57,18 +57,23 @@
 }
 
 .btnContainer {
-  //  background: red;
-  width: 100%;
+  // background: red;
 
-  max-height: calc(100% - 40em);
+  height: 11em;
 
-  height: calc(100% - 42em);
+  height: 11em;
 
-  min-height: calc(100% - 38rem);
+  // min-height: calc(100% - 38rem);
 
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media only screen and (max-width: 1280px) {
+    height: 6.7em;
+  }
+
+  
 
   button {
     background: var(--blue);

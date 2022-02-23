@@ -8,7 +8,7 @@ import { Welcome } from "./Welcome/page/Welcome";
 
 function App() {
   return (
-    <div>
+    <>
       <MainNavigation />
       <main>
         <Profile />
@@ -17,7 +17,7 @@ function App() {
 
         {/* <Welcome/> */}
       </main>
-    </div>
+    </>
   );
 
   // return <h1>hello</h1>

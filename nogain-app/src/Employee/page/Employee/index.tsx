@@ -5,6 +5,7 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 
 import styles from "./styles.module.scss";
+import { AddEmployee } from "../../components/AddEmployee";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
@@ -51,9 +52,20 @@ export const Employee = () => {
     setEmployeeIsShown(true);
   };
 
+  const closeAddEmployeeHandler = () => {
+    setEmployeeIsShown(false);
+  };
+
   return (
     <>
-      {addEmployeeIsShown && ReactDOM.createPortal(<Backdrop />, portalElement)}
+      {addEmployeeIsShown &&
+        ReactDOM.createPortal(
+          <>
+            <Backdrop onClose={closeAddEmployeeHandler} />,
+            <AddEmployee onClose={closeAddEmployeeHandler} />
+          </>,
+          portalElement
+        )}
       <DefaultPage className={classDefaultController}>
         {listEmpty && <p className={styles.p}>Sem funcionarios</p>}
 
