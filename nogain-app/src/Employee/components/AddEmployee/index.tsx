@@ -7,13 +7,11 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 
 import { validName } from "../../../util/validName";
 import { validEmail } from "../../../util/validEmail";
-
+import { validCNI } from "../../../util/validCNI";
 
 type propsType = {
   onClose: () => void;
-}
-
-
+};
 
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
@@ -39,18 +37,29 @@ export const AddEmployee = (props: propsType) => {
   // Telephone
 
   const [enteredTelephone, setEnteredTelephone] = useState("");
-  const [enteredTelephoneTouched, setEntereedTelephoneTouched] =
-    useState(false);
+  const [enteredTelephoneTouched, setEnteredTelephoneTouched] = useState(false);
   const enteredTelephoneIsNotEmpty = enteredTelephone.trim() !== "";
   const enteredTelephoneIsValid = validEmail(enteredTelephone);
   const telephoneInputIsInvalid =
     !enteredTelephoneIsNotEmpty && enteredTelephoneTouched;
 
-  const phoneIsValid =
+  const telephoneIsValid =
     !enteredTelephoneTouched ||
     (enteredTelephoneIsValid && enteredTelephoneIsNotEmpty);
 
-  const FormIsValid = nameIsValid && emailIsValid; // function is not good enough
+  // CNI
+  const [enteredCNI, setEnteredCNI] = useState("");
+  const [enteredCNITouched, setEnteredCNITouched] = useState(false);
+  const enteredCNIIsNotEmpty = enteredCNI.trim() !== "";
+  const enteredCNIIsValid = validCNI(enteredCNI.toUpperCase());
+  const cniInputIsInvalid = !enteredCNIIsNotEmpty && enteredCNITouched;
+
+  const cniInputIsValid =
+    !enteredCNITouched || (enteredCNIIsValid && enteredCNIIsNotEmpty);
+
+  // form validation
+  const FormIsValid =
+    nameIsValid && emailIsValid && telephoneIsValid && enteredCNIIsValid; // function is not good enough
 
   // name input
   const nameInputChangeHandler = (
@@ -84,7 +93,17 @@ export const AddEmployee = (props: propsType) => {
   };
 
   const telephoneInputBlurHandler = () => {
-    setEntereedTelephoneTouched(true);
+    setEnteredTelephoneTouched(true);
+  };
+
+  const cniInputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setEnteredCNI(event.target.value);
+  };
+
+  const cniInputBlurHandler = () => {
+    setEnteredCNITouched(true);
   };
 
   const hoverHandler = () => {
@@ -100,12 +119,22 @@ export const AddEmployee = (props: propsType) => {
 
     setEnteredNameTouched(true);
     setEnteredEmailTouched(true);
+    setEnteredTelephoneTouched(true);
+    setEnteredCNITouched(true);
 
     if (nameInputIsInvalid) {
       return;
     }
 
     if (emailInputIsInvalid) {
+      return;
+    }
+
+    if (telephoneInputIsInvalid) {
+      return;
+    }
+
+    if (cniInputIsInvalid) {
       return;
     }
 
@@ -124,8 +153,12 @@ export const AddEmployee = (props: propsType) => {
 
         setEnteredName("");
         setEnteredEmail("");
+        setEnteredTelephone("");
+        setEnteredCNI("");
         setEnteredNameTouched(false);
         setEnteredEmailTouched(false);
+        setEnteredTelephoneTouched(false);
+        setEnteredCNITouched(false);
         //     }
       }
     }
@@ -141,8 +174,16 @@ export const AddEmployee = (props: propsType) => {
 
   // const emailEnteredController =
 
+  const telephoneEnteredController = telephoneIsValid
+    ? ` `
+    : `  ${styles.invalidInput}`;
+
+  const cniEnteredController = cniInputIsValid
+    ? ` `
+    : `  ${styles.invalidInput}`;
+
   return (
-    <div className={styles.addEmployeeContainer} >
+    <div className={styles.addEmployeeContainer}>
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <h1>Inscrição do Funcionario</h1>
@@ -153,7 +194,6 @@ export const AddEmployee = (props: propsType) => {
           onMouseLeave={leaveHandler}
           onClick={props.onClose}
         >
-
           <img src={iconChange} alt="close" />
         </button>
       </div>
@@ -188,6 +228,7 @@ export const AddEmployee = (props: propsType) => {
           <div className={styles.inputContainer}>
             <label>Telemóvel</label>
             <input
+              className={telephoneEnteredController}
               onBlur={telephoneInputBlurHandler}
               onChange={telephoneInputChangeHandler}
               type="tel"
@@ -198,7 +239,13 @@ export const AddEmployee = (props: propsType) => {
         <div className={styles.twoinputrow}>
           <div className={styles.inputContainer}>
             <label>CNI</label>
-            <input type="text" />
+            <input
+              className={cniEnteredController}
+              onBlur={cniInputBlurHandler}
+              onChange={cniInputChangeHandler}
+              type="text"
+              placeholder="Insira o seu CNI"
+            />
           </div>
           <div className={styles.inputContainer}>
             <label>NIF</label>
