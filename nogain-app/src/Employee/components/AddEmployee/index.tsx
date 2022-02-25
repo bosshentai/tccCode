@@ -8,6 +8,7 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 import { validName } from "../../../util/validName";
 import { validEmail } from "../../../util/validEmail";
 import { validCNI } from "../../../util/validCNI";
+import { validPhoneNumber } from "../../../util/validPhoneNumber";
 
 type propsType = {
   onClose: () => void;
@@ -16,7 +17,7 @@ type propsType = {
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
-  // Name
+  // state Name
   const [enteredName, setEnteredName] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
   const enteredNameIsNotEmpty = enteredName.trim() !== "";
@@ -24,7 +25,7 @@ export const AddEmployee = (props: propsType) => {
   const nameInputIsInvalid = !enteredNameIsNotEmpty && enteredNameTouched;
   const nameIsValid =
     !enteredNameTouched || (enteredNameIsValid && enteredNameIsNotEmpty);
-  // Email
+  // state Email
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
   const enteredEmailIsNotEmpty = enteredEmail.trim() !== "";
@@ -34,12 +35,12 @@ export const AddEmployee = (props: propsType) => {
   const emailIsValid =
     !enteredEmailTouched || (enteredEmailIsValid && enteredEmailIsNotEmpty);
 
-  // Telephone
+  // state Telephone
 
   const [enteredTelephone, setEnteredTelephone] = useState("");
   const [enteredTelephoneTouched, setEnteredTelephoneTouched] = useState(false);
   const enteredTelephoneIsNotEmpty = enteredTelephone.trim() !== "";
-  const enteredTelephoneIsValid = validEmail(enteredTelephone);
+  const enteredTelephoneIsValid = validPhoneNumber(enteredTelephone);
   const telephoneInputIsInvalid =
     !enteredTelephoneIsNotEmpty && enteredTelephoneTouched;
 
@@ -47,15 +48,23 @@ export const AddEmployee = (props: propsType) => {
     !enteredTelephoneTouched ||
     (enteredTelephoneIsValid && enteredTelephoneIsNotEmpty);
 
-  // CNI
+  // state CNI
   const [enteredCNI, setEnteredCNI] = useState("");
   const [enteredCNITouched, setEnteredCNITouched] = useState(false);
   const enteredCNIIsNotEmpty = enteredCNI.trim() !== "";
   const enteredCNIIsValid = validCNI(enteredCNI.toUpperCase());
   const cniInputIsInvalid = !enteredCNIIsNotEmpty && enteredCNITouched;
 
-  const cniInputIsValid =
+  const cniIsValid =
     !enteredCNITouched || (enteredCNIIsValid && enteredCNIIsNotEmpty);
+
+  // state NiF
+  const [enteredNIF, setEnteredNIF] = useState("");
+  const [enteredNIFTouched, setEnteredTouched] = useState(false);
+  const enteredNIFIsNotEmpty = enteredNIF.trim() !== "";
+  // miss enteredNIFIsValid
+  const nifInputIsInvalid = !enteredNIFIsNotEmpty && enteredNIFTouched;
+  const nifIsValid = !enteredNIFTouched || enteredNIFIsNotEmpty;
 
   // form validation
   const FormIsValid =
@@ -96,6 +105,7 @@ export const AddEmployee = (props: propsType) => {
     setEnteredTelephoneTouched(true);
   };
 
+  // cni input
   const cniInputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -104,6 +114,16 @@ export const AddEmployee = (props: propsType) => {
 
   const cniInputBlurHandler = () => {
     setEnteredCNITouched(true);
+  };
+
+  const nifInputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setEnteredNIF(event.target.value);
+  };
+
+  const nifInputBlurHandler = () => {
+    setEnteredTouched(true);
   };
 
   const hoverHandler = () => {
@@ -178,9 +198,9 @@ export const AddEmployee = (props: propsType) => {
     ? ` `
     : `  ${styles.invalidInput}`;
 
-  const cniEnteredController = cniInputIsValid
-    ? ` `
-    : `  ${styles.invalidInput}`;
+  const cniEnteredController = cniIsValid ? ` ` : `  ${styles.invalidInput}`;
+
+  const nifEnteredController = nifIsValid ? ` ` : `  ${styles.invalidInput}`;
 
   return (
     <div className={styles.addEmployeeContainer}>
@@ -249,7 +269,12 @@ export const AddEmployee = (props: propsType) => {
           </div>
           <div className={styles.inputContainer}>
             <label>NIF</label>
-            <input type="text" />
+            <input
+              className={nifEnteredController}
+              onBlur={nifInputBlurHandler}
+              onChange={nifInputChangeHandler}
+              type="text"
+            />
           </div>
         </div>
         <div className={styles.inputContainer}>
