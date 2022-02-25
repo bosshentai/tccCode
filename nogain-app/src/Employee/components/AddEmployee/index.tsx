@@ -5,17 +5,36 @@ import styles from "./styles.module.scss";
 import whiteCross from "../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../assets/icons/blueCross.svg";
 
+import { useInput } from "../../../shared/hooks/useInput";
+
 import { validName } from "../../../util/validName";
 import { validEmail } from "../../../util/validEmail";
 import { validCNI } from "../../../util/validCNI";
 import { validPhoneNumber } from "../../../util/validPhoneNumber";
+import { validNIF } from "../../../util/validNIF";
+import { validBirth } from "../../../util/validBirth";
 
 type propsType = {
   onClose: () => void;
 };
 
+type useInput = {
+  enteredValue: string;
+  enteredValueTouched: boolean;
+
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: () => void;
+};
+
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
+
+  // const {
+  //   value: enteredName,
+  //   touch: enteredNameTouched,
+  //   valueInputChangeHandler: nameInputChangeHandler,
+  //   valueInputBlurHandler: nameInputBlurHandler,
+  // } = useInput(validName);
 
   // state Name
   const [enteredName, setEnteredName] = useState("");
@@ -60,17 +79,26 @@ export const AddEmployee = (props: propsType) => {
 
   // state NiF
   const [enteredNIF, setEnteredNIF] = useState("");
-  const [enteredNIFTouched, setEnteredTouched] = useState(false);
+  const [enteredNIFTouched, setEnteredNIFTouched] = useState(false);
   const enteredNIFIsNotEmpty = enteredNIF.trim() !== "";
-  // miss enteredNIFIsValid
+  const enteredNIFIsValid = validNIF(enteredNIF.toUpperCase());
   const nifInputIsInvalid = !enteredNIFIsNotEmpty && enteredNIFTouched;
-  const nifIsValid = !enteredNIFTouched || enteredNIFIsNotEmpty;
+  const nifIsValid =
+    !enteredNIFTouched || (enteredNIFIsNotEmpty && enteredNIFIsValid);
+
+  // state date
+  const [enteredBirth, setEnteredBirth] = useState("");
+  const [enteredBirthTouched, setEnteredBirthTouched] = useState(false);
+  const enteredBirthIsNotEmpty = enteredBirth.trim() !== "";
+  // const enteredBirthIsValid = validBirth(enteredBirth.slice());
+  const birthInputIsInvalid = !enteredBirthIsNotEmpty && enteredBirthTouched;
+  const birthIsValid = !enteredBirthTouched || enteredBirthIsNotEmpty;
+
 
   // form validation
   const FormIsValid =
     nameIsValid && emailIsValid && telephoneIsValid && enteredCNIIsValid; // function is not good enough
 
-  // name input
   const nameInputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -116,6 +144,7 @@ export const AddEmployee = (props: propsType) => {
     setEnteredCNITouched(true);
   };
 
+  // nif input
   const nifInputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -123,8 +152,22 @@ export const AddEmployee = (props: propsType) => {
   };
 
   const nifInputBlurHandler = () => {
-    setEnteredTouched(true);
+    setEnteredNIFTouched(true);
   };
+
+  // Birth input
+  const birthInputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setEnteredBirth(event.target.value);
+  };
+  const birthInputBlurHandler = () => {
+    setEnteredBirthTouched(true)
+  }
+
+
+  // Close Button
+
 
   const hoverHandler = () => {
     setHover(true);
@@ -141,6 +184,8 @@ export const AddEmployee = (props: propsType) => {
     setEnteredEmailTouched(true);
     setEnteredTelephoneTouched(true);
     setEnteredCNITouched(true);
+    setEnteredNIFTouched(true);
+    setEnteredBirthTouched(true);
 
     if (nameInputIsInvalid) {
       return;
@@ -158,16 +203,26 @@ export const AddEmployee = (props: propsType) => {
       return;
     }
 
+    if (nifInputIsInvalid) {
+      return;
+    }
+
     if (FormIsValid) {
       if (
         enteredNameIsNotEmpty &&
         enteredEmailIsNotEmpty &&
-        enteredTelephoneIsNotEmpty
+        enteredTelephoneIsNotEmpty &&
+        enteredCNIIsNotEmpty &&
+        enteredNIFIsNotEmpty
       ) {
         //   if (enteredName.length > 10) {
         console.log({
           name: enteredName,
           email: enteredEmail,
+          telephone: enteredTelephone,
+          cni: enteredCNI,
+          nif: enteredNIF,
+          birth: enteredBirth,
           dataCreated: new Date(),
         });
 
@@ -192,8 +247,6 @@ export const AddEmployee = (props: propsType) => {
     ? ` `
     : `  ${styles.invalidInput}`;
 
-  // const emailEnteredController =
-
   const telephoneEnteredController = telephoneIsValid
     ? ` `
     : `  ${styles.invalidInput}`;
@@ -201,6 +254,8 @@ export const AddEmployee = (props: propsType) => {
   const cniEnteredController = cniIsValid ? ` ` : `  ${styles.invalidInput}`;
 
   const nifEnteredController = nifIsValid ? ` ` : `  ${styles.invalidInput}`;
+
+  const birthEnteredController = birthIsValid ? ` ` : `  ${styles.invalidInput}`;
 
   return (
     <div className={styles.addEmployeeContainer}>
@@ -230,7 +285,7 @@ export const AddEmployee = (props: propsType) => {
             onChange={nameInputChangeHandler}
             onBlur={nameInputBlurHandler}
             type="text"
-            placeholder="Insira o seu nome completo"
+            placeholder="Insira o nome completo"
           />
         </div>
         <div className={styles.twoinputrow}>
@@ -242,7 +297,7 @@ export const AddEmployee = (props: propsType) => {
               onChange={emailInputChangeHandler}
               onBlur={emailInputBlurHandler}
               type="email"
-              placeholder="Insira o seu email"
+              placeholder="Insira o email"
             />
           </div>
           <div className={styles.inputContainer}>
@@ -252,7 +307,7 @@ export const AddEmployee = (props: propsType) => {
               onBlur={telephoneInputBlurHandler}
               onChange={telephoneInputChangeHandler}
               type="tel"
-              placeholder="Insira o seu numero de telemóvel"
+              placeholder="Insira o numero de telemóvel"
             />
           </div>
         </div>
@@ -274,12 +329,19 @@ export const AddEmployee = (props: propsType) => {
               onBlur={nifInputBlurHandler}
               onChange={nifInputChangeHandler}
               type="text"
+              placeholder="Insira o seu NIF"
             />
           </div>
         </div>
         <div className={styles.inputContainer}>
           <label>Data de Nascimento</label>
-          <input type="date" />
+          <input
+          className={birthEnteredController}
+          onBlur={birthInputBlurHandler}
+          onChange={birthInputChangeHandler}
+          type="date" 
+          placeholder="Insira a data de nascimento"
+          />
         </div>
 
         <button className={styles.btnSubmit}>Inscrever</button>
