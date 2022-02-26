@@ -7,12 +7,12 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 
 import { useInput } from "../../../shared/hooks/useInput";
 
-import { validName } from "../../../util/validName";
-import { validEmail } from "../../../util/validEmail";
-import { validCNI } from "../../../util/validCNI";
-import { validPhoneNumber } from "../../../util/validPhoneNumber";
-import { validNIF } from "../../../util/validNIF";
-import { validBirth } from "../../../util/validBirth";
+import { validName } from "../../../shared/util/validName";
+import { validEmail } from "../../../shared/util/validEmail";
+import { validCNI } from "../../../shared/util/validCNI";
+import { validPhoneNumber } from "../../../shared/util/validPhoneNumber";
+import { validNIF } from "../../../shared/util/validNIF";
+import { validBirth } from "../../../shared/util/validBirth";
 
 type propsType = {
   onClose: () => void;
