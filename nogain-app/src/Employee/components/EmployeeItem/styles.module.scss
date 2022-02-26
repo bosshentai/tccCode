@@ -1,0 +1,56 @@
+
+
+.employeeContainer{
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  cursor: pointer;
+
+
+  &:hover{
+    background: rgba(36, 110, 227, 0.5);
+  }
+
+  &:nth-of-type(even){
+    background: rgba(36, 110, 227, 0.13);
+
+    &:hover{
+      background: rgba(36, 110, 227, 0.5);
+    }
+  }
+
+  
+  div{
+    // background: blue;
+    // border: yellow 1px solid;
+    width: 100%;
+    height: 3rem;
+    
+
+    display: flex;
+    justify-content: center;
+    // text-align: center;
+    align-items: center;
+    // margin: auto auto; 
+ 
+
+  }
+
+  .info{
+    color: black;
+  }
+
+  .statusActive{
+    color: green;
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  .statusInactive{
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+  }
+}

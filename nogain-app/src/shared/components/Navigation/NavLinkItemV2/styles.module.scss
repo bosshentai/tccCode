@@ -1,0 +1,65 @@
+
+
+
+.navlinkActive {
+   text-decoration: none;
+   color: #246ee3;
+
+   width: 100%;
+   height: 100%;
+   display: flex;
+
+   align-items: center;
+
+  background: white;
+
+   &:hover {
+     background: white;
+   }
+
+   img {
+     width: 40px;
+     height: 28px;
+     margin-left: 2rem;
+   }
+
+   p {
+     padding: 1.2rem;
+   }
+
+  }
+
+
+.navlink {
+  text-decoration: none;
+  color: white;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  align-items: center;
+
+  &:hover {
+    background: white;
+    color: #246ee3;
+
+    // animation-duration: 300ms;
+  }
+
+  img {
+    width: 40px;
+    height: 28px;
+    margin-left: 2rem;
+  }
+
+  p {
+    margin-left: 1.2rem;
+  }
+
+
+
+}
+
+
+

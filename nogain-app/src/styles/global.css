@@ -9,11 +9,39 @@
 :root{
   --blue: #246ee3;
   --white: #ffffff;
-  --lightBlue : rgba(36, 110, 227, 0.2);
+  --lightBlue : rgba(36, 110, 227, 0.2);  
+
+ 
+
+
+}
+
+#root{
+  width: 100vw;
+  height: 100vh;
+}
+
+#overlays{
+  position: fixed;
+  z-index: 10;
 }
 
 body{
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
   width: 100%;
+  background: #F4F4F4;
+
  
+}
+
+
+
+main{
+  height: 100%;
+  width: 100%;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
 }
