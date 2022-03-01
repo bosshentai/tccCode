@@ -1,5 +1,7 @@
 import React, { useReducer } from "react";
 
+import styles from "./styles.module.scss";
+
 // type FormState = {
 
 // }
@@ -35,12 +37,14 @@ type inputProps = {
   id: string;
   placeHolder: string;
   initialValue?: string;
+  initialValid?: boolean;
 };
 
 export const InputText = (props: inputProps) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.initialValue || "",
     isTouched: false,
+    isValid: props.initialValid || false,
   });
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,13 +61,16 @@ export const InputText = (props: inputProps) => {
   };
 
   return (
-    <div>
-    <input
-      id={props.id}
-      type="text"
-      onBlur={touchHandler}
-      placeholder={props.placeHolder}
-    />
+    <div className={styles.inputContainer}>
+      <input
+        className={`${inputState.isTouched && styles.invalidInput}`}
+        id={props.id}
+        type="text"
+        onBlur={touchHandler}
+        onChange={changeHandler}
+        placeholder={props.placeHolder}
+        value={inputState.value}
+      />
     </div>
   );
 };
