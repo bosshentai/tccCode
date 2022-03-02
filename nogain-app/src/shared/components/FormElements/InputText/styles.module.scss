@@ -60,6 +60,8 @@
       background: rgba(255, 0, 0, 0.13);
     }
 
-    
+    &::placeholder{
+      color: #ff0000;
+    }
   }
 }

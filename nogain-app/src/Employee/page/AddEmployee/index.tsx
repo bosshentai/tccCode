@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 import whiteCross from "../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../assets/icons/blueCross.svg";
 
-import { useInput } from "../../../shared/hooks/useInput";
+
 
 import { validName } from "../../../shared/util/validName";
 import { validEmail } from "../../../shared/util/validEmail";
@@ -14,6 +14,7 @@ import { validPhoneNumber } from "../../../shared/util/validPhoneNumber";
 import { validNIF } from "../../../shared/util/validNIF";
 import { validBirth } from "../../../shared/util/validBirth";
 import { InputText } from "../../../shared/components/FormElements/InputText";
+import { useForm } from "../../../shared/hooks/form-hook";
 
 type propsType = {
   onClose: () => void;
@@ -30,140 +31,17 @@ type useInput = {
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
-  // const {
-  //   value: enteredName,
-  //   touch: enteredNameTouched,
-  //   valueInputChangeHandler: nameInputChangeHandler,
-  //   valueInputBlurHandler: nameInputBlurHandler,
-  // } = useInput(validName);
-
-  // state Name
-  // const [enteredName, setEnteredName] = useState("");
-  // const [enteredNameTouched, setEnteredNameTouched] = useState(false);
-  // const enteredNameIsNotEmpty = enteredName.trim() !== "";
-  // const enteredNameIsValid = validName(enteredName);
-  // const nameInputIsInvalid = !enteredNameIsNotEmpty && enteredNameTouched;
-  // const nameIsValid =
-  //   !enteredNameTouched || (enteredNameIsValid && enteredNameIsNotEmpty);
-  // // state Email
-  // const [enteredEmail, setEnteredEmail] = useState("");
-  // const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
-  // const enteredEmailIsNotEmpty = enteredEmail.trim() !== "";
-  // const enteredEmailIsValid = validEmail(enteredEmail);
-  // const emailInputIsInvalid = !enteredEmailIsNotEmpty && enteredEmailTouched;
-
-  // const emailIsValid =
-  //   !enteredEmailTouched || (enteredEmailIsValid && enteredEmailIsNotEmpty);
-
-  // // state Telephone
-
-  // const [enteredTelephone, setEnteredTelephone] = useState("");
-  // const [enteredTelephoneTouched, setEnteredTelephoneTouched] = useState(false);
-  // const enteredTelephoneIsNotEmpty = enteredTelephone.trim() !== "";
-  // const enteredTelephoneIsValid = validPhoneNumber(enteredTelephone);
-  // const telephoneInputIsInvalid =
-  //   !enteredTelephoneIsNotEmpty && enteredTelephoneTouched;
-
-  // const telephoneIsValid =
-  //   !enteredTelephoneTouched ||
-  //   (enteredTelephoneIsValid && enteredTelephoneIsNotEmpty);
-
-  // // state CNI
-  // const [enteredCNI, setEnteredCNI] = useState("");
-  // const [enteredCNITouched, setEnteredCNITouched] = useState(false);
-  // const enteredCNIIsNotEmpty = enteredCNI.trim() !== "";
-  // const enteredCNIIsValid = validCNI(enteredCNI.toUpperCase());
-  // const cniInputIsInvalid = !enteredCNIIsNotEmpty && enteredCNITouched;
-
-  // const cniIsValid =
-  //   !enteredCNITouched || (enteredCNIIsValid && enteredCNIIsNotEmpty);
-
-  // // state NiF
-  // const [enteredNIF, setEnteredNIF] = useState("");
-  // const [enteredNIFTouched, setEnteredNIFTouched] = useState(false);
-  // const enteredNIFIsNotEmpty = enteredNIF.trim() !== "";
-  // const enteredNIFIsValid = validNIF(enteredNIF.toUpperCase());
-  // const nifInputIsInvalid = !enteredNIFIsNotEmpty && enteredNIFTouched;
-  // const nifIsValid =
-  //   !enteredNIFTouched || (enteredNIFIsNotEmpty && enteredNIFIsValid);
-
-  // // state date
-  // const [enteredBirth, setEnteredBirth] = useState("");
-  // const [enteredBirthTouched, setEnteredBirthTouched] = useState(false);
-  // const enteredBirthIsNotEmpty = enteredBirth.trim() !== "";
-  // // const enteredBirthIsValid = validBirth(enteredBirth.slice());
-  // const birthInputIsInvalid = !enteredBirthIsNotEmpty && enteredBirthTouched;
-  // const birthIsValid = !enteredBirthTouched || enteredBirthIsNotEmpty;
-
-  // // form validation
-  // const FormIsValid =
-  //   nameIsValid && emailIsValid && telephoneIsValid && enteredCNIIsValid; // function is not good enough
-
-  // const nameInputChangeHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setEnteredName(event.target.value);
-  // };
-
-  // const nameInputBlurHandler = () => {
-  //   setEnteredNameTouched(true);
-  // };
-
-  // // email input
-  // const emailInputChangeHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setEnteredEmail(event.target.value);
-  // };
-
-  // const emailInputBlurHandler = () => {
-  //   setEnteredEmailTouched(true);
-  // };
-
-  // // telephone input
-  // const telephoneInputChangeHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   // if (typeof event.target.value === "number") {
-  //   setEnteredTelephone(event.target.value);
-  //   // }
-  // };
-
-  // const telephoneInputBlurHandler = () => {
-  //   setEnteredTelephoneTouched(true);
-  // };
-
-  // // cni input
-  // const cniInputChangeHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setEnteredCNI(event.target.value);
-  // };
-
-  // const cniInputBlurHandler = () => {
-  //   setEnteredCNITouched(true);
-  // };
-
-  // // nif input
-  // const nifInputChangeHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setEnteredNIF(event.target.value);
-  // };
-
-  // const nifInputBlurHandler = () => {
-  //   setEnteredNIFTouched(true);
-  // };
-
-  // // Birth input
-  // const birthInputChangeHandler = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setEnteredBirth(event.target.value);
-  // };
-  // const birthInputBlurHandler = () => {
-  //   setEnteredBirthTouched(true)
-  // }
+  const [formState, inputHandler] = useForm(
+    {
+      name: {
+        value: "",
+      },
+      email:{
+        value: "",
+      }
+    },
+    false
+  );
 
   // Close Button
 
@@ -175,85 +53,16 @@ export const AddEmployee = (props: propsType) => {
     setHover(false);
   };
 
-  // const formRegisterEmployeeHandler = (event: React.FormEvent) => {
-  //   event.preventDefault();
+  const formRegisterEmployeeHandler = (event: React.FormEvent) => {
+    event.preventDefault();
 
-  //   setEnteredNameTouched(true);
-  //   setEnteredEmailTouched(true);
-  //   setEnteredTelephoneTouched(true);
-  //   setEnteredCNITouched(true);
-  //   setEnteredNIFTouched(true);
-  //   setEnteredBirthTouched(true);
+    console.log("in The form");
+    console.table(formState);
+  };
 
-  //   if (nameInputIsInvalid) {
-  //     return;
-  //   }
 
-  //   if (emailInputIsInvalid) {
-  //     return;
-  //   }
-
-  //   if (telephoneInputIsInvalid) {
-  //     return;
-  //   }
-
-  //   if (cniInputIsInvalid) {
-  //     return;
-  //   }
-
-  //   if (nifInputIsInvalid) {
-  //     return;
-  //   }
-
-  //   if (FormIsValid) {
-  //     if (
-  //       enteredNameIsNotEmpty &&
-  //       enteredEmailIsNotEmpty &&
-  //       enteredTelephoneIsNotEmpty &&
-  //       enteredCNIIsNotEmpty &&
-  //       enteredNIFIsNotEmpty
-  //     ) {
-  //       //   if (enteredName.length > 10) {
-  //       console.log({
-  //         name: enteredName,
-  //         email: enteredEmail,
-  //         telephone: enteredTelephone,
-  //         cni: enteredCNI,
-  //         nif: enteredNIF,
-  //         birth: enteredBirth,
-  //         dataCreated: new Date(),
-  //       });
-
-  //       setEnteredName("");
-  //       setEnteredEmail("");
-  //       setEnteredTelephone("");
-  //       setEnteredCNI("");
-  //       setEnteredNameTouched(false);
-  //       setEnteredEmailTouched(false);
-  //       setEnteredTelephoneTouched(false);
-  //       setEnteredCNITouched(false);
-  //       //     }
-  //     }
-  //   }
-  // };
 
   const iconChange = !isHover ? whiteCross : blueCross;
-
-  // const nameEnteredController = nameIsValid ? ` ` : `  ${styles.invalidInput}`;
-
-  // const emailEnteredController = emailIsValid
-  //   ? ` `
-  //   : `  ${styles.invalidInput}`;
-
-  // const telephoneEnteredController = telephoneIsValid
-  //   ? ` `
-  //   : `  ${styles.invalidInput}`;
-
-  // const cniEnteredController = cniIsValid ? ` ` : `  ${styles.invalidInput}`;
-
-  // const nifEnteredController = nifIsValid ? ` ` : `  ${styles.invalidInput}`;
-
-  // const birthEnteredController = birthIsValid ? ` ` : `  ${styles.invalidInput}`;
 
   return (
     <div className={styles.addEmployeeContainer}>
@@ -272,81 +81,56 @@ export const AddEmployee = (props: propsType) => {
       </div>
 
       <form
-        // onSubmit={formRegisterEmployeeHandler}
+        onSubmit={formRegisterEmployeeHandler}
         className={styles.formContainer}
       >
         <InputText
-          id="FullName"
+          type="text"
+          id="name"
           label="Nome Completo"
           placeHolder="Insira o nome completo"
-         
+          onInput={inputHandler}
         />
-        {/* <div className={styles.inputContainer}>
-          <label>Nome Completo</label>
-          <input
-            className={nameEnteredController}
-            value={enteredName}
-            onChange={nameInputChangeHandler}
-            onBlur={nameInputBlurHandler}
+        <div className={styles.twoinputrow}>
+          <InputText
+            type="email"
+            id="email"
+            label="Email"
+            placeHolder="Insira o email"
+            onInput={inputHandler}
+          />
+          <InputText
+            type="tel"
+            id="tel"
+            label="Telemóvel"
+            placeHolder="Insira o email"
+            onInput={inputHandler}
+          />
+        </div>
+        <div className={styles.twoinputrow}>
+          <InputText
             type="text"
-            placeholder="Insira o nome completo"
+            id="CNI"
+            label="CNI"
+            placeHolder="Insira o CNI"
+            onInput={inputHandler}
+          />
+          <InputText
+            type="text"
+            id="NIF"
+            label="NIF"
+            placeHolder="Insira o NIF"
+            onInput={inputHandler}
           />
         </div>
-        <div className={styles.twoinputrow}>
-          <div className={styles.inputContainer}>
-            <label>Email</label>
-            <input
-              className={emailEnteredController}
-              value={enteredEmail}
-              onChange={emailInputChangeHandler}
-              onBlur={emailInputBlurHandler}
-              type="email"
-              placeholder="Insira o email"
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <label>Telemóvel</label>
-            <input
-              className={telephoneEnteredController}
-              onBlur={telephoneInputBlurHandler}
-              onChange={telephoneInputChangeHandler}
-              type="tel"
-              placeholder="Insira o numero de telemóvel"
-            />
-          </div>
-        </div>
-        <div className={styles.twoinputrow}>
-          <div className={styles.inputContainer}>
-            <label>CNI</label>
-            <input
-              className={cniEnteredController}
-              onBlur={cniInputBlurHandler}
-              onChange={cniInputChangeHandler}
-              type="text"
-              placeholder="Insira o seu CNI"
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <label>NIF</label>
-            <input
-              className={nifEnteredController}
-              onBlur={nifInputBlurHandler}
-              onChange={nifInputChangeHandler}
-              type="text"
-              placeholder="Insira o seu NIF"
-            />
-          </div>
-        </div>
-        <div className={styles.inputContainer}>
-          <label>Data de Nascimento</label>
-          <input
-          className={birthEnteredController}
-          onBlur={birthInputBlurHandler}
-          onChange={birthInputChangeHandler}
-          type="date" 
-          placeholder="Insira a data de nascimento"
-          />
-        </div> */}
+        <InputText
+          type="date"
+          id="birth"
+          label="Data de Nascimento"
+          placeHolder="dd/mm/yyyy"
+          onInput={inputHandler}
+        />
+
 
         <button className={styles.btnSubmit}>Inscrever</button>
       </form>
