@@ -5,14 +5,6 @@ import styles from "./styles.module.scss";
 import whiteCross from "../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../assets/icons/blueCross.svg";
 
-
-
-import { validName } from "../../../shared/util/validName";
-import { validEmail } from "../../../shared/util/validEmail";
-import { validCNI } from "../../../shared/util/validCNI";
-import { validPhoneNumber } from "../../../shared/util/validPhoneNumber";
-import { validNIF } from "../../../shared/util/validNIF";
-import { validBirth } from "../../../shared/util/validBirth";
 import { InputText } from "../../../shared/components/FormElements/InputText";
 import { useForm } from "../../../shared/hooks/form-hook";
 
@@ -35,9 +27,27 @@ export const AddEmployee = (props: propsType) => {
     {
       name: {
         value: "",
+        isValid: false,
       },
-      email:{
+      email: {
         value: "",
+        isValid: false,
+      },
+      tel: {
+        value: "",
+        isValid: false,
+      },
+      cni:{
+        value: "",
+        isValid: false,
+      },
+      nif:{
+        value: "",
+        isValid: false,
+      },
+      birth:{
+        value: "",
+        isValid: false,
       }
     },
     false
@@ -57,10 +67,8 @@ export const AddEmployee = (props: propsType) => {
     event.preventDefault();
 
     console.log("in The form");
-    console.table(formState);
+    console.table(formState.inputs);
   };
-
-
 
   const iconChange = !isHover ? whiteCross : blueCross;
 
@@ -130,7 +138,6 @@ export const AddEmployee = (props: propsType) => {
           placeHolder="dd/mm/yyyy"
           onInput={inputHandler}
         />
-
 
         <button className={styles.btnSubmit}>Inscrever</button>
       </form>

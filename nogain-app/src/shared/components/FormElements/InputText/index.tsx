@@ -47,7 +47,7 @@ type inputProps = {
   placeHolder: string;
   label: string;
   type: string;
-  onInput: (value: string) => void;
+  onInput: (id: string, value: string, isValid: boolean) => void;
   initialValue?: string;
   initialValid?: boolean;
 };
@@ -82,9 +82,12 @@ export const InputText = (props: inputProps) => {
     isValid: props.initialValid || false,
   });
 
+  const { id, onInput } = props;
+  const { value, isValid } = inputState;
+
   useEffect(() => {
-    props.onInput(inputState.value);
-  }, [props.onInput, inputState.value]);
+    onInput(id, value, isValid);
+  }, [id, value, onInput, value]);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -163,7 +166,7 @@ export const InputText = (props: inputProps) => {
   // console.table(inputState);
 
   // console.table(inputState.value);
-  
+
   console.log(inputState.value.length);
 
   return (
