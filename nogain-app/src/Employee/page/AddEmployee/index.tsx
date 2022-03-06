@@ -37,18 +37,18 @@ export const AddEmployee = (props: propsType) => {
         value: "",
         isValid: false,
       },
-      cni:{
+      cni: {
         value: "",
         isValid: false,
       },
-      nif:{
+      nif: {
         value: "",
         isValid: false,
       },
-      birth:{
+      birth: {
         value: "",
         isValid: false,
-      }
+      },
     },
     false
   );
@@ -66,8 +66,14 @@ export const AddEmployee = (props: propsType) => {
   const formRegisterEmployeeHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    console.log("in The form");
-    console.table(formState.inputs);
+   
+    if (formState.isValid === true) {
+      console.table(formState.inputs);
+      console.log("in The form");
+    }
+    else {
+      console.log("invalid form");
+    }
   };
 
   const iconChange = !isHover ? whiteCross : blueCross;

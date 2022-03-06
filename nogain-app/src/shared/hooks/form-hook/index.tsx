@@ -7,6 +7,7 @@ enum ActionType {
 
 type input = {
   [id: string]: {
+
     value: string;
     isValid: boolean;
   };
@@ -20,6 +21,7 @@ type Action =
       value: string;
       isValid: boolean;
       inputs?: input[] ;
+     
       
     }
   | { type: ActionType.SETDATA; inputs: any };
@@ -27,6 +29,17 @@ type Action =
 const formReducer = (_state: any, action: Action) => {
   switch (action.type) {
     case ActionType.INPUTCHANGE: {
+      let formIsValid = true;
+      for (const inputId in _state.inputs){
+        if(!_state.inputs[inputId]){
+          continue;
+        }
+        if (inputId === action.inputId){
+          formIsValid = formIsValid && action.isValid;
+        } else {
+          formIsValid = formIsValid && _state.inputs[inputId].isValid;
+        }
+      }
       // for (const inputId in _state.inputs) {
       //   if (!_state.inputs[inputId]) {
       //     continue;
@@ -41,6 +54,7 @@ const formReducer = (_state: any, action: Action) => {
           ..._state.inputs,
           [action.inputId]: { value: action.value, isValid: action.isValid },
         },
+        isValid: formIsValid
       };
     }
 
