@@ -5,7 +5,7 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 
 import styles from "./styles.module.scss";
-import { AddEmployee } from "../../components/AddEmployee";
+import { AddEmployee } from "../AddEmployee";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
