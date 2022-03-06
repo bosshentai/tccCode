@@ -14,7 +14,7 @@ services:
       - "host.docker.internal:172.17.0.1"
 
   db:
-    build: ././docker/mongo
+    build: ./.docker/mongo
     restart: always
     tty: true
     volumes:

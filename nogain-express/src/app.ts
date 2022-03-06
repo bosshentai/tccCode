@@ -1,17 +1,18 @@
 import express from 'express';
 const bodyParser = require('body-parser');
+const HttpError = require('./models/http-error');
 
 // let express = require('express');
-const employeeRoutes = require('./routes/employee-routes');
+// const employeeRoutes = require('./routes/employee-routes');
 
 
 const app = express();
 
-const port = 5000;
+const port = 3000;
 
 app.use(bodyParser.json());
 
-app.use("api/employee", employeeRoutes);
+// app.use("api/employee", employeeRoutes);
 
 
 app.use((req, res, next) => {
