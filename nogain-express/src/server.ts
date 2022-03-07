@@ -1,9 +1,14 @@
 import 'reflect-metadata';
 import express from 'express';
+import { router } from './routes/users-routes';
 
 
+const app = express();
 
+app.use(express.json());
+app.use(router)
 
+app.listen(4003,() => console.log("server is running on port 4003"));
 
 
 // const bodyParser = require('body-parser');
