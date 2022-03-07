@@ -1,10 +1,13 @@
 {
-"compilerOptions": {
-  "target": "es6",
-  "module": "commonjs",
-  "rootDir": "./",
-  "outDir": "./build",
-  "esModuleInterop": true,
-  "strict": true,
-}
+  "compilerOptions": {
+    "sourceMap": true,
+
+    "outDir": "dist",
+
+    "strict": true,
+
+    "lib": ["esnext"],
+
+    "esModuleInterop": true
+  }
 }
