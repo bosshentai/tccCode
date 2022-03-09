@@ -75,8 +75,12 @@ export const Employee = () => {
               <div className={styles.title}>
                 <p>Nome</p>
               </div>
-              <div className={styles.title}>Email</div>
-              <div className={styles.title}>Status</div>
+              <div className={styles.title}>
+                <p>Email</p>
+              </div>
+              <div className={styles.title}>
+                <p>Status</p>
+              </div>
             </div>
             <EmployeeList employees={DUMMY_DATA} />
           </div>

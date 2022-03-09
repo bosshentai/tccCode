@@ -1,0 +1,46 @@
+.tableContainer {
+  max-height: 40rem;
+  height: calc(40rem - 2rem);
+  min-height: 38rem;
+
+  width: 100%;
+  font-family: "Ubuntu", sans-serif;
+  background: white;
+
+  .header {
+    display: flex;
+
+    height: 3rem;
+    width: 100%;
+
+    border: 2px solid var(--blue);
+
+    .title {
+      display: flex;
+      width: 34rem;
+      border: 2px solid var(--blue);
+
+      text-align: center;
+      align-items: center;
+      justify-content: space-around;
+
+
+    }
+
+    .title:nth-child(-n + 2) {
+      border-right: 2px solid var(--blue);
+    }
+  }
+}
+
+
+.p {
+  max-height: 40rem;
+  height: calc(40rem - 2rem);
+  min-height: 30rem;
+
+  width: 100%;
+
+  font-family: "Ubuntu", sans-serif;
+
+}
