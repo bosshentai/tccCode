@@ -7,6 +7,7 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 
 import { InputText } from "../../../shared/components/FormElements/InputText";
 import { useForm } from "../../../shared/hooks/form-hook";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 type propsType = {
   onClose: () => void;
@@ -22,6 +23,8 @@ type useInput = {
 
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
+
+  const { sendRequest } = useHttpClient();
 
   const [formState, inputHandler] = useForm(
     {
@@ -63,15 +66,51 @@ export const AddEmployee = (props: propsType) => {
     setHover(false);
   };
 
-  const formRegisterEmployeeHandler = (event: React.FormEvent) => {
+  const formRegisterEmployeeHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
-   
+
+
     if (formState.isValid === true) {
-      console.table(formState.inputs);
-      console.log("in The form");
-    }
-    else {
+    
+
+      const formData = {
+        'name': formState.inputs.name.value,
+        'email': formState.inputs.email.value,
+        'phone': formState.inputs.tel.value,
+        'CNI': formState.inputs.cni.value,
+        'NIF': formState.inputs.nif.value,
+        'birth': formState.inputs.birth.value,
+      }
+
+     
+
+
+
+      try {
+
+       await fetch('http://localhost:4003/api/employee/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+
+        // await sendRequest(
+        //   "http://localhost:4003/api/employee",
+        //   "POST",
+        //   JSON.stringify(formData)
+        // );
+        // fetch("http://localhost:4003/api/employee", {
+        //   method: "POST",
+        //   body: JSON.stringify(formData),
+        // })
+        props.onClose();
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
       console.log("invalid form");
     }
   };
@@ -124,15 +163,15 @@ export const AddEmployee = (props: propsType) => {
         <div className={styles.twoinputrow}>
           <InputText
             type="text"
-            id="CNI"
-            label="CNI"
+            id="cni"
+            label="cni"
             placeHolder="Insira o CNI"
             onInput={inputHandler}
           />
           <InputText
             type="text"
-            id="NIF"
-            label="NIF"
+            id="nif"
+            label="nif"
             placeHolder="Insira o NIF"
             onInput={inputHandler}
           />

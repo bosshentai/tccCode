@@ -40,14 +40,6 @@ const formReducer = (_state: any, action: Action) => {
           formIsValid = formIsValid && _state.inputs[inputId].isValid;
         }
       }
-      // for (const inputId in _state.inputs) {
-      //   if (!_state.inputs[inputId]) {
-      //     continue;
-      //     }
-      //     if (inputId === action.inputId){
-
-      //   }
-
       return {
         ..._state,
         inputs: {
@@ -61,6 +53,7 @@ const formReducer = (_state: any, action: Action) => {
     case ActionType.SETDATA: {
       return {
         inputs: action.inputs,
+        // isValid: action.formIsValid
       };
     }
     default:
