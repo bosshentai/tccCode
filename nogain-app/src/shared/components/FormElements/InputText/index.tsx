@@ -60,9 +60,9 @@ const chooseValidator = (id: string, value: string): boolean => {
       return validEmail(value);
     case "tel":
       return validPhoneNumber(value);
-    case "CNI":
+    case "cni":
       return validCNI(value);
-    case "NIF":
+    case "nif":
       return validNIF(value);
     case "birth":
       return validBirth(
@@ -167,7 +167,7 @@ export const InputText = (props: inputProps) => {
 
   // console.table(inputState.value);
 
-  console.log(inputState.value.length);
+  // console.log(inputState.value.length);
 
   return (
     <div className={styles.inputContainer}>

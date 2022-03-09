@@ -4,15 +4,6 @@ import { validBirth } from "../validBirth";
 
 
 
-// const year = Number(cni.slice(0,4));
-// const month = Number(cni.slice(4,6));
-// const day = cni.slice(6,8);
-// const sex = cni.slice(8,9);
-
-
-// console.log(`data de nascimento ${year}`)
-// console.log(`data de nascimento ${month}`)
-// console.log(`data de nascimento ${day}`)
 
 
 
@@ -64,4 +55,4 @@ export const validCNI = (cni: string): boolean => {
 
 }
 
-const cni = "19931022M003R";
+
