@@ -52,6 +52,12 @@ export const Client = () => {
           </div>
         </div>
       )}
+    <div className={styles.btnContainer}>
+        <button>
+          <p>Adicionar Cliente</p> 
+        </button>
+    </div>
+
     </DefaultPage>
   );
 };
