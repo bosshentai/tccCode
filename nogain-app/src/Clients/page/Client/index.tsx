@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { ClientList } from "../../components/ClientList";
 
 import styles from "./styles.module.scss";
 
@@ -50,6 +51,7 @@ export const Client = () => {
               <p>Plano de Treino</p>
             </div>
           </div>
+          <ClientList clients={DUMMY_DATA} />
         </div>
       )}
     <div className={styles.btnContainer}>

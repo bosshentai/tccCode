@@ -1,3 +1,4 @@
+import { ClientItem } from "../ClientItem";
 import styles from "./styles.module.scss";
 
 type client = {
@@ -18,7 +19,15 @@ export const ClientList = (props: clientListProps) => {
 
   return (
     <ul className={styles.clientList}>
-
+      {clientData.map((client: client) => (
+        <ClientItem
+        key={client.id}
+        id={client.id}
+        name={client.name}
+        email={client.email}
+        trainPlan={client.trainPlan}
+        />
+      ))}
     </ul>
   )
 
