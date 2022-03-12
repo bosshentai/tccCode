@@ -25,6 +25,10 @@ export const EmployeeItem = (props: employeeInfo) => {
     ? styles.statusActive
     : styles.statusInactive;
 
+  const onClick = () => {
+    // props.onClick(id);
+  }
+
   return (
     <li key={id} id={id} className={styles.employeeContainer}>
       <div className={styles.info}>
