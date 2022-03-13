@@ -1,0 +1,60 @@
+.adddiscountContainer{
+  width: 1158px;
+  height: 818px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #f4f4f4;
+  box-shadow: 10px 10px 20px rgba(36, 110, 227, 0.5);
+  z-index: 30;
+
+  .headerContainer{
+    display: flex;
+
+    height: 83px;
+
+    .left{
+      width: 1066px;
+      background-color: #4b88e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family: "Ubuntu", sans-serif;
+      color: white;
+    }
+
+    .right{
+      width: 92px;
+      background: linear-gradient(0deg, #246ee3, #246ee3);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border: none;
+
+      cursor: pointer;
+
+      &:hover{
+        background: rgba(36, 110, 227, 0.06);
+        transition: all 0.3s ease-in-out;
+      }
+
+      img{
+        // background-color: red;
+        width: 55px;
+        height: 55px;
+      }
+    }
+  }
+
+    }
+  }
+
+
+}

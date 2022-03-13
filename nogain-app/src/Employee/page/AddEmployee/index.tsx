@@ -69,33 +69,24 @@ export const AddEmployee = (props: propsType) => {
   const formRegisterEmployeeHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
-
-
     if (formState.isValid === true) {
-    
-
       const formData = {
-        'name': formState.inputs.name.value,
-        'email': formState.inputs.email.value,
-        'phone': formState.inputs.tel.value,
-        'CNI': formState.inputs.cni.value,
-        'NIF': formState.inputs.nif.value,
-        'birth': formState.inputs.birth.value,
-      }
-
-     
-
-
+        name: formState.inputs.name.value,
+        email: formState.inputs.email.value,
+        phone: formState.inputs.tel.value,
+        CNI: formState.inputs.cni.value,
+        NIF: formState.inputs.nif.value,
+        birth: formState.inputs.birth.value,
+      };
 
       try {
-
-       await fetch('http://localhost:4003/api/employee/add', {
-          method: 'POST',
+        await fetch("http://localhost:4003/api/employee/add", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData)
-        })
+          body: JSON.stringify(formData),
+        });
 
         // await sendRequest(
         //   "http://localhost:4003/api/employee",
@@ -118,12 +109,13 @@ export const AddEmployee = (props: propsType) => {
   const iconChange = !isHover ? whiteCross : blueCross;
 
   return (
-    <div className={styles.addEmployeeContainer}>
+    <div data-testid="addEmployee" className={styles.addEmployeeContainer}>
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <h1>Inscrição do Funcionario</h1>
         </div>
         <button
+          data-testid="closeBtn"
           className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
@@ -134,6 +126,7 @@ export const AddEmployee = (props: propsType) => {
       </div>
 
       <form
+        data-testid="form"
         onSubmit={formRegisterEmployeeHandler}
         className={styles.formContainer}
       >
@@ -184,7 +177,7 @@ export const AddEmployee = (props: propsType) => {
           onInput={inputHandler}
         />
 
-        <button className={styles.btnSubmit}>Inscrever</button>
+        <button data-testid="button" className={styles.btnSubmit}>Inscrever</button>
       </form>
     </div>
   );
