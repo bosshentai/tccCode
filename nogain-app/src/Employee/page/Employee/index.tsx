@@ -40,7 +40,7 @@ export const Employee = () => {
 
   useEffect(() => {
     setListEmployee(DUMMY_DATA);
-    
+
     if (listEmployee.length === 0) {
       setListEmpty(true);
     } else {

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage"
 import { DiscountList } from '../../components/DiscountList';
 
 import styles from "./styles.module.scss";
+
+const portalElement = document.getElementById("overlays") as HTMLElement;
 
 type Discount = {
   id: string;
@@ -66,7 +69,7 @@ export const Discount = () => {
   const [listEmpty, setListEmpty] = React.useState(true);
 
 
-  // const [addDiscountIsShown, setDiscountIsShown] = React.useState(false);
+  const [addDiscountIsShown, setDiscountIsShown] = React.useState(false);
 
 
   const [listDiscount, setListDiscount] = React.useState<Discount[]>([]);
@@ -97,7 +100,18 @@ export const Discount = () => {
 
 
 
-  return <DefaultPage>
+  return  (
+    <>
+    {
+      addDiscountIsShown &&
+      ReactDOM.createPortal(
+        <>
+        
+        </>,
+        portalElement
+      )
+    }
+  <DefaultPage>
 
   {listEmpty && <p className={styles.p}>Sem descontos</p>}
 
@@ -106,4 +120,6 @@ export const Discount = () => {
   </div>}
 
   </DefaultPage>
+  </>)
+
 }
