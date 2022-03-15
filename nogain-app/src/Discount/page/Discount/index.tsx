@@ -66,7 +66,7 @@ export const Discount = () => {
   const [listEmpty, setListEmpty] = React.useState(true);
 
 
-  const [addDiscountIsShown, setDiscountIsShown] = React.useState(false);
+  // const [addDiscountIsShown, setDiscountIsShown] = React.useState(false);
 
 
   const [listDiscount, setListDiscount] = React.useState<Discount[]>([]);
@@ -80,19 +80,20 @@ export const Discount = () => {
     // }
     // fetchData();
     
-      setListDiscount(DUMMY_Data)
+      // setListDiscount(DUMMY_Data)
     
   },[])
 
 
 
   useEffect( ()=>{
+     setListDiscount(DUMMY_Data)
     if(listDiscount.length === 0){
       setListEmpty(true);
     }else{
       setListEmpty(false);
     }
-  })
+  },[listDiscount, listEmpty,setListEmpty])
 
 
 

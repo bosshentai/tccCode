@@ -1,4 +1,4 @@
-.discountContainer {
+.trainingPlanContainer {
   width: 278px;
   height: 128px;
   background: #4b88ee;
@@ -14,8 +14,6 @@
 
   margin-top: 1rem;
   margin-left: 4rem;
-  // flex: 1 1 3rem;
-  // margin: 3rem;
 
   div {
     // background: black;
@@ -30,8 +28,6 @@
   }
 
   .amount {
-    // background:black;
-
     display: flex;
     justify-content: space-between;
   }
