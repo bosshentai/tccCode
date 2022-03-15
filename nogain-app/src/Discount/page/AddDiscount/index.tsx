@@ -23,7 +23,8 @@ export const AddDiscount = () => {
         <div className={styles.left}>
           <h1>Registrar Desconto</h1>
         </div>
-        <button className={styles.right}
+        <button
+          className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
         >
@@ -32,8 +33,19 @@ export const AddDiscount = () => {
       </div>
       {/* Form  */}
       <div>
-
+        <label>Nome</label>
+        <input type="text" />
       </div>
+      <div>
+        <label>Descrição</label>
+        <input type="textarea" />
+      </div>
+      <div>
+        <label>Montante</label>
+        <input type="text" />
+      </div>
+
+      <button>registrar</button>
     </div>
   );
 };

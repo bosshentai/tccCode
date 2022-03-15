@@ -36,9 +36,11 @@ export const Employee = () => {
 
   const [addEmployeeIsShown, setEmployeeIsShown] = useState(false);
 
-  const [listEmployee, setListEmployee] = useState<employee[]>(DUMMY_DATA);
+  const [listEmployee, setListEmployee] = useState<employee[]>([]);
 
   useEffect(() => {
+    setListEmployee(DUMMY_DATA);
+    
     if (listEmployee.length === 0) {
       setListEmpty(true);
     } else {

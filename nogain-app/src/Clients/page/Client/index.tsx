@@ -18,6 +18,12 @@ const DUMMY_DATA = [
     email: "lomba@gmail.com",
     trainPlan: "lomba",
   },
+  {
+    id: "2asxzad",
+    name: "Hern",
+    email: "test@gmail.com",
+    trainPlan: "lomba",
+  }
 ];
 
 export const Client = () => {
@@ -25,9 +31,10 @@ export const Client = () => {
 
   const [addClientIsShown, setClientIsShown] = React.useState(false);
 
-  const [listClient, setListClient] = React.useState<client[]>(DUMMY_DATA);
+  const [listClient, setListClient] = React.useState<client[]>([]);
 
   useEffect(() => {
+    setListClient(DUMMY_DATA);
     if (listClient.length === 0) {
       setListEmpty(true);
     } else {
