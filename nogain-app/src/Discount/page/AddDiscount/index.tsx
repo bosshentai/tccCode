@@ -4,7 +4,11 @@ import styles from "./styles.module.scss";
 import whiteCross from "../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../assets/icons/blueCross.svg";
 
-export const AddDiscount = () => {
+type propsType = {
+  onClose: () => void;
+};
+
+export const AddDiscount = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
   const hoverHandler = () => {
@@ -27,25 +31,29 @@ export const AddDiscount = () => {
           className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
+          onClick={props.onClose}
         >
           <img src={iconChange} alt="close" />
         </button>
       </div>
       {/* Form  */}
+      <form className={styles.formContainer}>
       <div>
         <label>Nome</label>
         <input type="text" />
       </div>
       <div>
         <label>Descrição</label>
-        <input type="textarea" />
+        {/* <input type="textarea" rows="5"/> */}
+        <textarea />
       </div>
       <div>
         <label>Montante</label>
         <input type="text" />
       </div>
 
-      <button>registrar</button>
+      <button className={styles.btnSubmit}>registrar</button>
+      </form>
     </div>
   );
 };

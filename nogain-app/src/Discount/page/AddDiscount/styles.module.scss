@@ -1,21 +1,7 @@
-@keyframes fadeUp {
-  from {
-
-    opacity: 0;
-  }
-  to {
-
-    opacity: 1;
-
-  }
-
-}
 
 
 
-
-
-.adddiscountContainer {
+.addDiscountContainer {
   width: 1158px;
   height: 818px;
 
@@ -28,9 +14,6 @@
   box-shadow: 10px 10px 20px rgba(36, 110, 227, 0.5);
   z-index: 30;
 
-  animation-name: fadeUp;
-  animation-duration:  100s;
-  animation-fill-mode: forwards;
 
   .headerContainer {
     display: flex;
@@ -73,6 +56,101 @@
       }
     }
   }
+
+
+  .formContainer{
+    width: 50em;
+    height: 40rem;
+
+    display: flex;
+    flex-direction: column;
+
+    margin:auto;
+    padding-top: 6rem;
+
+
+      div{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 4rem;
+      }
+
+      label {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4b88e8;
+      }
+
+
+      input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 2px solid #4b88e8;
+        background-color: transparent;
+        font-size: 20px;
+
+        // padding: 0.5rem;
+        width: 20rem;
+        height: 1.5rem;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover, 
+        &:focus {
+          background-color:  rgba(36,110,227,0.06);
+        }
+
+        &::placeholder {
+          color: #4b88e8;
+        }
+
+      }
+
+      textarea{
+        
+        border: 2px solid #4b88e8;
+        width: 30rem;
+        height: 5rem;
+        outline: none;
+        resize: none;
+
+        padding-bottom: 2rem;
+      }
+  }
+
+
+    .btnSubmit{
+      width: 12rem;
+      height: 4rem;
+      background: linear-gradient(0deg, #246ee3, #246ee3);
+
+      margin:auto;
+
+
+
+      border: none;
+      border-radius: 25px;
+
+
+      color: white;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(36, 110, 227, 0.5);
+        // transition: all 0.3s ease-in-out;
+      }
+    }
+
+
+
+
 }
 
 

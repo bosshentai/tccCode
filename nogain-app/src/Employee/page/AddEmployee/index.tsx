@@ -13,13 +13,13 @@ type propsType = {
   onClose: () => void;
 };
 
-type useInput = {
-  enteredValue: string;
-  enteredValueTouched: boolean;
+// type useInput = {
+//   enteredValue: string;
+//   enteredValueTouched: boolean;
 
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: () => void;
-};
+//   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+//   handleBlur: () => void;
+// };
 
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
