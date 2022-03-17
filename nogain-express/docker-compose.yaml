@@ -14,9 +14,7 @@ services:
     restart: always
     depends_on:
       - redis
-  # image: 'postgres:lastest'
-  # ports:
-  #   - '5432:5432'
+
 
 
 
