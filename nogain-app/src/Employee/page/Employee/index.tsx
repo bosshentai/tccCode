@@ -87,7 +87,6 @@ export const Employee = () => {
             <EmployeeList employees={DUMMY_DATA} />
           </div>
         )}
-
         <div className={styles.btnContainer}>
           <button onClick={showAddEmployeeHandler}>
             <p>Adicionar Funcionario</p>

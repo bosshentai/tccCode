@@ -108,7 +108,7 @@ export const Discount = () => {
           </>,
           portalElement
         )}
-      <DefaultPage>
+      <DefaultPage >
         {listEmpty && <p className={styles.p}>Sem descontos</p>}
 
         {!listEmpty && (
@@ -116,7 +116,7 @@ export const Discount = () => {
             <DiscountList discounts={listDiscount} />
           </div>
         )}
-        <div className={styles.btnCotainer}>
+        <div className={styles.btnContainer}>
           <button className={styles.button} onClick={showAddDiscountHandler}>
             <span>Adicionar Desconto</span>
           </button>

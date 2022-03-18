@@ -61,19 +61,17 @@
 
   height: 11em;
 
-  height: 11em;
+  // height: 11em;
 
   // min-height: calc(100% - 38rem);
 
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   @media only screen and (max-width: 1280px) {
     height: 6.7em;
   }
-
-  
 
   button {
     background: var(--blue);
