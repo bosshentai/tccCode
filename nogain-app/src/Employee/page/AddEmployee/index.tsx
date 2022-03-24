@@ -24,6 +24,8 @@ type propsType = {
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
+  const [showError, setShowError] = useState(false);
+
   const { sendRequest } = useHttpClient();
 
   const [formState, inputHandler] = useForm(

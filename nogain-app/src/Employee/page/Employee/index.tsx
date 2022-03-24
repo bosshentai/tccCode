@@ -36,6 +36,8 @@ export const Employee = () => {
 
   const [addEmployeeIsShown, setEmployeeIsShown] = useState(false);
 
+  
+
   const [listEmployee, setListEmployee] = useState<employee[]>([]);
 
   useEffect(() => {

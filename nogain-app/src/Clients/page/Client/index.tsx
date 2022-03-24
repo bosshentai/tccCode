@@ -70,3 +70,6 @@ export const Client = () => {
     </DefaultPage>
   );
 };
+
+
+// export default Client;
