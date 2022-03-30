@@ -2,7 +2,8 @@
   "compilerOptions": {
     "sourceMap": true,
 
-    "outDir": "dist",
+    "outDir": "dist/js",
+    // "routDir": "src",
 
     "strict": true,
 
