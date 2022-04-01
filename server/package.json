@@ -1,0 +1,33 @@
+{
+  "name": "nogain-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon  ./src/server.ts",
+    "dev": "ts-node-dev ./src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.10.0",
+    "express": "^4.17.2",
+    "mongodb": "^3.7.3",
+    "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.4.1",
+    "ts-node-dev": "^1.1.8",
+    "typeorm": "^0.2.45",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.21",
+    "nodemon": "^2.0.15",
+    "prisma": "^3.10.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}

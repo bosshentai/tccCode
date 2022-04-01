@@ -1,0 +1,36 @@
+.clientContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(36, 110, 227, 0.5);
+  }
+
+  &:nth-of-type(even) {
+    background: rgba(36, 110, 227, 0.13);
+
+    &:hover {
+      background: rgba(36, 110, 227, 0.5);
+    }
+  }
+
+  div {
+    width: 100%;
+    height: 3rem;
+
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+  }
+
+
+  .info{
+    color: black;
+  }
+
+  
+}

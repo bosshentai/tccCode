@@ -1,0 +1,196 @@
+@keyframes fadeUp {
+  from {
+
+    opacity: 0;
+   
+    transform: translateX(-50%);
+  }
+  to {
+
+    opacity: 1;
+  
+  }
+
+}
+
+
+
+
+.addEmployeeContainer {
+  width: 1158px;
+  height: 818px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #f4f4f4;
+  box-shadow: 10px 10px 20px rgba(36, 110, 227, 0.5);
+  z-index: 30;
+
+
+  animation-name: fadeUp;
+  animation-duration:  0.4s;
+  animation-fill-mode: forwards;
+
+
+  .headerContainer {
+ 
+    display: flex;
+
+    height: 83px;
+
+    .left {
+      width: 1066px;
+      background-color: #4b88e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family: "Ubuntu", sans-serif;
+      color: white;
+    }
+
+    .right {
+      width: 92px;
+      background: linear-gradient(0deg, #246ee3, #246ee3);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border: none;
+
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(36, 110, 227, 0.06);
+        transition: all 0.3s ease-in-out;
+      }
+
+      img {
+        // background-color: red;
+        width: 55px;
+        height: 55px;
+      }
+    }
+  }
+
+  .formContainer {
+    // background-color: red;
+
+    width: 50em;
+    height: 40rem;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: auto;
+    padding-top: 3rem;
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .twoinputrow {
+      display: flex;
+      flex-direction: row;
+      // padding-left: 1rem ;
+    }
+
+    .inputContainer {
+      color: #4b88e8;
+
+      padding-bottom: 2rem;
+
+      &:nth-child(2) {
+        padding-left: 5rem;
+      }
+
+      label {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 24px;
+        line-height: 28px;
+        padding-bottom: 1rem;
+      }
+
+      input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 2px solid #246ee3;
+        background-color: transparent;
+        font-size: 20px;
+
+        width: 20rem;
+        height: 1.5rem;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover,
+        &:focus {
+          background-color: rgba(36, 110, 227, 0.06);
+        }
+
+        &::placeholder {
+          color: #4b88e8;
+        }
+      }
+      input[type="date"] {
+        color: #4b88e8;
+        cursor: pointer;
+
+        &::-webkit-calendar-picker-indicator {
+          // adiciona 1 icon la direto
+          background: none;
+        }
+      }
+
+      .invalidInput {
+        background-color: rgba(255, 0, 0, 0.13);
+        border-bottom: 2px solid #ff0000;
+
+        &:hover,
+        &:focus {
+          background: rgba(255, 0, 0, 0.13);
+        }
+        &::placeholder {	
+          color: #ff0000;
+        }
+
+        &::-webkit-datetime-edit{
+          color: #ff0000;
+
+        }
+      }
+    }
+
+    .btnSubmit {
+      width: 233px;
+      height: 77px;
+
+      margin: auto;
+
+      border: none;
+
+      background: linear-gradient(0deg, #246ee3, #246ee3);
+
+      border-radius: 25px;
+
+      color: white;
+      font-size: 24px;
+      line-height: 28px;
+
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(36, 110, 227, 0.5);
+      }
+    }
+  }
+}

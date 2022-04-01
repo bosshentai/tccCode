@@ -1,0 +1,38 @@
+.discountContainer {
+  width: 278px;
+  height: 128px;
+  background: #4b88ee;
+
+  box-shadow: 4px 5px 8px rgba(36, 110, 227, 0.49);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  overflow: auto;
+
+  margin-top: 1rem;
+  margin-left: 4rem;
+  // flex: 1 1 3rem;
+  // margin: 3rem;
+
+  div {
+    // background: black;
+    width: 100%;
+    height: 100%;
+
+    color: white;
+    font-size: 24px;
+    font-family: "Ubuntu", sans-serif;
+
+    padding: 1rem;
+  }
+
+  .amount {
+    // background:black;
+
+    display: flex;
+    justify-content: space-between;
+  }
+}

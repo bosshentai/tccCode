@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+
+    "outDir": "dist/js",
+    // "routDir": "src",
+
+    "strict": true,
+
+    "lib": ["esnext"],
+
+    "esModuleInterop": true
+  }
+}
