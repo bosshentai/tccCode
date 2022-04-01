@@ -1,0 +1,100 @@
+@startuml Nogain
+
+class Person {
+  id : uuid
+  name : string
+  phone : string
+  cni : string
+  nif : string
+  email : string
+  birthDay: data
+  password : string
+  role : role
+  created_at: datetime
+  updated_at: datetime
+  
+}
+
+
+class Client {
+  id: uuid
+  name : string
+  email: string
+  phone: string
+  birthDay: data
+  created_at: datetime
+
+}
+
+
+
+
+class PersonalTrainer {
+  id: uuid
+  name : string
+  email: string
+  phone: string
+  cni: string
+  nif: string
+  email: string
+  birthDay: data
+  create_at: datetime
+  updated_at: datetime
+
+
+}
+
+class discount {
+  id: uuid
+  name: string
+  description: string
+  amount: float
+  created_at: datetime
+  updated_at: datetime
+}
+
+class TrainingPlan {
+  id: uuid
+  name: string
+  description: string
+  amount: float
+  created_at: datetime
+  updated_at: datetime
+}
+
+
+class clientPersonalTrainingDiscountTrainingPlan {
+  id: uuid
+  client_id: uuid
+  personal_trainer_id: uuid
+  discount_id: uuid
+  training_plan_id: uuid
+  created_at: datetime
+  updated_at: datetime
+}
+
+class clientHistory {
+  id: uuid
+  client_id: uuid
+  person_id: uuid
+  total: float
+  created_at: datetime
+}
+
+
+enum Role {
+  admin
+  employee
+}
+
+Person --- Role
+
+clientHistory <|-- Client
+clientHistory <|-- Person
+
+clientPersonalTrainingDiscountTrainingPlan <|-- Client
+clientPersonalTrainingDiscountTrainingPlan <|-- PersonalTrainer
+clientPersonalTrainingDiscountTrainingPlan <|-- discount
+clientPersonalTrainingDiscountTrainingPlan <|-- TrainingPlan
+
+@enduml
