@@ -8,6 +8,7 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 import { InputText } from "../../../shared/components/FormElements/InputText";
 import { useForm } from "../../../shared/hooks/form-hook";
 import { ErrorPopup } from "../../../shared/components/UIElements/ErrorPopup";
+import axios from "axios";
 // import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 type propsType = {
@@ -65,6 +66,8 @@ export const AddEmployee = (props: propsType) => {
   const formRegisterEmployeeHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    const urlPath = "http://localhost:5000/api/employee/add";
+
     if (formState.isValid === true) {
       const formData = {
         name: formState.inputs.name.value,
@@ -76,13 +79,14 @@ export const AddEmployee = (props: propsType) => {
       };
 
       try {
-        await fetch("http://localhost:4003/api/employee/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        // await fetch("http://localhost:4003/api/employee/add", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(formData),
+        // });
+        const response = await axios.post(urlPath, formData);
         props.onClose();
       } catch (err) {
         console.log(err);

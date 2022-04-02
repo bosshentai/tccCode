@@ -32,9 +32,9 @@ export const EmployeeItem = (props: employeeInfo) => {
   // }
 
   return (
-    <li key={id} id={id} className={styles.employeeContainer}>
-      {/* <NavLink to={`Profile/${id}`}> */}
+    <li key={id} className={styles.employeeContainer}>
       <NavLink to="Profile">
+        {/* <NavLink to={`Profile/${id}`}> */}
         <div className={styles.info}>
           <p>{name}</p>
         </div>
