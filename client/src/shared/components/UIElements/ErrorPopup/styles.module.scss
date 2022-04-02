@@ -1,0 +1,61 @@
+.errorContainer {
+  background: white;
+  
+
+  // opacity: 1;
+  width: 816px;
+  height: 417px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 40;
+  .headerContainer {
+    display: flex;
+    height: 58px;
+    background: #e84a4a;
+    flex-direction: row-reverse;
+
+    //  justify-self: flex-end;
+    // align-content: flex-end;
+    .right {
+      width: 58px;
+
+      display: flex;
+      // justify-self: flex-end;
+
+      // position: relative;
+      // margin-right: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #d62222;
+      border: none;
+
+      cursor: pointer;
+
+      &:hover {
+        background:#BD0000;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+
+
+  }
+
+  .errorMessage{
+background-color: rgba(255, 0, 0, 0.13);
+    display:flex;
+    align-items: center;
+    height: 86%;
+    width: 100%;
+    justify-content: center;
+  }
+}

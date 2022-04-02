@@ -7,26 +7,20 @@ import blueCross from "../../../assets/icons/blueCross.svg";
 
 import { InputText } from "../../../shared/components/FormElements/InputText";
 import { useForm } from "../../../shared/hooks/form-hook";
-import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { ErrorPopup } from "../../../shared/components/UIElements/ErrorPopup";
+// import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 type propsType = {
   onClose: () => void;
 };
 
-// type useInput = {
-//   enteredValue: string;
-//   enteredValueTouched: boolean;
-
-//   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-//   handleBlur: () => void;
-// };
 
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
   const [showError, setShowError] = useState(false);
 
-  const { sendRequest } = useHttpClient();
+  // const { sendRequest } = useHttpClient();
 
   const [formState, inputHandler] = useForm(
     {
@@ -89,98 +83,98 @@ export const AddEmployee = (props: propsType) => {
           },
           body: JSON.stringify(formData),
         });
-
-        // await sendRequest(
-        //   "http://localhost:4003/api/employee",
-        //   "POST",
-        //   JSON.stringify(formData)
-        // );
-        // fetch("http://localhost:4003/api/employee", {
-        //   method: "POST",
-        //   body: JSON.stringify(formData),
-        // })
         props.onClose();
       } catch (err) {
         console.log(err);
       }
     } else {
       console.log("invalid form");
+      setShowError(true);
     }
   };
 
   const iconChange = !isHover ? whiteCross : blueCross;
 
+  const closeErrorHandler = () => {
+    setShowError(false);
+  }
+
   return (
-    <div data-testid="addEmployee" className={styles.addEmployeeContainer}>
-      <div className={styles.headerContainer}>
-        <div className={styles.left}>
-          <h1>Inscrição do Funcionario</h1>
+    <>
+      {showError && <ErrorPopup onClose={closeErrorHandler}/>}
+
+      <div className={styles.addEmployeeContainer}>
+        <div className={styles.headerContainer}>
+          <div className={styles.left}>
+            <h1>Inscrição do Funcionario</h1>
+          </div>
+          <button
+            className={styles.right}
+            onMouseEnter={hoverHandler}
+            onMouseLeave={leaveHandler}
+            onClick={props.onClose}
+          >
+            <img src={iconChange} alt="close" />
+          </button>
         </div>
-        <button
-          data-testid="closeBtn"
-          className={styles.right}
-          onMouseEnter={hoverHandler}
-          onMouseLeave={leaveHandler}
-          onClick={props.onClose}
+
+        <form
+          data-testid="form"
+          onSubmit={formRegisterEmployeeHandler}
+          className={styles.formContainer}
         >
-          <img src={iconChange} alt="close" />
-        </button>
+          <InputText
+            type="text"
+            id="name"
+            label="Nome Completo"
+            placeHolder="Insira o nome completo"
+            onInput={inputHandler}
+          />
+          <div className={styles.twoinputrow}>
+            <InputText
+              type="email"
+              id="email"
+              label="Email"
+              placeHolder="Insira o email"
+              onInput={inputHandler}
+            />
+            <InputText
+              type="tel"
+              id="tel"
+              label="Telemóvel"
+              placeHolder="Insira o email"
+              onInput={inputHandler}
+            />
+          </div>
+          <div className={styles.twoinputrow}>
+            <InputText
+              type="text"
+              id="cni"
+              label="cni"
+              placeHolder="Insira o CNI"
+              onInput={inputHandler}
+            />
+            <InputText
+              type="text"
+              id="nif"
+              label="nif"
+              placeHolder="Insira o NIF"
+              onInput={inputHandler}
+            />
+          </div>
+          <InputText
+            type="date"
+            id="birth"
+            label="Data de Nascimento"
+            placeHolder="dd/mm/yyyy"
+            onInput={inputHandler}
+          />
+
+          <button data-testid="button" className={styles.btnSubmit}>
+            Inscrever
+          </button>
+        </form>
       </div>
-
-      <form
-        data-testid="form"
-        onSubmit={formRegisterEmployeeHandler}
-        className={styles.formContainer}
-      >
-        <InputText
-          type="text"
-          id="name"
-          label="Nome Completo"
-          placeHolder="Insira o nome completo"
-          onInput={inputHandler}
-        />
-        <div className={styles.twoinputrow}>
-          <InputText
-            type="email"
-            id="email"
-            label="Email"
-            placeHolder="Insira o email"
-            onInput={inputHandler}
-          />
-          <InputText
-            type="tel"
-            id="tel"
-            label="Telemóvel"
-            placeHolder="Insira o email"
-            onInput={inputHandler}
-          />
-        </div>
-        <div className={styles.twoinputrow}>
-          <InputText
-            type="text"
-            id="cni"
-            label="cni"
-            placeHolder="Insira o CNI"
-            onInput={inputHandler}
-          />
-          <InputText
-            type="text"
-            id="nif"
-            label="nif"
-            placeHolder="Insira o NIF"
-            onInput={inputHandler}
-          />
-        </div>
-        <InputText
-          type="date"
-          id="birth"
-          label="Data de Nascimento"
-          placeHolder="dd/mm/yyyy"
-          onInput={inputHandler}
-        />
-
-        <button data-testid="button" className={styles.btnSubmit}>Inscrever</button>
-      </form>
-    </div>
+    </>
   );
 };
