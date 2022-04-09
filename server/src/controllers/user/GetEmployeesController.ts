@@ -6,7 +6,7 @@ import { prismaClient } from "../../database/prismaClient";
 
 
 
-export class getEmployeesController {
+export class GetEmployeesController {
   async handle(request: Request, response: Response) {
       
       const employees = await prismaClient.user.findMany({

@@ -22,7 +22,7 @@ model User {
   birthDate  String
   status     Status   @default(Inactive)
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("users")
 }
@@ -57,7 +57,7 @@ model PersonalTrainer {
   nif       String
   birthDate DateTime
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("personal_trainers")
 }
@@ -68,7 +68,7 @@ model discount {
   name      String
   value     Float
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("discounts")
 }
@@ -78,7 +78,7 @@ model TrainingPlan{
   name      String
   price     Float
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("training_plans")
 }
@@ -90,7 +90,7 @@ model ClientPaymentSetting{
   training_plan_id String
   personal_trainer_id String
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("client_payment_settings")
 }

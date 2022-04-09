@@ -22,26 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-
-
 app.use("/api", employeeRouter)
-
-// app.listen(4003,() => console.log("server is running on port 4003"));
-
-
-// const bodyParser = require('body-parser');
-
-// let express = require('express');
-// const employeeRoutes = require('./routes/employee-routes');
-
-
-// const app = express();
-
-// const port = 3000;
-
-// app.use(bodyParser.json());
 
 
 
