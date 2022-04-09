@@ -6,8 +6,11 @@ import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 
 import styles from "./styles.module.scss";
 import { AddEmployee } from "../AddEmployee";
+import axios from "axios";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
+
+const urlPath = "http://localhost:4003/api/employee/all";
 
 type employee = {
   id: string;
@@ -16,20 +19,20 @@ type employee = {
   status: string;
 };
 
-const DUMMY_DATA = [
-  {
-    id: "1asadas",
-    name: "Hernani",
-    email: "baptista@gmail.com",
-    status: "Ativo",
-  },
-  {
-    id: "2asxzad",
-    name: "Hern",
-    email: "test@gmail.com",
-    status: "Inativo",
-  },
-];
+// const DUMMY_DATA = [
+//   {
+//     id: "1asadas",
+//     name: "Hernani",
+//     email: "baptista@gmail.com",
+//     status: "Ativo",
+//   },
+//   {
+//     id: "2asxzad",
+//     name: "Hern",
+//     email: "test@gmail.com",
+//     status: "Inativo",
+//   },
+// ];
 
 export const Employee = () => {
   const [listEmpty, setListEmpty] = useState(true);
@@ -40,8 +43,12 @@ export const Employee = () => {
 
   const [listEmployee, setListEmployee] = useState<employee[]>([]);
 
-  useEffect(() => {
-    setListEmployee(DUMMY_DATA);
+  useEffect(  () => {
+ 
+    axios.get(urlPath).then((response) => {
+      setListEmployee(response.data);
+    });
+
 
     if (listEmployee.length === 0) {
       setListEmpty(true);
@@ -86,7 +93,7 @@ export const Employee = () => {
                 <p>Status</p>
               </div>
             </div>
-            <EmployeeList employees={DUMMY_DATA} />
+            <EmployeeList employees={listEmployee} />
           </div>
         )}
         <div className={styles.btnContainer}>
