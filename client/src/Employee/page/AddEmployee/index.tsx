@@ -21,6 +21,9 @@ export const AddEmployee = (props: propsType) => {
 
   const [showError, setShowError] = useState(false);
 
+
+  const [errorHandler,setErrorhandler] = useState(false);
+
   // const { sendRequest } = useHttpClient();
 
   const [formState, inputHandler] = useForm(
@@ -93,6 +96,14 @@ export const AddEmployee = (props: propsType) => {
       }
     } else {
       console.log("invalid form");
+
+      // if(formState.inputs.name.isValid === false){
+      //   // inputHandler.inputs.name.isValid = false;
+      //   console.log("name is invalid");
+      //   // touche true
+      //   setErrorhandler(true);
+      
+      // }
       setShowError(true);
     }
   };
@@ -133,6 +144,7 @@ export const AddEmployee = (props: propsType) => {
             label="Nome Completo"
             placeHolder="Insira o nome completo"
             onInput={inputHandler}
+            isValid={errorHandler}
           />
           <div className={styles.twoinputrow}>
             <InputText

@@ -64,7 +64,7 @@ export const TrainingPlan = () => {
 
         {!listEmpty && <div className={styles.container}></div>}
 
-        <div>
+        <div className={styles.btnContainer}>
           <button onClick={showAddTrainingHandler}>Adicionar</button>
         </div>
       </DefaultPage>

@@ -22,6 +22,7 @@ export const ErrorPopup = (props: propsType) => {
   const iconChange = isHover ? redCross : whiteCross;
 
   return (
+    <div className={styles.transparentWall}>
     <div className={styles.errorContainer}>
       <div className={styles.headerContainer}>
         <button
@@ -36,6 +37,7 @@ export const ErrorPopup = (props: propsType) => {
       <div className={styles.errorMessage}>
         <h1>Inscrição do Funcionario Invalido</h1>
       </div>
+    </div>
     </div>
   );
 };

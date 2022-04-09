@@ -12,6 +12,7 @@ import { validBirth } from "../../../util/validBirth";
 enum ActionType {
   CHANGE,
   TOUCH,
+  VERIFICATION
 }
 
 type Action =
@@ -21,6 +22,7 @@ type Action =
       isValid: boolean;
     }
   | { type: ActionType.TOUCH; isTouch: boolean };
+  // | { type: ActionType.VERIFICATION; isValid: boolean };
 
 const inputReducer = (_state: any, action: Action) => {
   switch (action.type) {
@@ -37,6 +39,12 @@ const inputReducer = (_state: any, action: Action) => {
         isTouched: action.isTouch,
       };
     }
+    // case ActionType.VERIFICATION: {
+    //   return {
+    //     ..._state,
+    //     isValid: action.isValid,
+    //   }
+    // }
     default:
       return _state;
   }
@@ -50,6 +58,8 @@ type inputProps = {
   onInput: (id: string, value: string, isValid: boolean) => void;
   initialValue?: string;
   initialValid?: boolean;
+  // isTouched?: boolean;
+  isValid?: boolean;
 };
 
 const chooseValidator = (id: string, value: string): boolean => {
@@ -104,7 +114,15 @@ export const InputText = (props: inputProps) => {
     });
   };
 
-  const teste = inputState.isTouched && !inputState.isValid;
+  // const verificationHandler = () => {
+  //   dispatch({
+  //     type: ActionType.VERIFICATION,
+  //     isValid: props.isValid || false,
+  //   });
+  // }
+
+
+  const teste = inputState.isTouched && !inputState.isValid ;
 
   const classeController = teste ? ` ${styles.invalidInput} ` : `  `;
 
@@ -120,6 +138,7 @@ export const InputText = (props: inputProps) => {
             onChange={changeHandler}
             onBlur={touchHandler}
             value={inputState.value}
+            // isValid={props.isValid}
           />
         );
       case "email":

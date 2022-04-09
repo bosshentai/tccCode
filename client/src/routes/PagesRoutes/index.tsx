@@ -32,7 +32,7 @@ export function PagesRoutes() {
       <Route path="/TrainingPlan" element={<TrainingPlan />} />
       <Route path="/Discount" element={<Discount />} />
       <Route path="/Employee" element={<Employee />} />
-      <Route path="/Employee/Profile" element={<EmployeeProfile />} />
+      <Route path="/Employee/Profile/:id" element={<EmployeeProfile />} />
 
       <Route path="/PersonalTrainer" element={<PersonalTrainer />} />
       <Route path="*" element={<Navigate to="/" />} />
