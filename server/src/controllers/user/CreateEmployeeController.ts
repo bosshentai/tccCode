@@ -28,7 +28,7 @@ export class CreateEmployeeController {
     });
 
 
-    return response.json(client);
+    return response.status(201).json(client);
 
   }
 }
