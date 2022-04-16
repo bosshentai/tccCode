@@ -9,8 +9,6 @@ import { prismaClient } from '../../database/prismaClient';
 export class CreateEmployeeController {
   async handle(request: Request, response: Response) {
 
-
-
     const { name, email, phone, CNI, NIF, birth } = request.body;
 
 
