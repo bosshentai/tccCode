@@ -19,20 +19,20 @@ type employee = {
   status: string;
 };
 
-// const DUMMY_DATA = [
-//   {
-//     id: "1asadas",
-//     name: "Hernani",
-//     email: "baptista@gmail.com",
-//     status: "Ativo",
-//   },
-//   {
-//     id: "2asxzad",
-//     name: "Hern",
-//     email: "test@gmail.com",
-//     status: "Inativo",
-//   },
-// ];
+const DUMMY_DATA = [
+  {
+    id: "1asadas",
+    name: "Hernani",
+    email: "baptista@gmail.com",
+    status: "Ativo",
+  },
+  {
+    id: "2asxzad",
+    name: "Hern",
+    email: "test@gmail.com",
+    status: "Inativo",
+  },
+];
 
 export const Employee = () => {
   const [listEmpty, setListEmpty] = useState(true);
@@ -45,10 +45,11 @@ export const Employee = () => {
 
   useEffect(  () => {
  
-    axios.get(urlPath).then((response) => {
-      setListEmployee(response.data);
-    });
+    // axios.get(urlPath).then((response) => {
+    //   setListEmployee(response.data);
+    // });
 
+    setListEmployee(DUMMY_DATA);
 
     if (listEmployee.length === 0) {
       setListEmpty(true);

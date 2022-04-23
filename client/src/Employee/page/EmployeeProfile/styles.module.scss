@@ -1,0 +1,115 @@
+.headerContainer{
+
+  height: 75px;
+  background: #4B88E8;
+
+  display: flex;
+  align-items: center;
+
+
+  .left{
+    // background: red;
+
+    height: 100%;
+    width: 75px;
+
+    display: flex;
+    // justify-items: center;
+    align-items: center;
+    justify-content: center;
+    
+    button{
+      background: transparent;
+      border: none;
+
+      cursor: pointer;
+    }
+
+   
+  }
+
+  h1{
+    // background: red;
+    margin: auto;
+    color: white;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+}
+
+.employeeInfoContainer{
+  background: white;
+  height: calc(100% - 22rem);
+
+  .infoContainer{
+
+    // background-color: red;
+
+    
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    
+    padding-left: 9rem;
+    margin-bottom: 2.5rem;
+
+    &:first-of-type{
+      padding-top: 2rem;
+
+    }
+
+    .telephoneContainer {
+      // background: red;
+      display: flex;
+    }
+
+    .btnContainer{
+
+      // background: black;
+
+      width: 100%;
+      height: fit-content;
+      
+      display: flex;
+      justify-content: center;
+      
+      button{
+          background: #4B88E8;
+          border:  none;
+
+          height: 37px;
+          width: 13rem;
+          border-radius: 25px;
+
+          color : white;
+          font-family: 'Ubuntu', sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 21px;
+
+          cursor: pointer;
+
+          &:hover{
+            background-color: #4B88E8;
+          }
+        
+      }
+    }
+
+  }
+}
