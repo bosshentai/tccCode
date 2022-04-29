@@ -34,7 +34,7 @@ const day28 = (day: number): boolean => {
   }
 }
 
-const bisexto = (day: number, year: number): boolean => {
+const bisexed = (day: number, year: number): boolean => {
   if (year % 100 === 0 && year % 400 === 0 && year % 4 === 0) {
     return day29(day);
   } else {
@@ -45,6 +45,17 @@ const bisexto = (day: number, year: number): boolean => {
 
 
 export  const validBirth = (day: number, month: number, year: number): boolean => {
+
+  /**
+   * Return true if the date is valid
+   *
+   * @param {number} day - The First input
+   *
+   * @param {number} month - The Second input
+   *
+   * @param {number} year - The Third input
+   */
+
   if (year > 0) {
     switch (month) {
       case 1:
@@ -56,7 +67,7 @@ export  const validBirth = (day: number, month: number, year: number): boolean =
       case 12:
         return day31(day);
       case 2:
-        return bisexto(day, year);
+        return bisexed(day, year);
       case 4:
       case 6:
       case 9:

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 
@@ -6,12 +6,36 @@ import whiteBack from "../../../assets/icons/whiteBack.svg";
 
 import styles from "./styles.module.scss";
 
+const DUMMY_DATA = {
+  id: "1asadas",
+  name: "Hernani",
+  email: "baptista@gmail",
+  birthDate: "01/01/2000",
+  CNI: "123456789",
+  NIF: "123456789",
+  number: "9541850",	
+};
+
 export function EmployeeProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(id);
+  const [verificedId, setVerificedId] = useState(false);
 
+
+  useEffect( () =>{
+      if (id === DUMMY_DATA.id) {
+        setVerificedId(true);
+       }
+      //  else{
+      //   navigate("/employee");
+      // }
+  },[])
+
+
+  
+
+  // console.log(id);
 
   // const telephoneCss = `${styles.infoContainer}  `;
 
@@ -38,31 +62,31 @@ export function EmployeeProfile() {
         {/* <p>Nome: {id}</p> */}
         <div className={styles.infoContainer}>
           <label>Nome:</label>
-          <p>Nome Exemplo</p>
+          <p>{DUMMY_DATA.name}</p>
         </div>
         <div className={styles.infoContainer}>
           <label>Email:</label>
-          <p>exemplode@teste.com</p>
+          <p>{DUMMY_DATA.email}</p>
         </div>
         <div className={styles.infoContainer}>
           <label>Data de Nascimento:</label>
-          <p>MM/DD/YYYY</p>
+          <p>{DUMMY_DATA.birthDate}</p>
         </div>
         <div className={styles.infoContainer}>
           <label>CNI:</label>
-          <p>123456789</p>
+          <p>{DUMMY_DATA.CNI}</p>
         </div>
         <div className={styles.infoContainer}>
           <label>NIF:</label>
-          <p>123456789</p>
+          <p>{DUMMY_DATA.NIF}</p>
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.telephoneContainer}>
-          <label>Telefone:</label>
-          <p>123456789</p>
+            <label>Telefone:</label>
+            <p>{DUMMY_DATA.number}</p>
           </div>
           <div className={styles.btnContainer}>
-          <button>Alterar</button>
+            <button>Alterar</button>
           </div>
         </div>
       </div>

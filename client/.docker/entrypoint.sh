@@ -5,4 +5,4 @@ if [ ! -f ".env"]; then
 fi
 
 npm insall
-npm run dev
+npm start
