@@ -5,6 +5,7 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import whiteBack from "../../../assets/icons/whiteBack.svg";
 
 import styles from "./styles.module.scss";
+import { transpileModule } from "typescript";
 
 const DUMMY_DATA = {
   id: "1asadas",
@@ -21,6 +22,11 @@ export function EmployeeProfile() {
   const navigate = useNavigate();
 
   const [verificedId, setVerificedId] = useState(false);
+  const [inputDisable,setinputDisable] = useState(true);
+  
+
+
+  
 
 
   useEffect( () =>{
@@ -33,6 +39,16 @@ export function EmployeeProfile() {
   },[])
 
 
+  const [teleNumber, setTeleNumber] = useState(DUMMY_DATA.number);
+
+
+  const handleTeleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTeleNumber(event.target.value);
+  }
+
+  const handleDisable = () =>{
+    setinputDisable(false);
+  }
   
 
   // console.log(id);
@@ -83,10 +99,14 @@ export function EmployeeProfile() {
         <div className={styles.infoContainer}>
           <div className={styles.telephoneContainer}>
             <label>Telefone:</label>
-            <p>{DUMMY_DATA.number}</p>
+            {/* <p>{DUMMY_DATA.number}</p> */}
+            <input type="text" value={teleNumber}
+            onChange={handleTeleNumberChange}
+             disabled={inputDisable}
+            />
           </div>
           <div className={styles.btnContainer}>
-            <button>Alterar</button>
+            <button onClick={handleDisable}>Alterar</button>
           </div>
         </div>
       </div>
