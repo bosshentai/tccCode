@@ -94,7 +94,7 @@ export const Employee = () => {
                 <p>Status</p>
               </div>
             </div>
-            <EmployeeList employees={listEmployee} />
+            <EmployeeList data-testid="employeeList"  employees={listEmployee} />
           </div>
         )}
         <div className={styles.btnContainer}>

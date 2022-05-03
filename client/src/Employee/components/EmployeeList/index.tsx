@@ -19,7 +19,7 @@ export const EmployeeList = (props: employeeListProps) => {
   // console.log(employeeData);
 
   return (
-    <ul data-testid="employeeList"  className={styles.employeeList}>
+    <ul className={styles.employeeList}>
       {employeeData.map((employee: employee) => (
         <EmployeeItem
           key={employee.id}
