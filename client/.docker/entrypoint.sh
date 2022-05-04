@@ -4,5 +4,5 @@ if [ ! -f ".env"]; then
     cp .env.example .env
 fi
 
-npm insall
+npm install
 npm start

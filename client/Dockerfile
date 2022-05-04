@@ -4,8 +4,23 @@ FROM node:alpine
 USER node
 
 
+
 # set the working direction
-WORKDIR /app/node/app
+WORKDIR /usr/src/app
+
+
+# COPY package.json /app/package.json
+# COPY ["package.json", "package-lock.json", "./"] 
+# COPY package*.json ./
+COPY  package.json ./
+
+RUN  npm install
+
+COPY  . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
 
 # add `/app/node_modules/.bin` to $PATH
 # ENV PATH /app/node_modules/.bin:$PATH
