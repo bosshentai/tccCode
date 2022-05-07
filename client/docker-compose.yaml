@@ -1,20 +1,56 @@
-version: "3"
+# version: '3.7'
 
-services:
-  frontend:
-    build: .
-    container_name: frontend
-    entrypoint: ./.docker/entrypoint.sh
-    ports:
-      - "3001:3000"
+# services:
+#   client:
+#     container_name: client
+#     build: ./
+#     volumes:
+#       - './:/app'
+#       - '/app/node_modules'
+#     ports:
+#       - '3000:3000'
+#     stdin_open: true
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true
+#     command: npm start
 
-    volumes:
-      - ./src:/app/src
-      - ./public:/app/public
-      - /app/node_modules
 
 
-    # stdin_open: true
-    # tty: true 
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# version: "3"
+
+# services:
+#   frontend:
+#     build: .
+#     container_name: frontend
+#     entrypoint: ./.docker/entrypoint.sh
+#     ports:
+#       - "3001:3000"
+
+#     volumes:
+#       - ./src:/app/src
+#       - ./public:/app/public
+#       - /app/node_modules
+
+
+#     stdin_open: true
+#     tty: true
+#     extra_hosts:
+#       - "host.docker.internal:172.17.0.1"
