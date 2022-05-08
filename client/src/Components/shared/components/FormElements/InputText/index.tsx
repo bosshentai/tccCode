@@ -24,7 +24,30 @@ type Action =
   | { type: ActionType.TOUCH; isTouch: boolean };
   // | { type: ActionType.VERIFICATION; isValid: boolean };
 
-const inputReducer = (_state: any, action: Action) => {
+type StateType = {
+  value: string;
+  isValid: boolean;
+  isTouched: boolean;
+
+}
+
+
+
+const inputReducer = (_state: StateType, action: Action) => {
+
+  /**
+   *
+   * @description - Reducer for the input component
+   *
+   * @param _state - The current state of the input
+   *
+   * @param action - The action to be performed
+   *
+   * @returns - The new state of the input
+   *
+   */
+
+
   switch (action.type) {
     case ActionType.CHANGE:
       return {
@@ -63,6 +86,15 @@ type inputProps = {
 };
 
 const chooseValidator = (id: string, value: string): boolean => {
+
+  /**
+   * @description - Chooses the validator to be used
+   * @param id :string - The id of the input
+   * @param value:string - The value of the input
+   * @returns {boolean}- The validity of the input
+   *
+   */
+
   switch (id) {
     case "name":
       return validName(value);
@@ -86,6 +118,13 @@ const chooseValidator = (id: string, value: string): boolean => {
 };
 
 export const InputText = (props: inputProps) => {
+
+  /**
+   *
+   * @description - The input component
+   * @param props - The props of the input
+   * @returns - The input component
+   */
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.initialValue || "",
     isTouched: false,

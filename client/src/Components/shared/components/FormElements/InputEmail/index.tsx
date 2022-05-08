@@ -3,7 +3,7 @@ import React, { useReducer } from "react";
 import styles from "./styles.module.scss";
 
 import { validEmail } from "../../../util/validEmail";
-import { displayPartsToString } from "typescript";
+// import { displayPartsToString } from "typescript";
 
 enum ActionType {
   CHANGE,
@@ -20,6 +20,12 @@ type Action =
   | { type: ActionType.TOUCH; isTouch: boolean };
 
 const inputReducer = (_state: any, action: Action) => {
+
+  /**
+   * @description - Reducer for the input email component
+   */
+
+
   switch (action.type) {
     case ActionType.CHANGE:
       return {
@@ -74,12 +80,12 @@ export const InputEmail = (props: inputProps) => {
   };
 
 
-  const teste = inputState.isTouched && !inputState.isValid;
+  // const teste = inputState.isTouched && !inputState.isValid;
 
 
 
 
-  const classController = teste ? ` ${styles.invalidInput} ` : "";
+  // const classController = teste ? ` ${styles.invalidInput} ` : "";
 
 
   return (

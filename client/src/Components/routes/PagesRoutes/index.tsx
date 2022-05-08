@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Client } from "../../Clients/page/Client";
+import { Client } from "../../Components/Clients/page/Client";
 import { Discount } from "../../Discount/page/Discount";
 import { Employee } from "../../Employee/page/Employee";
 import { EmployeeProfile } from "../../Employee/page/EmployeeProfile";
