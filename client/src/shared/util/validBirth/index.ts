@@ -1,5 +1,12 @@
 
 const day31 = (day: number): boolean => {
+  /**
+   * @description Checks if the day is between 1 and 31
+   * @param day : number
+   * @returns {boolean} true if day is between 1 and 31, false otherwise
+   *
+   *
+   */
   if (day > 0 && day <= 31) {
     return true;
   } else {
@@ -9,6 +16,12 @@ const day31 = (day: number): boolean => {
 
 
 const day30 = (day: number): boolean => {
+  /**
+   * @description Checks if the day is between 1 and 30
+   * @param day: number
+   * @returns {boolean} true if day is between 1 and 30, false otherwise
+   */
+
   if (day > 0 && day <= 30) {
     return true;
 
@@ -19,6 +32,13 @@ const day30 = (day: number): boolean => {
 
 
 const day29 = (day: number): boolean => {
+
+  /**
+   * @description Checks if the day is between 1 and 29
+   * @param day: number
+   * @returns {boolean} true if day is between 1 and 29, false otherwise
+   */
+
   if (day > 0 && day <= 29) {
     return true;
   } else {
@@ -27,6 +47,12 @@ const day29 = (day: number): boolean => {
 }
 
 const day28 = (day: number): boolean => {
+
+  /**
+   * @description Checks if the day is between 1 and 28
+   * @param day: number
+   * @returns {boolean} true if day is between 1 and 28, false otherwise
+   */
   if (day > 0 && day <= 28) {
     return true;
   } else {
@@ -35,25 +61,30 @@ const day28 = (day: number): boolean => {
 }
 
 const bisexed = (day: number, year: number): boolean => {
+  /**
+   * @description Checks if leap year
+   * @param day: number
+   * @param year: number
+   * @returns {boolean} true if leap year, false otherwise
+   *
+   */
   if (year % 100 === 0 && year % 400 === 0 && year % 4 === 0) {
     return day29(day);
   } else {
     return day28(day);
   }
-
+  return false;
 }
 
 
-export  const validBirth = (day: number, month: number, year: number): boolean => {
+export const validBirth = (day: number, month: number, year: number): boolean => {
 
   /**
-   * Return true if the date is valid
-   *
+   * @description Checks if the date is valid
    * @param {number} day - The First input
-   *
    * @param {number} month - The Second input
-   *
    * @param {number} year - The Third input
+   * @returns {boolean}  true if the date is valid, false otherwise
    */
 
   if (year > 0) {

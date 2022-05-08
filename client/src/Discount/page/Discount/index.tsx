@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
-type Discount = {
+type discountype = {
   id: string;
   name: string;
   amount: number;
@@ -68,7 +68,7 @@ export const Discount = () => {
 
   const [addDiscountIsShown, setDiscountIsShown] = React.useState(false);
 
-  const [listDiscount, setListDiscount] = React.useState<Discount[]>([]);
+  const [listDiscount, setListDiscount] = React.useState<discountype[]>([]);
 
   useEffect(() => {
     // const fetchData = async () => {

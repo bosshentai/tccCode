@@ -29,7 +29,7 @@ const DUMMY_DATA = [
 export const Client = () => {
   const [listEmpty, setListEmpty] = React.useState(true);
 
-  const [addClientIsShown, setClientIsShown] = React.useState(false);
+  // const [addClientIsShown, setClientIsShown] = React.useState(false);
 
   const [listClient, setListClient] = React.useState<client[]>([]);
 

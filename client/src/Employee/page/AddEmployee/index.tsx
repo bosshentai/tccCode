@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import styles from "./styles.module.scss";
 
@@ -144,7 +144,7 @@ export const AddEmployee = (props: propsType) => {
             label="Nome Completo"
             placeHolder="Insira o nome completo"
             onInput={inputHandler}
-            isValid={errorHandler}
+           
           />
           <div className={styles.twoinputrow}>
             <InputText

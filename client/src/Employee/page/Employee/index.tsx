@@ -10,7 +10,7 @@ import axios from "axios";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
-const urlPath = "http://localhost:4003/api/employee/all";
+const urlPath = "http://localhost:5000/api/employee/all";
 
 type employee = {
   id: string;

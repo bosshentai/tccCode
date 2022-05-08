@@ -2,12 +2,13 @@
 import { validBirth } from "../validBirth";
 
 
-
-
-
-
-
 const validSexCNI = (sex: string): boolean => {
+  /**
+   * @description Checks if Sex is masculine or feminine
+   * @param sex: string
+   * @returns {boolean}
+   *
+   */
   if (sex === "M" || sex === "F") {
     return true;
   }
@@ -17,6 +18,13 @@ const validSexCNI = (sex: string): boolean => {
 
 
 const valid3Number = (number: string): boolean => {
+
+  /**
+   * @description Checks if the number is 3 digits
+   * @param number: string
+   * @returns {boolean}
+   */
+
   let regex = /[0-9]{3}/;
 
   if (number.length === 3) {
@@ -29,6 +37,13 @@ const valid3Number = (number: string): boolean => {
 
 
 const validCharacter = (character: string): boolean => {
+
+  /**
+   * @description Checks if the character is a letter
+   * @param character: string
+   * @returns {boolean}
+   */
+
   let regex = /[A-Z]{1}/;
 
   return regex.test(character);
@@ -36,6 +51,12 @@ const validCharacter = (character: string): boolean => {
 
 
 export const validCNI = (cni: string): boolean => {
+
+  /**
+   * @description Checks if the CNI is valid
+   * @param cni: string
+   * @returns {boolean}
+   */
 
   let year = Number(cni.slice(0, 4));
   let month = Number(cni.slice(4, 6));
