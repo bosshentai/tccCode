@@ -2,8 +2,10 @@ import React, { useState } from "react";
 
 import styles from "./styles.module.scss";
 
-import whiteCross from "../../../assets/icons/whiteCross.svg";
-import blueCross from "../../../assets/icons/blueCross.svg";
+
+import whiteCross from "../../../../assets/icons/whiteCross.svg";
+import blueCross from "../../../../assets/icons/blueCross.svg";
+
 
 import { InputText } from "../../../shared/components/FormElements/InputText";
 import { useForm } from "../../../shared/hooks/form-hook";

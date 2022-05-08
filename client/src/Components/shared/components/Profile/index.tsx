@@ -1,4 +1,5 @@
-import profileIcon from "../../../assets/icons/blueProfile.svg";
+
+import profileIcon from "../../../../assets/icons/blueProfile.svg";
 
 import styles from "./styles.module.scss";
 

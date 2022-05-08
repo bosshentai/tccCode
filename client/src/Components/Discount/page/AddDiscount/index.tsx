@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
 
-import whiteCross from "../../../assets/icons/whiteCross.svg";
-import blueCross from "../../../assets/icons/blueCross.svg";
+
+import whiteCross from "../../../../assets/icons/whiteCross.svg";
+import blueCross from "../../../../assets/icons/blueCross.svg";
+// import blueCross from "../../../assets/icons/blueCross.svg";
 
 type propsType = {
   onClose: () => void;

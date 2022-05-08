@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 
-import whiteBack from "../../../assets/icons/whiteBack.svg";
+
+import whiteBack from "../../../../assets/icons/whiteBack.svg";
 
 import styles from "./styles.module.scss";
-import { transpileModule } from "typescript";
+// import { transpileModule } from "typescript";
 
 const DUMMY_DATA = {
   id: "1asadas",
