@@ -1,13 +1,11 @@
-.headerContainer{
-
+.headerContainer {
   height: 75px;
-  background: #4B88E8;
+  background: #4b88e8;
 
   display: flex;
   align-items: center;
 
-
-  .left{
+  .left {
     // background: red;
 
     height: 100%;
@@ -17,42 +15,37 @@
     // justify-items: center;
     align-items: center;
     justify-content: center;
-    
-    button{
+
+    button {
       background: transparent;
       border: none;
 
       cursor: pointer;
     }
-
-   
   }
 
-  h1{
+  h1 {
     // background: red;
     margin: auto;
     color: white;
 
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
     line-height: 42px;
   }
-
 }
 
-.employeeInfoContainer{
+.employeeInfoContainer {
   background: white;
   height: calc(100% - 22rem);
 
-  .infoContainer{
-
+  .infoContainer {
     // background-color: red;
 
-    
     color: black;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -63,62 +56,104 @@
 
     display: flex;
     align-items: center;
-    
+
     padding-left: 9rem;
     margin-bottom: 2.5rem;
 
-    &:first-of-type{
+    &:first-of-type {
       padding-top: 2rem;
-
     }
 
     .telephoneContainer {
       // background: red;
       display: flex;
 
-      input{
+      input {
+
+        // telephone input  styles
         border: none;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 24px;
         line-height: 28px;
+
+        // width: 100%;
+
+        &:disabled{
+          color: black;
+        }
+
+        // border-left: #4b88e8 1px solid;
+
       }
+
+      button {
+        // background: red;
+        width: 2.3rem;
+        height: 1.8rem;
+
+        border: none;
+        border-radius: 0.625rem;
+
+        margin-left: 0.2rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        img {
+          // width: 100%;
+          // height: auto;
+          width: 1.8rem;
+          height: 1, 4rem;
+        }
+
+
+
+      }
+
+      .yes {
+        background: #4B88E8;
+      }
+      .close{
+        background: #D62222;
+      }
+
     }
 
-    .btnContainer{
-
+    .btnContainer {
       // background: black;
 
       width: 100%;
       height: fit-content;
-      
+
       display: flex;
       justify-content: center;
-      
-      button{
-          background: #4B88E8;
-          border:  none;
 
-          height: 37px;
-          width: 13rem;
-          border-radius: 25px;
+      button {
+        background: #4b88e8;
+        border: none;
 
-          color : white;
-          font-family: 'Ubuntu', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
+        height: 1.8rem;
+        width: 13rem;
+        border-radius: 25px;
 
-          cursor: pointer;
+        color: white;
+        font-family: "Ubuntu", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
 
-          &:hover{
-            background-color: #4B88E8;
-          }
-        
+        cursor: pointer;
+
+        &:hover {
+          background-color: #4b88e8;
+        }
       }
     }
-
   }
 }

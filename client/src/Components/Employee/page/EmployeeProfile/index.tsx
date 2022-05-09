@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 
-
 import whiteBack from "../../../../assets/icons/whiteBack.svg";
+import whiteClose from "../../../../assets/icons/whiteLightClose.svg";
+import whiteYes from "../../../../assets/icons/whiteyes.svg";
 
 import styles from "./styles.module.scss";
 // import { transpileModule } from "typescript";
@@ -15,7 +16,7 @@ const DUMMY_DATA = {
   birthDate: "01/01/2000",
   CNI: "123456789",
   NIF: "123456789",
-  number: "9541850",	
+  number: "9541850",
 };
 
 export function EmployeeProfile() {
@@ -23,46 +24,31 @@ export function EmployeeProfile() {
   const navigate = useNavigate();
 
   const [verificedId, setVerificedId] = useState(false);
-  const [inputDisable,setinputDisable] = useState(true);
-  
+  const [inputDisable, setinputDisable] = useState(true);
 
-
-  
-
-
-  useEffect( () =>{
-      if (id === DUMMY_DATA.id) {
-        setVerificedId(true);
-       }
-      //  else{
-      //   navigate("/employee");
-      // }
-  },[])
-
+  useEffect(() => {
+    if (id === DUMMY_DATA.id) {
+      setVerificedId(true);
+    }
+    //  else{
+    //   navigate("/employee");
+    // }
+  }, []);
 
   const [teleNumber, setTeleNumber] = useState(DUMMY_DATA.number);
 
-
-  const handleTeleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTeleNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setTeleNumber(event.target.value);
-  }
+  };
 
-  const handleDisable = () =>{
+  const handleDisable = () => {
     setinputDisable(false);
-  }
-  
-
-  // console.log(id);
-
-  // const telephoneCss = `${styles.infoContainer}  `;
+  };
 
   return (
     <DefaultPage>
-      {/* <Link to={`Profile/${employeeId}`}> */}
-      {/* <h1>PersonalTrainerProfile</h1>
-      <p>{id}</p> */}
-      {/* </Link> */}
-
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <button
@@ -101,10 +87,22 @@ export function EmployeeProfile() {
           <div className={styles.telephoneContainer}>
             <label>Telefone:</label>
             {/* <p>{DUMMY_DATA.number}</p> */}
-            <input type="text" value={teleNumber}
-            onChange={handleTeleNumberChange}
-             disabled={inputDisable}
+            <input
+              type="text"
+              value={teleNumber}
+              onChange={handleTeleNumberChange}
+              disabled={inputDisable}
             />
+            {!inputDisable && (
+              <>
+                <button className={styles.yes}>
+                  <img src={whiteYes} />
+                </button>
+                <button className={styles.close}>
+                  <img src={whiteClose} />
+                </button>
+              </>
+            )}
           </div>
           <div className={styles.btnContainer}>
             <button onClick={handleDisable}>Alterar</button>
