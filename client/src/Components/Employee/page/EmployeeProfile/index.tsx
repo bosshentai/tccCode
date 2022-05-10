@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
@@ -11,8 +12,8 @@ import styles from "./styles.module.scss";
 
 const DUMMY_DATA = {
   id: "1asadas",
-  name: "Hernani",
-  email: "baptista@gmail",
+  name: "Hernâni",
+  email: "baptista@gmail.com",
   birthDate: "01/01/2000",
   CNI: "123456789",
   NIF: "123456789",
@@ -23,29 +24,54 @@ export function EmployeeProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [verificedId, setVerificedId] = useState(false);
-  const [inputDisable, setinputDisable] = useState(true);
+  const [verifiedId, setVerifiedId] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (id === DUMMY_DATA.id) {
-      setVerificedId(true);
+      setVerifiedId(true);
     }
     //  else{
     //   navigate("/employee");
     // }
-  }, []);
+  }, [verifiedId, id, navigate]);
 
   const [teleNumber, setTeleNumber] = useState(DUMMY_DATA.number);
+
 
   const handleTeleNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setTeleNumber(event.target.value);
+
   };
 
   const handleDisable = () => {
-    setinputDisable(false);
+    setIsOpen(true);
   };
+
+  const handleClose = () => {
+
+    const savedTelePhoneNumber = DUMMY_DATA.number;
+
+    setTeleNumber(savedTelePhoneNumber);
+
+
+
+
+    setIsOpen(false);
+
+
+  };
+
+
+  const handleSave = () => {
+
+
+    setIsOpen(false);
+  }
+
+
 
   return (
     <DefaultPage>
@@ -59,7 +85,7 @@ export function EmployeeProfile() {
             <img src={whiteBack} />
           </button>
         </div>
-        <h1>Informação do Funcionario</h1>
+        <h1>Informação do Funcionário</h1>
       </div>
       <div className={styles.employeeInfoContainer}>
         {/* <p>Nome: {id}</p> */}
@@ -86,19 +112,20 @@ export function EmployeeProfile() {
         <div className={styles.infoContainer}>
           <div className={styles.telephoneContainer}>
             <label>Telefone:</label>
-            {/* <p>{DUMMY_DATA.number}</p> */}
+
             <input
               type="text"
               value={teleNumber}
+
               onChange={handleTeleNumberChange}
-              disabled={inputDisable}
+              disabled={!isOpen}
             />
-            {!inputDisable && (
+            {isOpen && (
               <>
-                <button className={styles.yes}>
+                <button className={styles.yes} onClick={handleSave}>
                   <img src={whiteYes} />
                 </button>
-                <button className={styles.close}>
+                <button className={styles.close} onClick={handleClose}>
                   <img src={whiteClose} />
                 </button>
               </>

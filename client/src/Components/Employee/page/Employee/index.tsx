@@ -19,20 +19,20 @@ type employee = {
   status: string;
 };
 
-const DUMMY_DATA = [
-  {
-    id: "1asadas",
-    name: "Hernani",
-    email: "baptista@gmail.com",
-    status: "Ativo",
-  },
-  {
-    id: "2asxzad",
-    name: "Hern",
-    email: "test@gmail.com",
-    status: "Inativo",
-  },
-];
+// const DUMMY_DATA = [
+//   {
+//     id: "1asadas",
+//     name: "Hernâni",
+//     email: "baptista@gmail.com",
+//     status: "Ativo",
+//   },
+//   {
+//     id: "2asxzad",
+//     name: "Hern",
+//     email: "test@gmail.com",
+//     status: "Inativo",
+//   },
+// ];
 
 export const Employee = () => {
   const [listEmpty, setListEmpty] = useState(true);
@@ -45,11 +45,11 @@ export const Employee = () => {
 
   useEffect(  () => {
  
-    // axios.get(urlPath).then((response) => {
-    //   setListEmployee(response.data);
-    // });
+    axios.get(urlPath).then((response) => {
+      setListEmployee(response.data);
+    });
 
-    setListEmployee(DUMMY_DATA);
+    // setListEmployee(DUMMY_DATA);
 
     if (listEmployee.length === 0) {
       setListEmpty(true);
@@ -79,7 +79,7 @@ export const Employee = () => {
           portalElement
         )}
       <DefaultPage className={classDefaultController}>
-        {listEmpty && <p className={styles.p}>Sem funcionarios</p>}
+        {listEmpty && <p className={styles.p}>Sem funcionários</p>}
 
         {!listEmpty && (
           <div className={styles.tableContainer}>
@@ -94,12 +94,12 @@ export const Employee = () => {
                 <p>Status</p>
               </div>
             </div>
-            <EmployeeList data-testid="employeeList"  employees={listEmployee} />
+            <EmployeeList employees={listEmployee} />
           </div>
         )}
         <div className={styles.btnContainer}>
           <button onClick={showAddEmployeeHandler}>
-            <p>Adicionar Funcionario</p>
+            <p>Adicionar Funcionário</p>
           </button>
         </div>
       </DefaultPage>
