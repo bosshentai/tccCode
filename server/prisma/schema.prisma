@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String 
+  password   String
+  phone      String
+  role       Role     @default(EMPLOYEE)
+  CNI        String   
+  NIF        String   
+  birthDate  String
+  status     Status   @default(Inactive)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+enum Role {
+  MANAGER
+  EMPLOYEE
+}
+
+enum Status {
+  Active
+  Inactive
+}
+
+model client {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  birthDate DateTime
+  created_at DateTime @default(now())
+
+  @@map("clients")
+}
+
+model PersonalTrainer {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  cni       String
+  nif       String
+  birthDate DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("personal_trainers")
+}
+
+
+model discount {
+  id        String   @id @default(uuid())
+  name      String
+  value     Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("discounts")
+}
+
+model TrainingPlan{
+  id        String   @id @default(uuid())
+  name      String
+  price     Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("training_plans")
+}
+
+model ClientPaymentSetting{
+  id       String   @id @default(uuid())
+  client_id String
+  discount_id String
+  training_plan_id String
+  personal_trainer_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("client_payment_settings")
+}

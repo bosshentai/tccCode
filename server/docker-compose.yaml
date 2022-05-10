@@ -1,0 +1,74 @@
+# version: '3'
+
+# services:
+#   postgres: &postgres
+#     image: postgres:9.6
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: postgres
+#     volumes:
+#       - ./data/postgres:/var/lib/postgresql/data
+#     ports:
+#       - "5432:5432"
+#     restart: always
+#     depends_on:
+#       - redis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# version: "3"
+
+# services:
+#   app:
+#     build: .
+#     entrypoint: wait-for db:3306 40 -- ./.docker/entrypoint.sh
+#     ports:
+#       - 3000:3000
+#     volumes:
+#       - .:/home/node/app
+#     depends_on:
+#       - db
+#     extra_hosts:
+#       - "host.docker.internal:172.17.0.1"
+
+#   db:
+#     build: ./.docker/mongo
+#     restart: always
+#     tty: true
+#     volumes:
+#       - ./.docker/data:/var/lib/mongodb
+#     environment:
+#       - MONGO_INITDB_ROOT_USERNAME=root
+#       - MONGO_INITDB_ROOT_PASSWORD=root
+# version: '3.9'
+
+# services:
+#   db:
+#     image: 'postgres'
+#     ports:
+#       - '2345:5432'
+#     environment:
+#       POSTGRES_USER: 'postgres'
+#       POSTGRES_PASSWORD: 'postgres'
+#       POSTGRES_DB: 'mydb'
+#   server:
+#     build: .
+#     ports:
+#       - '5000:5000'
+#     environment:
+#       DATABASE_URL: 'postgresql://postgres:postgres@db:5432/mydb?schema=public'

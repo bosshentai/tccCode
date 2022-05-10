@@ -1,0 +1,71 @@
+.inputContainer {
+  color: #4b88e8;
+  padding-bottom: 2rem;
+
+ 
+
+  &:nth-child(2) {
+    padding-left: 5rem;
+  }
+
+  label {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 24px;
+    line-height: 28px;
+    padding-bottom: 1rem;
+  }
+
+  input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #246ee3;
+    background-color: transparent;
+    font-size: 20px;
+
+    width: 20rem;
+    height: 1.5rem;
+
+    caret-color: #246ee3;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: rgba(36, 110, 232, 0.06);
+    }
+
+    &::placeholder{
+      color: #4b88e8;
+    }
+
+  }
+
+  input[type="date"] {
+    color: #4b88e8;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator{
+      // adiciona 1 icon la direto
+      background: none;
+    }
+  }
+
+  .invalidInput {
+    background-color: rgba(255, 0, 0, 0.13);
+    border-bottom: 2px solid #ff0000;
+
+    color:#ff0000;
+
+    &:hover,
+    &:focus {
+      background: rgba(255, 0, 0, 0.13);
+    }
+
+    &::placeholder{
+      color: #ff0000;
+    }
+  }
+}
