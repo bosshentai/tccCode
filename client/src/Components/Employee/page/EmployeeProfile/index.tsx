@@ -5,22 +5,47 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 
 import whiteBack from "../../../../assets/icons/whiteBack.svg";
 import whiteClose from "../../../../assets/icons/whiteLightClose.svg";
-import whiteYes from "../../../../assets/icons/whiteyes.svg";
+import whiteYes from "../../../../assets/icons/whitEyes.svg";
 
 import styles from "./styles.module.scss";
+import axios from "axios";
 // import { transpileModule } from "typescript";
 
-const DUMMY_DATA = {
-  id: "1asadas",
-  name: "Hernâni",
-  email: "baptista@gmail.com",
-  birthDate: "01/01/2000",
-  CNI: "123456789",
-  NIF: "123456789",
-  number: "9541850",
-};
+// const DUMMY_DATA = {
+//   id: "1asadas",
+//   name: "Hernâni",
+//   email: "baptista@gmail.com",
+//   birthDate: "01/01/2000",
+//   CNI: "123456789",
+//   NIF: "123456789",
+//   number: "9541850",
+// };
+
+
+
 
 export function EmployeeProfile() {
+
+
+  const getEmployeeUrl = `http://localhost:8080/api/employee/`;
+
+
+  // console.log(window.location.href);
+
+  // split the url to get the id
+
+  // const enterUrl = window.location.href;
+  // const url = enterUrl.substring(0, enterUrl.lastIndexOf("/"));
+  // const employeeId = enterUrl.substring(enterUrl.lastIndexOf("/") + 1);
+
+  // // change the url path to the employee profile page
+  // window.location.href = url;
+
+
+  // console.log("enterURL " + enterUrl)
+  // console.log("url split " + url);
+  // console.log("employeeId " + employeeId);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -28,21 +53,25 @@ export function EmployeeProfile() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (id === DUMMY_DATA.id) {
-      setVerifiedId(true);
-    }
+
+    axios.get(getEmployeeUrl+id)
+.then(response => {response.data})
+    // if (id === DUMMY_DATA.id) {
+    //   setVerifiedId(true);
+    // }
+
     //  else{
     //   navigate("/employee");
     // }
   }, [verifiedId, id, navigate]);
 
-  const [teleNumber, setTeleNumber] = useState(DUMMY_DATA.number);
+  const [teleNumber, setTeleNumber] = useState();
 
 
   const handleTeleNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setTeleNumber(event.target.value);
+    // setTeleNumber(event.target.value);
 
   };
 
@@ -52,9 +81,9 @@ export function EmployeeProfile() {
 
   const handleClose = () => {
 
-    const savedTelePhoneNumber = DUMMY_DATA.number;
+    // const savedTelePhoneNumber = DUMMY_DATA.number;
 
-    setTeleNumber(savedTelePhoneNumber);
+    // setTeleNumber(savedTelePhoneNumber);
 
 
 
@@ -72,6 +101,9 @@ export function EmployeeProfile() {
   }
 
 
+
+
+  const teleNumberCssController = isOpen ? `${styles.teleNumber} ${styles.teleNumberOpen}` : `${styles.teleNumber}`;
 
   return (
     <DefaultPage>
@@ -91,23 +123,23 @@ export function EmployeeProfile() {
         {/* <p>Nome: {id}</p> */}
         <div className={styles.infoContainer}>
           <label>Nome:</label>
-          <p>{DUMMY_DATA.name}</p>
+          {/* <p>{DUMMY_DATA.name}</p> */}
         </div>
         <div className={styles.infoContainer}>
           <label>Email:</label>
-          <p>{DUMMY_DATA.email}</p>
+          {/* <p>{DUMMY_DATA.email}</p> */}
         </div>
         <div className={styles.infoContainer}>
           <label>Data de Nascimento:</label>
-          <p>{DUMMY_DATA.birthDate}</p>
+          {/* <p>{DUMMY_DATA.birthDate}</p> */}
         </div>
         <div className={styles.infoContainer}>
           <label>CNI:</label>
-          <p>{DUMMY_DATA.CNI}</p>
+          {/* <p>{DUMMY_DATA.CNI}</p> */}
         </div>
         <div className={styles.infoContainer}>
           <label>NIF:</label>
-          <p>{DUMMY_DATA.NIF}</p>
+          {/* <p>{DUMMY_DATA.NIF}</p> */}
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.telephoneContainer}>
@@ -116,7 +148,7 @@ export function EmployeeProfile() {
             <input
               type="text"
               value={teleNumber}
-
+              className={teleNumberCssController}
               onChange={handleTeleNumberChange}
               disabled={!isOpen}
             />

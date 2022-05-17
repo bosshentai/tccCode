@@ -35,8 +35,10 @@ export function PagesRoutes() {
       <Route path="/Employee" element={<Employee />} />
       <Route path="/Employee/Profile/:id" element={<EmployeeProfile />} />
 
+      {/* <Route path="/Employee/Profile/" element={<EmployeeProfile />} /> */}
+
       <Route path="/PersonalTrainer" element={<PersonalTrainer />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>
   );
 }

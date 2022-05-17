@@ -68,7 +68,7 @@
       // background: red;
       display: flex;
 
-      input {
+      .teleNumber {
 
         // telephone input  styles
         border: none;
@@ -84,7 +84,27 @@
           color: black;
         }
 
+        &:focus {
+          outline: none;
+        }
+
         // border-left: #4b88e8 1px solid;
+
+      }
+
+      .teleNumberOpen {
+        border: none;
+        border-bottom: #4b88e8 2px solid;
+
+        color:#4b88e8;
+
+        background-color: rgba(36,110,227,0.06);
+
+        &:focus{
+          outline: none;
+        }
+
+
 
       }
 

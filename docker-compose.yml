@@ -12,27 +12,33 @@ services:
     ports:
       - "5432:5432"
     restart:  always
-    depends_on:
-      - redis
+    # depends_on:
+    #   - redis
 
 
   frontend:
     build: ./client
     ports:
       - '3000:3000'
+    volumes:
+      - ./client:/usr/src/app
     depends_on:
       - backend
 
   backend:
     tty: true
     build: ./server
+    # command: npx prisma migrate dev
     ports:
       - '5000:5000'
     # environment:
     #   DATA_URL: 'postgresql://postgres:postgres@db:5432/postgres?schema=public'
     depends_on:
       - db
-    restart: always
+    # restart: always
+
+volumes:
+  postgres-data:
 
 
 
