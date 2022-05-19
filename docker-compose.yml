@@ -12,8 +12,8 @@ services:
     ports:
       - "5432:5432"
     restart:  always
-    # depends_on:
-    #   - redis
+    depends_on:
+      - redis
 
 
   frontend:
@@ -35,10 +35,13 @@ services:
     #   DATA_URL: 'postgresql://postgres:postgres@db:5432/postgres?schema=public'
     depends_on:
       - db
+    volumes:
+      - ./server:/usr/src/app
+    restart: always
     # restart: always
 
-volumes:
-  postgres-data:
+# volumes:
+#   postgres-data:
 
 
 

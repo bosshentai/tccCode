@@ -8,7 +8,7 @@ import whiteClose from "../../../../assets/icons/whiteLightClose.svg";
 import whiteYes from "../../../../assets/icons/whitEyes.svg";
 
 import styles from "./styles.module.scss";
-import axios from "axios";
+// import axios from "axios";
 // import { transpileModule } from "typescript";
 
 // const DUMMY_DATA = {
@@ -21,14 +21,8 @@ import axios from "axios";
 //   number: "9541850",
 // };
 
-
-
-
 export function EmployeeProfile() {
-
-
-  const getEmployeeUrl = `http://localhost:8080/api/employee/`;
-
+  // const getEmployeeUrl = `http://localhost:8080/api/employee/`;
 
   // console.log(window.location.href);
 
@@ -41,7 +35,6 @@ export function EmployeeProfile() {
   // // change the url path to the employee profile page
   // window.location.href = url;
 
-
   // console.log("enterURL " + enterUrl)
   // console.log("url split " + url);
   // console.log("employeeId " + employeeId);
@@ -52,27 +45,28 @@ export function EmployeeProfile() {
   const [verifiedId, setVerifiedId] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  // const [employee, setEmployee] = useState<any>({});
+
   useEffect(() => {
+    // axios.get(getEmployeeUrl + id).then((response) => {
+    // setEmployee(response.data)
+    // });
+    if (id === "1") {
+      setVerifiedId(true);
+    }
 
-    axios.get(getEmployeeUrl+id)
-.then(response => {response.data})
-    // if (id === DUMMY_DATA.id) {
-    //   setVerifiedId(true);
-    // }
-
-    //  else{
-    //   navigate("/employee");
-    // }
+     else{
+      // navigate("/employee");
+      setVerifiedId(false);
+    }
   }, [verifiedId, id, navigate]);
 
-  const [teleNumber, setTeleNumber] = useState();
-
+  // const [teleNumber, setTeleNumber] = useState();
 
   const handleTeleNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     // setTeleNumber(event.target.value);
-
   };
 
   const handleDisable = () => {
@@ -80,30 +74,20 @@ export function EmployeeProfile() {
   };
 
   const handleClose = () => {
-
     // const savedTelePhoneNumber = DUMMY_DATA.number;
 
     // setTeleNumber(savedTelePhoneNumber);
 
-
-
-
     setIsOpen(false);
-
-
   };
 
-
   const handleSave = () => {
-
-
     setIsOpen(false);
-  }
+  };
 
-
-
-
-  const teleNumberCssController = isOpen ? `${styles.teleNumber} ${styles.teleNumberOpen}` : `${styles.teleNumber}`;
+  const teleNumberCssController = isOpen
+    ? `${styles.teleNumber} ${styles.teleNumberOpen}`
+    : `${styles.teleNumber}`;
 
   return (
     <DefaultPage>
@@ -147,7 +131,7 @@ export function EmployeeProfile() {
 
             <input
               type="text"
-              value={teleNumber}
+              // value={teleNumber}
               className={teleNumberCssController}
               onChange={handleTeleNumberChange}
               disabled={!isOpen}

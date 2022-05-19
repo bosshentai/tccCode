@@ -24,7 +24,7 @@ export const AddEmployee = (props: propsType) => {
   const [showError, setShowError] = useState(false);
 
 
-  const [errorHandler,setErrorhandler] = useState(false);
+  // const [errorHandler,setErrorhandler] = useState(false);
 
   // const { sendRequest } = useHttpClient();
 
@@ -91,13 +91,20 @@ export const AddEmployee = (props: propsType) => {
         //   },
         //   body: JSON.stringify(formData),
         // });
-        const response = await axios.post(urlPath, formData);
+        // const response = await axios.post(urlPath, formData);
+        // console.log(response.status);
+
+        await axios.post(urlPath, formData);
+
         props.onClose();
+
+        // return response.status;
+
       } catch (err) {
         console.log(err);
       }
     } else {
-      console.log("invalid form");
+      // console.log("invalid form");
 
       // if(formState.inputs.name.isValid === false){
       //   // inputHandler.inputs.name.isValid = false;
@@ -123,7 +130,7 @@ export const AddEmployee = (props: propsType) => {
       <div className={styles.addEmployeeContainer}>
         <div className={styles.headerContainer}>
           <div className={styles.left}>
-            <h1>Inscrição do Funcionario</h1>
+            <h1>Inscrição do Funcionário</h1>
           </div>
           <button
             className={styles.right}
@@ -136,7 +143,7 @@ export const AddEmployee = (props: propsType) => {
         </div>
 
         <form
-          data-testid="form"
+
           onSubmit={formRegisterEmployeeHandler}
           className={styles.formContainer}
         >
@@ -188,7 +195,7 @@ export const AddEmployee = (props: propsType) => {
             onInput={inputHandler}
           />
 
-          <button data-testid="button" className={styles.btnSubmit}>
+          <button className={styles.btnSubmit}>
             Inscrever
           </button>
         </form>
