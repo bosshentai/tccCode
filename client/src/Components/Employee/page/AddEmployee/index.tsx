@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 import styles from "./styles.module.scss";
 
-
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
-
 
 import { InputText } from "../../../shared/components/FormElements/InputText";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -17,12 +15,10 @@ type propsType = {
   onClose: () => void;
 };
 
-
 export const AddEmployee = (props: propsType) => {
   const [isHover, setHover] = useState(false);
 
   const [showError, setShowError] = useState(false);
-
 
   // const [errorHandler,setErrorhandler] = useState(false);
 
@@ -84,13 +80,6 @@ export const AddEmployee = (props: propsType) => {
       };
 
       try {
-        // await fetch("http://localhost:4003/api/employee/add", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(formData),
-        // });
         // const response = await axios.post(urlPath, formData);
         // console.log(response.status);
 
@@ -99,20 +88,10 @@ export const AddEmployee = (props: propsType) => {
         props.onClose();
 
         // return response.status;
-
       } catch (err) {
         console.log(err);
       }
     } else {
-      // console.log("invalid form");
-
-      // if(formState.inputs.name.isValid === false){
-      //   // inputHandler.inputs.name.isValid = false;
-      //   console.log("name is invalid");
-      //   // touche true
-      //   setErrorhandler(true);
-      
-      // }
       setShowError(true);
     }
   };
@@ -121,11 +100,11 @@ export const AddEmployee = (props: propsType) => {
 
   const closeErrorHandler = () => {
     setShowError(false);
-  }
+  };
 
   return (
     <>
-      {showError && <ErrorPopup onClose={closeErrorHandler}/>}
+      {showError && <ErrorPopup onClose={closeErrorHandler} />}
 
       <div className={styles.addEmployeeContainer}>
         <div className={styles.headerContainer}>
@@ -143,7 +122,6 @@ export const AddEmployee = (props: propsType) => {
         </div>
 
         <form
-
           onSubmit={formRegisterEmployeeHandler}
           className={styles.formContainer}
         >
@@ -153,7 +131,6 @@ export const AddEmployee = (props: propsType) => {
             label="Nome Completo"
             placeHolder="Insira o nome completo"
             onInput={inputHandler}
-           
           />
           <div className={styles.twoinputrow}>
             <InputText
@@ -195,9 +172,7 @@ export const AddEmployee = (props: propsType) => {
             onInput={inputHandler}
           />
 
-          <button className={styles.btnSubmit}>
-            Inscrever
-          </button>
+          <button className={styles.btnSubmit}>Inscrever</button>
         </form>
       </div>
     </>

@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./styles.module.scss";
-
 
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
-// import blueCross from "../../../assets/icons/blueCross.svg";
+import { validName } from "../../../shared/util/validName";
 
 type propsType = {
   onClose: () => void;
 };
 
 export const AddDiscount = (props: propsType) => {
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  // const areaINputRef = useRef();
+  // const amountInputRef = useRef();
+
   const [isHover, setHover] = useState(false);
 
   const hoverHandler = () => {
@@ -19,6 +22,38 @@ export const AddDiscount = (props: propsType) => {
 
   const leaveHandler = () => {
     setHover(false);
+  };
+
+  const formRegisterDiscountHandler = (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    // console.log(nameInputRef.current!.value);
+
+    const enteredName = nameInputRef.current!.value;
+
+    const nameIsNotEmpty = enteredName.trim().length !== 0;
+    const nameIsValid = validName(enteredName);
+    // minimo 6 letras
+
+
+    console.log("Name is not empty: " + nameIsNotEmpty);
+    console.log("Name is valid: " + nameIsValid);
+
+
+    // if (nameIsEmpty || !nameIsValid) {
+    //   return;
+    // }
+
+
+    // if(enteredName.trim().length === 0) {
+    //   console.log('Name is empty');
+    // }
+
+
+    // const formData = new FormData();
+    // console.log("Form submitted");
   };
 
   const iconChange = !isHover ? whiteCross : blueCross;
@@ -39,22 +74,33 @@ export const AddDiscount = (props: propsType) => {
         </button>
       </div>
       {/* Form  */}
-      <form className={styles.formContainer}>
-      <div>
-        <label>Nome</label>
-        <input type="text" />
-      </div>
-      <div>
-        <label>Descrição</label>
-        {/* <input type="textarea" rows="5"/> */}
-        <textarea />
-      </div>
-      <div>
-        <label>Montante</label>
-        <input type="text" />
-      </div>
+      <form
+        onSubmit={formRegisterDiscountHandler}
+        className={styles.formContainer}
+      >
+        <div>
+          <label>Nome</label>
+          <input
+          type="text"
+          ref={nameInputRef} />
+        </div>
+        {/* <InputText
+        type="text"
+        id="name"
+        label="Nome"
+        placeHolder="Insira o nome"
+        onInput={inputHandler}
+      /> */}
+        <div>
+          <label>Descrição</label>
+          <textarea />
+        </div>
+        <div>
+          <label>Montante</label>
+          <input type="text" />
+        </div>
 
-      <button className={styles.btnSubmit}>registrar</button>
+        <button className={styles.btnSubmit}>Registrar</button>
       </form>
     </div>
   );

@@ -1,8 +1,10 @@
 
+// import { Role } from '@prisma/client';
 import { Role } from '@prisma/client';
 import { Request, Response } from 'express';
 
 import { prismaClient } from '../../database/prismaClient';
+// import
 
 
 
@@ -12,7 +14,7 @@ export class CreateEmployeeController {
     const { name, email, phone, CNI, NIF, birth } = request.body;
 
 
-    // try {
+    try {
       const client = await prismaClient.user.create({
         data: {
           name: name,
@@ -30,9 +32,10 @@ export class CreateEmployeeController {
       return response.status(201).json(client);
 
 
-    // } catch (e) {
+    } catch (e) {
       // console.log(e);
-    // }
+      return response.status(400);
+    }
 
 
     // return response.status(400).json({ error: 'Unknown error' });

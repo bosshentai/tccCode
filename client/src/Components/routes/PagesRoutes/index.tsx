@@ -1,6 +1,6 @@
-import React, { lazy } from "react";
+import React from "react";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import {Client} from "../../Clients/page/Client";
 import { Discount } from "../../Discount/page/Discount";

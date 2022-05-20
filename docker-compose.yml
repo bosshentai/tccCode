@@ -28,7 +28,7 @@ services:
   backend:
     tty: true
     build: ./server
-    command: npx prisma migrate dev
+    # command: npx prisma migrate dev
     ports:
       - '5000:5000'
     # environment:
