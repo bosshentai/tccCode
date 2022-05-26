@@ -1,4 +1,4 @@
-version: ' 3'
+version: '3'
 
 services:
   db:
@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - data_postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     restart:  always
@@ -38,10 +38,10 @@ services:
     volumes:
       - ./server:/usr/src/app
     restart: always
-    # restart: always
+
 
 volumes:
-  postgres-data:
+  data_postgres: {}
 
 
 
