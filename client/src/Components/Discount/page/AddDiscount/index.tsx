@@ -11,10 +11,12 @@ type propsType = {
 
 export const AddDiscount = (props: propsType) => {
   const nameInputRef = useRef<HTMLInputElement>(null);
-  // const areaINputRef = useRef();
-  // const amountInputRef = useRef();
+  const areaInputRef = useRef<HTMLTextAreaElement>(null);
+  const amountInputRef = useRef();
 
   const [isHover, setHover] = useState(false);
+
+  const [isNameOk, setIsNameOk] = useState(true);
 
   const hoverHandler = () => {
     setHover(true);
@@ -29,34 +31,47 @@ export const AddDiscount = (props: propsType) => {
   ) => {
     event.preventDefault();
 
-    // console.log(nameInputRef.current!.value);
+    // console.log(areaInputRef.current!.value);
 
+    // Name
     const enteredName = nameInputRef.current!.value;
-
     const nameIsNotEmpty = enteredName.trim().length !== 0;
     const nameIsValid = validName(enteredName);
     // mínimo 6 letras
 
+    const nameIsOk = nameIsNotEmpty && nameIsValid;
 
-    console.log("Name is not empty: " + nameIsNotEmpty);
-    console.log("Name is valid: " + nameIsValid);
+    // Description
+    const enteredDescription = areaInputRef.current!.value;
+    const descriptionIsNotEmpty = enteredDescription.trim().length !== 0;
 
+    // console.log("Name is not empty: " + nameIsNotEmpty);
+    // console.log("Name is valid: " + nameIsValid);
 
-    // if (nameIsEmpty || !nameIsValid) {
-    //   return;
-    // }
+    if (!nameIsOk) {
+      setIsNameOk(false);
 
+      return;
 
-    // if(enteredName.trim().length === 0) {
-    //   console.log('Name is empty');
-    // }
+      // alert("Nome inválido");
+      // return;
+    }
 
+    if (nameIsOk && descriptionIsNotEmpty) {
+      setIsNameOk(true);
 
-    // const formData = new FormData();
-    // console.log("Form submitted");
+      // console.log(enteredName);
+
+      console.log("Discount added");
+      // props.onClose();
+    }
   };
 
   const iconChange = !isHover ? whiteCross : blueCross;
+
+  const nameControllerClass = isNameOk
+    ? `${styles.nameValid}`
+    : `${styles.nameInvalid}`;
 
   return (
     <div className={styles.addDiscountContainer}>
@@ -81,8 +96,10 @@ export const AddDiscount = (props: propsType) => {
         <div>
           <label>Nome</label>
           <input
-          type="text"
-          ref={nameInputRef} />
+            type="text"
+            ref={nameInputRef}
+            className={nameControllerClass}
+          />
         </div>
         {/* <InputText
         type="text"
@@ -93,7 +110,7 @@ export const AddDiscount = (props: propsType) => {
       /> */}
         <div>
           <label>Descrição</label>
-          <textarea />
+          <textarea ref={areaInputRef} />
         </div>
         <div>
           <label>Montante</label>
