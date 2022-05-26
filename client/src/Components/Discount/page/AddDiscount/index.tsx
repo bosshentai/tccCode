@@ -12,11 +12,12 @@ type propsType = {
 export const AddDiscount = (props: propsType) => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const areaInputRef = useRef<HTMLTextAreaElement>(null);
-  const amountInputRef = useRef();
+  const amountInputRef = useRef<HTMLInputElement>(null);
 
   const [isHover, setHover] = useState(false);
 
   const [isNameOk, setIsNameOk] = useState(true);
+  const [isNumberOk, setIsNumberOk] = useState(true);
 
   const hoverHandler = () => {
     setHover(true);
@@ -43,28 +44,44 @@ export const AddDiscount = (props: propsType) => {
 
     // Description
     const enteredDescription = areaInputRef.current!.value;
-    const descriptionIsNotEmpty = enteredDescription.trim().length !== 0;
+    // const descriptionIsNotEmpty = enteredDescription.trim().length !== 0;
 
     // console.log("Name is not empty: " + nameIsNotEmpty);
     // console.log("Name is valid: " + nameIsValid);
 
+    // Amount
+    const enteredAmount = amountInputRef.current!.value;
+    const amountIsNotEmpty = enteredAmount.trim().length !== 0;
+
+
+    console.log("Amount is not empty: " + amountIsNotEmpty);
+    console.log(" Entered amount: " + enteredAmount);
+    // const amountIsValid = isNaN(Number(enteredAmount));
+
+    const amountIsOk = amountIsNotEmpty;
+
     if (!nameIsOk) {
       setIsNameOk(false);
 
-      return;
-
-      // alert("Nome inválido");
-      // return;
+     
     }
 
-    if (nameIsOk && descriptionIsNotEmpty) {
+    if (!amountIsOk) {
+      setIsNumberOk(false);
+
+    }
+
+    if (nameIsOk) {
       setIsNameOk(true);
+      setIsNumberOk(true);
 
       // console.log(enteredName);
 
       console.log("Discount added");
       // props.onClose();
     }
+
+    return;
   };
 
   const iconChange = !isHover ? whiteCross : blueCross;
@@ -72,6 +89,10 @@ export const AddDiscount = (props: propsType) => {
   const nameControllerClass = isNameOk
     ? `${styles.nameValid}`
     : `${styles.nameInvalid}`;
+
+  const numberControllerClass = isNumberOk
+    ? `${styles.numberValid}`
+    : `${styles.numberInvalid}`;
 
   return (
     <div className={styles.addDiscountContainer}>
@@ -114,7 +135,12 @@ export const AddDiscount = (props: propsType) => {
         </div>
         <div>
           <label>Montante</label>
-          <input type="text" />
+          <input
+            className={numberControllerClass}
+            type="number"
+            onWheel={(event) => event.currentTarget.blur()}
+            ref={amountInputRef}
+          />
         </div>
 
         <button className={styles.btnSubmit}>Registrar</button>
