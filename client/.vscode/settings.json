@@ -6,5 +6,8 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   "javascript.inlayHints.parameterTypes.enabled": true,
   "explorer.compactFolders": false,
-  "livePreview.defaultPreviewPath": "/docs/index.html"
+  "livePreview.defaultPreviewPath": "/docs/index.html",
+  "cSpell.words": [
+    "nogain"
+  ]
 }

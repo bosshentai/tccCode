@@ -35,7 +35,7 @@ export const AddDiscount = (props: propsType) => {
 
     const nameIsNotEmpty = enteredName.trim().length !== 0;
     const nameIsValid = validName(enteredName);
-    // minimo 6 letras
+    // mínimo 6 letras
 
 
     console.log("Name is not empty: " + nameIsNotEmpty);
