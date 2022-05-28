@@ -6,15 +6,15 @@ RUN apk add --no-cache bash
 RUN ln -sf /bin/bash /bin/sh
 
 
-COPY package*.json ./
+# COPY package*.json ./
 
-RUN npm install
+# RUN npm install
 
-COPY . .
+# COPY . .
 
-EXPOSE 3000
+# EXPOSE 3000
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
 
 
 

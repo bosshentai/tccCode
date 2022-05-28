@@ -63,7 +63,7 @@ export const AddDiscount = (props: propsType) => {
     if (!nameIsOk) {
       setIsNameOk(false);
 
-     
+
     }
 
     if (!amountIsOk) {
