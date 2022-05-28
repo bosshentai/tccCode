@@ -1,16 +1,24 @@
 FROM node:alpine
 
 WORKDIR /usr/src/app
-
 RUN apk add --no-cache bash
 RUN ln -sf /bin/bash /bin/sh
 
+# USER react
 
-# COPY package*.json ./
+# WORKDIR /home/react/app
+
+
+
+
+
+
+
+COPY package*.json ./
 
 # RUN npm install
 
-# COPY . .
+COPY . .
 
 # EXPOSE 3000
 

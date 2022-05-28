@@ -15,11 +15,16 @@ COPY tsconfig.json ./
 
 COPY . .
 
-RUN npm install
+# USER node
 
-RUN npx prisma generate
-# RUN npx prisma migrate dev
+# WORKDIR /home/node/app
 
-EXPOSE 5000
 
-CMD ["npm","run","dev"]
+# RUN npm install
+
+# RUN npx prisma generate
+# # RUN npx prisma migrate dev
+
+# EXPOSE 5000
+
+# CMD ["npm","run","dev"]
