@@ -4,21 +4,20 @@ WORKDIR /usr/src/app
 RUN apk add --no-cache bash
 RUN ln -sf /bin/bash /bin/sh
 
+COPY package*.json ./
+
+COPY . .
+
+
+
+
+
 # USER react
 
 # WORKDIR /home/react/app
 
-
-
-
-
-
-
-COPY package*.json ./
-
 # RUN npm install
 
-COPY . .
 
 # EXPOSE 3000
 
