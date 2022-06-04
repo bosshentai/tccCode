@@ -15,7 +15,7 @@ export class CreateEmployeeController {
 
 
     try {
-      const client = await prismaClient.user.create({
+      const employee = await prismaClient.user.create({
         data: {
           name: name,
           email: email,
@@ -29,7 +29,7 @@ export class CreateEmployeeController {
       });
 
 
-      return response.status(201).json(client);
+      return response.status(201).json(employee);
 
 
     } catch (e) {
