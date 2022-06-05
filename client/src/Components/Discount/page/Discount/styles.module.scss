@@ -58,7 +58,8 @@
     cursor: pointer;
 
     &:hover {
-      background: var(--blue-hover);
+      // background: var(--blue-hover);
+      background: rgba(36,110,227,0.5);
       transition: all 0.3s ease-in-out;
     }
   }
