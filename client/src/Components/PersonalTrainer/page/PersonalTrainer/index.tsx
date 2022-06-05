@@ -1,7 +1,8 @@
 // import { useEffect, useState } from "react"
 
-import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage"
+import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 
+import styles from "./styles.module.scss";
 
 // type personalTrainer = {
 //   id: string;
@@ -11,7 +12,6 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage"
 //   amount: string;
 
 // }
-
 
 // const DUMMY_DATA = [
 //   {
@@ -28,13 +28,22 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage"
 // ]
 
 export const PersonalTrainer = () => {
-
   // const [listEmpty, setListEmpty] = useState(true)
-
 
   // const [ listPersonalTrainer,setListPersonalTrainer] = useState<personalTrainer[]>([])
 
-
-
-  return <DefaultPage>PersonalTrainer Page</DefaultPage>
-}
+  return (
+    <DefaultPage>
+      <div className={styles.tableContainer}>
+        <div className={styles.header}>
+          <div className={styles.title}>
+            <p>Nome</p>
+          </div>
+          <div className={styles.title}>
+            <p>Email</p>
+          </div>
+        </div>
+      </div>
+    </DefaultPage>
+  );
+};

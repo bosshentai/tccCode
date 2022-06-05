@@ -144,7 +144,7 @@ export const AddEmployee = (props: propsType) => {
               type="tel"
               id="tel"
               label="Telemóvel"
-              placeHolder="Insira o email"
+              placeHolder="Insira o numero do telemóvel"
               onInput={inputHandler}
             />
           </div>
@@ -152,14 +152,14 @@ export const AddEmployee = (props: propsType) => {
             <InputText
               type="text"
               id="cni"
-              label="cni"
+              label="CNI"
               placeHolder="Insira o CNI"
               onInput={inputHandler}
             />
             <InputText
               type="text"
               id="nif"
-              label="nif"
+              label="NIF"
               placeHolder="Insira o NIF"
               onInput={inputHandler}
             />
