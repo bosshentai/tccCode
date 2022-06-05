@@ -10,7 +10,7 @@ import axios from "axios";
 
 
 type propsType = {
-  onnClose: () => void;
+  onClose: () => void;
 }
 
 const InitialInputs = {

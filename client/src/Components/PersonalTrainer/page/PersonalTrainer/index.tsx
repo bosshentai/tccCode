@@ -1,6 +1,7 @@
-// import { useEffect, useState } from "react"
-
+import { useState } from "react";
+import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { AddPersonalTrainer } from "../AddPersonalTrainer";
 
 import styles from "./styles.module.scss";
 
@@ -28,11 +29,32 @@ import styles from "./styles.module.scss";
 // ]
 
 export const PersonalTrainer = () => {
-  // const [listEmpty, setListEmpty] = useState(true)
+  const [listEmpty, setListEmpty] = useState(true);
+
+  const [addPersonalTrainerIsShow, setPersonalTrainerIsShow] = useState(false);
 
   // const [ listPersonalTrainer,setListPersonalTrainer] = useState<personalTrainer[]>([])
 
+
+  const showAddPersonalTrainerHandler = () => {
+    setPersonalTrainerIsShow(true);
+  }
+
+
+  const closeAddPersonalTrainerHandler = () => {
+    setPersonalTrainerIsShow(false);
+  }
+
   return (
+   <> 
+   {
+     addPersonalTrainerIsShow &&
+     <>
+      <Backdrop onClose={closeAddPersonalTrainerHandler}/>
+      <AddPersonalTrainer onClose={closeAddPersonalTrainerHandler}/>
+     </>
+
+   }
     <DefaultPage>
       <div className={styles.tableContainer}>
         <div className={styles.header}>
@@ -45,5 +67,6 @@ export const PersonalTrainer = () => {
         </div>
       </div>
     </DefaultPage>
+    </>
   );
 };
