@@ -9,5 +9,6 @@
   "livePreview.defaultPreviewPath": "/docs/index.html",
   "cSpell.words": [
     "nogain"
-  ]
+  ],
+  "peacock.color": "#007fff"
 }
