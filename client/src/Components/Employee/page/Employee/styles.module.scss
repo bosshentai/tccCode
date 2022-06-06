@@ -38,7 +38,7 @@
   }
 }
 
-.p {
+.p{
   max-height: 40rem;
   height: calc(40rem - 2rem);
   min-height: 38rem;
@@ -90,7 +90,7 @@
 
     &:hover {
       background: rgba(36, 110, 227, 0.5);
-      transition: all 0.3s ease-in-out;
+      transition: all 300ms ease-in-out;
     }
   }
 }

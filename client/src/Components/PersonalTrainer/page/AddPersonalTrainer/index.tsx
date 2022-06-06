@@ -96,6 +96,7 @@ export const AddPersonalTrainer = (props: propsType) => {
 
 
   return (
+    <>
     <div className={styles.addPersonalTrainerContainer}>
       <div className={styles.headerContainer}>
         <div className={styles.left}>
@@ -162,5 +163,6 @@ export const AddPersonalTrainer = (props: propsType) => {
         <button className={styles.btnSubmit}>Registar</button>
       </form>
     </div>
+    </>
   );
 };

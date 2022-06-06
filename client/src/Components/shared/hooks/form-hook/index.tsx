@@ -76,7 +76,7 @@ export const useForm = (initialInputs: object, initialIsValid: any) => {
     isValid: initialIsValid,
   });
 
-  const inputHandler = useCallback((id, value, isValid) => {
+  const inputHandler = useCallback((id :string, value:string, isValid: boolean) => {
     dispatch({
       type: ActionType.INPUTCHANGE,
       value: value,
