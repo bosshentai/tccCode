@@ -44,10 +44,6 @@ export const AddDiscount = (props: propsType) => {
 
     // Description
     const enteredDescription = areaInputRef.current!.value;
-    // const descriptionIsNotEmpty = enteredDescription.trim().length !== 0;
-
-    // console.log("Name is not empty: " + nameIsNotEmpty);
-    // console.log("Name is valid: " + nameIsValid);
 
     // Amount
     const enteredAmount = amountInputRef.current!.value;
@@ -71,11 +67,13 @@ export const AddDiscount = (props: propsType) => {
 
     }
 
-    if (nameIsOk) {
+    if (nameIsOk && amountIsOk) {
       setIsNameOk(true);
       setIsNumberOk(true);
 
-      // console.log(enteredName);
+      console.log( "Nome do Desconto " + enteredName);
+      console.log("A Descrição :" + enteredDescription);
+      console.log("O valor: " + enteredAmount);
 
       console.log("Discount added");
       // props.onClose();
@@ -119,16 +117,11 @@ export const AddDiscount = (props: propsType) => {
           <input
             type="text"
             ref={nameInputRef}
+            placeholder="Insira o nome de Desconto"
             className={nameControllerClass}
           />
         </div>
-        {/* <InputText
-        type="text"
-        id="name"
-        label="Nome"
-        placeHolder="Insira o nome"
-        onInput={inputHandler}
-      /> */}
+
         <div>
           <label>Descrição</label>
           <textarea ref={areaInputRef} />

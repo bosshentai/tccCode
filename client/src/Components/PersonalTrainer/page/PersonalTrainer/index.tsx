@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { PersonalTrainerList } from "../../Components/PersonalTrainerList";
 import { AddPersonalTrainer } from "../AddPersonalTrainer";
 
 import styles from "./styles.module.scss";
@@ -11,17 +12,20 @@ const portalElement = document.getElementById("overlays") as HTMLElement;
 type personalTrainer = {
   id: string;
   name: string;
+  email: string;
 }
 
 const DUMMY_DATA = [
   {
     id: "1asadas",
     name: "Hernâni",
+    email: "baptista@got.com"
 
   },
   {
     id: "2assad",
     name: "Hern",
+    email: "asdada@asdsd.com"
   }
 ]
 
@@ -31,6 +35,19 @@ export const PersonalTrainer = () => {
   const [addPersonalTrainerIsShow, setPersonalTrainerIsShow] = useState(false);
 
   const [ listPersonalTrainer,setListPersonalTrainer] = useState<personalTrainer[]>([])
+
+
+  useEffect( () => {
+
+    setListPersonalTrainer(DUMMY_DATA);
+
+    if (listPersonalTrainer.length === 0){
+      setListEmpty(true);
+    }else{
+      setListEmpty(false);
+    }
+    
+  },[listPersonalTrainer])
 
 
   const showAddPersonalTrainerHandler = () => {
@@ -65,6 +82,7 @@ export const PersonalTrainer = () => {
             <p>Email</p>
           </div>
         </div>
+        <PersonalTrainerList personalTrainers={listPersonalTrainer}/>
       </div>
       }
       <div className={styles.btnContainer}>

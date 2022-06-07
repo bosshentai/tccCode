@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { AddTrainingPlan } from "../AddTrainingPlan";
 
 import styles from "./styles.module.scss";
 
@@ -55,6 +56,7 @@ export const TrainingPlan = () => {
         ReactDOM.createPortal(
           <>
             <Backdrop onClose={closeAddTrainingHandler} />
+            <AddTrainingPlan/>
           </>,
           portalElement
         )}

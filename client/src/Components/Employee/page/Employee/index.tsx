@@ -61,7 +61,7 @@ export const Employee = () => {
     }
   }, [listEmployee, setListEmployee]);
 
-  const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
+  // const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
 
   const showAddEmployeeHandler = () => {
     setEmployeeIsShown(true);
@@ -81,7 +81,7 @@ export const Employee = () => {
           </>,
           portalElement
         )}
-      <DefaultPage className={classDefaultController}>
+      <DefaultPage>
         {listEmpty && <p className={styles.p}>Sem funcionários</p>}
 
         {!listEmpty && (
