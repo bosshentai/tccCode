@@ -16,15 +16,15 @@ class Person {
 }
 
 
-class Client {
-  id: uuid
-  name : string
-  email: string
-  phone: string
-  birthDay: data
-  created_at: datetime
+' class Client {
+'   id: uuid
+'   name : string
+'   email: string
+'   phone: string
+'   birthDay: data
+'   created_at: datetime
 
-}
+' }
 
 
 
@@ -75,7 +75,7 @@ class clientPersonalTrainingDiscountTrainingPlan {
 
 class clientHistory {
   id: uuid
-  client_id: uuid
+  custumoer_id: uuid
   person_id: uuid
   total: float
   created_at: datetime
@@ -83,16 +83,17 @@ class clientHistory {
 
 
 enum Role {
-  admin
-  employee
+  MANAGER
+  EMPLOYEE
+  CUSTOMER
 }
 
 Person --- Role
 
-clientHistory <|-- Client
-clientHistory <|-- Person
+' clientHistory <|-- Client
+' clientHistory <|-- Person
 
-clientPersonalTrainingDiscountTrainingPlan <|-- Client
+clientPersonalTrainingDiscountTrainingPlan <|-- Person
 clientPersonalTrainingDiscountTrainingPlan <|-- PersonalTrainer
 clientPersonalTrainingDiscountTrainingPlan <|-- discount
 clientPersonalTrainingDiscountTrainingPlan <|-- TrainingPlan
