@@ -25,21 +25,21 @@ export const ErrorPopup = (props: propsType) => {
 
   return (
     <div className={styles.transparentWall}>
-    <div className={styles.errorContainer}>
-      <div className={styles.headerContainer}>
-        <button
-          className={styles.right}
-          onMouseEnter={hoverHandler}
-          onMouseLeave={leaveHandler}
-          onClick={props.onClose}
-        >
-          <img src={iconChange} alt="close" />
-        </button>
+      <div className={styles.errorContainer}>
+        <div className={styles.headerContainer}>
+          <button
+            className={styles.right}
+            onMouseEnter={hoverHandler}
+            onMouseLeave={leaveHandler}
+            onClick={props.onClose}
+          >
+            <img src={iconChange} alt="close" />
+          </button>
+        </div>
+        <div className={styles.errorMessage}>
+          <h1>Inscrição do Funcionário Invalido</h1>
+        </div>
       </div>
-      <div className={styles.errorMessage}>
-        <h1>Inscrição do Funcionario Invalido</h1>
-      </div>
-    </div>
     </div>
   );
 };

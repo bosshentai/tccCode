@@ -17,6 +17,7 @@ export const AddTrainingPlan = () => {
   const [isHover, setHover] = useState(false);
 
   const [isNameOk,setIsNameOk] = useState(true);
+  const [isAmountOk,setIsAmountOk] = useState(true);
 
   const hoverHandler = () => {
     setHover(true);
@@ -34,8 +35,20 @@ export const AddTrainingPlan = () => {
       const nameIsNotEmpty = enteredName.trim().length !== 0;
       const nameIsValid = validName(enteredName);
 
-
       const nameIsOk = nameIsNotEmpty && nameIsValid;
+
+
+      const enteredDescription = descriptionInputRef.current!.value;
+
+
+      const enteredAmount = amountInputRef.current!.value;
+      const amountIsNotEmpty = enteredAmount.trim().length !== 0;
+      const amountIsValid = Number(enteredAmount); // verificar se e 1 number
+
+      const amountIsOk = amountIsNotEmpty && amountIsValid;
+
+
+
 
 
 
@@ -44,6 +57,21 @@ export const AddTrainingPlan = () => {
         setIsNameOk(false);
       }
 
+      if(!amountIsOk){
+        setIsAmountOk(false);
+      }
+
+
+      if (nameIsOk && amountIsOk){
+        setIsAmountOk(true);
+        setIsNameOk(true)
+
+        console.log("Nome do Plano de Treino: " +  enteredAmount);
+        console.log("Descrição do Plano de Treino" + enteredDescription);
+        console.log("Montante:" + enteredAmount);
+
+
+      }
 
       
 
@@ -54,6 +82,8 @@ export const AddTrainingPlan = () => {
   const iconChange = !isHover ? whiteCross : blueCross;
 
   const nameControllerClass = isNameOk ? `${styles.isValid}` : `${styles.isInValid}`;
+
+  const amountControllerClass = isAmountOk ? `${styles.isValid}` : `${styles.isInValid}`
 
 
   return <div className={styles.addTrainingPlanContainer}>
@@ -95,6 +125,7 @@ export const AddTrainingPlan = () => {
         type="number"
         placeholder="Insira o montante"
         onWheel={(event) => event.currentTarget.blur()}
+        className={amountControllerClass}
         ref={amountInputRef}
         />
       </div>
