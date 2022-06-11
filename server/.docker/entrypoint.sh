@@ -5,4 +5,6 @@
 # fi
 
 npm install
-npm start
+npx prisma generate
+npx prisma migrate dev
+npm run dev

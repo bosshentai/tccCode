@@ -1,19 +1,22 @@
 
+// import { Role } from '@prisma/client';
 import { Role } from '@prisma/client';
 import { Request, Response } from 'express';
 
 import { prismaClient } from '../../database/prismaClient';
+// import
 
 
 
 export class CreateEmployeeController {
   async handle(request: Request, response: Response) {
 
+    try {
+
     const { name, email, phone, CNI, NIF, birth } = request.body;
 
 
-    // try {
-      const client = await prismaClient.user.create({
+      const employee = await prismaClient.user.create({
         data: {
           name: name,
           email: email,
@@ -27,12 +30,14 @@ export class CreateEmployeeController {
       });
 
 
-      return response.status(201).json(client);
+      return response.status(201).json(employee);
 
 
-    // } catch (e) {
+    } catch (e) {
       // console.log(e);
-    // }
+      return response.status(400);
+    }
+
 
 
     // return response.status(400).json({ error: 'Unknown error' });

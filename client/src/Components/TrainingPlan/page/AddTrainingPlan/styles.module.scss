@@ -9,12 +9,9 @@
   }
 }
 
-
-
-
-.addDiscountContainer {
-  width: 1158px;
-  height: 818px;
+.addTrainingPlanContainer {
+  width: 72rem;
+  height: 51rem;
 
   position: fixed;
   top: 50%;
@@ -31,12 +28,12 @@
 
   .headerContainer {
     display: flex;
-
-    height: 83px;
+    height: 5.188rem;
 
     .left {
-      width: 1066px;
+      width: 66.625rem;
       background-color: #4b88e8;
+
       display: flex;
       align-items: center;
       justify-content: center;
@@ -46,13 +43,15 @@
     }
 
     .right {
-      width: 92px;
-      background: linear-gradient(0deg, #246ee3, #246ee3);
+      width: 5.75rem;
+      height: 100%;
+      background: #246ee3;
 
       display: flex;
-
+      // align-self: center;
       align-items: center;
       justify-content: center;
+      // justify-items: center;
 
       border: none;
 
@@ -64,15 +63,14 @@
       }
 
       img {
-        // background-color: red;
-        width: 55px;
-        height: 55px;
+        width: 3.438rem;
+        height: 3.438rem;
       }
     }
   }
 
   .formContainer {
-    width: 50em;
+    width: 50rem;
     height: 40rem;
 
     display: flex;
@@ -98,10 +96,13 @@
       border-top: none;
       border-left: none;
       border-right: none;
-      background-color: transparent;
+      background: transparent;
+
       width: 20rem;
       height: 1.5rem;
-      font-size: 20px;
+
+      font-size: 1.25rem;
+
       &:focus {
         outline: none;
       }
@@ -119,12 +120,12 @@
       margin: 0;
     }
 
-    .nameValid {
+    .isValid {
       border-bottom: 2px solid #4b88e8;
 
       &:hover,
       &:focus {
-        background-color: rgba(36, 110, 227, 0.06);
+        background: rgba(36, 110, 227, 0.06);
       }
 
       &::placeholder {
@@ -132,39 +133,19 @@
       }
     }
 
-    .nameInvalid {
-      background-color: rgba(255, 0, 0, 0.13);
-
+    .isInValid {
+      background: rgba(255, 0, 0, 0.13);
       border-bottom: 2px solid #ff0000;
-
-      &:hover {
-        background-color: rgba(255, 0, 0, 0.2);
-        transition: all 0.3s ease-in-out;
-      }
-    }
-
-    .numberValid {
-      background-color: transparent;
-      border-bottom: 2px solid #4b88e8;
 
       &:hover,
-      &:focus{
-        background-color: rgba(36, 110, 227, 0.06);
-      }
-    }
-
-    .numberInvalid {
-      // background-color: red;
-      background-color: rgba(255, 0, 0, 0.13);
-
-      border-bottom: 2px solid #ff0000;
-
-
-      &:hover{
-        background-color: rgba(255, 0, 0, 0.2);
-        transition: all 0.3s ease-in-out;
+      &:focus {
+        background: rgba(255, 0, 0, 0.2);
+        transition: all 300ms ease-in-out;
       }
 
+      &::placeholder {
+        color: #ff0000;
+      }
     }
 
     textarea {
@@ -173,7 +154,6 @@
       height: 5rem;
       outline: none;
       resize: none;
-
       padding-bottom: 2rem;
     }
   }
@@ -181,7 +161,7 @@
   .btnSubmit {
     width: 12rem;
     height: 4rem;
-    background: linear-gradient(0deg, #246ee3, #246ee3);
+    background: #246ee3;
 
     margin: auto;
 
@@ -193,10 +173,8 @@
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-
     &:hover {
       background: rgba(36, 110, 227, 0.5);
-      // transition: all 0.3s ease-in-out;
     }
   }
 }

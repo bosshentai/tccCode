@@ -6,11 +6,9 @@ import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 
 import styles from "./styles.module.scss";
 import { AddEmployee } from "../AddEmployee";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
-
-const urlPath = "http://localhost:5000/api/employee/all";
 
 type employee = {
   id: string;
@@ -19,37 +17,42 @@ type employee = {
   status: string;
 };
 
-// const DUMMY_DATA = [
-//   {
-//     id: "1asadas",
-//     name: "Hernâni",
-//     email: "baptista@gmail.com",
-//     status: "Ativo",
-//   },
-//   {
-//     id: "2asxzad",
-//     name: "Hern",
-//     email: "test@gmail.com",
-//     status: "Inativo",
-//   },
-// ];
+// type GetEmployeeResponse = {
+//   data: employee[];
+// };
+
+
 
 export const Employee = () => {
   const [listEmpty, setListEmpty] = useState(true);
 
   const [addEmployeeIsShown, setEmployeeIsShown] = useState(false);
 
-  
-
   const [listEmployee, setListEmployee] = useState<employee[]>([]);
 
-  useEffect(  () => {
- 
-    axios.get(urlPath).then((response) => {
-      setListEmployee(response.data);
-    });
+  useEffect(() => {
+    const urlPath = "http://localhost:5000/api/employee/all";
 
-    // setListEmployee(DUMMY_DATA);
+    try {
+      // setInterval(() => {
+        axios.get(urlPath).then((response: AxiosResponse) => {
+          setListEmployee(response.data);
+        });
+
+        // setListEmployee(DUMMY_DATA);
+      // }, 1000);
+
+      // const { data ,status } =  axios.get<GetEmployeeResponse>(urlPath,
+      //   {
+      //     headers: {
+      //       Accept: "application/json",
+      //     },}
+      //     );
+
+      //     return data;
+    } catch (error) {
+      console.log("Error: " + error);
+    }
 
     if (listEmployee.length === 0) {
       setListEmpty(true);
@@ -58,7 +61,7 @@ export const Employee = () => {
     }
   }, [listEmployee, setListEmployee]);
 
-  const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
+  // const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
 
   const showAddEmployeeHandler = () => {
     setEmployeeIsShown(true);
@@ -78,7 +81,7 @@ export const Employee = () => {
           </>,
           portalElement
         )}
-      <DefaultPage className={classDefaultController}>
+      <DefaultPage>
         {listEmpty && <p className={styles.p}>Sem funcionários</p>}
 
         {!listEmpty && (

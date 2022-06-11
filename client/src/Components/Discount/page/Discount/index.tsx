@@ -70,16 +70,7 @@ export const Discount = () => {
 
   const [listDiscount, setListDiscount] = React.useState<discountype[]>([]);
 
-  useEffect(() => {
-    // const fetchData = async () => {
-    //   const result = await fetch('http://localhost:8080/api/discounts');
-    //   const body = await result.json();
-    //   setListDiscount(body);
-    //   setListEmpty(false);
-    // }
-    // fetchData();
-    // setListDiscount(DUMMY_Data)
-  }, []);
+
 
   useEffect(() => {
     setListDiscount(DUMMY_Data);
@@ -88,7 +79,7 @@ export const Discount = () => {
     } else {
       setListEmpty(false);
     }
-  }, [listDiscount, listEmpty, setListEmpty]);
+  }, [listDiscount, listEmpty]);
 
   const showAddDiscountHandler = () => {
     setDiscountIsShown(true);

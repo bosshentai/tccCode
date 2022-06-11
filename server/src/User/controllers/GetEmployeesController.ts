@@ -1,4 +1,4 @@
-import { Role} from "@prisma/client";
+import { Role } from "@prisma/client";
 
 
 import { Request, Response } from "express";
@@ -8,7 +8,8 @@ import { prismaClient } from "../../database/prismaClient";
 
 export class GetEmployeesController {
   async handle(request: Request, response: Response) {
-      
+
+    try{
       const employees = await prismaClient.user.findMany({
         select:{
           id: true,
@@ -20,8 +21,12 @@ export class GetEmployeesController {
           role: Role.EMPLOYEE
         }
       });
-  
+
       return response.json(employees);
+
+    } catch (e) {
+      return response.status(400).json({ error: "Unknown error" });
+    }
   
   }
 }

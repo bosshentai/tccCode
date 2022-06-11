@@ -7,14 +7,20 @@ export class GetEmployeeByIdController {
   async handle(request: Request, response: Response) {
     const { id } = request.params;
 
-    const employee = await prismaClient.user.findUnique({
-      where: {
-        id: id,
-      }}
-    )
+    try {
+      const employee = await prismaClient.user.findUnique({
+        where: {
+          id: id,
+        }
+      }
+      )
 
 
-  return response.json(employee);
-}
+      return response.json(employee);
+    } catch (e) {
+      return response.status(400).json({ error: 'Unknown error' });
+    }
+
+  }
 
 };

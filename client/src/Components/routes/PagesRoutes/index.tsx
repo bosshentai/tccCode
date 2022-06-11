@@ -1,6 +1,6 @@
-import React, { lazy } from "react";
+import React from "react";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import {Client} from "../../Clients/page/Client";
 import { Discount } from "../../Discount/page/Discount";
@@ -35,8 +35,10 @@ export function PagesRoutes() {
       <Route path="/Employee" element={<Employee />} />
       <Route path="/Employee/Profile/:id" element={<EmployeeProfile />} />
 
+      {/* <Route path="/Employee/Profile/" element={<EmployeeProfile />} /> */}
+
       <Route path="/PersonalTrainer" element={<PersonalTrainer />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>
   );
 }

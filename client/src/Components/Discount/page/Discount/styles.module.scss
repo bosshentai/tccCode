@@ -47,9 +47,10 @@
     max-width: 600px;
     width: calc(600px - 15rem);
     min-width: 200px;
-    height: 3em;
+    height: 4rem;
+    
+    
     border: none;
-
     border-radius: 13px;
     color: var(--white);
 
@@ -58,7 +59,8 @@
     cursor: pointer;
 
     &:hover {
-      background: var(--blue-hover);
+      // background: var(--blue-hover);
+      background: rgba(36,110,227,0.5);
       transition: all 0.3s ease-in-out;
     }
   }

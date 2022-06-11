@@ -1,3 +1,27 @@
+version: '3'
+
+services:
+  frontend:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+       - tcc-network
+
+networks:
+  tcc-network:
+    driver: bridge
+
+
+
+
+
 # version: '3.7'
 
 # services:

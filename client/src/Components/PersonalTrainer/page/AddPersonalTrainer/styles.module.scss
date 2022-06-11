@@ -9,7 +9,7 @@
   }
 }
 
-.addEmployeeContainer {
+.addPersonalTrainerContainer {
   width: 1158px;
   height: 818px;
 
@@ -57,11 +57,10 @@
 
       &:hover {
         background: rgba(36, 110, 227, 0.06);
-        transition: all 0.3s ease-in-out;
+        transition: all 300ms ease-in-out;
       }
 
       img {
-        // background-color: red;
         width: 55px;
         height: 55px;
       }
@@ -69,8 +68,6 @@
   }
 
   .formContainer {
-    // background-color: red;
-
     width: 50em;
     height: 40rem;
 
@@ -78,17 +75,16 @@
     flex-direction: column;
 
     margin: auto;
-    padding-top: 3rem;
+    padding: 3rem;
 
     div {
       display: flex;
       flex-direction: column;
     }
 
-    .twoinputrow {
+    .twoInputInRow {
       display: flex;
       flex-direction: row;
-      // padding-left: 1rem ;
     }
 
     .inputContainer {
@@ -111,7 +107,7 @@
         border-top: none;
         border-left: none;
         border-right: none;
-        border-bottom: 2px solid #246ee3;
+        border-bottom: 2px solif #246ee3;
         background-color: transparent;
         font-size: 20px;
 
@@ -131,24 +127,26 @@
           color: #4b88e8;
         }
       }
+
       input[type="date"] {
         color: #4b88e8;
         cursor: pointer;
 
         &::-webkit-calendar-picker-indicator {
-          // adiciona 1 icon la direto
           background: none;
         }
       }
 
       .invalidInput {
         background-color: rgba(255, 0, 0, 0.13);
+
         border-bottom: 2px solid #ff0000;
 
         &:hover,
         &:focus {
           background: rgba(255, 0, 0, 0.13);
         }
+
         &::placeholder {
           color: #ff0000;
         }
