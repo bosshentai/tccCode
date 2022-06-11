@@ -11,10 +11,11 @@ import { prismaClient } from '../../database/prismaClient';
 export class CreateEmployeeController {
   async handle(request: Request, response: Response) {
 
+    try {
+
     const { name, email, phone, CNI, NIF, birth } = request.body;
 
 
-    try {
       const employee = await prismaClient.user.create({
         data: {
           name: name,
@@ -36,6 +37,7 @@ export class CreateEmployeeController {
       // console.log(e);
       return response.status(400);
     }
+
 
 
     // return response.status(400).json({ error: 'Unknown error' });
