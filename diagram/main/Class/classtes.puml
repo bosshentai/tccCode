@@ -1,4 +1,5 @@
 @startuml Nogain
+!theme materia-outline
 
 class Person {
   id : uuid
