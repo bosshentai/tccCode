@@ -1,6 +1,6 @@
 
 
-@media screen and(max-width: 1440px), screen and (max-height: 1024px){
+// @media screen and(max-width: 1440px), screen and (max-height: 1024px){
 
 .tableContainer {
 
@@ -41,47 +41,10 @@
 }
 
 
-.btnContainer {
-  background: red;
-
-  height: 8.938rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  // @media only screen and (max-width: 1280px) {
-  //   height: 6.7em;
-  // }
-
-  button {
-    background: var(--blue);
-    // width: calc(100% - 70rem);
-    // max-width: 600px;
-    // width: calc(600px - 15rem);
-    // min-width: 200px;
-    // height: 4rem;
-
-    width: 26.625rem;
-    height: 4.813rem;
 
 
-    border: none;
-    border-radius: 13px;
-    color: var(--white);
 
-    font-size: 24px;
-
-    cursor: pointer;
-
-    &:hover {
-      background: rgba(36, 110, 227, 0.5);
-      transition: all 300ms ease-in-out;
-    }
-  }
-}
-
-
-}
+// }
 
 
 

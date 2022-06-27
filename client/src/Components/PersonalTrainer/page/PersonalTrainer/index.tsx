@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
@@ -86,11 +87,10 @@ export const PersonalTrainer = () => {
         <PersonalTrainerList personalTrainers={listPersonalTrainer}/>
       </div>
       }
-      <div className={styles.btnContainer}>
-        <button onClick={showAddPersonalTrainerHandler}>
-          <p>Adicionar Personal Trainer</p>
-        </button>
-      </div>
+      <BtnBottomSide btnText="Adicionar Personal Trainer"
+      showHandler={showAddPersonalTrainerHandler}
+      />
+
     </DefaultPage>
     </>
   );

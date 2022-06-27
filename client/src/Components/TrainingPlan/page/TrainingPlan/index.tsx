@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
@@ -57,20 +58,21 @@ export const TrainingPlan = () => {
         ReactDOM.createPortal(
           <>
             <Backdrop onClose={closeAddTrainingHandler} />
-            <AddTrainingPlan/>
+            <AddTrainingPlan />
           </>,
           portalElement
         )}
 
       <DefaultPage>
         {/* {listEmpty && <p className={styles.p}>Sem Plano de Treino</p>} */}
-        {listEmpty && <EmptyPage message="Sem de Treino"/>}
+        {listEmpty && <EmptyPage message="Sem de Treino" />}
 
         {!listEmpty && <div className={styles.container}></div>}
 
-        <div className={styles.btnContainer}>
-          <button onClick={showAddTrainingHandler}>Adicionar</button>
-        </div>
+        <BtnBottomSide
+          btnText="Adicionar Plano Treino"
+          showHandler={showAddTrainingHandler}
+        />
       </DefaultPage>
     </>
   );

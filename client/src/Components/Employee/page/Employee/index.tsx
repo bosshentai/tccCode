@@ -8,6 +8,7 @@ import styles from "./styles.module.scss";
 import { AddEmployee } from "../AddEmployee";
 import axios, { AxiosResponse } from "axios";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
@@ -36,11 +37,11 @@ export const Employee = () => {
 
     try {
       // setInterval(() => {
-        axios.get(urlPath).then((response: AxiosResponse) => {
-          setListEmployee(response.data);
-        });
+      axios.get(urlPath).then((response: AxiosResponse) => {
+        setListEmployee(response.data);
+      });
 
-        // setListEmployee(DUMMY_DATA);
+      // setListEmployee(DUMMY_DATA);
       // }, 1000);
 
       // const { data ,status } =  axios.get<GetEmployeeResponse>(urlPath,
@@ -84,7 +85,7 @@ export const Employee = () => {
         )}
       <DefaultPage>
         {/* {listEmpty && <p className={styles.p}>Sem funcionários</p>} */}
-        {listEmpty && <EmptyPage message="Sem Funcionários"/>}
+        {listEmpty && <EmptyPage message="Sem Funcionários" />}
 
         {!listEmpty && (
           <div className={styles.tableContainer}>
@@ -102,11 +103,9 @@ export const Employee = () => {
             <EmployeeList employees={listEmployee} />
           </div>
         )}
-        <div className={styles.btnContainer}>
-          <button onClick={showAddEmployeeHandler}>
-            <p>Adicionar Funcionário</p>
-          </button>
-        </div>
+        <BtnBottomSide btnText="Adicionar Funcionário"
+          showHandler={showAddEmployeeHandler}
+        />
       </DefaultPage>
     </>
   );
