@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { AddTrainingPlan } from "../AddTrainingPlan";
 
 import styles from "./styles.module.scss";
@@ -62,7 +63,8 @@ export const TrainingPlan = () => {
         )}
 
       <DefaultPage>
-        {listEmpty && <p className={styles.p}>Sem Plano de Treino</p>}
+        {/* {listEmpty && <p className={styles.p}>Sem Plano de Treino</p>} */}
+        {listEmpty && <EmptyPage message="Sem de Treino"/>}
 
         {!listEmpty && <div className={styles.container}></div>}
 

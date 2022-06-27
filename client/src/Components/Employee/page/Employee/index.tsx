@@ -7,6 +7,7 @@ import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import styles from "./styles.module.scss";
 import { AddEmployee } from "../AddEmployee";
 import axios, { AxiosResponse } from "axios";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
@@ -82,7 +83,8 @@ export const Employee = () => {
           portalElement
         )}
       <DefaultPage>
-        {listEmpty && <p className={styles.p}>Sem funcionários</p>}
+        {/* {listEmpty && <p className={styles.p}>Sem funcionários</p>} */}
+        {listEmpty && <EmptyPage message="Sem Funcionários"/>}
 
         {!listEmpty && (
           <div className={styles.tableContainer}>

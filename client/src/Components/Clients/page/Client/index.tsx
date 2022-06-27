@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { ClientList } from "../../components/ClientList";
 
 import styles from "./styles.module.scss";
@@ -44,7 +45,8 @@ export const Client = () => {
 
   return (
     <DefaultPage>
-      {listEmpty && <p className={styles.p}>Sem clientes</p>}
+      {/* {listEmpty && <p className={styles.p}>Sem clientes</p>} */}
+      {listEmpty && <EmptyPage message="Sem Clientes"/>}
       {!listEmpty && (
         <div className={styles.tableContainer}>
           <div className={styles.header}>

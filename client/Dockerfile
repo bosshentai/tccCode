@@ -1,4 +1,6 @@
-FROM node:alpine
+FROM node:18.1.0-alpine3.15
+# FROM node:18.1.0
+# FROM node:18.1.0-ubuntu
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache bash

@@ -1,9 +1,11 @@
-.tableContainer {
-  //  background: red;
 
-  max-height: 40rem;
-  height: calc(40rem - 2rem);
-  min-height: 38rem;
+
+@media screen and(max-width: 1440px), screen and (max-height: 1024px){
+
+.tableContainer {
+
+  height: 43.688rem;
+
 
   width: 100%;
 
@@ -38,48 +40,29 @@
   }
 }
 
-.p{
-  max-height: 40rem;
-  height: calc(40rem - 2rem);
-  min-height: 38rem;
-
-  width: 100%;
-
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 800;
-  font-size: 50px;
-
-  background: white;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  justify-content: center;
-}
 
 .btnContainer {
-  // background: red;
+  background: red;
 
-  height: 11em;
-
-  // height: 11em;
-
-  // min-height: calc(100% - 38rem);
-
+  height: 8.938rem;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  @media only screen and (max-width: 1280px) {
-    height: 6.7em;
-  }
+  // @media only screen and (max-width: 1280px) {
+  //   height: 6.7em;
+  // }
 
   button {
     background: var(--blue);
     // width: calc(100% - 70rem);
-    max-width: 600px;
-    width: calc(600px - 15rem);
-    min-width: 200px;
-    height: 4rem;
+    // max-width: 600px;
+    // width: calc(600px - 15rem);
+    // min-width: 200px;
+    // height: 4rem;
+
+    width: 26.625rem;
+    height: 4.813rem;
 
 
     border: none;
@@ -96,3 +79,9 @@
     }
   }
 }
+
+
+}
+
+
+

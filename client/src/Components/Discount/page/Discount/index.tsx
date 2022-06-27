@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { DiscountList } from "../../components/DiscountList";
 import { AddDiscount } from "../AddDiscount";
 
@@ -100,7 +101,9 @@ export const Discount = () => {
           portalElement
         )}
       <DefaultPage >
-        {listEmpty && <p className={styles.p}>Sem descontos</p>}
+
+
+        {listEmpty && <EmptyPage message="Sem Descontos"/>}
 
         {!listEmpty && (
           <div className={styles.tableContainer}>

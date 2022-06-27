@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { PersonalTrainerList } from "../../Components/PersonalTrainerList";
 import { AddPersonalTrainer } from "../AddPersonalTrainer";
 
@@ -71,7 +72,7 @@ export const PersonalTrainer = () => {
 
    }
     <DefaultPage>
-      {listEmpty && <p className={styles.p}>Sem Personal Trainer</p>}
+      {listEmpty && <EmptyPage message="Sem Personal Trainer"/>}
       {!listEmpty && 
       <div className={styles.tableContainer}>
         <div className={styles.header}>
