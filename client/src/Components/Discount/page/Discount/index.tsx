@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { DiscountList } from "../../components/DiscountList";
@@ -107,9 +108,9 @@ export const Discount = () => {
         {listEmpty && <EmptyPage message="Sem Descontos" />}
 
         {!listEmpty && (
-          <div className={styles.tableContainer}>
+          <DefaultInsidePage className={styles.tableContainer}>
             <DiscountList discounts={listDiscount} />
-          </div>
+          </DefaultInsidePage>
         )}
 
 

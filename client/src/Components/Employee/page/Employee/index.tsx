@@ -9,6 +9,7 @@ import { AddEmployee } from "../AddEmployee";
 import axios, { AxiosResponse } from "axios";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
@@ -88,7 +89,7 @@ export const Employee = () => {
         {listEmpty && <EmptyPage message="Sem Funcionários" />}
 
         {!listEmpty && (
-          <div className={styles.tableContainer}>
+          <DefaultInsidePage className={styles.tableContainer}>
             <div className={styles.header}>
               <div className={styles.title}>
                 <p>Nome</p>
@@ -101,7 +102,7 @@ export const Employee = () => {
               </div>
             </div>
             <EmployeeList employees={listEmployee} />
-          </div>
+          </DefaultInsidePage>
         )}
         <BtnBottomSide btnText="Adicionar Funcionário"
           showHandler={showAddEmployeeHandler}

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { ClientList } from "../../components/ClientList";
@@ -56,7 +57,7 @@ export const Client = () => {
       {/* {listEmpty && <p className={styles.p}>Sem clientes</p>} */}
       {listEmpty && <EmptyPage message="Sem Clientes"/>}
       {!listEmpty && (
-        <div className={styles.tableContainer}>
+        <DefaultInsidePage className={styles.tableContainer}>
           <div className={styles.header}>
             <div className={styles.title}>
               <p>Nome</p>
@@ -69,7 +70,7 @@ export const Client = () => {
             </div>
           </div>
           <ClientList clients={DUMMY_DATA} />
-        </div>
+        </DefaultInsidePage>
       )}
     {/* <div className={styles.btnContainer}>
         <button>

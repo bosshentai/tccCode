@@ -1,18 +1,13 @@
-
+.textContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .p {
-  height: 43.688rem;
-
-  width: 100%;
 
   font-family: "Ubuntu", sans-serif;
   font-weight: 800;
   font-size: 3.125rem;
 
-
-  background: white;
-  display:flex;
-  justify-items: center;
-  align-items: center;
-  justify-content: center;
 }
