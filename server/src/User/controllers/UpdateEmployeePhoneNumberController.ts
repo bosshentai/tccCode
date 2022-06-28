@@ -1,10 +1,13 @@
 
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { prismaClient } from '../../database/prismaClient';
+import { HttpError } from '../../models/http-error';
 
 
 export class UpdateEmployeePhoneNumBerController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response, next: NextFunction) {
+
+
     const { phone } = request.body;
     const { id } = request.params;
 
@@ -20,20 +23,25 @@ export class UpdateEmployeePhoneNumBerController {
       )
     } catch (err) {
 
-      return response.status(500);
+      const error = new HttpError("Something went wrong, could not update employee",500);
+
+      return next(error);
+      // return response.status(500);
     }
 
-    // 
-    if (employee?.id != id) {
-      return response.status(404);
-    }
+    // // 
+    // if (employee?.id != id) {
+    //   const error = new Htt
+    //   // return response.status(404);
+    // }
+
 
 
 
 
 
     try {
-      const updated = await prismaClient.user.update(
+      const updatedPhone = await prismaClient.user.update(
         {
           where: {
             id: id
@@ -43,13 +51,14 @@ export class UpdateEmployeePhoneNumBerController {
           }
         })
 
-        return response.status(200).json(updated);
+        return response.status(200).json(updatedPhone);
 
     }catch(err){
-      return response.status(404);
+      const error = new HttpError("Something went wrong, could not update place.", 500);
+      return next(error);
     }
     
 
-
+    
   }
 }

@@ -1,19 +1,20 @@
 
 // import { Role } from '@prisma/client';
 import { Role } from '@prisma/client';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { prismaClient } from '../../database/prismaClient';
+import { HttpError } from '../../models/http-error';
 // import
 
 
 
 export class CreateEmployeeController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response, next: NextFunction) {
 
     try {
 
-    const { name, email, phone, CNI, NIF, birth } = request.body;
+      const { name, email, phone, CNI, NIF, birth } = request.body;
 
 
       const employee = await prismaClient.user.create({
@@ -34,13 +35,14 @@ export class CreateEmployeeController {
 
 
     } catch (e) {
-      // console.log(e);
-      return response.status(400);
+
+      const error = new HttpError("Fail to add employeed", 500)
+
+      return next(error);
     }
 
 
 
-    // return response.status(400).json({ error: 'Unknown error' });
 
   }
 }
