@@ -9,7 +9,7 @@ export class UpdateEmployeePhoneNumBerController {
 
 
     const { phone } = request.body;
-    const { id } = request.params;
+    const employeeId = request.params.id;
 
 
     let employee;
@@ -17,25 +17,17 @@ export class UpdateEmployeePhoneNumBerController {
       employee = await prismaClient.user.findUnique(
         {
           where: {
-            id: id,
+            id: employeeId,
           }
         }
       )
     } catch (err) {
 
-      const error = new HttpError("Something went wrong, could not update employee",500);
+      const error = new HttpError("Something went wrong, could not update employee", 500);
 
       return next(error);
       // return response.status(500);
     }
-
-    // // 
-    // if (employee?.id != id) {
-    //   const error = new Htt
-    //   // return response.status(404);
-    // }
-
-
 
 
 
@@ -44,21 +36,21 @@ export class UpdateEmployeePhoneNumBerController {
       const updatedPhone = await prismaClient.user.update(
         {
           where: {
-            id: id
+            id: employee?.id
           },
           data: {
             phone: phone
           }
         })
 
-        return response.status(200).json(updatedPhone);
+      return response.status(200).json(updatedPhone);
 
-    }catch(err){
+    } catch (err) {
       const error = new HttpError("Something went wrong, could not update place.", 500);
       return next(error);
     }
-    
 
-    
+
+
   }
 }
