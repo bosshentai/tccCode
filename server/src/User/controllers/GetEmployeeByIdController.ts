@@ -17,7 +17,7 @@ export class GetEmployeeByIdController {
       )
 
 
-      return response.json(employee);
+      return response.status(200).json(employee);
     } catch (err) {
 
       const error = new HttpError("Fail to Find Employeed by ID", 500);
