@@ -19,15 +19,9 @@ class Person {
   +getPersonInfoById()
   +updatePhoneNumber()
 
-
-
 }
 
-
 class Client {
-
-
-
   +payMonthlyFee()
   +selectTrainningPlan()
   +selectPersonalTrainer()
@@ -36,14 +30,12 @@ class Client {
 
 
 class PersonalTrainer {
-
   +updatePersonalTrainerInfo()
 
 }
 
 
 class Manager {
-
   +registerPersonalTrainer()
   +registerClient()
   +registerEmployee()
@@ -56,14 +48,11 @@ class Employee {
   +viewClientList()
   +viewPersonalTrainerList()
   +viewDiscountList()
-
-
-
 }
 
 
 
-class discount {
+class Discount {
   id: id
   name: string
   description: string
@@ -109,18 +98,20 @@ class clientHistory {
 
 ' Person --- Role
 
+' confirma se inheritance or aggregation
 
-Person "1" o-- "1...*" Client
-Person "1" o-- "1...*" PersonalTrainer
-Person "1" <|-- "1" Manager
-Person "1" o-- "1...*" Employee
+Person  <|--  Client
+Person  <|--  PersonalTrainer
+Person  <|--  Manager
+Person  <|--  Employee
 
 ' clientHistory <|-- Client
 ' clientHistory <|-- Person
 
-' clientPersonalTrainingDiscountTrainingPlan <|-- Person
-' clientPersonalTrainingDiscountTrainingPlan <|-- PersonalTrainer
-' clientPersonalTrainingDiscountTrainingPlan <|-- discount
-' clientPersonalTrainingDiscountTrainingPlan <|-- TrainingPlan
+clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Person
+clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" PersonalTrainer
+clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Discount
+clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" TrainingPlan
+clientPersonalTrainingDiscountTrainingPlan "0...1"--- "1...*" clientHistory
 
 @enduml
