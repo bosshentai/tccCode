@@ -1,0 +1,88 @@
+@startuml
+
+Class funcionario {
+  - id_funcionario
+  - nome_functionio
+  - email
+  - dataDeNascimento
+  - contacto
+
+
+
+  + registarPedidos()
+  + atualizarPedidos()
+  + PreencherRecibo()
+  + criarCarinho()
+  + EliminarCarinho()
+
+}
+
+class Cliente {
+
+  - id_cliente
+  - nome_cliente
+  - email
+  - data_Nascimento
+  - contacto
+  - nr_doc
+  + registrarItem()
+}
+
+
+class Carinho {
+  -id_carinho
+  -id_produto
+  ' -id_funcionario
+  ' id_Cliente
+  - quantidade_produto
+  - status_carinho
+
+
+  + atualizarProduto()
+  + eliminarProduto()
+}
+
+
+class ListaDeCompraFinal{
+  id_ListadeCompra
+  id_carinho
+  id_funcionario
+  status_ListaDeCompraFinal
+
+  + atualizarStatus()
+
+}
+
+
+class Produto{
+  -id_Prodito
+  -nome_Produto
+  -Descricao
+
+  +registarProduto()
+  +AtualizarProduto()
+  +EliminarProduto()
+}
+
+enum status_Carinho {
+  VENDAS
+  MANUTENÇÃO
+}
+
+enum status_ListaDEcompraFinal{
+  PAGO
+  PENDENTE
+}
+
+
+Carinho "*" O-- "1" Cliente
+Carinho <|-- Produto
+Carinho <|-- funcionario
+
+ListaDeCompraFinal "1" --- "1" Carinho
+
+
+Carinho "*" o-- "1" status_Carinho
+ListaDeCompraFinal "*" o-- status_ListaDEcompraFinal
+
+@enduml

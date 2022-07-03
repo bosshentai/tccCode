@@ -2,51 +2,69 @@
 !theme materia-outline
 
 class Person {
-  id : uuid
-  name : string
-  phone : string
-  cni : string
-  nif : string
-  email : string
-  birthDay: data
-  password : string
-  role : role
-  created_at: datetime
-  updated_at: datetime
-  
+  - id : id
+  -name : string
+  -phone : string
+  -cni : string
+  -nif : string
+  -email : string
+  -birthDay: data
+  -password : string
+  -role : role
+  -created_at: datetime
+  -updated_at: datetime
+
+  +login()
+  +logOut()
+  +getPersonInfoById()
+  +updatePhoneNumber()
+
+
+
 }
 
 
-' class Client {
-'   id: uuid
-'   name : string
-'   email: string
-'   phone: string
-'   birthDay: data
-'   created_at: datetime
-
-' }
+class Client {
 
 
+
+  +payMonthlyFee()
+  +selectTrainningPlan()
+  +selectPersonalTrainer()
+  +selectDiscount()
+}
 
 
 class PersonalTrainer {
-  id: uuid
-  name : string
-  email: string
-  phone: string
-  cni: string
-  nif: string
-  email: string
-  birthDay: data
-  create_at: datetime
-  updated_at: datetime
+
+  +updatePersonalTrainerInfo()
+
+}
+
+
+class Manager {
+
+  +registerPersonalTrainer()
+  +registerClient()
+  +registerEmployee()
+  +updateManagerEmail()
+}
+
+
+class Employee {
+
+  +viewClientList()
+  +viewPersonalTrainerList()
+  +viewDiscountList()
+
 
 
 }
 
+
+
 class discount {
-  id: uuid
+  id: id
   name: string
   description: string
   amount: float
@@ -55,7 +73,7 @@ class discount {
 }
 
 class TrainingPlan {
-  id: uuid
+  id: id
   name: string
   description: string
   amount: float
@@ -65,38 +83,44 @@ class TrainingPlan {
 
 
 class clientPersonalTrainingDiscountTrainingPlan {
-  id: uuid
-  client_id: uuid
-  personal_trainer_id: uuid
-  discount_id: uuid
-  training_plan_id: uuid
+  id: id
+  client_id: id
+  personal_trainer_id: id
+  discount_id: id
+  training_plan_id: id
   created_at: datetime
   updated_at: datetime
 }
 
 class clientHistory {
-  id: uuid
-  custumoer_id: uuid
-  person_id: uuid
+  id: id
+  custumoer_id: id
+  person_id: id
   total: float
   created_at: datetime
 }
 
 
-enum Role {
-  MANAGER
-  EMPLOYEE
-  CUSTOMER
-}
+' enum Role {
+'   MANAGER
+'   EMPLOYEE
+'   CUSTOMER
+' }
 
-Person --- Role
+' Person --- Role
+
+
+Person "1" o-- "1...*" Client
+Person "1" o-- "1...*" PersonalTrainer
+Person "1" <|-- "1" Manager
+Person "1" o-- "1...*" Employee
 
 ' clientHistory <|-- Client
 ' clientHistory <|-- Person
 
-clientPersonalTrainingDiscountTrainingPlan <|-- Person
-clientPersonalTrainingDiscountTrainingPlan <|-- PersonalTrainer
-clientPersonalTrainingDiscountTrainingPlan <|-- discount
-clientPersonalTrainingDiscountTrainingPlan <|-- TrainingPlan
+' clientPersonalTrainingDiscountTrainingPlan <|-- Person
+' clientPersonalTrainingDiscountTrainingPlan <|-- PersonalTrainer
+' clientPersonalTrainingDiscountTrainingPlan <|-- discount
+' clientPersonalTrainingDiscountTrainingPlan <|-- TrainingPlan
 
 @enduml
