@@ -1,4 +1,5 @@
 import React from "react";
+import { Router } from "react-router-dom";
 
 
 import { PagesRoutes } from "./Components/routes/PagesRoutes";
@@ -14,8 +15,9 @@ function App() {
       <MainNavigation />
       <main>
         <Profile />
-
+      
         <PagesRoutes />
+       
       </main>
     </>
   );

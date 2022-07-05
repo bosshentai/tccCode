@@ -26,6 +26,7 @@ import { Welcome } from "../../Welcome/page/Welcome";
 
 export function PagesRoutes() {
   return (
+  
     <Routes>
       <Route path="/" element={<Welcome />} />
       {/* <Route path="/Client" element={<Client />} /> */}
@@ -40,5 +41,6 @@ export function PagesRoutes() {
       <Route path="/PersonalTrainer" element={<PersonalTrainer />} />
       {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>
+  
   );
 }
