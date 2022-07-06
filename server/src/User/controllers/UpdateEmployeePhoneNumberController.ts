@@ -22,11 +22,9 @@ export class UpdateEmployeePhoneNumBerController {
         }
       )
     } catch (err) {
-
-      const error = new HttpError("Something went wrong, could not update employee", 500);
-
+      const error = new HttpError("Something went wrong, could not getemployee id ", 500);
       return next(error);
-      // return response.status(500);
+     
     }
 
 
@@ -42,9 +40,7 @@ export class UpdateEmployeePhoneNumBerController {
             phone: phone
           }
         })
-
       return response.status(200).json(updatedPhone);
-
     } catch (err) {
       const error = new HttpError("Something went wrong, could not update place.", 500);
       return next(error);
