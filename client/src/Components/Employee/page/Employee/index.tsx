@@ -7,6 +7,9 @@ import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import styles from "./styles.module.scss";
 import { AddEmployee } from "../AddEmployee";
 import axios, { AxiosResponse } from "axios";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
@@ -35,11 +38,11 @@ export const Employee = () => {
 
     try {
       // setInterval(() => {
-        axios.get(urlPath).then((response: AxiosResponse) => {
-          setListEmployee(response.data);
-        });
+      axios.get(urlPath).then((response: AxiosResponse) => {
+        setListEmployee(response.data);
+      });
 
-        // setListEmployee(DUMMY_DATA);
+      // setListEmployee(DUMMY_DATA);
       // }, 1000);
 
       // const { data ,status } =  axios.get<GetEmployeeResponse>(urlPath,
@@ -82,10 +85,11 @@ export const Employee = () => {
           portalElement
         )}
       <DefaultPage>
-        {listEmpty && <p className={styles.p}>Sem funcionários</p>}
+        {/* {listEmpty && <p className={styles.p}>Sem funcionários</p>} */}
+        {listEmpty && <EmptyPage message="Sem Funcionários" />}
 
         {!listEmpty && (
-          <div className={styles.tableContainer}>
+          <DefaultInsidePage className={styles.tableContainer}>
             <div className={styles.header}>
               <div className={styles.title}>
                 <p>Nome</p>
@@ -98,13 +102,11 @@ export const Employee = () => {
               </div>
             </div>
             <EmployeeList employees={listEmployee} />
-          </div>
+          </DefaultInsidePage>
         )}
-        <div className={styles.btnContainer}>
-          <button onClick={showAddEmployeeHandler}>
-            <p>Adicionar Funcionário</p>
-          </button>
-        </div>
+        <BtnBottomSide btnText="Adicionar Funcionário"
+          showHandler={showAddEmployeeHandler}
+        />
       </DefaultPage>
     </>
   );

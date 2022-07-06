@@ -1,22 +1,19 @@
-.profileContainer{
-    // background-color: black;
+.profileContainer {
+  // background-color: black;
   display: flex;
 
-  height: 10rem;
+  height: 11.25rem;
+
 
   justify-content: flex-end;
 
-
-
-
-
   align-items: center;
-  
-  img{
+
+  img {
     margin-right: 2rem;
     height: 129px;
     width: 129px;
-
-   
+    // height: 8.063rem;
+    // width: 8.063rem;
   }
 }

@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { ClientList } from "../../components/ClientList";
 
 import styles from "./styles.module.scss";
@@ -29,7 +32,7 @@ const DUMMY_DATA = [
 export const Client = () => {
   const [listEmpty, setListEmpty] = React.useState(true);
 
-  // const [addClientIsShown, setClientIsShown] = React.useState(false);
+   const [addClientIsShown, setClientIsShown] = React.useState(false);
 
   const [listClient, setListClient] = React.useState<client[]>([]);
 
@@ -42,11 +45,19 @@ export const Client = () => {
     }
   }, [listClient, setListClient]);
 
+
+
+  const showAddClientHandler = () =>{
+    setClientIsShown(true);
+  }
+
+
   return (
     <DefaultPage>
-      {listEmpty && <p className={styles.p}>Sem clientes</p>}
+      {/* {listEmpty && <p className={styles.p}>Sem clientes</p>} */}
+      {listEmpty && <EmptyPage message="Sem Clientes"/>}
       {!listEmpty && (
-        <div className={styles.tableContainer}>
+        <DefaultInsidePage className={styles.tableContainer}>
           <div className={styles.header}>
             <div className={styles.title}>
               <p>Nome</p>
@@ -59,13 +70,17 @@ export const Client = () => {
             </div>
           </div>
           <ClientList clients={DUMMY_DATA} />
-        </div>
+        </DefaultInsidePage>
       )}
-    <div className={styles.btnContainer}>
+    {/* <div className={styles.btnContainer}>
         <button>
-          <p>Adicionar Cliente</p> 
+          <p>Adicionar Cliente</p>
         </button>
-    </div>
+    </div> */}
+    <BtnBottomSide
+    btnText="Adicionar Cliente"
+    showHandler={showAddClientHandler}
+    />
 
     </DefaultPage>
   );

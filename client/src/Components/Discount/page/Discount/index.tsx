@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { DiscountList } from "../../components/DiscountList";
 import { AddDiscount } from "../AddDiscount";
 
@@ -100,18 +103,21 @@ export const Discount = () => {
           portalElement
         )}
       <DefaultPage >
-        {listEmpty && <p className={styles.p}>Sem descontos</p>}
+
+
+        {listEmpty && <EmptyPage message="Sem Descontos" />}
 
         {!listEmpty && (
-          <div className={styles.tableContainer}>
+          <DefaultInsidePage className={styles.tableContainer}>
             <DiscountList discounts={listDiscount} />
-          </div>
+          </DefaultInsidePage>
         )}
-        <div className={styles.btnContainer}>
-          <button className={styles.button} onClick={showAddDiscountHandler}>
-            <span>Adicionar Desconto</span>
-          </button>
-        </div>
+
+
+        <BtnBottomSide
+          btnText="Adicionar Desconto"
+          showHandler={showAddDiscountHandler}
+        />
       </DefaultPage>
     </>
   );

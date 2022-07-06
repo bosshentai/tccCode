@@ -52,14 +52,14 @@ model client {
   @@map("clients")
 }
 
-model PersonalTrainer {
+model personalTrainer {
   id        String   @id @default(uuid())
   name      String
   email     String
   phone     String
-  cni       String
-  nif       String
-  birthDate DateTime
+  CNI       String
+  NIF       String
+  birthDate String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 

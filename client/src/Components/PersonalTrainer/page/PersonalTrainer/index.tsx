@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
+import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { PersonalTrainerList } from "../../Components/PersonalTrainerList";
 import { AddPersonalTrainer } from "../AddPersonalTrainer";
 
@@ -71,9 +74,9 @@ export const PersonalTrainer = () => {
 
    }
     <DefaultPage>
-      {listEmpty && <p className={styles.p}>Sem Personal Trainer</p>}
-      {!listEmpty && 
-      <div className={styles.tableContainer}>
+      {listEmpty && <EmptyPage message="Sem Personal Trainer"/>}
+      {!listEmpty &&
+      <DefaultInsidePage className={styles.tableContainer}>
         <div className={styles.header}>
           <div className={styles.title}>
             <p>Nome</p>
@@ -83,13 +86,12 @@ export const PersonalTrainer = () => {
           </div>
         </div>
         <PersonalTrainerList personalTrainers={listPersonalTrainer}/>
-      </div>
+      </DefaultInsidePage>
       }
-      <div className={styles.btnContainer}>
-        <button onClick={showAddPersonalTrainerHandler}>
-          <p>Adicionar Personal Trainer</p>
-        </button>
-      </div>
+      <BtnBottomSide btnText="Adicionar Personal Trainer"
+      showHandler={showAddPersonalTrainerHandler}
+      />
+
     </DefaultPage>
     </>
   );
