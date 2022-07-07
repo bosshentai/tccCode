@@ -9,6 +9,7 @@ import whiteYes from "../../../../assets/icons/whitEyes.svg";
 
 import styles from "./styles.module.scss";
 import axios, { AxiosResponse } from "axios";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 // import { transpileModule } from "typescript";
 
 
@@ -95,6 +96,7 @@ export function EmployeeProfile() {
 
   return (
     <DefaultPage>
+      <DefaultInsidePage>
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <button
@@ -166,6 +168,7 @@ export function EmployeeProfile() {
           </div>
         </div>
       </div>
+      </DefaultInsidePage>
     </DefaultPage>
   );
 }
