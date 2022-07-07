@@ -1,0 +1,68 @@
+@startuml RegisterClient
+
+
+actor Manager as a1
+boundary Registerclient as b1
+control API as c1
+database Postgress as db
+boundary ViewClientList as b2
+
+
+a1 -> b1 : 1:Insert Client Info
+activate b1
+alt validate
+
+    b1 -> c1: 1.1 Request Client Info
+    activate c1
+
+    alt validate
+    c1 -> db: Request Client data
+
+        alt Doesn't exists
+            db --> c1 : Response Sucess
+
+            c1 --> b1 : Notificate Sucess Registration
+
+            b1 -> b2 : Redirect to ViewClientList
+
+        else else
+
+            db --> c1 : Response Fail
+
+            c1 --> b1 : Notificate Exist Client
+
+        end
+
+    else else
+
+    c1 --> b1: Invalidate Client Info
+    b1 --> b1 : Notificate UnSucess Registration
+    end
+
+else else
+
+
+    b1 --> b1: invalid Client Info
+
+
+
+end
+deactivate b1
+
+
+
+
+
+@enduml
+
+
+
+
+
+
+
+
+
+
+
+
