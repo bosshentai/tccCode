@@ -1,5 +1,6 @@
 @startuml Nogain
-!theme materia-outline
+' !theme materia-outline
+!theme plain
 
 class Person {
   - id : id
@@ -18,10 +19,17 @@ class Person {
   +logOut()
   +getPersonInfoById()
   +updatePhoneNumber()
+  +ViewClientList()
+  +viewDiscountList()
+  +viewPersonalTrainerList()
 
 }
 
 class Client {
+  -id: id
+  -nameClient: string
+  -email: string
+  -telephone: string
   +payMonthlyFee()
   +selectTrainningPlan()
   +selectPersonalTrainer()
@@ -45,11 +53,10 @@ class Manager {
 
 class Employee {
 
-  +viewClientList()
-  +viewPersonalTrainerList()
-  +viewDiscountList()
+  ' +viewClientList()
+  ' +viewPersonalTrainerList()
+  ' +viewDiscountList()
 }
-
 
 
 class Discount {
@@ -100,8 +107,8 @@ class clientHistory {
 
 ' confirma se inheritance or aggregation
 
-Person  <|--  Client
-Person  <|--  PersonalTrainer
+' Person  <|--  Client
+' Person  <|--  PersonalTrainer
 Person  <|--  Manager
 Person  <|--  Employee
 
