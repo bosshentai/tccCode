@@ -1,0 +1,45 @@
+@startuml Register Discount
+
+actor Manager as a1
+boundary RegisterDiscount as b1
+control API as c1
+database Postgress as db
+boundary ViewDiscountList as b2
+
+a1 -> b1: 1: Insert Discount Info
+activate b1
+alt validate Info
+    b1 -> c1: 1.2: Post Discount Info
+    activate c1
+
+    alt validate Request
+          c1 -> db: 1.3: Post Discount Data
+          activate db
+
+          alt alt
+          db --> c1: 1.4: Response Sucess
+
+
+          c1 --> b1: 1.5: Notificate Register Discount
+
+          b1 -> b2: 1.6: Redirect ViewDiscountList
+          else
+
+          db --> c1: 1.5: Response Fail
+
+          deactivate db
+
+          end
+    else else
+        '  db --> c1 : 1.7: Response Fail
+
+         c1 --> b1 : 1.7: Notificate Fail to Register
+    end
+    deactivate c1
+else else
+
+  b1 -> b1 : 1.8: Invalid Discount Info
+
+end
+deactivate b1
+@enduml

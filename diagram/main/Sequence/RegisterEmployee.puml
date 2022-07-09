@@ -1,0 +1,13 @@
+@startuml RegisterEmployee
+
+actor Manager as a1
+boundary AddEmployee as b1
+control API as c1
+database Postgress as db
+boundary ViewEmployeeLista as b2
+
+
+
+
+
+@enduml

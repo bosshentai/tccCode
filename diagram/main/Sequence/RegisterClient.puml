@@ -8,41 +8,43 @@ database Postgress as db
 boundary ViewClientList as b2
 
 
-a1 -> b1 : 1:Insert Client Info
+a1 -> b1 : 1: Insert Client Info
 activate b1
-alt validate
+alt validate Info
 
-    b1 -> c1: 1.1 Request Client Info
+    b1 -> c1: 1.1: Post Client Info
     activate c1
 
-    alt validate
-    c1 -> db: Request Client data
+    alt validate Request
+    c1 -> db: 1.2 Post Client data
+    activate db
 
         alt Doesn't exists
-            db --> c1 : Response Sucess
+            db --> c1 : 1.3: Response Sucess
 
-            c1 --> b1 : Notificate Sucess Registration
+            c1 --> b1 : 1.4: Notificate Sucess Registration
 
-            b1 -> b2 : Redirect to ViewClientList
+            b1 -> b2 : 1.5: Redirect to ViewClientList
 
         else else
 
-            db --> c1 : Response Fail
+            db --> c1 : 1.6: Response Fail
 
-            c1 --> b1 : Notificate Exist Client
+            ' c1 --> b1 : 1.7: Notificate Exist Client
 
+            deactivate db
         end
-
     else else
 
-    c1 --> b1: Invalidate Client Info
-    b1 --> b1 : Notificate UnSucess Registration
+    c1 --> b1:  1.7: Notificate Invalidate Client Info
+    ' b1 --> b1 : Notificate Fail Registration
+    deactivate c1
     end
 
 else else
 
 
-    b1 --> b1: invalid Client Info
+    b1 --> b1: 1.8: Invalid Client Info
 
 
 

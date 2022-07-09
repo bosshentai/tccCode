@@ -21,23 +21,22 @@ alt authenticated
     c1 -> db : 1.2: Valid Email && Password
     activate db
 
-
-    group alt
+    alt Doesn't Exist
         db -->c1 : 1.3: Authenticated
 
         c1 --> l1: 1.4: Success Login
 
 
-     l1 -> w1: 2: Redict to Welcome Page
+     l1 -> w1: 1.5: Redict to Welcome Page
 
     else else
-        db --> c1: 1.5: Invalid Authentication
+        db --> c1: 1.6: Invalid Authentication
         deactivate db
     end
 
 else else
 
-    c1 --> l1 : 1.6: Invalid Email or password
+    c1 --> l1 : 1.7: Invalid Email or password
     deactivate c1
     deactivate l1
 end
