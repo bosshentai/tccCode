@@ -7,7 +7,35 @@ database Postgress as db
 boundary ViewEmployeeLista as b2
 
 
+a1 -> b1: 1: Insert Employee Info
 
+activate b1
+alt validate Info
+  b1 -> c1 : 1.1: Post Employee Info
+  activate c1
+
+  alt validate Request
+    c1 -> db: 1.2: Post Employee Data
+    activate db
+    alt Sucess
+      db -> c1: 1.3: Response Sucess
+
+      c1 -> b1: 1.4: Notificate Register Discount
+
+      b1 -> b2: 1.5: Redirect ViewDiscountList
+    else else
+      db -> c1: 1.6: Response Fail
+
+      deactivate db
+    end
+
+  else else
+    c1 -> b1: 1.7: Notificate Fail to Register  
+
+  end
+
+
+end
 
 
 @enduml

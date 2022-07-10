@@ -9,23 +9,23 @@ boundary ViewDiscountList as b2
 a1 -> b1: 1: Insert Discount Info
 activate b1
 alt validate Info
-    b1 -> c1: 1.2: Post Discount Info
+    b1 -> c1: 1.1: Post Discount Info
     activate c1
 
     alt validate Request
-          c1 -> db: 1.3: Post Discount Data
+          c1 -> db: 1.2: Post Discount Data
           activate db
 
-          alt alt
-          db --> c1: 1.4: Response Sucess
+          alt Sucess
+          db --> c1: 1.3: Response Sucess
 
 
-          c1 --> b1: 1.5: Notificate Register Discount
+          c1 --> b1: 1.4: Notificate Register Discount
 
-          b1 -> b2: 1.6: Redirect ViewDiscountList
-          else
+          b1 -> b2: 1.5: Redirect ViewDiscountList
+          else else
 
-          db --> c1: 1.5: Response Fail
+          db --> c1: 1.6: Response Fail
 
           deactivate db
 
