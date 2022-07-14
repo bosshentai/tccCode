@@ -2,7 +2,7 @@
 ' !theme materia-outline
 !theme plain
 
-class Person {
+class Employee {
   - id : id
   -name : string
   -phone : string
@@ -38,6 +38,10 @@ class Client {
 
 
 class PersonalTrainer {
+  -id: id
+  -personalTrainerName: string
+  -email:string
+  -preco: number
   +updatePersonalTrainerInfo()
 
 }
@@ -51,12 +55,12 @@ class Manager {
 }
 
 
-class Employee {
+' class Employee {
 
-  ' +viewClientList()
-  ' +viewPersonalTrainerList()
-  ' +viewDiscountList()
-}
+'   ' +viewClientList()
+'   ' +viewPersonalTrainerList()
+'   ' +viewDiscountList()
+' }
 
 
 class Discount {
@@ -78,24 +82,32 @@ class TrainingPlan {
 }
 
 
-class clientPersonalTrainingDiscountTrainingPlan {
-  id: id
-  client_id: id
-  personal_trainer_id: id
-  discount_id: id
-  training_plan_id: id
-  created_at: datetime
-  updated_at: datetime
-}
+' class clientPersonalTrainingDiscountTrainingPlan {
+'   id: id
+'   client_id: id
+'   personal_trainer_id: id
+'   discount_id: id
+'   training_plan_id: id
+'   created_at: datetime
+'   updated_at: datetime
+' }
 
-class clientHistory {
-  id: id
-  custumoer_id: id
-  person_id: id
-  total: float
-  created_at: datetime
-}
+' class ClientHistory {
+'   id: id
+'   custumoer_id: id
+'   person_id: id
+'   total: float
+'   created_at: datetime
+' }
 
+
+
+
+
+
+Client "1" --- "0..1" Discount
+Client "1" --- "1" TrainingPlan
+Client "1" --- "0..1" PersonalTrainer
 
 ' enum Role {
 '   MANAGER
@@ -109,16 +121,17 @@ class clientHistory {
 
 ' Person  <|--  Client
 ' Person  <|--  PersonalTrainer
-Person  <|--  Manager
-Person  <|--  Employee
+Employee  <|--  Manager
+' Person  <|--  Employee
 
 ' clientHistory <|-- Client
 ' clientHistory <|-- Person
 
-clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Person
-clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" PersonalTrainer
-clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Discount
-clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" TrainingPlan
-clientPersonalTrainingDiscountTrainingPlan "0...1"--- "1...*" clientHistory
+' clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Employee
+' clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" PersonalTrainer
+' clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Discount
+' clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" TrainingPlan
+' clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" ClientHistory
+' clientPersonalTrainingDiscountTrainingPlan "0...1" --- "1...*" Client
 
 @enduml
