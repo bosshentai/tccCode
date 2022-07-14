@@ -1,0 +1,41 @@
+@startuml RegisterTraningPlan
+
+actor Manager as a1
+boundary AddTrainingPlan as b1
+control API as c1
+database Postgress as db
+boundary ViewTrainingPlanList as b2
+
+
+a1 -> b1: 1: Insert Training Plna Info
+
+activate b1
+alt validate Info
+  b1 -> c1 : 1.1: Post Emplpoyee Info
+  activate c1
+
+  alt validate Request
+    c1 -> db: 1.2: Post Employee Data
+    activate db
+    alt Sucess
+      db --> c1: 1.3: Response Sucess
+      c1 --> b1: 1.4: Notificate Register Discount
+
+      b1 -> b2: 1.5: Redirect ViewTrainingPlanList
+
+    else else
+      db --> c1: 1.6: Response Fail
+
+      deactivate db
+    end
+  ' end
+
+else else
+  c1 --> b1: 1.7: Notificate Fail to Register
+  deactivate b1
+  deactivate c1
+  end
+' deactivate b1
+end
+
+@enduml

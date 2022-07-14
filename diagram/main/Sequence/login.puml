@@ -1,0 +1,46 @@
+@startuml name
+' !theme materia-outline
+!theme plain
+
+actor Manager as p1
+boundary Login as l1
+control control as c1
+database postgress as db
+boundary Welcome as w1
+
+activate l1
+
+
+p1 -> l1 : 1:Login
+
+alt authenticated
+
+    l1 -> c1 : 1.1: Request Login
+    activate c1
+
+    c1 -> db : 1.2: Valid Email && Password
+    activate db
+
+    alt Doesn't Exist
+        db -->c1 : 1.3: Authenticated
+
+        c1 --> l1: 1.4: Success Login
+
+
+     l1 -> w1: 1.5: Redict to Welcome Page
+
+    else else
+        db --> c1: 1.6: Invalid Authentication
+        deactivate db
+    end
+
+else else
+
+    c1 --> l1 : 1.7: Invalid Email or password
+    deactivate c1
+    deactivate l1
+end
+
+
+
+@enduml
