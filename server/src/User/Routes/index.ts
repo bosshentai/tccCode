@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { check } from "express-validator";
 import { CreateEmployeeController } from "../controllers/CreateEmployeeController";
 import { GetEmployeeByIdController } from "../controllers/GetEmployeeByIdController";
 import { GetEmployeesController } from '../controllers/GetEmployeesController';
@@ -12,7 +13,25 @@ const getEmployees = new GetEmployeesController()
 const getEmployeeById = new GetEmployeeByIdController()
 const updateEmployeePhoneNumber = new UpdateEmployeePhoneNumBerController();
 
-employeeRouter.post("/employee/add", createEmployee.handle);
+employeeRouter.post("/employee/add", [
+  check('name')
+    .not()
+    .isEmpty(),
+  check('email')
+    .not()
+    .isEmpty()
+    .isEmail(),
+  check('phone')
+    .not()
+    .isEmpty(),
+    // .isMobilePhone(locale)
+  check('CNI')
+    .not()
+    .isEmpty(),
+  check('NIF')
+    .not()
+    
+], createEmployee.handle);
 employeeRouter.get("/employee/all", getEmployees.handle);
 employeeRouter.get("/employee/:id", getEmployeeById.handle);
 employeeRouter.patch("/employee/:id", updateEmployeePhoneNumber.handle);

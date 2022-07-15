@@ -26,7 +26,7 @@ export class CreateEmployeeController {
           role: Role.EMPLOYEE,
           CNI: CNI,
           NIF: NIF,
-          birthDate: birth
+          birthDate: new Date(birth) // convert the String in Date
         },
       });
 

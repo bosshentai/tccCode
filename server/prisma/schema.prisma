@@ -9,6 +9,9 @@ generator client {
     // binaryTargets = ["debian-openssl-1.1.x"]
 }
 
+
+//https://dev.to/sabinthedev/building-a-prisma-schema-61b
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -16,14 +19,14 @@ datasource db {
 
 model User {
   id         String   @id @default(uuid())
-  name       String
-  email      String 
+  name       String  
+  email      String  @unique
   password   String
   phone      String
   role       Role     @default(EMPLOYEE)
   CNI        String   
   NIF        String   
-  birthDate  String
+  birthDate  DateTime @db.Date   
   status     Status   @default(Inactive)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
