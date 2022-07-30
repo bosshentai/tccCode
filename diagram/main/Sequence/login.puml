@@ -1,10 +1,10 @@
 @startuml name
 ' !theme materia-outline
-!theme plain
+' !theme plain
 
 actor Manager as p1
 boundary Login as l1
-control control as c1
+control api as c1
 database postgress as db
 boundary Welcome as w1
 
