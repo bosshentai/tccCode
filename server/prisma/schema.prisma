@@ -2,13 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native","linux-musl"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
   // binaryTargets = ["debian-openssl-1.1.1-native"]
   // binaryTargets = ["native", "debian-openssl-1.1.x"]
-    // binaryTargets = ["debian-openssl-1.1.x"]
+  // binaryTargets = ["debian-openssl-1.1.x"]
 }
-
 
 //https://dev.to/sabinthedev/building-a-prisma-schema-61b
 
@@ -17,87 +16,126 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         String   @id @default(uuid())
-  name       String  
-  email      String  @unique
-  password   String
-  phone      String
-  role       Role     @default(EMPLOYEE)
-  CNI        String   
-  NIF        String   
-  birthDate  DateTime @db.Date   
-  status     Status   @default(Inactive)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@map("users")
-}
-
-enum Role {
+enum Roles {
   MANAGER
   EMPLOYEE
+  CLIENT
+  PERSONALTRAINER
+  UNKNOW
 }
 
 enum Status {
-  Active
-  Inactive
+  ACTIVE
+  INACTIVE
+  BLOCKED
 }
 
-model client {
-  id        String   @id @default(uuid())
-  name      String
-  email     String
-  phone     String
-  birthDate DateTime
-  created_at DateTime @default(now())
-
-  @@map("clients")
-}
-
-model personalTrainer {
-  id        String   @id @default(uuid())
-  name      String
-  email     String
-  phone     String
-  CNI       String
-  NIF       String
-  birthDate String
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  birth_date DateTime @db.Date
+  role       Roles    @default(UNKNOW)
+  phone      String
+  CNI        String
+  NIF        String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@map("personal_trainers")
+  client Client[]
+  @@map("users")
 }
 
 
-model discount {
-  id        String   @id @default(uuid())
-  name      String
-  value     Float
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+model Client {
+  id String @id @default(uuid()) 
+  user_id String
+  user User? @relation(fields: [user_id],references: [id])
 
-  @@map("discounts")
+
+
 }
 
-model TrainingPlan{
-  id        String   @id @default(uuid())
-  name      String
-  price     Float
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+// model User {
+//   id         String   @id @default(uuid())
+//   name       String  
+//   email      String  @unique
+//   password   String
+//   phone      String
+//   role       Role     @default(EMPLOYEE)
+//   CNI        String   
+//   NIF        String   
+//   birthDate  DateTime @db.Date   
+//   status     Status   @default(Inactive)
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
 
-  @@map("training_plans")
-}
+//   @@map("users")
+// }
 
-model ClientPaymentSetting{
-  id       String   @id @default(uuid())
-  client_id String
-  discount_id String
-  training_plan_id String
-  personal_trainer_id String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+// enum Role {
+//   MANAGER
+//   EMPLOYEE
+// }
 
-  @@map("client_payment_settings")
-}
+// enum Status {
+//   Active
+//   Inactive
+// }
+
+// model client {
+//   id        String   @id @default(uuid())
+//   name      String
+//   email     String
+//   phone     String
+//   birthDate DateTime
+//   created_at DateTime @default(now())
+
+//   @@map("clients")
+// }
+
+// model personalTrainer {
+//   id        String   @id @default(uuid())
+//   name      String
+//   email     String
+//   phone     String
+//   CNI       String
+//   NIF       String
+//   birthDate String
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+
+//   @@map("personal_trainers")
+// }
+
+// model discount {
+//   id        String   @id @default(uuid())
+//   name      String
+//   value     Float
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+
+//   @@map("discounts")
+// }
+
+// model TrainingPlan{
+//   id        String   @id @default(uuid())
+//   name      String
+//   price     Float
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+
+//   @@map("training_plans")
+// }
+
+// model ClientPaymentSetting{
+//   id       String   @id @default(uuid())
+//   client_id String
+//   discount_id String
+//   training_plan_id String
+//   personal_trainer_id String
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+
+//   @@map("client_payment_settings")
+// }
