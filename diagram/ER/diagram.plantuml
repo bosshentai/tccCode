@@ -96,10 +96,14 @@ u1 }|--|| e1
 u1 }|--|| pt
 
 
+d1 ||--|| cd
+t1 ||--|| ctp
+
 
 c1 ||--o{ cpt
 c1 ||--o{ cd
 c1 ||--o{ ctp
+c1 ||--o{ pay
 
 
 @enduml
