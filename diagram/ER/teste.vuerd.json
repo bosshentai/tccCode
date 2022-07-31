@@ -3,11 +3,11 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -997.3333333333335,
-    "scrollLeft": -527,
-    "zoomLevel": 0.9,
+    "scrollTop": -279,
+    "scrollLeft": -481,
+    "zoomLevel": 0.8,
     "show": {
-      "tableComment": true,
+      "tableComment": false,
       "columnComment": false,
       "columnDataType": true,
       "columnDefault": true,
@@ -382,9 +382,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1004,
-          "top": 488.5,
-          "zIndex": 8,
+          "left": 1174,
+          "top": 703.5,
+          "zIndex": 17,
           "widthName": 97.47209167480469,
           "widthComment": 60
         },
@@ -731,7 +731,7 @@
           "active": false,
           "left": 111.75,
           "top": 907.4012,
-          "zIndex": 11,
+          "zIndex": 10,
           "widthName": 60,
           "widthComment": 60
         },
@@ -793,7 +793,7 @@
           "active": false,
           "left": 1456.7226,
           "top": 221.8058,
-          "zIndex": 12,
+          "zIndex": 11,
           "widthName": 60,
           "widthComment": 60
         },
@@ -977,9 +977,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 791,
-          "top": 1181.5833,
-          "zIndex": 10,
+          "left": 834.75,
+          "top": 1297.8333,
+          "zIndex": 14,
           "widthName": 94.71609497070312,
           "widthComment": 60
         },
@@ -1218,7 +1218,7 @@
           "active": false,
           "left": 655.5,
           "top": 727.5833,
-          "zIndex": 13,
+          "zIndex": 12,
           "widthName": 139.16311645507812,
           "widthComment": 60
         },
@@ -1337,8 +1337,8 @@
           "columnIds": [
             "9a3362e0-834c-449b-82ba-1b510a9c8bad"
           ],
-          "x": 1004,
-          "y": 586.375,
+          "x": 1174,
+          "y": 801.375,
           "direction": "left"
         },
         "constraintName": "fk_users_to_personltrainers",
@@ -1415,8 +1415,8 @@
           "columnIds": [
             "928d2268-8819-4706-af80-4948f38b7bc2"
           ],
-          "x": 791,
-          "y": 1236.5833,
+          "x": 834.75,
+          "y": 1352.8333,
           "direction": "left"
         },
         "constraintName": "fk_clients_to_client_discount",
@@ -1441,8 +1441,8 @@
           "columnIds": [
             "7930da86-3d55-4184-9874-ab69c4b31e7d"
           ],
-          "x": 1084.5630798339844,
-          "y": 1236.5833,
+          "x": 1128.3130798339844,
+          "y": 1352.8333,
           "direction": "right"
         },
         "constraintName": "fk_discounts_to_client_discount",
@@ -1484,8 +1484,8 @@
           "columnIds": [
             "f2079ba5-2756-4a87-a822-3d85536995c2"
           ],
-          "x": 1004,
-          "y": 521.125,
+          "x": 1174,
+          "y": 736.125,
           "direction": "left"
         },
         "end": {

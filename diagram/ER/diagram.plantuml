@@ -1,0 +1,44 @@
+@startuml ERDiagram
+
+' hide the spot
+hide circle
+
+
+skinparam linetype ortho
+
+entity "users" as u1 {
+  '* identifying_atrribute
+  * id : string <<generated>>
+  --
+
+  * name : string
+  * email : string
+  * birth_data : date
+  * role : roles
+  * password : string <<generated>>
+  * created_at : time
+  * updated_at : time
+}
+
+entity "clients" as c1 {
+  * id : String <<generated>>
+  --
+  * user_id : string <<FK>>
+
+}
+
+entity "training_plans" as t1 {
+  * id : string <<generated>>
+  --
+  * name : string
+  * description : string
+  * value : float
+  * create_at : time
+  * updated_at : time
+}
+
+entity "discounts" as d1 {
+  
+}
+
+@enduml
