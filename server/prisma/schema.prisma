@@ -12,9 +12,10 @@ generator client {
 //https://dev.to/sabinthedev/building-a-prisma-schema-61b
 
 
-generator erd {
-  provider = "prisma-erd-generator"
-}
+// generator erd {
+//   provider = "prisma-erd-generator"
+//   output = "./ERD.svg"
+// }
 
 datasource db {
   provider = "postgresql"
@@ -63,6 +64,7 @@ model Client {
   // status Status
   cpt ClientPersonalTrainer? 
   ctp ClientTrainingPlan?
+  cd ClientDiscount?
 
 
   @@map("clients")
@@ -87,6 +89,8 @@ model Discount {
   value      Float
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  cd ClientDiscount?
 
   @@map("discounts")
 }
@@ -134,7 +138,7 @@ model ClientPersonalTrainer {
   // created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@id([client_id,personal_trainer_id])
+  // @@id([client_id,personal_trainer_id])
 
   @@map("client_personal_trainer")
 }
@@ -147,8 +151,20 @@ model ClientTrainingPlan {
   training_plan_id String @unique
   train Training_plan @relation(fields: [training_plan_id],references: [id])
 
-  @@id([client_id,training_plan_id])
+  // @@id([client_id,training_plan_id])
   @@map("client_training_plan")
+}
+
+
+model ClientDiscount{
+  client_id String @unique
+  client Client @relation(fields: [client_id], references: [id])
+  discount_id String @unique
+  discount Discount @relation(fields: [discount_id],references: [id])
+
+
+  // @@id([])
+  @@map("client_discount")
 }
 
 // model User {
