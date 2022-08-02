@@ -35,8 +35,7 @@
 		"formulahendry.auto-complete-tag",
 		"ms-vscode.vscode-typescript-tslint-plugin",
 		"streetsidesoftware.code-spell-checker",
-		"streetsidesoftware.code-spell-checker-portuguese",
-		"RapidAPI.vscode-rapidapi-client"
+		"streetsidesoftware.code-spell-checker-portuguese"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
