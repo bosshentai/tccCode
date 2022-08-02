@@ -7,10 +7,10 @@ import { CreatePersonalTrainerController } from "../controllers/CreatePersonalTr
 const personalTrainerRouter = Router();
 
 
-const createPersonalTrainerRouter =  CreatePersonalTrainerController;
+const createPersonalTrainerRouter = new CreatePersonalTrainerController();
 
 
-personalTrainerRouter.post("/personalTrainer/add",createPersonalTrainerRouter);
+personalTrainerRouter.post("/personalTrainer/add",createPersonalTrainerRouter.handle);
 
 
 export { personalTrainerRouter};

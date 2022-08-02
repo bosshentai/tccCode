@@ -1,37 +1,85 @@
+import {Roles } from "@prisma/client";
+import { Request, Response, NextFunction } from "express";
 
-import {Role} from '@prisma/client';
-import { Request, Response, NextFunction} from "express";
-
-import { prismaClient } from '../../database/prismaClient';
-import { HttpError} from '../../models/http-error';
-
-export const CreatePersonalTrainerController = async (request: Request,response:Response,next:NextFunction) => {
+import {prismaClient} from "../../database/prismaClient";
+import { HttpError } from "../../models/http-error";
 
 
-  try {
+export class CreatePersonalTrainerController {
+  async handle(request: Request, response:Response, next: NextFunction){
 
-    const { name , email, phone, CNI, NIF, birth} = request.body;
+    try {
+      const {name,email, phone,CNI,NIF,birth, value} = request.body;
 
-    const personalTrainer = await prismaClient.personalTrainer.create({
-      data:{
-        name: name,
-        email: email,
-        phone: phone,
-        CNI: CNI,
-        NIF: NIF,
-        birthDate: birth
-      }
-    })
+      const user = await prismaClient.user.create({
+        data: {
+          name: name,
+          email: email,
+          password: "123456",
+          phone: phone,
+          role: Roles.PERSONALTRAINER,
+          CNI : CNI,
+          NIF : NIF,
+          birth_date : new Date(birth)
+        },
+      })
 
-    return response.status(201).json(personalTrainer);
 
-  }catch(e) {
-    const error = new HttpError("Fail to add Personal Trainer",500);
+      
 
-    return next(error);
+      const personalTrainer = await prismaClient.personalTrainer.create({
+        data: {
+          user_id : user.id,
+          value: Number(value)
+        },
+      })
 
+
+      return response.status(201).json(personalTrainer);
+
+    } catch (e){
+      const error = new HttpError("Fail to add Personal Trainer", 500);
+      return next(error);
+    }
   }
-} 
+}
+
+
+
+
+// import {Role} from '@prisma/client';
+// import { Request, Response, NextFunction} from "express";
+
+// import { prismaClient } from '../../database/prismaClient';
+// import { HttpError} from '../../models/http-error';
+
+// export const CreatePersonalTrainerController = async (request: Request,response:Response,next:NextFunction) => {
+
+
+//   try {
+
+//     const { name , email, phone, CNI, NIF, birth} = request.body;
+
+//     const personalTrainer = await prismaClient.personalTrainer.create({
+//       data:{
+//         name: name,
+//         email: email,
+//         phone: phone,
+//         CNI: CNI,
+//         NIF: NIF,
+//         birthDate: birth
+//       }
+//     })
+
+//     return response.status(201).json(personalTrainer);
+
+//   }catch(e) {
+//     const error = new HttpError("Fail to add Personal Trainer",500);
+
+//     return next(error);
+
+//   }
+// } 
 
 
 

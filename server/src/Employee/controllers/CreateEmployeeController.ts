@@ -1,6 +1,6 @@
 
 // import { Role } from '@prisma/client';
-import { Role } from '@prisma/client';
+import { Roles } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 
 import { prismaClient } from '../../database/prismaClient';
@@ -17,18 +17,26 @@ export class CreateEmployeeController {
       const { name, email, phone, CNI, NIF, birth } = request.body;
 
 
-      const employee = await prismaClient.user.create({
+      const user = await prismaClient.user.create({
         data: {
           name: name,
           email: email,
           password: "123456",
           phone: phone,
-          role: Role.EMPLOYEE,
+          role: Roles.EMPLOYEE,
           CNI: CNI,
           NIF: NIF,
-          birthDate: new Date(birth) // convert the String in Date
+          birth_date: new Date(birth) // convert the String in Date
         },
       });
+
+
+      const employee = await prismaClient.employee.create({
+        data: {
+          user_id : user.id
+          
+        },
+      })
 
 
       return response.status(201).json(employee);
@@ -36,7 +44,7 @@ export class CreateEmployeeController {
 
     } catch (e) {
 
-      const error = new HttpError("Fail to add employeed", 500)
+      const error = new HttpError("Fail to add Employee", 500)
 
       return next(error);
     }

@@ -20,11 +20,22 @@
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+		// "[prisma]":{
+		// 	"editor.defaultFormatter": "Prisma.prisma"
+		// }
+	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"Prisma.prisma"
+		"Prisma.prisma",
+		"esbenp.prettier-vscode",
+		"johnpapa.vscode-peacock",
+		"steoates.autoimport",
+		"formulahendry.auto-complete-tag",
+		"ms-vscode.vscode-typescript-tslint-plugin",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-portuguese"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

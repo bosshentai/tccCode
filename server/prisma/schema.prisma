@@ -65,6 +65,7 @@ model Client {
   cpt ClientPersonalTrainer? 
   ctp ClientTrainingPlan?
   cd ClientDiscount?
+  pay Payment[]
 
 
   @@map("clients")
@@ -111,7 +112,7 @@ model PersonalTrainer {
 model Employee {
   id      String @id @default(uuid())
   user_id String
-  status  Status
+  status  Status @default(INACTIVE)
 
   user User @relation(fields: [user_id],references: [id])
 
@@ -165,6 +166,24 @@ model ClientDiscount{
 
   // @@id([])
   @@map("client_discount")
+}
+
+
+
+model Payment {
+  id String @id @default(uuid())
+  user_id String
+  client Client @relation(fields: [user_id], references: [id])
+  training_plan_name String?
+  training_plan_value Float @default(0.0)
+  discount_name String?
+  discount_value Float @default(0.0)
+  personal_trainer_name String?
+  personal_trainer_value Float @default(0.0)
+
+
+
+  @@map("payments")
 }
 
 // model User {

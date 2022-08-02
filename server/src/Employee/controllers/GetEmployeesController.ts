@@ -1,4 +1,4 @@
-import { Role } from "@prisma/client";
+import { Roles } from "@prisma/client";
 
 
 import { Request, Response } from "express";
@@ -15,10 +15,11 @@ export class GetEmployeesController {
           id: true,
           name: true,
           email: true,
-          status: true,
+        
+          // status: true,
         },
         where: {
-          role: Role.EMPLOYEE
+          role: Roles.EMPLOYEE
         }
       });
 

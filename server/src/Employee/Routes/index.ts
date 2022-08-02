@@ -8,7 +8,7 @@ import { UpdateEmployeePhoneNumBerController } from "../controllers/UpdateEmploy
 const employeeRouter = Router();
 
 
-const createEmployee = new CreateEmployeeController()
+const createEmployees = new CreateEmployeeController()
 const getEmployees = new GetEmployeesController()
 const getEmployeeById = new GetEmployeeByIdController()
 const updateEmployeePhoneNumber = new UpdateEmployeePhoneNumBerController();
@@ -31,7 +31,7 @@ employeeRouter.post("/employee/add", [
   check('NIF')
     .not()
     
-], createEmployee.handle);
+], createEmployees.handle);
 employeeRouter.get("/employee/all", getEmployees.handle);
 employeeRouter.get("/employee/:id", getEmployeeById.handle);
 employeeRouter.patch("/employee/:id", updateEmployeePhoneNumber.handle);

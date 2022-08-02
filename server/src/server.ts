@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
-import { employeeRouter } from './User/Routes';
+import { employeeRouter } from './Employee/Routes';
 
 import {HttpError} from './models/http-error';	
 import bodyParser from 'body-parser';
