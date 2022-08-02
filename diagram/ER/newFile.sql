@@ -51,7 +51,7 @@ CREATE TABLE personal_trainers (
 );
 
 
-CREATE TABLE employee(
+CREATE TABLE employees(
     id text NOT NULL PRIMARY KEY,
     user_id text NOT NULL,
     emp_status status
