@@ -1,4 +1,4 @@
-import { CreateClientController } from './../controllers/CreateClientController';
+import { CreateClientController } from '../controllers/CreateClientController';
 import { Router } from "express";
 
 

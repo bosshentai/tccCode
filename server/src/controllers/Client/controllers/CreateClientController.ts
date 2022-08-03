@@ -2,8 +2,8 @@
 import { Roles} from "@prisma/client";
 import {Request, Response,NextFunction} from 'express';
 
-import {prismaClient} from "../../database/prismaClient";
-import { HttpError } from "../../models/http-error";
+import {prismaClient} from "../../../database/prismaClient";
+import { HttpError } from "../../../models/http-error";
 
 
 export class CreateClientController {

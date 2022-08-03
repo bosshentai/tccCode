@@ -6,7 +6,7 @@ import { prismaClient } from "../../database/prismaClient";
 
 
 
-export class GetEmployeesController {
+export class GetAllEmployeesController {
   async handle(request: Request, response: Response) {
 
     try{

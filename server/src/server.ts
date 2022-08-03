@@ -1,11 +1,9 @@
 import 'reflect-metadata';
 import express from 'express';
-import { employeeRouter } from './Employee/Routes';
 
-import {HttpError} from './models/http-error';	
+import { HttpError } from './models/http-error';
 import bodyParser from 'body-parser';
-import { personalTrainerRouter } from './PersonalTrainer/Routes';
-
+import { router } from './Routes';
 
 const app = express();
 
@@ -23,8 +21,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", employeeRouter)
-app.use('/api', personalTrainerRouter)
+
+app.use("/api",router);
 
 
 
