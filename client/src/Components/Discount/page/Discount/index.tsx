@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
@@ -18,53 +19,53 @@ type discountype = {
   amount: number;
 };
 
-const DUMMY_Data = [
-  {
-    id: "1",
-    name: "desconto 1",
-    amount: 10,
-  },
-  {
-    id: "2",
-    name: "desconto 2",
-    amount: 20,
-  },
-  {
-    id: "3",
-    name: "desconto 3",
-    amount: 30,
-  },
-  {
-    id: "4",
-    name: "desconto 4",
-    amount: 40,
-  },
-  {
-    id: "5",
-    name: "desconto 5",
-    amount: 50,
-  },
-  {
-    id: "6",
-    name: "desconto 6",
-    amount: 60,
-  },
-  {
-    id: "7",
-    name: "desconto 7",
-    amount: 70,
-  },
-  {
-    id: "8",
-    name: "desconto 8",
-    amount: 80,
-  },
-  {
-    id: "9",
-    name: "desconto 9",
-    amount: 90,
-  },
-];
+// const DUMMY_Data = [
+//   {
+//     id: "1",
+//     name: "desconto 1",
+//     amount: 10,
+//   },
+//   {
+//     id: "2",
+//     name: "desconto 2",
+//     amount: 20,
+//   },
+//   {
+//     id: "3",
+//     name: "desconto 3",
+//     amount: 30,
+//   },
+//   {
+//     id: "4",
+//     name: "desconto 4",
+//     amount: 40,
+//   },
+//   {
+//     id: "5",
+//     name: "desconto 5",
+//     amount: 50,
+//   },
+//   {
+//     id: "6",
+//     name: "desconto 6",
+//     amount: 60,
+//   },
+//   {
+//     id: "7",
+//     name: "desconto 7",
+//     amount: 70,
+//   },
+//   {
+//     id: "8",
+//     name: "desconto 8",
+//     amount: 80,
+//   },
+//   {
+//     id: "9",
+//     name: "desconto 9",
+//     amount: 90,
+//   },
+// ];
 
 export const Discount = () => {
   const [listEmpty, setListEmpty] = React.useState(true);
@@ -76,7 +77,21 @@ export const Discount = () => {
 
 
   useEffect(() => {
-    setListDiscount(DUMMY_Data);
+    // setListDiscount(DUMMY_Data);
+    const urlPath = 'http://localhost:5000/api/discount/all';
+
+
+    try {
+        axios.get(urlPath).then((response:AxiosResponse) => {
+          setListDiscount(response.data);``
+        })
+
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+
+
+
     if (listDiscount.length === 0) {
       setListEmpty(true);
     } else {

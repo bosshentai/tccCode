@@ -62,6 +62,8 @@ export const AddPersonalTrainer = (props: propsType) => {
   const formRegisterPersonalTrainer = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    const urlPatch = "http://localhost:5000/api/personalTrainer/add"
+
   // missing the urlPatch for the backend add the PersonalTrainer
 
     if (formState.isValid === true){
@@ -77,7 +79,7 @@ export const AddPersonalTrainer = (props: propsType) => {
 
       try{
 
-        // await axios.post(url, formData);
+        await axios.post(urlPatch, formData);
 
         props.onClose();
 

@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
@@ -18,19 +19,19 @@ type personalTrainer = {
   email: string;
 }
 
-const DUMMY_DATA = [
-  {
-    id: "1asadas",
-    name: "Hernâni",
-    email: "baptista@got.com"
+// const DUMMY_DATA = [
+//   {
+//     id: "1asadas",
+//     name: "Hernâni",
+//     email: "baptista@got.com"
 
-  },
-  {
-    id: "2assad",
-    name: "Hern",
-    email: "asdada@asdsd.com"
-  }
-]
+//   },
+//   {
+//     id: "2assad",
+//     name: "Hern",
+//     email: "asdada@asdsd.com"
+//   }
+// ]
 
 export const PersonalTrainer = () => {
   const [listEmpty, setListEmpty] = useState(true);
@@ -41,8 +42,21 @@ export const PersonalTrainer = () => {
 
 
   useEffect( () => {
+    const urlPath = "http://localhost:5000/api/personalTrainer/all"
 
-    setListPersonalTrainer(DUMMY_DATA);
+    // setListPersonalTrainer(DUMMY_DATA);
+
+
+    try {
+      axios.get(urlPath).then((response:AxiosResponse)=>{
+        setListPersonalTrainer(response.data)
+      })
+      
+    
+
+    } catch (error) {
+      console.log("Error: " + error);
+    }
 
     if (listPersonalTrainer.length === 0){
       setListEmpty(true);
