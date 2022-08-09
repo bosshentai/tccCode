@@ -11,7 +11,6 @@ generator client {
 
 //https://dev.to/sabinthedev/building-a-prisma-schema-61b
 
-
 // generator erd {
 //   provider = "prisma-erd-generator"
 //   output = "./ERD.svg"
@@ -49,24 +48,23 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  client Client[]
+  client            Client[]
   personal_trainers PersonalTrainer[]
-  employee Employee[]
-  manager Manager?
+  employee          Employee[]
+  manager           Manager?
 
   @@map("users")
 }
 
 model Client {
-  id      String @id @default(uuid())
+  id      String                 @id @default(uuid())
   user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User                   @relation(fields: [user_id], references: [id])
   // status Status
-  cpt ClientPersonalTrainer? 
-  ctp ClientTrainingPlan?
-  cd ClientDiscount?
-  pay Payment[]
-
+  cpt     ClientPersonalTrainer?
+  ctp     ClientTrainingPlan?
+  cd      ClientDiscount?
+  pay     Payment[]
 
   @@map("clients")
 }
@@ -85,11 +83,12 @@ model Training_plan {
 }
 
 model Discount {
-  id         String   @id @default(uuid())
-  name       String
-  value      Float
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id          String   @id @default(uuid())
+  name        String
+  description String   @default("")
+  value       Float
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   cd ClientDiscount?
 
@@ -105,7 +104,6 @@ model PersonalTrainer {
 
   cpt ClientPersonalTrainer?
 
-
   @@map("personal_trainers")
 }
 
@@ -114,13 +112,13 @@ model Employee {
   user_id String
   status  Status @default(INACTIVE)
 
-  user User @relation(fields: [user_id],references: [id])
+  user User @relation(fields: [user_id], references: [id])
 
   @@map("employees")
 }
 
 model Manager {
-  id String @id @default(uuid())
+  id      String @id @default(uuid())
   user_id String @unique
 
   user User @relation(fields: [user_id], references: [id])
@@ -128,13 +126,11 @@ model Manager {
   @@map("manager")
 }
 
-
-
 model ClientPersonalTrainer {
-  client_id String @unique
-  client Client @relation(fields: [client_id], references: [id])
-  personal_trainer_id String @unique
-  personalTrainer PersonalTrainer @relation(fields: [personal_trainer_id], references: [id])
+  client_id           String          @unique
+  client              Client          @relation(fields: [client_id], references: [id])
+  personal_trainer_id String          @unique
+  personalTrainer     PersonalTrainer @relation(fields: [personal_trainer_id], references: [id])
 
   // created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -144,44 +140,36 @@ model ClientPersonalTrainer {
   @@map("client_personal_trainer")
 }
 
-
-
 model ClientTrainingPlan {
-  client_id String @unique
-  client Client @relation(fields: [client_id],references: [id])
-  training_plan_id String @unique
-  train Training_plan @relation(fields: [training_plan_id],references: [id])
+  client_id        String        @unique
+  client           Client        @relation(fields: [client_id], references: [id])
+  training_plan_id String        @unique
+  train            Training_plan @relation(fields: [training_plan_id], references: [id])
 
   // @@id([client_id,training_plan_id])
   @@map("client_training_plan")
 }
 
-
-model ClientDiscount{
-  client_id String @unique
-  client Client @relation(fields: [client_id], references: [id])
-  discount_id String @unique
-  discount Discount @relation(fields: [discount_id],references: [id])
-
+model ClientDiscount {
+  client_id   String   @unique
+  client      Client   @relation(fields: [client_id], references: [id])
+  discount_id String   @unique
+  discount    Discount @relation(fields: [discount_id], references: [id])
 
   // @@id([])
   @@map("client_discount")
 }
 
-
-
 model Payment {
-  id String @id @default(uuid())
-  user_id String
-  client Client @relation(fields: [user_id], references: [id])
-  training_plan_name String?
-  training_plan_value Float @default(0.0)
-  discount_name String?
-  discount_value Float @default(0.0)
-  personal_trainer_name String?
-  personal_trainer_value Float @default(0.0)
-
-
+  id                     String  @id @default(uuid())
+  user_id                String
+  client                 Client  @relation(fields: [user_id], references: [id])
+  training_plan_name     String?
+  training_plan_value    Float   @default(0.0)
+  discount_name          String?
+  discount_value         Float   @default(0.0)
+  personal_trainer_name  String?
+  personal_trainer_value Float   @default(0.0)
 
   @@map("payments")
 }

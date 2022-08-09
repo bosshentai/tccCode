@@ -9,8 +9,8 @@ services:
       - "5000:5000"
     volumes:
       - .:/app/node/app
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     # environment:
     #   DATA_URL: 'postgresql://postgres:postgres@postgres:5432/postgres?schema=public'
     extra_hosts:
@@ -18,30 +18,30 @@ services:
     networks:
       - tcc-network
 
-  # db:
-  #   build: .docker/postgres
-  #   # image: postgres
-  #   container_name: backend-db
-  #   restart: always
-  #   tty: true
-  #   volumes:
-  #     - data_postgres:/var/lib/postgresql/data
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: postgres
-  #   ports:
-  #     - "5432:5432"
-  #   networks:
-  #     - tcc-network
+  db:
+    build: .docker/postgres
+    # image: postgres
+    container_name: backend-db
+    restart: always
+    tty: true
+    volumes:
+      - data_postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - tcc-network
 
 networks:
   tcc-network:
     driver: bridge
 
 
-# volumes:
-#   data_postgres: {}
+volumes:
+  data_postgres: {}
 
 
 

@@ -13,11 +13,12 @@ export class CreateDiscountController {
 {
   try{
 
-    const { name, value} = request.body;
+    const { name, value, description} = request.body;
 
     const discount = await prismaClient.discount.create({
       data:{
         name: name,
+        description: description,
         value: Number(value)
       }
     })
