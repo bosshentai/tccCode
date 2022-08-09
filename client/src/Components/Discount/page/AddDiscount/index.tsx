@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
 import { validName } from "../../../shared/util/validName";
+import axios from "axios";
 
 type propsType = {
   onClose: () => void;
@@ -27,7 +28,7 @@ export const AddDiscount = (props: propsType) => {
     setHover(false);
   };
 
-  const formRegisterDiscountHandler = (
+  const formRegisterDiscountHandler = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -37,10 +38,10 @@ export const AddDiscount = (props: propsType) => {
     // Name
     const enteredName = nameInputRef.current!.value;
     const nameIsNotEmpty = enteredName.trim().length !== 0;
-    const nameIsValid = validName(enteredName);
+    // const nameIsValid = validName(enteredName);
     // mínimo 6 letras
 
-    const nameIsOk = nameIsNotEmpty && nameIsValid;
+    const nameIsOk = nameIsNotEmpty ;
 
     // Description
     const enteredDescription = areaInputRef.current!.value;
@@ -50,8 +51,13 @@ export const AddDiscount = (props: propsType) => {
     const amountIsNotEmpty = enteredAmount.trim().length !== 0;
 
 
-    console.log("Amount is not empty: " + amountIsNotEmpty);
-    console.log(" Entered amount: " + enteredAmount);
+
+    // console.log("Name is not empty: " + nameIsNotEmpty);
+    // console.log("Entered name: " + enteredName);
+    // console.log("Name is Valid: " + nameIsValid);
+
+    // console.log("Amount is not empty: " + amountIsNotEmpty);
+    // console.log(" Entered amount: " + enteredAmount);
     // const amountIsValid = isNaN(Number(enteredAmount));
 
     const amountIsOk = amountIsNotEmpty;
@@ -69,13 +75,35 @@ export const AddDiscount = (props: propsType) => {
 
     if (nameIsOk && amountIsOk) {
       setIsNameOk(true);
-      setIsNumberOk(true);
+      // setIsNumberOk(true);
 
-      console.log( "Nome do Desconto " + enteredName);
-      console.log("A Descrição :" + enteredDescription);
-      console.log("O valor: " + enteredAmount);
+      // console.log( "Nome do Desconto " + enteredName);
+      // console.log("A Descrição :" + enteredDescription);
+      // console.log("O valor: " + enteredAmount);
 
-      console.log("Discount added");
+
+      const urlPatch = "http://localhost:5000/api/discount/add"
+
+
+      const formData = {
+        name: enteredName,
+        description: enteredDescription,
+        value: enteredAmount
+      }
+
+
+      try {
+
+        await axios.post(urlPatch, formData);
+        
+      } catch (error) {
+        console.log(error)
+      }
+
+
+
+
+      // console.log("Discount added");
       // props.onClose();
     }
 

@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
 import { validName } from "../../../shared/util/validName";
+import axios from "axios";
 
 
 export const AddTrainingPlan = () => {
@@ -28,14 +29,14 @@ export const AddTrainingPlan = () => {
   }
 
 
-  const formRegisterTrainingPlan = (event: React.FormEvent<HTMLFormElement>) => {
+  const formRegisterTrainingPlan = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const enteredName = nameInputRef.current!.value;
       const nameIsNotEmpty = enteredName.trim().length !== 0;
-      const nameIsValid = validName(enteredName);
+      // const nameIsValid = validName(enteredName);
 
-      const nameIsOk = nameIsNotEmpty && nameIsValid;
+      const nameIsOk = nameIsNotEmpty ;
 
 
       const enteredDescription = descriptionInputRef.current!.value;
@@ -66,9 +67,27 @@ export const AddTrainingPlan = () => {
         setIsAmountOk(true);
         setIsNameOk(true)
 
-        console.log("Nome do Plano de Treino: " +  enteredAmount);
-        console.log("Descrição do Plano de Treino" + enteredDescription);
-        console.log("Montante:" + enteredAmount);
+        // console.log("Nome do Plano de Treino: " +  enteredAmount);
+        // console.log("Descrição do Plano de Treino" + enteredDescription);
+        // console.log("Montante:" + enteredAmount);
+
+        const urlPatch = "http://localhost:5000/api/trainingplan/add";
+
+        const formData = {
+          name: enteredName,
+          description: enteredDescription,
+          value: enteredAmount
+        }
+
+        try {
+
+          await axios.post(urlPatch,formData)
+          
+        } catch (error) {
+          console.log(error)
+        }
+
+
 
 
       }
