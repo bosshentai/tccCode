@@ -23,7 +23,7 @@ export class GetAllPersonalTrainersController {
       return response.status(200).json(personalTrainers);
 
     }catch(e){
-      const error = new HttpError("Couldnt get all Personal Trainer",404);
+      const error = new HttpError("Couldn't get all Personal Trainer",404);
       return error
     }
   }

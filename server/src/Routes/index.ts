@@ -1,7 +1,8 @@
+import { GetAllPersonalTrainersController } from './../controllers/PersonalTrainer/GetAllPersonalTrainerController';
 import { Router } from "express";
 import { check } from "express-validator";
 import { CreateDiscountController } from "../controllers/Discount/CreateDiscountController";
-import { GetAllDiscountsController } from "../controllers/Discount/GetAllDiscount";
+import { GetAllDiscountsController } from "../controllers/Discount/GetAllDiscountController";
 import { CreateEmployeeController } from "../controllers/Employee/CreateEmployeeController";
 import { GetAllEmployeesController } from "../controllers/Employee/GetAllEmployeesController";
 import { GetEmployeeByIdController } from "../controllers/Employee/GetEmployeeByIdController";
@@ -23,6 +24,7 @@ const getAllTrainingPlan = new GetAllDiscountsController();
 
 // Personal Trainer
 const createPersonalTrainer = new CreateTrainingPlanController();
+const getAllPersonalTrainer = new GetAllPersonalTrainersController();
 
 
 // EmployeeRouter
@@ -67,6 +69,8 @@ router.get("/employee/all", getAllEmployees.handle)
 router.get("/employee/:id", getEmployeeById.handle)
 
 router.get("/discount/all",getDiscount.handle)
+
+router.get("/personalTrainer/all",getAllPersonalTrainer.handle)
 
 
 // patch
