@@ -38,33 +38,33 @@ export const PersonalTrainer = () => {
 
   const [addPersonalTrainerIsShow, setPersonalTrainerIsShow] = useState(false);
 
-  const [ listPersonalTrainer,setListPersonalTrainer] = useState<personalTrainer[]>([])
+  const [listPersonalTrainer, setListPersonalTrainer] = useState<personalTrainer[]>([])
 
 
-  useEffect( () => {
+  useEffect(() => {
     const urlPath = "http://localhost:5000/api/personalTrainer/all"
 
     // setListPersonalTrainer(DUMMY_DATA);
 
 
     try {
-      axios.get(urlPath).then((response:AxiosResponse)=>{
+      axios.get(urlPath).then((response: AxiosResponse) => {
         setListPersonalTrainer(response.data)
       })
-      
-    
+
+
 
     } catch (error) {
       console.log("Error: " + error);
     }
 
-    if (listPersonalTrainer.length === 0){
+    if (listPersonalTrainer.length === 0) {
       setListEmpty(true);
-    }else{
+    } else {
       setListEmpty(false);
     }
-    
-  },[listPersonalTrainer])
+
+  }, [listPersonalTrainer])
 
 
   const showAddPersonalTrainerHandler = () => {
@@ -77,36 +77,36 @@ export const PersonalTrainer = () => {
   }
 
   return (
-   <> 
-   {
-     addPersonalTrainerIsShow &&
-     ReactDOM.createPortal(
-     <>
-      <Backdrop onClose={closeAddPersonalTrainerHandler}/>
-      <AddPersonalTrainer onClose={closeAddPersonalTrainerHandler}/>
-     </>,portalElement)
+    <>
+      {
+        addPersonalTrainerIsShow &&
+        ReactDOM.createPortal(
+          <>
+            <Backdrop onClose={closeAddPersonalTrainerHandler} />
+            <AddPersonalTrainer onClose={closeAddPersonalTrainerHandler} />
+          </>, portalElement)
 
-   }
-    <DefaultPage>
-      {listEmpty && <EmptyPage message="Sem Personal Trainer"/>}
-      {!listEmpty &&
-      <DefaultInsidePage className={styles.tableContainer}>
-        <div className={styles.header}>
-          <div className={styles.title}>
-            <p>Nome</p>
-          </div>
-          <div className={styles.title}>
-            <p>Email</p>
-          </div>
-        </div>
-        <PersonalTrainerList personalTrainers={listPersonalTrainer}/>
-      </DefaultInsidePage>
       }
-      <BtnBottomSide btnText="Adicionar Personal Trainer"
-      showHandler={showAddPersonalTrainerHandler}
-      />
+      <DefaultPage>
+        {listEmpty && <EmptyPage message="Sem Personal Trainer" />}
+        {!listEmpty &&
+          <DefaultInsidePage className={styles.tableContainer}>
+            <div className={styles.header}>
+              <div className={styles.title}>
+                <p>Nome</p>
+              </div>
+              <div className={styles.title}>
+                <p>Email</p>
+              </div>
+            </div>
+            <PersonalTrainerList personalTrainers={listPersonalTrainer} />
+          </DefaultInsidePage>
+        }
+        <BtnBottomSide btnText="Adicionar Personal Trainer"
+          showHandler={showAddPersonalTrainerHandler}
+        />
 
-    </DefaultPage>
+      </DefaultPage>
     </>
   );
 };

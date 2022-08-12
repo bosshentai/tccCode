@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
@@ -11,23 +12,23 @@ import styles from "./styles.module.scss";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
 
-const DUMMY_Data = [
-  {
-    id: "1",
-    name: "plano 1",
-    amount: 10,
-  },
-  {
-    id: "2",
-    name: "plano 2",
-    amount: 20,
-  },
-  {
-    id: "3",
-    name: "plano 3",
-    amount: 30,
-  },
-];
+// const DUMMY_Data = [
+//   {
+//     id: "1",
+//     name: "plano 1",
+//     amount: 10,
+//   },
+//   {
+//     id: "2",
+//     name: "plano 2",
+//     amount: 20,
+//   },
+//   {
+//     id: "3",
+//     name: "plano 3",
+//     amount: 30,
+//   },
+// ];
 
 export const TrainingPlan = () => {
   const [listEmpty, setListEmpty] = useState(true);
@@ -37,7 +38,24 @@ export const TrainingPlan = () => {
   const [listPlanningTrain, setListPlanningTrain] = useState([]);
 
   useEffect(() => {
-    setListPlanningTrain([]);
+    // setListPlanningTrain([]);
+
+    const urlPath = "http//localhost:5000/api/trainingplan/all"
+
+
+    try {
+      axios.get(urlPath).then((response: AxiosResponse) => {
+        setListPlanningTrain(response.data)
+      })
+
+
+
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+
+
+
     if (listPlanningTrain.length === 0) {
       setListEmpty(true);
     } else {
@@ -59,7 +77,7 @@ export const TrainingPlan = () => {
         ReactDOM.createPortal(
           <>
             <Backdrop onClose={closeAddTrainingHandler} />
-            <AddTrainingPlan />
+            <AddTrainingPlan onClose={closeAddTrainingHandler}/>
           </>,
           portalElement
         )}
@@ -69,8 +87,8 @@ export const TrainingPlan = () => {
         {listEmpty && <EmptyPage message="Sem Plano de Treino" />}
 
         {!listEmpty && <DefaultInsidePage className={styles.container} >
-            <h1>Lomba</h1>
-          </DefaultInsidePage>}
+          <h1>Lomba</h1>
+        </DefaultInsidePage>}
 
         <BtnBottomSide
           btnText="Adicionar Plano Treino"

@@ -5,11 +5,15 @@ import styles from "./styles.module.scss";
 
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
-import { validName } from "../../../shared/util/validName";
+// import { validName } from "../../../shared/util/validName";
 import axios from "axios";
 
 
-export const AddTrainingPlan = () => {
+type propsType = {
+  onClose: () => void;
+}
+
+export const AddTrainingPlan = (props: propsType) => {
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
@@ -81,7 +85,10 @@ export const AddTrainingPlan = () => {
 
         try {
 
-          await axios.post(urlPatch,formData)
+          await axios.post(urlPatch,formData);
+
+
+          props.onClose();
           
         } catch (error) {
           console.log(error)
@@ -114,7 +121,7 @@ export const AddTrainingPlan = () => {
         className={styles.right}
         onMouseEnter={hoverHandler}
         onMouseLeave={leaveHandler}
-      // onClick={props.onClose}
+      onClick={props.onClose}
       >
         <img src={iconChange} alt="close" />
       </button>

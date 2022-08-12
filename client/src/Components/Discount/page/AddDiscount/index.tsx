@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
-import { validName } from "../../../shared/util/validName";
+// import { validName } from "../../../shared/util/validName";
 import axios from "axios";
 
 type propsType = {
@@ -95,6 +95,8 @@ export const AddDiscount = (props: propsType) => {
       try {
 
         await axios.post(urlPatch, formData);
+
+        props.onClose();
         
       } catch (error) {
         console.log(error)
