@@ -1,3 +1,4 @@
+import { GetAllTrainingPlansController } from './../controllers/trainingPlan/GetAllTrainingPlan';
 import { GetAllPersonalTrainersController } from './../controllers/PersonalTrainer/GetAllPersonalTrainerController';
 import { Router } from "express";
 import { check } from "express-validator";
@@ -19,7 +20,7 @@ const router = Router();
 
 // Training plan
 const createTrainingPlan = new CreateTrainingPlanController();
-const getAllTrainingPlan = new GetAllDiscountsController();
+const getAllTrainingPlan = new GetAllTrainingPlansController();
 
 
 // Personal Trainer

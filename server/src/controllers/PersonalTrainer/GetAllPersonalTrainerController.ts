@@ -13,6 +13,11 @@ export class GetAllPersonalTrainersController {
           id: true,
           name: true,
           email: true,
+          personal_trainers:{
+           select: {
+            value: true
+           }
+          }
         },
         where:{
           role: Roles.PERSONALTRAINER
