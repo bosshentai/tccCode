@@ -2,14 +2,14 @@
 import styles from "./styles.module.scss";
 
 
-type TrainingPalnProps = {
+type TrainingPlanProps = {
   id: string;
   name: string;
   amount: number;
 }
 
 
-export const TrainingPlanItem = (props: TrainingPalnProps) => {
+export const TrainingPlanItem = (props: TrainingPlanProps) => {
   const {id,name,amount} = props;
 
   return (

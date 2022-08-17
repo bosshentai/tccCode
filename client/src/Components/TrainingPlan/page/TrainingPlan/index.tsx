@@ -6,11 +6,20 @@ import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
 import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
+import { TrainingPlanList } from "../../components/TrainingPlanList";
 import { AddTrainingPlan } from "../AddTrainingPlan";
 
 import styles from "./styles.module.scss";
 
 const portalElement = document.getElementById("overlays") as HTMLElement;
+
+
+
+type trainingplanType = {
+  id: string;
+  name: string;
+  value: number;
+}
 
 // const DUMMY_Data = [
 //   {
@@ -35,12 +44,12 @@ export const TrainingPlan = () => {
 
   const [addTrainingPlan, setAddTrainingPlan] = useState(false);
 
-  const [listPlanningTrain, setListPlanningTrain] = useState([]);
+  const [listPlanningTrain, setListPlanningTrain] = useState<trainingplanType[]>([]);
 
   useEffect(() => {
     // setListPlanningTrain([]);
 
-    const urlPath = "http//localhost:5000/api/trainingplan/all"
+    const urlPath = "http://localhost:5000/api/trainingplan/all"
 
 
     try {
@@ -87,7 +96,7 @@ export const TrainingPlan = () => {
         {listEmpty && <EmptyPage message="Sem Plano de Treino" />}
 
         {!listEmpty && <DefaultInsidePage className={styles.container} >
-          <h1>Lomba</h1>
+          <TrainingPlanList trainingPlans={listPlanningTrain}/>
         </DefaultInsidePage>}
 
         <BtnBottomSide

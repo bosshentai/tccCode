@@ -16,7 +16,7 @@ const portalElement = document.getElementById("overlays") as HTMLElement;
 type discountype = {
   id: string;
   name: string;
-  amount: number;
+  value: number;
 };
 
 // const DUMMY_Data = [
