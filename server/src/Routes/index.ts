@@ -9,6 +9,7 @@ import { GetAllEmployeesController } from "../controllers/Employee/GetAllEmploye
 import { GetEmployeeByIdController } from "../controllers/Employee/GetEmployeeByIdController";
 import { UpdateEmployeePhoneNumBerController } from "../controllers/Employee/UpdateEmployeePhoneNumberController";
 import { CreateTrainingPlanController } from "../controllers/trainingPlan/CreateTrainingPlan";
+import { CreateClientController } from '../controllers/Client/controllers/CreateClientController';
 
 
 
@@ -42,6 +43,11 @@ const createDiscount = new CreateDiscountController();
 const getDiscount = new GetAllDiscountsController();
 
 
+// Client
+
+const createClient = new CreateClientController();
+
+
 //Post
 
 router.post("/trainingplan/add", createTrainingPlan.handle);
@@ -54,11 +60,13 @@ router.post("/employee/add", [
   check('phone').not().isEmpty(),
   check('CNI').not().isEmpty(),
   check('NIF').not().isEmpty()
-], createEmployee.handle)
+], createEmployee.handle);
 
 
 
-router.post("/discount/add", createDiscount.handle)
+router.post("/discount/add", createDiscount.handle);
+
+router.post("/client/add", createClient.handle);
 
 
 //Get
@@ -66,17 +74,17 @@ router.post("/discount/add", createDiscount.handle)
 router.get("/trainingplan/all", getAllTrainingPlan.handle);
 
 
-router.get("/employee/all", getAllEmployees.handle)
-router.get("/employee/:id", getEmployeeById.handle)
+router.get("/employee/all", getAllEmployees.handle);
+router.get("/employee/:id", getEmployeeById.handle);
 
-router.get("/discount/all",getDiscount.handle)
+router.get("/discount/all", getDiscount.handle);
 
-router.get("/personalTrainer/all",getAllPersonalTrainer.handle)
+router.get("/personalTrainer/all", getAllPersonalTrainer.handle);
 
 
 // patch
 
-router.patch("/employee/:id", updateEmployeePhoneNumber.handle)
+router.patch("/employee/:id", updateEmployeePhoneNumber.handle);
 
 
 export { router }
