@@ -4,9 +4,8 @@
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl"]
-  // binaryTargets = ["debian-openssl-1.1.1-native"]
-  // binaryTargets = ["native", "debian-openssl-1.1.x"]
-  // binaryTargets = ["debian-openssl-1.1.x"]
+  previewFeatures = ["interactiveTransactions"]
+
 }
 
 //https://dev.to/sabinthedev/building-a-prisma-schema-61b
@@ -127,10 +126,11 @@ model Manager {
 }
 
 model ClientPersonalTrainer {
-  client_id           String          @unique
+  id Int @id @default(autoincrement())
+  client_id           String         @unique
   client              Client          @relation(fields: [client_id], references: [id])
   personal_trainer_id String          @unique
-  personalTrainer     PersonalTrainer @relation(fields: [personal_trainer_id], references: [id])
+  personalTrainer     PersonalTrainer? @relation(fields: [personal_trainer_id], references: [id],onUpdate: NoAction, onDelete: NoAction)
 
   // created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -141,20 +141,26 @@ model ClientPersonalTrainer {
 }
 
 model ClientTrainingPlan {
+  id Int @id @default(autoincrement())
   client_id        String        @unique
   client           Client        @relation(fields: [client_id], references: [id])
   training_plan_id String        @unique
-  train            Training_plan @relation(fields: [training_plan_id], references: [id])
+  train            Training_plan? @relation(fields: [training_plan_id], references: [id],onUpdate: NoAction,onDelete: NoAction)
+
+  update_at DateTime @default(now())
 
   // @@id([client_id,training_plan_id])
   @@map("client_training_plan")
 }
 
 model ClientDiscount {
+  id Int @id @default(autoincrement())
   client_id   String   @unique
   client      Client   @relation(fields: [client_id], references: [id])
   discount_id String   @unique
-  discount    Discount @relation(fields: [discount_id], references: [id])
+  discount    Discount? @relation(fields: [discount_id], references: [id],onUpdate: NoAction,onDelete: NoAction)
+
+  update_at DateTime @default(now())
 
   // @@id([])
   @@map("client_discount")
@@ -174,86 +180,3 @@ model Payment {
   @@map("payments")
 }
 
-// model User {
-//   id         String   @id @default(uuid())
-//   name       String  
-//   email      String  @unique
-//   password   String
-//   phone      String
-//   role       Role     @default(EMPLOYEE)
-//   CNI        String   
-//   NIF        String   
-//   birthDate  DateTime @db.Date   
-//   status     Status   @default(Inactive)
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-
-//   @@map("users")
-// }
-
-// enum Role {
-//   MANAGER
-//   EMPLOYEE
-// }
-
-// enum Status {
-//   Active
-//   Inactive
-// }
-
-// model client {
-//   id        String   @id @default(uuid())
-//   name      String
-//   email     String
-//   phone     String
-//   birthDate DateTime
-//   created_at DateTime @default(now())
-
-//   @@map("clients")
-// }
-
-// model personalTrainer {
-//   id        String   @id @default(uuid())
-//   name      String
-//   email     String
-//   phone     String
-//   CNI       String
-//   NIF       String
-//   birthDate String
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-
-//   @@map("personal_trainers")
-// }
-
-// model discount {
-//   id        String   @id @default(uuid())
-//   name      String
-//   value     Float
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-
-//   @@map("discounts")
-// }
-
-// model TrainingPlan{
-//   id        String   @id @default(uuid())
-//   name      String
-//   price     Float
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-
-//   @@map("training_plans")
-// }
-
-// model ClientPaymentSetting{
-//   id       String   @id @default(uuid())
-//   client_id String
-//   discount_id String
-//   training_plan_id String
-//   personal_trainer_id String
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-
-//   @@map("client_payment_settings")
-// }

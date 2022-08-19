@@ -10,6 +10,7 @@ import { GetEmployeeByIdController } from "../controllers/Employee/GetEmployeeBy
 import { UpdateEmployeePhoneNumBerController } from "../controllers/Employee/UpdateEmployeePhoneNumberController";
 import { CreateTrainingPlanController } from "../controllers/trainingPlan/CreateTrainingPlan";
 import { CreateClientController } from '../controllers/Client/controllers/CreateClientController';
+import { CreatePersonalTrainerController } from '../controllers/PersonalTrainer/CreatePersonalTrainerController';
 
 
 
@@ -25,7 +26,7 @@ const getAllTrainingPlan = new GetAllTrainingPlansController();
 
 
 // Personal Trainer
-const createPersonalTrainer = new CreateTrainingPlanController();
+const createPersonalTrainer = new CreatePersonalTrainerController();
 const getAllPersonalTrainer = new GetAllPersonalTrainersController();
 
 
