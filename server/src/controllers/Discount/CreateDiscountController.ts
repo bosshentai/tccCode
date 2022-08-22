@@ -11,6 +11,14 @@ export class CreateDiscountController {
  
   async handle(request: Request, response:Response,next:NextFunction)
 {
+
+
+  if(request.method !== "POST"){
+    const error = new HttpError("Method not allowed", 405);
+    return next(error);
+  }
+
+
   try{
 
     const { name, value, description} = request.body;

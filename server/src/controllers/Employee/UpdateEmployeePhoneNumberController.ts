@@ -22,7 +22,7 @@ export class UpdateEmployeePhoneNumBerController {
         }
       )
     } catch (err) {
-      const error = new HttpError("Something went wrong, could not getemployee id ", 500);
+      const error = new HttpError("Something went wrong, could not get employee by id ", 500);
       return next(error);
      
     }

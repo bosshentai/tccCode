@@ -1,36 +1,21 @@
 import { Employee, prisma, Roles, Status } from "@prisma/client";
 
 
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { prismaClient } from "../../database/prismaClient";
-
-
-
-
-
-type EmployeeType = {
-  id: string
-  name: string
-  email: string
-  role: Employee
-  status: string
-}
-
-const SELECT = "SELECT";
-const USERS = "users";
-const EMPLOYEES = "employees"
-const ID = "id";
-const NAME = "name";
-const EMAIL = "email";
-const STATUS = "status";
-
+import { HttpError } from "../../models/http-error";
 
 
 
 
 
 export class GetAllEmployeesController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response, next: NextFunction) {
+
+    if (request.method !== "GET"){
+      const error = new HttpError("Method not allowed", 405)
+      return next(error);
+    }
 
     try {
       const employees = await prismaClient.user.findMany({

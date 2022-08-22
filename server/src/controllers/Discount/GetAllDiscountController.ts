@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { prismaClient } from "../../database/prismaClient";
 import { HttpError } from "../../models/http-error";
 
@@ -6,7 +6,15 @@ import { HttpError } from "../../models/http-error";
 
 
 export class GetAllDiscountsController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response, next: NextFunction) {
+
+    if (request.method !== "GET"){
+      const error = new HttpError("Method not allowed", 405);
+      return next(error);
+    }
+
+
+
     try {
 
       const discounts = await prismaClient.discount.findMany({

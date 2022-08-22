@@ -1,3 +1,4 @@
+import { GetAllClientController } from './../controllers/Client/controllers/GetAllClientController';
 import { GetAllTrainingPlansController } from './../controllers/trainingPlan/GetAllTrainingPlan';
 import { GetAllPersonalTrainersController } from './../controllers/PersonalTrainer/GetAllPersonalTrainerController';
 import { Router } from "express";
@@ -47,6 +48,7 @@ const getDiscount = new GetAllDiscountsController();
 // Client
 
 const createClient = new CreateClientController();
+const getAllClients = new GetAllClientController();
 
 
 //Post
@@ -81,6 +83,9 @@ router.get("/employee/:id", getEmployeeById.handle);
 router.get("/discount/all", getDiscount.handle);
 
 router.get("/personalTrainer/all", getAllPersonalTrainer.handle);
+
+
+router.get("/client/all",getAllClients.handle)
 
 
 // patch

@@ -5,30 +5,54 @@ import { HttpError } from "../../models/http-error";
 
 
 export class GetAllPersonalTrainersController {
-  async handle(request: Request, response: Response){
-    try{
+  async handle(request: Request, response: Response) {
 
-      const personalTrainers = await prismaClient.user.findMany({
-        select:{
+
+    if (request.method !== "GET"){
+      const error = new HttpError("Method not allowed", 405);
+      return error;
+    }
+
+
+    try {
+
+      // const personalTrainers = await prismaClient.user.findMany({
+      //   select:{
+      //     // id: true,
+      //     name: true,
+      //     email: true,
+      //     personal_trainers:{
+      //      select: {
+      //       id:true,
+      //       value: true
+      //      }
+      //     }
+      //   },
+      //   where:{
+      //     role: Roles.PERSONALTRAINER
+      //   }
+      // })
+
+
+      const personalTrainers = await prismaClient.personalTrainer.findMany({
+        select: {
           id: true,
-          name: true,
-          email: true,
-          personal_trainers:{
-           select: {
-            value: true
-           }
+          value: true,
+          user: {
+            select: {
+              name: true,
+              email: true
+
+            },
           }
-        },
-        where:{
-          role: Roles.PERSONALTRAINER
         }
       })
 
 
       return response.status(200).json(personalTrainers);
 
-    }catch(e){
-      const error = new HttpError("Couldn't get all Personal Trainer",404);
+    } catch (e) {
+      const error = new HttpError("Couldn't get all Personal Trainer", 404);
       return error
     }
   }

@@ -11,6 +11,11 @@ import { HttpError } from '../../models/http-error';
 export class CreateEmployeeController {
   async handle(request: Request, response: Response, next: NextFunction) {
 
+    if (request.method !== "POST"){
+      const error = new HttpError("Method not allowed", 405);
+      return next(error)
+    }
+
     try {
 
       const { name, email, phone, CNI, NIF, birth } = request.body;

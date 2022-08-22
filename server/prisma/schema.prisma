@@ -2,10 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl"]
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "linux-musl"]
   previewFeatures = ["interactiveTransactions"]
-
 }
 
 //https://dev.to/sabinthedev/building-a-prisma-schema-61b
@@ -126,11 +125,11 @@ model Manager {
 }
 
 model ClientPersonalTrainer {
-  id Int @id @default(autoincrement())
-  client_id           String         @unique
-  client              Client          @relation(fields: [client_id], references: [id])
-  personal_trainer_id String          @unique
-  personalTrainer     PersonalTrainer? @relation(fields: [personal_trainer_id], references: [id],onUpdate: NoAction, onDelete: NoAction)
+  id                  Int              @id @default(autoincrement())
+  client_id           String           @unique
+  client              Client           @relation(fields: [client_id], references: [id])
+  personal_trainer_id String           @unique
+  personalTrainer     PersonalTrainer? @relation(fields: [personal_trainer_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
 
   // created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -141,11 +140,11 @@ model ClientPersonalTrainer {
 }
 
 model ClientTrainingPlan {
-  id Int @id @default(autoincrement())
-  client_id        String        @unique
-  client           Client        @relation(fields: [client_id], references: [id])
-  training_plan_id String        @unique
-  train            Training_plan? @relation(fields: [training_plan_id], references: [id],onUpdate: NoAction,onDelete: NoAction)
+  id               Int            @id @default(autoincrement())
+  client_id        String         @unique
+  client           Client         @relation(fields: [client_id], references: [id])
+  training_plan_id String         @unique
+  train            Training_plan? @relation(fields: [training_plan_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
 
   update_at DateTime @default(now())
 
@@ -154,11 +153,11 @@ model ClientTrainingPlan {
 }
 
 model ClientDiscount {
-  id Int @id @default(autoincrement())
-  client_id   String   @unique
-  client      Client   @relation(fields: [client_id], references: [id])
-  discount_id String   @unique
-  discount    Discount? @relation(fields: [discount_id], references: [id],onUpdate: NoAction,onDelete: NoAction)
+  id          Int       @id @default(autoincrement())
+  client_id   String    @unique
+  client      Client    @relation(fields: [client_id], references: [id])
+  discount_id String    @unique
+  discount    Discount? @relation(fields: [discount_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
 
   update_at DateTime @default(now())
 
@@ -179,4 +178,3 @@ model Payment {
 
   @@map("payments")
 }
-
