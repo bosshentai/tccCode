@@ -49,7 +49,7 @@ export class Login {
 
     let token;
     try {
-      token = sign({userId: existingUser.id, email: existingUser.email}, "supersecret_don't_share")
+      token = sign({userId: existingUser.id, email: existingUser.email}, "lomba")
       
     } catch (e) {
       const error = new HttpError("Logging in failed,please try again later.",500);
