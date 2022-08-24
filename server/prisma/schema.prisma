@@ -167,8 +167,8 @@ model ClientDiscount {
 
 model Payment {
   id                     String  @id @default(uuid())
-  user_id                String
-  client                 Client  @relation(fields: [user_id], references: [id])
+  client_id                String
+  client                 Client  @relation(fields: [client_id], references: [id])
   training_plan_name     String?
   training_plan_value    Float   @default(0.0)
   discount_name          String?

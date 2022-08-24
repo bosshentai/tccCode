@@ -1,4 +1,5 @@
 import { Roles } from '@prisma/client'
+import { hash } from 'bcryptjs'
 import { Request, Response, NextFunction } from 'express'
 import { validationResult } from 'express-validator'
 
@@ -39,43 +40,50 @@ export class CreateClientController {
       discountId,
     } = request.body
 
-
-
-
     let existingUser
 
     try {
       existingUser = await prismaClient.user.findUnique({
-        where:{
-          email: email
-        }
+        where: {
+          email: email,
+        },
       })
-      
     } catch (e) {
       const error = new HttpError(
         "Couldn't register the client.",
-        500
+        500,
       )
-      
+
       return next(error)
     }
 
-
-
-    if (existingUser){
+    if (existingUser) {
       const error = new HttpError(
-        "User exists already",
-      422
+        'User exists already',
+        422,
       )
+      return next(error)
     }
 
-    try {
+    let hashedPassword
 
-      const user = await prismaClient.user.create({
+    try {
+      hashedPassword = await hash('123456', 12)
+    } catch (e) {
+      const error = new HttpError(
+        "Couldn't create Client, please try again",
+        500,
+      )
+      return next(error)
+    }
+
+    let createClient
+    try {
+      createClient = await prismaClient.user.create({
         data: {
           name: name,
           email: email,
-          password: '123456',
+          password: hashedPassword,
           phone: phone,
           role: Roles.CLIENT,
           CNI: CNI,
@@ -102,11 +110,10 @@ export class CreateClientController {
           },
         },
       })
-
-      return response.status(201).json(user)
     } catch (e) {
       const error = new HttpError('Fail to add Client', 500)
       return next(error)
     }
+    return response.status(201).json(createClient)
   }
 }
