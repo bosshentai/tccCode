@@ -75,7 +75,7 @@ model Training_plan {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  ctp ClientTrainingPlan?
+  ctp ClientTrainingPlan[]
 
   @@map("training_plans")
 }
@@ -88,7 +88,7 @@ model Discount {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  cd ClientDiscount?
+  cd ClientDiscount[]
 
   @@map("discounts")
 }
@@ -97,10 +97,12 @@ model PersonalTrainer {
   id      String @id @default(uuid())
   user_id String
   value   Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   user User @relation(fields: [user_id], references: [id])
 
-  cpt ClientPersonalTrainer?
+  cpt ClientPersonalTrainer[]
 
   @@map("personal_trainers")
 }
@@ -109,6 +111,9 @@ model Employee {
   id      String @id @default(uuid())
   user_id String
   status  Status @default(INACTIVE)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   user User @relation(fields: [user_id], references: [id])
 
@@ -119,6 +124,10 @@ model Manager {
   id      String @id @default(uuid())
   user_id String @unique
 
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+
   user User @relation(fields: [user_id], references: [id])
 
   @@map("manager")
@@ -128,10 +137,11 @@ model ClientPersonalTrainer {
   id                  Int              @id @default(autoincrement())
   client_id           String           @unique
   client              Client           @relation(fields: [client_id], references: [id])
-  personal_trainer_id String           @unique
+  personal_trainer_id String           
   personalTrainer     PersonalTrainer? @relation(fields: [personal_trainer_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
 
   // created_at DateTime @default(now())
+  created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   // @@id([client_id,personal_trainer_id])
@@ -143,10 +153,11 @@ model ClientTrainingPlan {
   id               Int            @id @default(autoincrement())
   client_id        String         @unique
   client           Client         @relation(fields: [client_id], references: [id])
-  training_plan_id String         @unique
+  training_plan_id String         
   train            Training_plan? @relation(fields: [training_plan_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
 
-  update_at DateTime @default(now())
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   // @@id([client_id,training_plan_id])
   @@map("client_training_plan")
@@ -156,10 +167,11 @@ model ClientDiscount {
   id          Int       @id @default(autoincrement())
   client_id   String    @unique
   client      Client    @relation(fields: [client_id], references: [id])
-  discount_id String    @unique
+  discount_id String    
   discount    Discount? @relation(fields: [discount_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
 
-  update_at DateTime @default(now())
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   // @@id([])
   @@map("client_discount")
@@ -175,6 +187,10 @@ model Payment {
   discount_value         Float   @default(0.0)
   personal_trainer_name  String?
   personal_trainer_value Float   @default(0.0)
+
+
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 
   @@map("payments")
 }

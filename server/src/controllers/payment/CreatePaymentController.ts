@@ -144,22 +144,36 @@ export class CreatePaymentController {
       return next(error)
     }
 
-    // let createPayment
+    if (!existingPersonalTrainer) {
+      const error = new HttpError(
+        "Personal Trainer doesn't exist",
+        404,
+      )
+      return next(error)
+    }
 
-    // try{
+    let createPayment
 
-    //   createPayment = await prismaClient.payment.create({
-    //     data:{
-    //       client_id: clientId,
+    try {
+      createPayment = await prismaClient.payment.create({
+        data: {
+          client_id: existingClient.id,
+          training_plan_name: existingTrainingPlan.name,
+          training_plan_value: existingTrainingPlan.value,
+          discount_name: existingDiscount.name,
+          discount_value: existingDiscount.value,
+          personal_trainer_name: existingPersonalTrainer.user.name,
+          personal_trainer_value: existingPersonalTrainer.value
+        },
+      })
+    } catch (e) {
+      const error = new HttpError(
+        'Fail to add payment',
+        500,
+      )
+      return next(error)
+    }
 
-    //     }
-    //   })
-
-    // }catch(e){
-    //   const error = new HttpError("Fail to add payment",500)
-    //   return next(error);
-    // }
-
-    return response.status(201).json(existingClient)
+    return response.status(201).json(createPayment)
   }
 }
