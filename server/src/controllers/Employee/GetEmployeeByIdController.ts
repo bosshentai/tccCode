@@ -19,11 +19,29 @@ export class GetEmployeeByIdController {
     let employee
 
     try {
-      employee = await prismaClient.user.findUnique({
+      employee = await prismaClient.employee.findUnique({
         where: {
           id: id,
         },
+        select: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              birth_date: true,
+              phone: true,
+              CNI: true,
+              NIF: true,
+            },
+          },
+        },
       })
+
+      // employee = await prismaClient.user.findUnique({
+      //   where: {
+      //     id: id,
+      //   },
+      // })
     } catch (err) {
       const error = new HttpError(
         'Fail to Find Employee by ID',

@@ -18,21 +18,36 @@ export class GetAllEmployeesController {
     }
 
     try {
-      const employees = await prismaClient.user.findMany({
+
+      const employees = await prismaClient.employee.findMany({
         select: {
           id: true,
-          name: true,
-          email: true,
-          employee: {
-            select: {
-              status: true
+          status: true,
+          user:{
+            select:{
+              name: true,
+              email: true,
+
             }
           }
-        },
-        where: {
-          role: Roles.EMPLOYEE
-        },
-      });
+
+        }
+      })
+      // const employees = await prismaClient.user.findMany({
+      //   select: {
+      //     id: true,
+      //     name: true,
+      //     email: true,
+      //     employee: {
+      //       select: {
+      //         status: true
+      //       }
+      //     }
+      //   },
+      //   where: {
+      //     role: Roles.EMPLOYEE
+      //   },
+      // });
 
       return response.json(employees);
 
