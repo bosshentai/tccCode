@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import React, { useEffect } from "react";
 import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
 import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
@@ -14,20 +15,20 @@ type client = {
   trainPlan: string;
 };
 
-const DUMMY_DATA = [
-  {
-    id: "1asadas",
-    name: "Hernani",
-    email: "lomba@gmail.com",
-    trainPlan: "lomba",
-  },
-  {
-    id: "2asxzad",
-    name: "Hern",
-    email: "test@gmail.com",
-    trainPlan: "lomba",
-  }
-];
+// const DUMMY_DATA = [
+//   {
+//     id: "1asadas",
+//     name: "Hernani",
+//     email: "lomba@gmail.com",
+//     trainPlan: "lomba",
+//   },
+//   {
+//     id: "2asxzad",
+//     name: "Hern",
+//     email: "test@gmail.com",
+//     trainPlan: "lomba",
+//   }
+// ];
 
 export const Client = () => {
   const [listEmpty, setListEmpty] = React.useState(true);
@@ -37,7 +38,20 @@ export const Client = () => {
   const [listClient, setListClient] = React.useState<client[]>([]);
 
   useEffect(() => {
-    setListClient(DUMMY_DATA);
+    // setListClient(DUMMY_DATA);
+    const urlPath = "http://localhost:5000/api/client/all"
+
+
+    try {
+      axios.get(urlPath).then((response:AxiosResponse)=>{
+        setListClient(response.data)
+      })
+      
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+
+
     if (listClient.length === 0) {
       setListEmpty(true);
     } else {
@@ -69,7 +83,7 @@ export const Client = () => {
               <p>Plano de Treino</p>
             </div>
           </div>
-          <ClientList clients={DUMMY_DATA} />
+          <ClientList clients={listClient} />
         </DefaultInsidePage>
       )}
     {/* <div className={styles.btnContainer}>

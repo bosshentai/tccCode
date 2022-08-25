@@ -82,9 +82,9 @@ export const Discount = () => {
 
 
     try {
-        axios.get(urlPath).then((response:AxiosResponse) => {
-          setListDiscount(response.data);``
-        })
+      axios.get(urlPath).then((response: AxiosResponse) => {
+        setListDiscount(response.data);
+      })
 
     } catch (error) {
       console.log("Error: " + error);
