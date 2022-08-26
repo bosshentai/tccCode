@@ -1,56 +1,55 @@
-import { useRef, useState } from "react";
-import styles from "./styles.module.scss";
+import { useRef, useState } from 'react'
+import styles from './styles.module.scss'
 
-import whiteCross from "../../../../assets/icons/whiteCross.svg";
-import blueCross from "../../../../assets/icons/blueCross.svg";
+import whiteCross from '../../../../assets/icons/whiteCross.svg'
+import blueCross from '../../../../assets/icons/blueCross.svg'
 // import { validName } from "../../../shared/util/validName";
-import axios from "axios";
+import axios from 'axios'
 
 type propsType = {
-  onClose: () => void;
-};
+  onClose: () => void
+}
 
 export const AddDiscount = (props: propsType) => {
-  const nameInputRef = useRef<HTMLInputElement>(null);
-  const areaInputRef = useRef<HTMLTextAreaElement>(null);
-  const amountInputRef = useRef<HTMLInputElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null)
+  const areaInputRef = useRef<HTMLTextAreaElement>(null)
+  const amountInputRef = useRef<HTMLInputElement>(null)
 
-  const [isHover, setHover] = useState(false);
+  const [isHover, setHover] = useState(false)
 
-  const [isNameOk, setIsNameOk] = useState(true);
-  const [isNumberOk, setIsNumberOk] = useState(true);
+  const [isNameOk, setIsNameOk] = useState(true)
+  const [isNumberOk, setIsNumberOk] = useState(true)
 
   const hoverHandler = () => {
-    setHover(true);
-  };
+    setHover(true)
+  }
 
   const leaveHandler = () => {
-    setHover(false);
-  };
+    setHover(false)
+  }
 
   const formRegisterDiscountHandler = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.FormEvent<HTMLFormElement>,
   ) => {
-    event.preventDefault();
+    event.preventDefault()
 
     // console.log(areaInputRef.current!.value);
 
     // Name
-    const enteredName = nameInputRef.current!.value;
-    const nameIsNotEmpty = enteredName.trim().length !== 0;
+    const enteredName = nameInputRef.current!.value
+    const nameIsNotEmpty = enteredName.trim().length !== 0
     // const nameIsValid = validName(enteredName);
     // mínimo 6 letras
 
-    const nameIsOk = nameIsNotEmpty ;
+    const nameIsOk = nameIsNotEmpty
 
     // Description
-    const enteredDescription = areaInputRef.current!.value;
+    const enteredDescription = areaInputRef.current!.value
 
     // Amount
-    const enteredAmount = amountInputRef.current!.value;
-    const amountIsNotEmpty = enteredAmount.trim().length !== 0;
-
-
+    const enteredAmount = amountInputRef.current!.value
+    const amountIsNotEmpty =
+      enteredAmount.trim().length !== 0
 
     // console.log("Name is not empty: " + nameIsNotEmpty);
     // console.log("Entered name: " + enteredName);
@@ -60,67 +59,57 @@ export const AddDiscount = (props: propsType) => {
     // console.log(" Entered amount: " + enteredAmount);
     // const amountIsValid = isNaN(Number(enteredAmount));
 
-    const amountIsOk = amountIsNotEmpty;
+    const amountIsOk = amountIsNotEmpty
 
     if (!nameIsOk) {
-      setIsNameOk(false);
-
-
+      setIsNameOk(false)
     }
 
     if (!amountIsOk) {
-      setIsNumberOk(false);
-
+      setIsNumberOk(false)
     }
 
     if (nameIsOk && amountIsOk) {
-      setIsNameOk(true);
+      setIsNameOk(true)
       // setIsNumberOk(true);
 
       // console.log( "Nome do Desconto " + enteredName);
       // console.log("A Descrição :" + enteredDescription);
       // console.log("O valor: " + enteredAmount);
 
-
-      const urlPatch = "http://localhost:5000/api/discount/add"
-
+      const urlPatch =
+        'http://localhost:5000/api/discount/add'
 
       const formData = {
         name: enteredName,
         description: enteredDescription,
-        value: enteredAmount
+        value: enteredAmount,
       }
 
-
       try {
+        await axios.post(urlPatch, formData)
 
-        await axios.post(urlPatch, formData);
-
-        props.onClose();
-        
+        props.onClose()
       } catch (error) {
         console.log(error)
       }
-
-
-
 
       // console.log("Discount added");
       // props.onClose();
     }
 
-    return;
-  };
+    return
+  }
 
-  const iconChange = !isHover ? whiteCross : blueCross;
+  const iconChange = !isHover ? whiteCross : blueCross
 
   const nameControllerClass = isNameOk
     ? `${styles.nameValid}`
-    : `${styles.nameInvalid}`;
+    : `${styles.nameInvalid}`
 
   const numberControllerClass = isNumberOk
     ? `${styles.numberValid}`
-    : `${styles.numberInvalid}`;
+    : `${styles.numberInvalid}`
 
   return (
     <div className={styles.addDiscountContainer}>
@@ -132,16 +121,17 @@ export const AddDiscount = (props: propsType) => {
           className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
-          onClick={props.onClose}
-        >
-          <img src={iconChange} alt="close" />
+          onClick={props.onClose}>
+          <img
+            src={iconChange}
+            alt="close"
+          />
         </button>
       </div>
       {/* Form  */}
       <form
         onSubmit={formRegisterDiscountHandler}
-        className={styles.formContainer}
-      >
+        className={styles.formContainer}>
         <div>
           <label>Nome</label>
           <input
@@ -166,8 +156,10 @@ export const AddDiscount = (props: propsType) => {
           />
         </div>
 
-        <button className={styles.btnSubmit}>Registrar</button>
+        <button className={styles.btnSubmit}>
+          Registrar
+        </button>
       </form>
     </div>
-  );
-};
+  )
+}

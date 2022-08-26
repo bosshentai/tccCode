@@ -1,0 +1,68 @@
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.addClientContainer {
+  width: 72.375rem;
+  height: 51.125rem;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  background-color: #f4f4f4;
+  box-shadow: 0.625rem 0.625rem 1.25rem
+    rgba(36, 110, 227, 0.5);
+  z-index: 30;
+
+  animation-name: fadeUp;
+  animation-duration: 400ms;
+  animation-fill-mode: forwards;
+
+  .headerContainer{
+
+    display: flex;
+    height: 5.188rem;
+
+  .left {
+    width: 66.625rem;
+    background-color: #4b88e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+  }
+
+  .right{
+    width:  5.75rem;
+    background: linear-gradient(0deg, #246ee3,#246ee3);
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    border:none;
+
+    cursor: pointer;
+
+    &:hover{
+      background: rgba(36, 110, 227, 0.006);
+      transition:all 300ms ease-in-out;
+    }
+
+    img{
+      width: 3.438rem;
+      height: 3.438rem;
+    }
+  }
+
+}
+}

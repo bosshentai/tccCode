@@ -1,19 +1,21 @@
-
-import styles from "./styles.module.scss";
-
+import styles from './styles.module.scss'
 
 type TrainingPlanProps = {
-  id: string;
-  name: string;
-  amount: number;
+  id: string
+  name: string
+  amount: number
 }
 
-
-export const TrainingPlanItem = (props: TrainingPlanProps) => {
-  const {id,name,amount} = props;
+export const TrainingPlanItem = (
+  props: TrainingPlanProps,
+) => {
+  const { id, name, amount } = props
 
   return (
-    <li key={id} id={id} className={styles.trainingPlanContainer}>
+    <li
+      key={id}
+      id={id}
+      className={styles.trainingPlanContainer}>
       <div>
         <span>{name}</span>
       </div>
