@@ -2,6 +2,7 @@ import styles from './styles.module.scss'
 
 import whiteCross from '../../../../assets/icons/whiteCross.svg'
 import blueCross from '../../../../assets/icons/blueCross.svg'
+import whiteCheck from '../../../../assets/icons/whiteCheck.svg'
 import { useState } from 'react'
 
 type propsType = {
@@ -11,6 +12,8 @@ type propsType = {
 export const AddClient = (props: propsType) => {
   const [isHover, setHover] = useState(false)
 
+  const [isChecked, setIsChecked] = useState(false)
+
   const hoverHandler = () => {
     setHover(true)
   }
@@ -19,7 +22,13 @@ export const AddClient = (props: propsType) => {
     setHover(false)
   }
 
+  const checkHandler = () => {
+    setIsChecked(!isChecked)
+  }
+
   const iconChange = !isHover ? whiteCross : blueCross
+
+  const checkIconChange = isChecked ? whiteCheck : ''
 
   return (
     <div className={styles.addClientContainer}>
@@ -38,6 +47,47 @@ export const AddClient = (props: propsType) => {
           />
         </button>
       </div>
+      <form className={styles.formContainer}>
+        <div>
+          <div className={styles.textInput}>
+            <label>Nome Completo</label>
+            <input />
+          </div>
+          <div className={styles.textInput}>
+            <label>Email</label>
+            <input type="email" />
+          </div>
+        </div>
+        <div>
+          <div className={styles.textInput}>
+            <label>Telemovel</label>
+            <input />
+          </div>
+
+          <div className={styles.textInput}>
+            <label>Data de Nascimento</label>
+            <input type="date" />
+          </div>
+        </div>
+        <div className={styles.checkInput}>
+          <label>Plano de Treino</label>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={checkHandler}
+          />
+        </div>
+        <div className={styles.checkInput}>
+          <label>Personal Trainer</label>
+          <input type="checkbox" />
+        </div>
+        <div className={styles.checkInput}>
+          <label>Desconto</label>
+          <input type="checkbox" />
+        </div>
+
+        <button>Inscrever</button>
+      </form>
     </div>
   )
 }
