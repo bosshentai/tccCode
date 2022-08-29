@@ -6,14 +6,26 @@ import whiteCheck from '../../../../assets/icons/whiteCheck.svg'
 import React, { useRef, useState } from 'react'
 import { RecordWithTtl } from 'dns'
 import { validName } from '../../../shared/util/validName'
+import { validEmail } from '../../../shared/util/validEmail'
 
 type propsType = {
   onClose: () => void
 }
 
 export const AddClient = (props: propsType) => {
+  // name
   const nameInputRef = useRef<HTMLInputElement>(null)
-  const [isNameOk,setIsNameOk] = useState(true);
+  const [isNameOk, setIsNameOk] = useState(true)
+
+  // email
+  const emailInputRef = useRef<HTMLInputElement>(null)
+  const [isEmailOk, setIsEmailOk] = useState(true)
+
+
+  //phone number
+  const phoneInputRef = useRef<HTMLInputElement>(null)
+  const [isNumberOk,setNumberOk] = useState(true)
+
 
   const [isHover, setHover] = useState(false)
 
@@ -24,9 +36,30 @@ export const AddClient = (props: propsType) => {
   ) => {
     event.preventDefault()
 
+    //name
     const enteredName = nameInputRef.current!.value
     const nameIsNotEmpty = enteredName.trim().length !== 0
     const nameIsValid = validName(enteredName)
+    const nameIsOk = nameIsNotEmpty && nameIsValid
+
+    //email
+    const enteredEmail = emailInputRef.current!.value
+    const emailIsNotEmpty = enteredEmail.trim().length !== 0
+    const emailIsValid = validEmail(enteredEmail)
+    const emailIsOk = emailIsNotEmpty && emailIsValid
+
+    if (!nameIsOk) {
+      setIsNameOk(false)
+    }
+
+    if (!emailIsOk) {
+      setIsEmailOk(false)
+    }
+
+    if (nameIsOk && emailIsOk) {
+      setIsNameOk(true)
+      setIsEmailOk(true)
+    }
   }
 
   const hoverHandler = () => {
@@ -42,6 +75,14 @@ export const AddClient = (props: propsType) => {
   }
 
   const iconChange = !isHover ? whiteCross : blueCross
+
+  const nameControllerClass = isNameOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`
+
+  const emailControllerClass = isEmailOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`
 
   // const checkIconChange = isChecked ? whiteCheck : ''
 
@@ -62,20 +103,27 @@ export const AddClient = (props: propsType) => {
           />
         </button>
       </div>
-      <form className={styles.formContainer}>
+      <form
+        onSubmit={formAddClientHandler}
+        className={styles.formContainer}>
         <div>
           <div className={styles.textInput}>
             <label>Nome Completo</label>
             <input
               type="text"
               ref={nameInputRef}
-              placeholder="Insira o nome do Client"
-              className={styles.inputValid}
+              placeholder="Insira o nome do Cliente"
+              className={nameControllerClass}
             />
           </div>
           <div className={styles.textInput}>
             <label>Email</label>
-            <input type="email" />
+            <input
+              type="email"
+              ref={emailInputRef}
+              placeholder="Insira o email do Cliente"
+              className={emailControllerClass}
+            />
           </div>
         </div>
         <div>
