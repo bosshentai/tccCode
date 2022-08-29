@@ -88,11 +88,52 @@
       &:nth-child(2) {
         margin-left: auto;
       }
+
+
+      input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        // border-bottom: 2px solid 
+        background-color: transparent;
+        width: 20rem;
+        height: 1.5rem;
+
+        &:focus{
+          outline: none;
+        }
+      }
+
+      .inputValid {
+        border-bottom: 2px solid #4b88e8;
+    
+        color:#246ee3;
+        &:hover,
+        &:focus{
+          background-color: rgba(36, 110, 227, 0.06);
+        }
+        &::placeholder{
+          color: #4b88e8;
+        }
+      }
+
     }
+
+    .checkboxSelectContainer{
+
+      display: flex;
+      // background: black;
+      // padding-bottom: 0;
+      justify-content: space-between;
+
 
     .checkInput {
       display: flex;
       width: 272px;
+      height: auto;
+      align-items: center;
+
+      padding: 0;
 
       input[type='checkbox'] {
         appearance: none;
@@ -118,6 +159,50 @@
       }
     }
 
+
+    .selectContainer{
+
+      
+        padding: 0;
+        
+        width: 20rem;
+       
+
+
+
+      .selectItem{
+        display: flex;
+        align-items: center;
+        padding: 0;
+        // background: white;
+        // -webkit-appearance: none;
+        // appearance: none;
+        // background-color: white;
+        background-color: #F4F4F4;
+        // border: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 2px solid #246ee3;
+        appearance: button;
+
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+
+
+        option{
+          background-color: red;
+          // appearance: none;
+        }
+
+        li{
+          background-color: red;
+        }
+        
+      }
+    }
+  }
     label {
       font-family: 'Ubuntu', sans-serif;
       font-size: 1.2rem;
@@ -125,13 +210,6 @@
       color: #4b88e8;
     }
 
-    input {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      background-color: transparent;
-      width: 20rem;
-      height: 1.5rem;
-    }
+ 
   }
 }
