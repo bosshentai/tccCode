@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from 'react-router-dom'
+// import { Router } from 'react-router-dom'
 
 import { PagesRoutes } from './Components/routes/PagesRoutes'
 import { MainNavigation } from './Components/shared/components/Navigation/MainNavigation'

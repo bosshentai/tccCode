@@ -48,7 +48,7 @@ export const Discount = () => {
     } else {
       setListEmpty(false)
     }
-  }, [listDiscount, listEmpty])
+  }, [listDiscount])
 
   const showAddDiscountHandler = () => {
     setDiscountIsShown(true)

@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react'
-import styles from './styles.module.scss'
-import whiteCross from '../../../../assets/icons/whiteCross.svg'
-import blueCross from '../../../../assets/icons/blueCross.svg'
 import axios from 'axios'
+// import  whiteCross from '../../../../assets/icons/whiteCross.svg'
+import { WhiteCross } from '../../../../assets/icons/WhitCross'
+// import blueCross from '../../../../assets/icons/blueCross.svg'
+import { BlueCross } from '../../../../assets/icons/BlueCross'
+import styles from './styles.module.scss'
 
 type propsType = {
   onClose: () => void
@@ -91,7 +93,7 @@ export const AddDiscount = (props: propsType) => {
     return
   }
 
-  const iconChange = !isHover ? whiteCross : blueCross
+  const iconChange = !isHover ? <WhiteCross/> : <BlueCross/>;
 
   const nameControllerClass = isNameOk
     ? `${styles.nameValid}`
@@ -112,10 +114,11 @@ export const AddDiscount = (props: propsType) => {
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
           onClick={props.onClose}>
-          <img
+            {iconChange}
+          {/* <img
             src={iconChange}
             alt="close"
-          />
+          /> */}
         </button>
       </div>
       {/* Form  */}
