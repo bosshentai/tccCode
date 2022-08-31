@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
 import styles from './styles.module.scss'
+
 import whiteCross from '../../../../assets/icons/whiteCross.svg'
 import blueCross from '../../../../assets/icons/blueCross.svg'
+// import { validName } from "../../../shared/util/validName";
 import axios from 'axios'
 
 type propsType = {
@@ -48,6 +50,14 @@ export const AddDiscount = (props: propsType) => {
     const enteredAmount = amountInputRef.current!.value
     const amountIsNotEmpty =
       enteredAmount.trim().length !== 0
+
+    // console.log("Name is not empty: " + nameIsNotEmpty);
+    // console.log("Entered name: " + enteredName);
+    // console.log("Name is Valid: " + nameIsValid);
+
+    // console.log("Amount is not empty: " + amountIsNotEmpty);
+    // console.log(" Entered amount: " + enteredAmount);
+    // const amountIsValid = isNaN(Number(enteredAmount));
 
     const amountIsOk = amountIsNotEmpty
 

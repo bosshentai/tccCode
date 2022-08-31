@@ -2,15 +2,34 @@ import styles from './styles.module.scss'
 
 import whiteCross from '../../../../assets/icons/whiteCross.svg'
 import blueCross from '../../../../assets/icons/blueCross.svg'
-import whiteCheck from '../../../../assets/icons/whiteCheck.svg'
-import React, { useRef, useState } from 'react'
-import { RecordWithTtl } from 'dns'
+// import whiteCheck from '../../../../assets/icons/whiteCheck.svg'
+import React, { useEffect, useRef, useState } from 'react'
+// import { RecordWithTtl } from 'dns'
 import { validName } from '../../../shared/util/validName'
 import { validEmail } from '../../../shared/util/validEmail'
+import { validPhoneNumber } from '../../../shared/util/validPhoneNumber'
+import { validBirth } from '../../../shared/util/validBirth'
+import { OptionList } from '../../components/OptionList'
 
 type propsType = {
   onClose: () => void
 }
+
+type trainingPlanInfo = {
+  id: string
+  name: string
+}
+
+const DUMMY_DATA = [
+  {
+    id: '1',
+    name: 'teste',
+  },
+  {
+    id: '2',
+    name: 'Teste2',
+  },
+]
 
 export const AddClient = (props: propsType) => {
   // name
@@ -21,15 +40,29 @@ export const AddClient = (props: propsType) => {
   const emailInputRef = useRef<HTMLInputElement>(null)
   const [isEmailOk, setIsEmailOk] = useState(true)
 
-
   //phone number
   const phoneInputRef = useRef<HTMLInputElement>(null)
-  const [isNumberOk,setNumberOk] = useState(true)
+  const [isNumberOk, setIsNumberOk] = useState(true)
 
+  // Birth
+  const birthInputRef = useRef<HTMLInputElement>(null)
+  const [isBirthOk, setIsBirthOk] = useState(true)
+
+  //training Plan
+
+  const [listTrainingPlan, setListTrainingPlan] = useState<
+    trainingPlanInfo[]
+  >([])
 
   const [isHover, setHover] = useState(false)
 
   const [isChecked, setIsChecked] = useState(false)
+
+  console.log('Renderizou')
+
+  useEffect(() => {
+    setListTrainingPlan(DUMMY_DATA)
+  }, [])
 
   const formAddClientHandler = async (
     event: React.FormEvent<HTMLFormElement>,
@@ -48,6 +81,23 @@ export const AddClient = (props: propsType) => {
     const emailIsValid = validEmail(enteredEmail)
     const emailIsOk = emailIsNotEmpty && emailIsValid
 
+    // phone
+    const enteredPhone = phoneInputRef.current!.value
+    const phoneIsNotEmpty = enteredPhone.trim().length !== 0
+    const phoneIsValid = validPhoneNumber(enteredPhone)
+    const phoneIsOk = phoneIsNotEmpty && phoneIsValid
+
+    // birth
+    const enteredBirth = birthInputRef.current!.value
+    const birthIsNotEmpty = enteredBirth.trim().length !== 0
+    const birthIsValid = validBirth(
+      Number(enteredBirth.slice(8, 10)),
+      Number(enteredBirth.slice(5, 7)),
+      Number(enteredBirth.slice(0, 4)),
+    )
+
+    const birthIsOk = birthIsNotEmpty && birthIsValid
+
     if (!nameIsOk) {
       setIsNameOk(false)
     }
@@ -56,9 +106,34 @@ export const AddClient = (props: propsType) => {
       setIsEmailOk(false)
     }
 
-    if (nameIsOk && emailIsOk) {
+    if (!phoneIsOk) {
+      setIsNumberOk(false)
+    }
+
+    if (!birthIsOk) {
+      setIsBirthOk(false)
+    }
+
+    if (nameIsOk) {
       setIsNameOk(true)
+    }
+
+    if (emailIsOk) {
       setIsEmailOk(true)
+    }
+
+    if (phoneIsOk) {
+      setIsNumberOk(true)
+    }
+
+    if (birthIsOk) {
+      setIsBirthOk(true)
+    }
+
+    if (nameIsOk && emailIsOk && phoneIsOk) {
+      // setIsNameOk(true)
+      // setIsEmailOk(true)
+      // setNumberOk(true)
     }
   }
 
@@ -84,7 +159,13 @@ export const AddClient = (props: propsType) => {
     ? `${styles.inputValid}`
     : `${styles.inputInvalid}`
 
-  // const checkIconChange = isChecked ? whiteCheck : ''
+  const phoneControllerClass = isNumberOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`
+
+  const birthControllerClass = isBirthOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`
 
   return (
     <div className={styles.addClientContainer}>
@@ -129,12 +210,22 @@ export const AddClient = (props: propsType) => {
         <div>
           <div className={styles.textInput}>
             <label>Telemovel</label>
-            <input />
+            <input
+              type="text"
+              ref={phoneInputRef}
+              placeholder="Insira o numero telemovel do Cliente"
+              className={phoneControllerClass}
+            />
           </div>
 
           <div className={styles.textInput}>
             <label>Data de Nascimento</label>
-            <input type="date" />
+            <input
+              type="date"
+              ref={birthInputRef}
+              placeholder="Insira a data de Nascimento do Cliente"
+              className={birthControllerClass}
+            />
           </div>
         </div>
         <div className={styles.checkboxSelectContainer}>
@@ -148,12 +239,13 @@ export const AddClient = (props: propsType) => {
           </div>
           {isChecked && (
             <div className={styles.selectContainer}>
-              <select
+              <OptionList data={listTrainingPlan} />
+              {/* <select
                 className={styles.selectItem}
                 name="personalTrainer">
                 <option value="none">None</option>
                 <option value="two">Two</option>
-              </select>
+              </select> */}
             </div>
           )}
         </div>

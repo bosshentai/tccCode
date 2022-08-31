@@ -1,0 +1,52 @@
+.discountList {
+  
+  height: 100%;
+ 
+  // background: red;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto ;
+  align-content: flex-start;
+  // row-gap: 0px;
+
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+
+    width: 12px;
+    height: 12px;
+    background: rgba(36,110,227,0.44);
+    border-radius: 50px;
+
+
+  }
+
+  // &::-webkit-scrollbar-track{
+  //   // border: 1px solid blue;
+  //   border-radius: 10px;
+  // }
+
+
+  &::-webkit-scrollbar-thumb {
+    background: #246EE3;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #4b88ee;
+    border-radius: 10px;
+  } 
+
+ 
+  // &::-webkit-scrollbar{
+  //   width: 10px;
+  //   // background: transparent;
+  // }
+  // &::-webkit-scrollbar-thumb{
+  //   background: #4b88ee;
+  //   border-radius: 10px;
+  // }
+  
+
+}

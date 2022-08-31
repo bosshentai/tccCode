@@ -22,6 +22,10 @@ type client = {
   trainPlan: string
 }
 
+
+const urlPath = 'http://localhost:5000/api/client/all'
+
+
 export const Client = () => {
   const [listEmpty, setListEmpty] = React.useState(true)
 
@@ -34,7 +38,6 @@ export const Client = () => {
 
   useEffect(() => {
     // setListClient(DUMMY_DATA);
-    const urlPath = 'http://localhost:5000/api/client/all'
 
     try {
       axios.get(urlPath).then((response: AxiosResponse) => {
@@ -49,7 +52,7 @@ export const Client = () => {
     } else {
       setListEmpty(false)
     }
-  }, [listClient, setListClient])
+  }, [])
 
   const showAddClientHandler = () => {
     setClientIsShown(true)
@@ -58,6 +61,8 @@ export const Client = () => {
   const closeAddEmployeeHandler = () => {
     setClientIsShown(false)
   }
+
+  // console.log("Renderizou")
 
   return (
     <>
