@@ -3,7 +3,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import { Client } from '../../Clients/page/Client'
-import { Discount } from '../../Clients/page/Client/Discount/page/Discount'
+import { Discount } from '../../Discount/page/Discount'
 import { Employee } from '../../Employee/page/Employee'
 import { EmployeeProfile } from '../../Employee/page/EmployeeProfile'
 import { PersonalTrainer } from '../../PersonalTrainer/page/PersonalTrainer'

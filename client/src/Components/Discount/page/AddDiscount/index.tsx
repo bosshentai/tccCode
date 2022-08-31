@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react'
 import axios from 'axios'
-// import  whiteCross from '../../../../assets/icons/whiteCross.svg'
-import { WhiteCross } from '../../../../assets/icons/WhitCross'
-// import blueCross from '../../../../assets/icons/blueCross.svg'
-import { BlueCross } from '../../../../assets/icons/BlueCross'
+import whiteCross from '../../../../assets/icons/whiteCross.svg'
+// import { WhiteCross } from '../../../../assets/icons/WhitCross'
+import blueCross from '../../../../assets/icons/blueCross.svg'
+// import { BlueCross } from '../../../../assets/icons/BlueCross'
 import styles from './styles.module.scss'
 
 type propsType = {
@@ -93,7 +93,8 @@ export const AddDiscount = (props: propsType) => {
     return
   }
 
-  const iconChange = !isHover ? <WhiteCross/> : <BlueCross/>;
+  // const iconChange = !isHover ? <WhiteCross/> : <BlueCross/>;
+  const iconChange = !isHover ? whiteCross : blueCross
 
   const nameControllerClass = isNameOk
     ? `${styles.nameValid}`
@@ -114,11 +115,11 @@ export const AddDiscount = (props: propsType) => {
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
           onClick={props.onClose}>
-            {iconChange}
-          {/* <img
+          {/* {iconChange} */}
+          <img
             src={iconChange}
             alt="close"
-          /> */}
+          />
         </button>
       </div>
       {/* Form  */}
