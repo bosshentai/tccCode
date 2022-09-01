@@ -67,7 +67,7 @@ export const Employee = () => {
     } else {
       setListEmpty(false)
     }
-  }, [listEmployee])
+  }, [listEmployee.length])
 
   // const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
 

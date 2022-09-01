@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { OptionItem } from '../OptionItem'
 
 type data = {
@@ -7,19 +7,35 @@ type data = {
 }
 
 type dataListProps = {
-  data: data[] | []
+  select: data[] | []
+  onChange: (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => void
 }
 
 export const OptionList = (props: dataListProps) => {
+  // const [selected,setSelected]= useState<String>();
 
-  const itemSelectRef = useRef(null)
+  // console.log(itemSelectRef.current)
 
+  // const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) =>{
+  //   // setSelected(event)
+  //   // setSelected(onChange(info[e.target.selectIndex]))
+  //   console.log(event.target.value)
+  //   setSelected(event.target.value)
+  // }
 
-  // console.log(itemSelectRef)
+  // console.log(selected)
 
-  const info = props.data
+  const info = props.select
   return (
-    <select ref={itemSelectRef}>
+    <select onChange={props.onChange}>
+      <option
+        defaultValue="None"
+        selected
+        disabled>
+        Escolha
+      </option>
       {info.map((data: data) => (
         <OptionItem
           key={data.id}

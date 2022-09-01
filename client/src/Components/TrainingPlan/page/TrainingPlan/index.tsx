@@ -70,7 +70,7 @@ export const TrainingPlan = () => {
     } else {
       setListEmpty(false);
     }
-  });
+  },[listPlanningTrain.length]);
 
   const showAddTrainingHandler = () => {
     setAddTrainingPlan(true);

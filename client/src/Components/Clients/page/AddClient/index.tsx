@@ -20,6 +20,16 @@ type trainingPlanInfo = {
   name: string
 }
 
+type personalTrainerInfo = {
+  id: string
+  name: string
+}
+
+type discountInfo = {
+  id: string
+  name: string
+}
+
 const DUMMY_DATA = [
   {
     id: '1',
@@ -49,20 +59,79 @@ export const AddClient = (props: propsType) => {
   const [isBirthOk, setIsBirthOk] = useState(true)
 
   //training Plan
-
   const [listTrainingPlan, setListTrainingPlan] = useState<
     trainingPlanInfo[]
   >([])
+  const [selectedTrainingPlan, setSelectedTrainingPlan] =
+    useState<String>()
+  const [isTrainingChecked, setIsTrainingChecked] =
+    useState(false)
+
+  // Personal Trainer
+  const [listPersonalTrainer, setListPersonalTrainer] =
+    useState<personalTrainerInfo[]>([])
+  const [
+    isPersonalTrainerChecked,
+    setIsPersonalTrainerChecked,
+  ] = useState(false)
+
+  const [
+    selectedPersonalTrainer,
+    setSelectedPersonalTrainer,
+  ] = useState<String>()
+
+  // Discount
+  const [listDiscount, setListDiscount] = useState<
+    discountInfo[]
+  >([])
+  const [isDiscountChecked, setIsDiscountChecked] =
+    useState(false)
+  const [selectedDiscount, setSelectedDiscount] =
+    useState<String>()
 
   const [isHover, setHover] = useState(false)
 
-  const [isChecked, setIsChecked] = useState(false)
+  // console.log('Renderizou')
 
-  console.log('Renderizou')
-
+  // trainingPLan
   useEffect(() => {
+    // try {
     setListTrainingPlan(DUMMY_DATA)
+
+    // } catch (error) {
+
+    // }
   }, [])
+
+  // PersonalTrainer
+  useEffect(() => {
+    setListPersonalTrainer(DUMMY_DATA)
+  }, [])
+
+  // Discount
+  useEffect(() => {
+    setListDiscount(DUMMY_DATA)
+  })
+
+  const trainingPlanSelectedHandler = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedTrainingPlan(event.target.value)
+  }
+
+  const personalTrainerSelectedHandler = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedPersonalTrainer(event.target.value)
+  }
+
+  const discountSelectedHandler = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedDiscount(event?.target.value)
+  }
+
+  // console.log(selectedTrainingPlan)
 
   const formAddClientHandler = async (
     event: React.FormEvent<HTMLFormElement>,
@@ -145,8 +214,17 @@ export const AddClient = (props: propsType) => {
     setHover(false)
   }
 
-  const checkHandler = () => {
-    setIsChecked(!isChecked)
+  const checkTraininigHandler = () => {
+    setIsTrainingChecked(!isTrainingChecked)
+    // setIsChecked(!isChecked)
+  }
+
+  const checkPersonalTrainerHandler = () => {
+    setIsPersonalTrainerChecked(!isPersonalTrainerChecked)
+  }
+
+  const checkDiscountHandler = () => {
+    setIsDiscountChecked(!isDiscountChecked)
   }
 
   const iconChange = !isHover ? whiteCross : blueCross
@@ -233,33 +311,54 @@ export const AddClient = (props: propsType) => {
             <label>Plano de Treino</label>
             <input
               type="checkbox"
-              checked={isChecked}
-              onChange={checkHandler}
+              checked={isTrainingChecked}
+              onChange={checkTraininigHandler}
             />
           </div>
-          {isChecked && (
+          {isTrainingChecked && (
             <div className={styles.selectContainer}>
-              <OptionList data={listTrainingPlan} />
-              {/* <select
-                className={styles.selectItem}
-                name="personalTrainer">
-                <option value="none">None</option>
-                <option value="two">Two</option>
-              </select> */}
+              <OptionList
+                select={listTrainingPlan}
+                onChange={trainingPlanSelectedHandler}
+              />
             </div>
           )}
         </div>
         <div className={styles.checkboxSelectContainer}>
           <div className={styles.checkInput}>
             <label>Personal Trainer</label>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={isPersonalTrainerChecked}
+              onChange={checkPersonalTrainerHandler}
+            />
           </div>
+          {isPersonalTrainerChecked && (
+            <div className={styles.selectContainer}>
+              <OptionList
+                select={listPersonalTrainer}
+                onChange={personalTrainerSelectedHandler}
+              />
+            </div>
+          )}
         </div>
         <div className={styles.checkboxSelectContainer}>
           <div className={styles.checkInput}>
             <label>Desconto</label>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={isDiscountChecked}
+              onChange={checkDiscountHandler}
+            />
           </div>
+          {isDiscountChecked && (
+            <div className={styles.selectContainer}>
+              <OptionList
+                select={listDiscount}
+                onChange={discountSelectedHandler}
+              />
+            </div>
+          )}
         </div>
         <button>Inscrever</button>
       </form>

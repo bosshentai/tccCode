@@ -48,7 +48,7 @@ export const Discount = () => {
     } else {
       setListEmpty(false)
     }
-  }, [listDiscount])
+  }, [listDiscount.length])
 
   const showAddDiscountHandler = () => {
     setDiscountIsShown(true)
@@ -57,6 +57,8 @@ export const Discount = () => {
   const closeAddEmployeeHandler = () => {
     setDiscountIsShown(false)
   }
+
+  // console.log("render")
 
   return (
     <>

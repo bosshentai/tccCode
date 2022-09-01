@@ -64,7 +64,7 @@ export const PersonalTrainer = () => {
       setListEmpty(false);
     }
 
-  }, [listPersonalTrainer])
+  }, [listPersonalTrainer.length])
 
 
   const showAddPersonalTrainerHandler = () => {
