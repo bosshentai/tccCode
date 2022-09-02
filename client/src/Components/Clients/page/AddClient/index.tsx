@@ -32,6 +32,10 @@ type discountInfo = {
 
 const DUMMY_DATA = [
   {
+    id: '0',
+    name: 'null',
+  },
+  {
     id: '1',
     name: 'teste',
   },
@@ -86,8 +90,6 @@ export const AddClient = (props: propsType) => {
   >([])
   const [isDiscountChecked, setIsDiscountChecked] =
     useState(false)
-  const [selectedDiscount, setSelectedDiscount] =
-    useState<String>()
 
   const [isHover, setHover] = useState(false)
 
@@ -109,9 +111,43 @@ export const AddClient = (props: propsType) => {
   }, [])
 
   // Discount
-  useEffect(() => {
+  useEffect( () => {
+
+
     setListDiscount(DUMMY_DATA)
-  })
+    // const fechData = async () => {
+    //   return await DUMMY_DATA
+    // }
+
+    // const result = fechData().catch(console.error())
+
+    // setListDiscount(result)
+  }, [listDiscount])
+
+  const listDiscountFiltered = listDiscount.filter(
+    (item) => item.name !== 'null',
+  )
+
+  // const listDiscountNullItem = listDiscount.filter(
+  //   (item) => item.name === 'null',
+  // )
+
+  const listDiscountNullItem =
+    listDiscount.length === 0
+      ? listDiscount.filter((item) => item.name === 'null')
+      : []
+
+  // const teste = async () => {
+  //  return  listDiscount.filter((item) => item.name === 'null')
+  // }
+
+  // console.log(listDiscountNullItem.at(0)?.id)
+  // console.log(teste)
+
+  const [selectedDiscount, setSelectedDiscount] =
+    useState<String>(listDiscountNullItem.at(0)?.id || '')
+
+  console.log('Selecte :' + selectedDiscount)
 
   const trainingPlanSelectedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -128,11 +164,37 @@ export const AddClient = (props: propsType) => {
   const discountSelectedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setSelectedDiscount(event?.target.value)
+    // if (isDiscountChecked === false){
+    //  return  setSelectedDiscount(listDiscountNullItem.id)
+    // }
+
+    return setSelectedDiscount(event?.target.value)
   }
 
   // console.log(selectedTrainingPlan)
 
+  const hoverHandler = () => {
+    setHover(true)
+  }
+
+  const leaveHandler = () => {
+    setHover(false)
+  }
+
+  const checkTraininigHandler = () => {
+    setIsTrainingChecked(!isTrainingChecked)
+    // setIsChecked(!isChecked)
+  }
+
+  const checkPersonalTrainerHandler = () => {
+    setIsPersonalTrainerChecked(!isPersonalTrainerChecked)
+  }
+
+  const checkDiscountHandler = () => {
+    setIsDiscountChecked(!isDiscountChecked)
+  }
+
+  // const teste = listDiscount.filter(item => item.name.includes("null"))
   const formAddClientHandler = async (
     event: React.FormEvent<HTMLFormElement>,
   ) => {
@@ -199,32 +261,38 @@ export const AddClient = (props: propsType) => {
       setIsBirthOk(true)
     }
 
-    if (nameIsOk && emailIsOk && phoneIsOk) {
-      // setIsNameOk(true)
-      // setIsEmailOk(true)
-      // setNumberOk(true)
+    // if (isDiscountChecked === false){
+    //   setSelectedDiscount(listDiscountNullItem.id)
+    // }
+
+    if (nameIsOk && emailIsOk && phoneIsOk && birthIsOk) {
+      console.log(isDiscountChecked)
+      // console.log(listDiscountNullItem.id)
+
+      if (isDiscountChecked === false) {
+        // setSelectedDiscount(listDiscountNullItem)
+        setSelectedDiscount(
+          listDiscountNullItem.at(0)?.id || '',
+        )
+      }
+      console.log('Name: ' + enteredName)
+      console.log('Email: ' + enteredEmail)
+      console.log('Phone: ' + enteredPhone)
+      console.log('Birth: ' + enteredBirth)
+      console.log(
+        'Plano de Treino ID : ' + selectedTrainingPlan,
+      )
+      console.log(
+        'Personal Trainer ID: ' + selectedPersonalTrainer,
+      )
+      console.log('Desconto: ID: ' + selectedDiscount)
+
+      // console.log(listDiscountNullItem)
+
+      // console.log(teste)
+      // console.log("Lista sem null "+ tesf)
+      // console.log("Lista: " : + listPersonalTrainer.filter())
     }
-  }
-
-  const hoverHandler = () => {
-    setHover(true)
-  }
-
-  const leaveHandler = () => {
-    setHover(false)
-  }
-
-  const checkTraininigHandler = () => {
-    setIsTrainingChecked(!isTrainingChecked)
-    // setIsChecked(!isChecked)
-  }
-
-  const checkPersonalTrainerHandler = () => {
-    setIsPersonalTrainerChecked(!isPersonalTrainerChecked)
-  }
-
-  const checkDiscountHandler = () => {
-    setIsDiscountChecked(!isDiscountChecked)
   }
 
   const iconChange = !isHover ? whiteCross : blueCross
@@ -354,7 +422,7 @@ export const AddClient = (props: propsType) => {
           {isDiscountChecked && (
             <div className={styles.selectContainer}>
               <OptionList
-                select={listDiscount}
+                select={listDiscountFiltered}
                 onChange={discountSelectedHandler}
               />
             </div>
