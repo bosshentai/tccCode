@@ -23,7 +23,8 @@
 
 	"extensions": [
 		"esbenp.prettier-vscode",
-		"johnpapa.vscode-peacock"
+		"johnpapa.vscode-peacock",
+		"streetsidesoftware.code-spell-checker"
 	]
 
 

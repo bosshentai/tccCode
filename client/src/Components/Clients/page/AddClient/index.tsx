@@ -10,6 +10,13 @@ import { validEmail } from '../../../shared/util/validEmail'
 import { validPhoneNumber } from '../../../shared/util/validPhoneNumber'
 import { validBirth } from '../../../shared/util/validBirth'
 import { OptionList } from '../../components/OptionList'
+import axios, { Axios, AxiosResponse } from 'axios'
+
+const urlPathGetDiscount =
+  'http://localhost:5000/api/discount/all'
+
+const urlPathGetTrainingPlan =
+  'http://localhost:5000/api/trainingplan/all'
 
 type propsType = {
   onClose: () => void
@@ -91,6 +98,8 @@ export const AddClient = (props: propsType) => {
   const [isDiscountChecked, setIsDiscountChecked] =
     useState(false)
 
+  /// Have to create useState the data In it -- lomba
+
   const [isHover, setHover] = useState(false)
 
   // console.log('Renderizou')
@@ -100,54 +109,76 @@ export const AddClient = (props: propsType) => {
     // try {
     setListTrainingPlan(DUMMY_DATA)
 
-    // } catch (error) {
-
-    // }
+    try {
+      axios
+        .get(urlPathGetTrainingPlan)
+        .then((response: AxiosResponse) => {
+          setListTrainingPlan(response.data)
+        })
+    } catch (error) {
+      console.log('Error' + error)
+    }
   }, [])
 
   // PersonalTrainer
   useEffect(() => {
+    //falta so bo
     setListPersonalTrainer(DUMMY_DATA)
+
+    // try{
+    //   axios
+    //   .get(urlPathGetTrainingPlan).then((response: AxiosResponse)=>{
+    //     setListPersonalTrainer()
+    //   })
+    // }
   }, [])
 
   // Discount
-  useEffect( () => {
+  useEffect(() => {
+    try {
+      axios
+        .get(urlPathGetDiscount)
+        .then((response: AxiosResponse) => {
+          setListDiscount(response.data)
+        })
+    } catch (error) {
+      console.log('Error: ' + error)
+    }
+  }, [])
 
+  // Training PLan
 
-    setListDiscount(DUMMY_DATA)
-    // const fechData = async () => {
-    //   return await DUMMY_DATA
-    // }
+  const listTrainingPlanFiltered = listTrainingPlan.filter(
+    (item) => item.name !== 'null',
+  )
 
-    // const result = fechData().catch(console.error())
+  const listTrainingPlanNullItem = listTrainingPlan.filter(
+    (item) => item.name === 'null',
+  )
 
-    // setListDiscount(result)
-  }, [listDiscount])
+  // Discount
 
   const listDiscountFiltered = listDiscount.filter(
     (item) => item.name !== 'null',
   )
 
-  // const listDiscountNullItem = listDiscount.filter(
-  //   (item) => item.name === 'null',
-  // )
+  const listDiscountNullItem = listDiscount.filter(
+    (item) => item.name === 'null',
+  )
 
-  const listDiscountNullItem =
-    listDiscount.length === 0
-      ? listDiscount.filter((item) => item.name === 'null')
-      : []
+  // UseEffect to Checked the Chosen one
+  useEffect(() => {
+    if (isDiscountChecked === false) {
+      setSelectedDiscount(listDiscountNullItem.at(0)?.id)
+    }
 
-  // const teste = async () => {
-  //  return  listDiscount.filter((item) => item.name === 'null')
-  // }
-
-  // console.log(listDiscountNullItem.at(0)?.id)
-  // console.log(teste)
+    if (isTrainingChecked === false) {
+      setSelectedTrainingPlan(listTrainingPlanNullItem.at(0)?.id)
+    }
+  }, [isDiscountChecked, isTrainingChecked])
 
   const [selectedDiscount, setSelectedDiscount] =
-    useState<String>(listDiscountNullItem.at(0)?.id || '')
-
-  console.log('Selecte :' + selectedDiscount)
+    useState<String>()
 
   const trainingPlanSelectedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -164,14 +195,8 @@ export const AddClient = (props: propsType) => {
   const discountSelectedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    // if (isDiscountChecked === false){
-    //  return  setSelectedDiscount(listDiscountNullItem.id)
-    // }
-
     return setSelectedDiscount(event?.target.value)
   }
-
-  // console.log(selectedTrainingPlan)
 
   const hoverHandler = () => {
     setHover(true)
@@ -181,7 +206,7 @@ export const AddClient = (props: propsType) => {
     setHover(false)
   }
 
-  const checkTraininigHandler = () => {
+  const checkTrainingHandler = () => {
     setIsTrainingChecked(!isTrainingChecked)
     // setIsChecked(!isChecked)
   }
@@ -194,7 +219,6 @@ export const AddClient = (props: propsType) => {
     setIsDiscountChecked(!isDiscountChecked)
   }
 
-  // const teste = listDiscount.filter(item => item.name.includes("null"))
   const formAddClientHandler = async (
     event: React.FormEvent<HTMLFormElement>,
   ) => {
@@ -261,20 +285,9 @@ export const AddClient = (props: propsType) => {
       setIsBirthOk(true)
     }
 
-    // if (isDiscountChecked === false){
-    //   setSelectedDiscount(listDiscountNullItem.id)
-    // }
-
     if (nameIsOk && emailIsOk && phoneIsOk && birthIsOk) {
       console.log(isDiscountChecked)
-      // console.log(listDiscountNullItem.id)
 
-      if (isDiscountChecked === false) {
-        // setSelectedDiscount(listDiscountNullItem)
-        setSelectedDiscount(
-          listDiscountNullItem.at(0)?.id || '',
-        )
-      }
       console.log('Name: ' + enteredName)
       console.log('Email: ' + enteredEmail)
       console.log('Phone: ' + enteredPhone)
@@ -286,12 +299,6 @@ export const AddClient = (props: propsType) => {
         'Personal Trainer ID: ' + selectedPersonalTrainer,
       )
       console.log('Desconto: ID: ' + selectedDiscount)
-
-      // console.log(listDiscountNullItem)
-
-      // console.log(teste)
-      // console.log("Lista sem null "+ tesf)
-      // console.log("Lista: " : + listPersonalTrainer.filter())
     }
   }
 
@@ -380,13 +387,13 @@ export const AddClient = (props: propsType) => {
             <input
               type="checkbox"
               checked={isTrainingChecked}
-              onChange={checkTraininigHandler}
+              onChange={checkTrainingHandler}
             />
           </div>
           {isTrainingChecked && (
             <div className={styles.selectContainer}>
               <OptionList
-                select={listTrainingPlan}
+                select={listTrainingPlanFiltered}
                 onChange={trainingPlanSelectedHandler}
               />
             </div>
