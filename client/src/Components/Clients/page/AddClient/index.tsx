@@ -11,12 +11,18 @@ import { validPhoneNumber } from '../../../shared/util/validPhoneNumber'
 import { validBirth } from '../../../shared/util/validBirth'
 import { OptionList } from '../../components/OptionList'
 import axios, { Axios, AxiosResponse } from 'axios'
+import { existingEmail } from '../../../shared/util/ExistingEmail'
 
 const urlPathGetDiscount =
   'http://localhost:5000/api/discount/all'
 
 const urlPathGetTrainingPlan =
   'http://localhost:5000/api/trainingplan/all'
+
+const urlPathGetPersonalTrainer =
+  'http://localhost:5000/api/personalTrainer/all'
+
+const urlPathGetAllUser = "http://localhost:5000/api/user/allemail"
 
 type propsType = {
   onClose: () => void
@@ -35,6 +41,10 @@ type personalTrainerInfo = {
 type discountInfo = {
   id: string
   name: string
+}
+
+type userInfo = {
+  email: string
 }
 
 const DUMMY_DATA = [
@@ -60,6 +70,7 @@ export const AddClient = (props: propsType) => {
   // email
   const emailInputRef = useRef<HTMLInputElement>(null)
   const [isEmailOk, setIsEmailOk] = useState(true)
+  const [listUserEmail,setListUserEmail] = useState<userInfo[]>([])
 
   //phone number
   const phoneInputRef = useRef<HTMLInputElement>(null)
@@ -107,7 +118,7 @@ export const AddClient = (props: propsType) => {
   // trainingPLan
   useEffect(() => {
     // try {
-    setListTrainingPlan(DUMMY_DATA)
+    // setListTrainingPlan(DUMMY_DATA)
 
     try {
       axios
@@ -123,14 +134,16 @@ export const AddClient = (props: propsType) => {
   // PersonalTrainer
   useEffect(() => {
     //falta so bo
-    setListPersonalTrainer(DUMMY_DATA)
+    // setListPersonalTrainer(DUMMY_DATA)
 
-    // try{
-    //   axios
-    //   .get(urlPathGetTrainingPlan).then((response: AxiosResponse)=>{
-    //     setListPersonalTrainer()
-    //   })
-    // }
+    try{
+      axios
+      .get(urlPathGetPersonalTrainer).then((response: AxiosResponse)=>{
+        setListPersonalTrainer(response.data)
+      })
+    }catch(error){
+      console.log("Error: " + error)
+    }
   }, [])
 
   // Discount
@@ -146,6 +159,13 @@ export const AddClient = (props: propsType) => {
     }
   }, [])
 
+
+  useEffect( () =>{
+    axios.get(urlPathGetAllUser).then((response: AxiosResponse) =>{
+      setListUserEmail(response.data)
+    })
+
+  },[])
   // Training PLan
 
   const listTrainingPlanFiltered = listTrainingPlan.filter(
@@ -173,7 +193,9 @@ export const AddClient = (props: propsType) => {
     }
 
     if (isTrainingChecked === false) {
-      setSelectedTrainingPlan(listTrainingPlanNullItem.at(0)?.id)
+      setSelectedTrainingPlan(
+        listTrainingPlanNullItem.at(0)?.id,
+      )
     }
   }, [isDiscountChecked, isTrainingChecked])
 
@@ -234,7 +256,10 @@ export const AddClient = (props: propsType) => {
     const enteredEmail = emailInputRef.current!.value
     const emailIsNotEmpty = enteredEmail.trim().length !== 0
     const emailIsValid = validEmail(enteredEmail)
-    const emailIsOk = emailIsNotEmpty && emailIsValid
+    const emailIsUsed = existingEmail(enteredEmail)
+
+    console.log(emailIsUsed)
+    const emailIsOk = emailIsNotEmpty && emailIsValid && !emailIsUsed
 
     // phone
     const enteredPhone = phoneInputRef.current!.value
