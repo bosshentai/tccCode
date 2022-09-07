@@ -14,6 +14,8 @@ export class CreateEmployeeController {
     response: Response,
     next: NextFunction,
   ) {
+
+    let employee
     if (request.method !== 'POST') {
       const error = new HttpError('Method not allowed', 405)
       return next(error)
@@ -33,38 +35,38 @@ export class CreateEmployeeController {
     const { name, email, phone, CNI, NIF, birth } =
       request.body
 
-    let existingUser
+    // let existingUser
 
-    try {
-      existingUser = await prismaClient.user.findUnique({
-        where: {
-          email: email,
-        },
-      })
-    } catch (e) {
-      const error = new HttpError(
-        "Couldn't register the User email",
-        500,
-      )
-      return next(error)
-    }
+    // try {
+    //   existingUser = await prismaClient.user.findUnique({
+    //     where: {
+    //       email: email,
+    //     },
+    //   })
+    // } catch (e) {
+    //   const error = new HttpError(
+    //     "Couldn't register the User email",
+    //     500,
+    //   )
+    //   return next(error)
+    // }
 
-    if (existingUser) {
-      const error = new HttpError(
-        'User exists already',
-        422,
-      )
-      return next(error)
-    }
+    // if (existingUser) {
+    //   const error = new HttpError(
+    //     'User exists already',
+    //     422,
+    //   )
+    //   return next(error)
+    // }
 
-    try {
-    } catch (e) {
-      const error = new HttpError(
-        "Couldn't register the Employee",
-        500,
-      )
-      return next(error)
-    }
+    // try {
+    // } catch (e) {
+    //   const error = new HttpError(
+    //     "Couldn't register the Employee",
+    //     500,
+    //   )
+    //   return next(error)
+    // }
 
     let hashedPassword
 
@@ -80,26 +82,42 @@ export class CreateEmployeeController {
     }
 
     try {
-      const user = await prismaClient.user.create({
-        data: {
-          name: name,
-          email: email,
-          password: hashedPassword,
-          phone: phone,
-          role: Roles.EMPLOYEE,
-          CNI: CNI,
-          NIF: NIF,
-          birth_date: new Date(birth), // convert the String in Date
-        },
-      })
 
-      const employee = await prismaClient.employee.create({
-        data: {
-          user_id: user.id,
-        },
+      employee =  await prismaClient.user.create({
+       data:{ 
+        name: name,
+        email: email,
+        password: hashedPassword,
+        phone: phone,
+        role: Roles.EMPLOYEE,
+        CNI: CNI,
+        NIF: NIF,
+        birth_date: new Date(birth),
+        employee:{
+          create:{}
+        }
+       }
       })
+      // const user = await prismaClient.user.create({
+      //   data: {
+      //     name: name,
+      //     email: email,
+      //     password: hashedPassword,
+      //     phone: phone,
+      //     role: Roles.EMPLOYEE,
+      //     CNI: CNI,
+      //     NIF: NIF,
+      //     birth_date: new Date(birth), // convert the String in Date
+      //   },
+      // })
 
-      return response.status(201).json(employee)
+      // const employee = await prismaClient.employee.create({
+      //   data: {
+      //     user_id: user.id,
+      //   },
+      // })
+
+      // return response.status(201).json(employee)
     } catch (e) {
       const error = new HttpError(
         'Fail to add Employee',
@@ -108,5 +126,7 @@ export class CreateEmployeeController {
 
       return next(error)
     }
+
+    return response.status(201).json(employee)
   }
 }

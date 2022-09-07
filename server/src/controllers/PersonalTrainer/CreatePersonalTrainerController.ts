@@ -1,8 +1,7 @@
 import { Roles } from '@prisma/client'
-import { hash, hashSync } from 'bcryptjs'
+import { hash } from 'bcryptjs'
 import { Request, Response, NextFunction } from 'express'
 import { validationResult } from 'express-validator'
-import { userInfo } from 'os'
 
 import { prismaClient } from '../../database/prismaClient'
 import { HttpError } from '../../models/http-error'
@@ -34,29 +33,29 @@ export class CreatePersonalTrainerController {
 
     let personalTrainer
 
-    let existingUser
+    // let existingUser
 
-    try {
-      existingUser = await prismaClient.user.findUnique({
-        where: {
-          email: email,
-        },
-      })
-    } catch (e) {
-      const error = new HttpError(
-        "Couldn't register the personal Trainer",
-        500,
-      )
-      return next(error)
-    }
+    // try {
+    //   existingUser = await prismaClient.user.findUnique({
+    //     where: {
+    //       email: email,
+    //     },
+    //   })
+    // } catch (e) {
+    //   const error = new HttpError(
+    //     "Couldn't register the personal Trainer",
+    //     500,
+    //   )
+    //   return next(error)
+    // }
 
-    if (existingUser) {
-      const error = new HttpError(
-        'User exists already',
-        422,
-      )
-      return next(error)
-    }
+    // if (existingUser) {
+    //   const error = new HttpError(
+    //     'User exists already',
+    //     422,
+    //   )
+    //   return next(error)
+    // }
 
     let hashedPassword
     try {
