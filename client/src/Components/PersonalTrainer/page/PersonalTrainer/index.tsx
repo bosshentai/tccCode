@@ -8,6 +8,7 @@ import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
 import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
 import { PersonalTrainerList } from "../../Components/PersonalTrainerList";
 import { AddPersonalTrainer } from "../AddPersonalTrainer";
+import { AddPersonalTrainerV2 } from "../AddPersonalTrainerV2";
 
 import styles from "./styles.module.scss";
 
@@ -83,7 +84,9 @@ export const PersonalTrainer = () => {
         ReactDOM.createPortal(
           <>
             <Backdrop onClose={closeAddPersonalTrainerHandler} />
-            <AddPersonalTrainer onClose={closeAddPersonalTrainerHandler} />
+            {/* <AddPersonalTrainer onClose={closeAddPersonalTrainerHandler} />
+             */}
+             <AddPersonalTrainerV2 onClose={closeAddPersonalTrainerHandler}/>
           </>, portalElement)
 
       }

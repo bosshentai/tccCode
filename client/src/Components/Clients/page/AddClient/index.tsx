@@ -22,7 +22,8 @@ const urlPathGetTrainingPlan =
 const urlPathGetPersonalTrainer =
   'http://localhost:5000/api/personalTrainer/all'
 
-const urlPathGetAllUser = "http://localhost:5000/api/user/allemail"
+const urlPathGetAllUser =
+  'http://localhost:5000/api/user/allemail'
 
 type propsType = {
   onClose: () => void
@@ -70,7 +71,9 @@ export const AddClient = (props: propsType) => {
   // email
   const emailInputRef = useRef<HTMLInputElement>(null)
   const [isEmailOk, setIsEmailOk] = useState(true)
-  const [listUserEmail,setListUserEmail] = useState<userInfo[]>([])
+  const [listUserEmail, setListUserEmail] = useState<
+    userInfo[]
+  >([])
 
   //phone number
   const phoneInputRef = useRef<HTMLInputElement>(null)
@@ -136,13 +139,14 @@ export const AddClient = (props: propsType) => {
     //falta so bo
     // setListPersonalTrainer(DUMMY_DATA)
 
-    try{
+    try {
       axios
-      .get(urlPathGetPersonalTrainer).then((response: AxiosResponse)=>{
-        setListPersonalTrainer(response.data)
-      })
-    }catch(error){
-      console.log("Error: " + error)
+        .get(urlPathGetPersonalTrainer)
+        .then((response: AxiosResponse) => {
+          setListPersonalTrainer(response.data)
+        })
+    } catch (error) {
+      console.log('Error: ' + error)
     }
   }, [])
 
@@ -159,13 +163,14 @@ export const AddClient = (props: propsType) => {
     }
   }, [])
 
-
-  useEffect( () =>{
-    axios.get(urlPathGetAllUser).then((response: AxiosResponse) =>{
-      setListUserEmail(response.data)
-    })
-
-  },[])
+  // email
+  useEffect(() => {
+    axios
+      .get(urlPathGetAllUser)
+      .then((response: AxiosResponse) => {
+        setListUserEmail(response.data)
+      })
+  }, [])
   // Training PLan
 
   const listTrainingPlanFiltered = listTrainingPlan.filter(
@@ -256,10 +261,15 @@ export const AddClient = (props: propsType) => {
     const enteredEmail = emailInputRef.current!.value
     const emailIsNotEmpty = enteredEmail.trim().length !== 0
     const emailIsValid = validEmail(enteredEmail)
-    const emailIsUsed = existingEmail(enteredEmail)
 
-    console.log(emailIsUsed)
-    const emailIsOk = emailIsNotEmpty && emailIsValid && !emailIsUsed
+    const emailIsUsed = listUserEmail.some(
+      (item) => item.email === enteredEmail,
+    )
+
+    // console.log(emailIsUsed)
+    // console.log(teste)
+    const emailIsOk =
+      emailIsNotEmpty && emailIsValid && !emailIsUsed
 
     // phone
     const enteredPhone = phoneInputRef.current!.value
@@ -310,8 +320,10 @@ export const AddClient = (props: propsType) => {
       setIsBirthOk(true)
     }
 
-    if (nameIsOk && emailIsOk && phoneIsOk && birthIsOk) {
-      console.log(isDiscountChecked)
+    const formOk = nameIsOk && emailIsOk && phoneIsOk && birthIsOk
+
+    if (formOk) {
+      // console.log(isDiscountChecked)
 
       console.log('Name: ' + enteredName)
       console.log('Email: ' + enteredEmail)
@@ -460,7 +472,9 @@ export const AddClient = (props: propsType) => {
             </div>
           )}
         </div>
-        <button>Inscrever</button>
+        <div className={styles.btnSubmitContainer}>
+          <button>Inscrever</button>
+        </div>
       </form>
     </div>
   )

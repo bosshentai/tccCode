@@ -24,7 +24,12 @@
 	"extensions": [
 		"esbenp.prettier-vscode",
 		"johnpapa.vscode-peacock",
-		"streetsidesoftware.code-spell-checker"
+		"streetsidesoftware.code-spell-checker",
+		"xabikos.JavaScriptSnippets",
+		"ms-vscode.vscode-typescript-next",
+		"pmneo.tsimporter",
+		"sburg.vscode-javascript-booster",
+		"loiane.ts-extension-pack"
 	]
 
 

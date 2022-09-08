@@ -1,72 +1,77 @@
-import React, { useState } from "react";
-import styles from "./styles.module.scss";
+import React, { useState } from 'react'
+import styles from './styles.module.scss'
 
-import { InputText } from "../../../shared/components/FormElements/InputText";
-import { useForm } from "../../../shared/hooks/form-hook";
+import { InputText } from '../../../shared/components/FormElements/InputText'
+import { useForm } from '../../../shared/hooks/form-hook'
 
-import whiteCross from "../../../../assets/icons/whiteCross.svg";
-import blueCross from "../../../../assets/icons/blueCross.svg";
-import axios from "axios";
-
+import whiteCross from '../../../../assets/icons/whiteCross.svg'
+import blueCross from '../../../../assets/icons/blueCross.svg'
+import axios from 'axios'
 
 type propsType = {
-  onClose: () => void;
+  onClose: () => void
 }
 
 const InitialInputs = {
   name: {
-    value: "",
+    value: '',
     isValid: false,
   },
   email: {
-    value: "",
+    value: '',
     isValid: false,
   },
   tel: {
-    value: "",
+    value: '',
     isValid: false,
   },
   CNI: {
-    value: "",
+    value: '',
     isValid: false,
   },
   NIF: {
-    value: "",
+    value: '',
     isValid: false,
   },
   birth: {
-    value: "",
+    value: '',
     isValid: false,
   },
-};
+}
 
 export const AddPersonalTrainer = (props: propsType) => {
-  const [isHover, setHover] = useState(false);
+  const [isHover, setHover] = useState(false)
 
-  const [showError, setShowError] = useState(false);
+  const [showError, setShowError] = useState(false)
 
-  const [formState, inputHandler] = useForm(InitialInputs, false);
+  const [formState, inputHandler] = useForm(
+    InitialInputs,
+    false,
+  )
 
   const hoverHandler = () => {
-    setHover(true);
-  };
-
-  const leaveHandler = () => {
-    setHover(false);
-  };
-
-  const closeErrorHandler = () => {
-    setShowError(false);
+    setHover(true)
   }
 
-  const formRegisterPersonalTrainer = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const leaveHandler = () => {
+    setHover(false)
+  }
 
-    const urlPatch = "http://localhost:5000/api/personalTrainer/add"
+  const closeErrorHandler = () => {
+    setShowError(false)
+  }
 
-  // missing the urlPatch for the backend add the PersonalTrainer
+  const formRegisterPersonalTrainer = async (
+    event: React.FormEvent,
+  ) => {
+    event.preventDefault()
 
-    if (formState.isValid === true){
+    const urlPatch =
+      'http://localhost:5000/api/personalTrainer/add'
+
+    // missing the urlPatch for the backend add the PersonalTrainer
+
+    if (formState.isValid === true) {
       const formData = {
         name: formState.inputs.name.value,
         email: formState.inputs.email.value,
@@ -76,95 +81,92 @@ export const AddPersonalTrainer = (props: propsType) => {
         birth: formState.inputs.birth.value,
       }
 
+      try {
+        await axios.post(urlPatch, formData)
 
-      try{
-
-        await axios.post(urlPatch, formData);
-
-        props.onClose();
-
-      } catch(err){
-        console.log(err);
+        props.onClose()
+      } catch (err) {
+        console.log(err)
       }
     } else {
-      setShowError(true);
+      setShowError(true)
     }
-
   }
 
-  const iconChange = !isHover ? whiteCross : blueCross;
-
-  
-
+  const iconChange = !isHover ? whiteCross : blueCross
 
   return (
     <>
-    <div className={styles.addPersonalTrainerContainer}>
-      <div className={styles.headerContainer}>
-        <div className={styles.left}>
-          <h1>Registrar Personal Trainer</h1>
+      <div className={styles.addPersonalTrainerContainer}>
+        <div className={styles.headerContainer}>
+          <div className={styles.left}>
+            <h1>Registrar Personal Trainer</h1>
+          </div>
+          <button
+            className={styles.right}
+            onMouseEnter={hoverHandler}
+            onMouseLeave={leaveHandler}
+            onClick={props.onClose}>
+            <img
+              src={iconChange}
+              alt="close"
+            />
+          </button>
         </div>
-        <button
-          className={styles.right}
-          onMouseEnter={hoverHandler}
-          onMouseLeave={leaveHandler}
-          onClick={props.onClose}
-        >
-          <img src={iconChange} alt="close" />
-        </button>
+
+        <form className={styles.formContainer}>
+          <InputText
+            type="text"
+            id="name"
+            label="Nome Completo"
+            placeHolder="Insira o nome completo"
+            onInput={inputHandler}
+          />
+          <div className={styles.twoInputInRow}>
+            <InputText
+              type="email"
+              id="email"
+              label="Email"
+              placeHolder="Insira o email"
+              onInput={inputHandler}
+            />
+            <InputText
+              type="tel"
+              id="tel"
+              label="Telemóvel"
+              placeHolder="Insira o numero do telemóvel"
+              onInput={inputHandler}
+            />
+          </div>
+          <div className={styles.twoInputInRow}>
+            <InputText
+              type="text"
+              id="cni"
+              label="CNI"
+              placeHolder="Insira o CNI"
+              onInput={inputHandler}
+            />
+            <InputText
+              type="text"
+              id="nif"
+              label="NIF"
+              placeHolder="Insira o NIF"
+              onInput={inputHandler}
+            />
+          </div>
+
+          <InputText
+            type="date"
+            id="date"
+            label="Data de Nascimento"
+            placeHolder="dd/mm/yyyy"
+            onInput={inputHandler}
+          />
+          <button className={styles.btnSubmit}>
+            Registar
+          </button>
+        </form>
       </div>
-
-      <form className={styles.formContainer}>
-        <InputText
-          type="text"
-          id="name"
-          label="Nome Completo"
-          placeHolder="Insira o nome completo"
-          onInput={inputHandler}
-        />
-        <div className={styles.twoInputInRow}>
-          <InputText
-            type="email"
-            id="email"
-            label="Email"
-            placeHolder="Insira o email"
-            onInput={inputHandler}
-          />
-          <InputText
-            type="tel"
-            id="tel"
-            label="Telemóvel"
-            placeHolder="Insira o numero do telemóvel"
-            onInput={inputHandler}
-          />
-        </div>
-        <div className={styles.twoInputInRow}>
-          <InputText
-            type="text"
-            id="cni"
-            label="CNI"
-            placeHolder="Insira o CNI"
-            onInput={inputHandler}
-          />
-          <InputText
-            type="text"
-            id="nif"
-            label="NIF"
-            placeHolder="Insira o NIF"
-            onInput={inputHandler}
-          />
-        </div>
-
-        <InputText
-          type="date"
-          id="date"
-          label="Data de Nascimento"
-          placeHolder="dd/mm/yyyy"
-          onInput={inputHandler}
-        />
-        <button className={styles.btnSubmit}>Registar</button>
-      </form>
-    </div>
     </>
-  );
-};
+  )
+}
