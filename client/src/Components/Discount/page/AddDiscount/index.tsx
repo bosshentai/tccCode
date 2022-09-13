@@ -14,6 +14,7 @@ export const AddDiscount = (props: propsType) => {
   const nameInputRef = useRef<HTMLInputElement>(null)
   const areaInputRef = useRef<HTMLTextAreaElement>(null)
   const amountInputRef = useRef<HTMLInputElement>(null)
+  // const cniInputRef = useRef<HTMLInputElement>(null)
 
   const [isHover, setHover] = useState(false)
 

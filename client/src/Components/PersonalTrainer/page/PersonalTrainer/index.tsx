@@ -1,99 +1,104 @@
-import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
-import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
-import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
-import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
-import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
-import { PersonalTrainerList } from "../../Components/PersonalTrainerList";
-import { AddPersonalTrainer } from "../AddPersonalTrainer";
-import { AddPersonalTrainerV2 } from "../AddPersonalTrainerV2";
+import axios, { AxiosResponse } from 'axios'
+import { useEffect, useState } from 'react'
+import ReactDOM from 'react-dom'
+import { BtnBottomSide } from '../../../shared/components/BtnBottomSide'
+import { Backdrop } from '../../../shared/components/UIElements/Backdrop'
+import { DefaultInsidePage } from '../../../shared/components/UIElements/DefaultInsidePage'
+import { DefaultPage } from '../../../shared/components/UIElements/DefaultPage'
+import { EmptyPage } from '../../../shared/components/UIElements/EmptyPage'
+import { PersonalTrainerList } from '../../Components/PersonalTrainerList'
+import { AddPersonalTrainer } from '../AddPersonalTrainer'
+import { AddPersonalTrainerV2 } from '../AddPersonalTrainerV2'
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss'
 
-const portalElement = document.getElementById("overlays") as HTMLElement;
+const portalElement = document.getElementById(
+  'overlays',
+) as HTMLElement
 
 type personalTrainer = {
-  id: string;
-  name: string;
-  email: string;
+  id: string
+  name: string
+  email: string
 }
 
-// const DUMMY_DATA = [
-//   {
-//     id: "1asadas",
-//     name: "Hernâni",
-//     email: "baptista@got.com"
-
-//   },
-//   {
-//     id: "2assad",
-//     name: "Hern",
-//     email: "asdada@asdsd.com"
-//   }
-// ]
-
 export const PersonalTrainer = () => {
-  const [listEmpty, setListEmpty] = useState(true);
+  const [listEmpty, setListEmpty] = useState(true)
 
-  const [addPersonalTrainerIsShow, setPersonalTrainerIsShow] = useState(false);
+  const [
+    addPersonalTrainerIsShow,
+    setPersonalTrainerIsShow,
+  ] = useState(false)
 
-  const [listPersonalTrainer, setListPersonalTrainer] = useState<personalTrainer[]>([])
+  const [listPersonalTrainer, setListPersonalTrainer] =
+    useState<personalTrainer[]>([])
 
 
   useEffect(() => {
-    const urlPath = "http://localhost:5000/api/personalTrainer/all"
+    const urlPath =
+      'http://localhost:5000/api/personalTrainer/all'
+    // const getData = axios.get(urlPath)
 
-    // setListPersonalTrainer(DUMMY_DATA);
+    const sendGetRequest = async () => {
+      const urlPath =
+        'http://localhost:5000/api/personalTrainer/all'
 
+      try {
+        const response = await axios.get<personalTrainer[]>(
+          urlPath,
+        )
 
-    try {
-      axios.get(urlPath).then((response: AxiosResponse) => {
-        setListPersonalTrainer(response.data)
-      })
+        const filteredData = response.data.filter(
+          (item: personalTrainer) => item.name !== 'null',
+        )
 
-
-
-    } catch (error) {
-      console.log("Error: " + error);
+        // return filteredData;
+        setListPersonalTrainer(filteredData)
+      } catch (err) {
+        console.error(err)
+      }
     }
+
+    sendGetRequest()
 
     if (listPersonalTrainer.length === 0) {
-      setListEmpty(true);
+      setListEmpty(true)
     } else {
-      setListEmpty(false);
+      setListEmpty(false)
     }
-
   }, [listPersonalTrainer.length])
 
-
   const showAddPersonalTrainerHandler = () => {
-    setPersonalTrainerIsShow(true);
+    setPersonalTrainerIsShow(true)
   }
 
-
   const closeAddPersonalTrainerHandler = () => {
-    setPersonalTrainerIsShow(false);
+    setPersonalTrainerIsShow(false)
   }
 
   return (
     <>
-      {
-        addPersonalTrainerIsShow &&
+      {addPersonalTrainerIsShow &&
         ReactDOM.createPortal(
           <>
-            <Backdrop onClose={closeAddPersonalTrainerHandler} />
+            <Backdrop
+              onClose={closeAddPersonalTrainerHandler}
+            />
             {/* <AddPersonalTrainer onClose={closeAddPersonalTrainerHandler} />
              */}
-             <AddPersonalTrainerV2 onClose={closeAddPersonalTrainerHandler}/>
-          </>, portalElement)
-
-      }
+            <AddPersonalTrainerV2
+              onClose={closeAddPersonalTrainerHandler}
+            />
+          </>,
+          portalElement,
+        )}
       <DefaultPage>
-        {listEmpty && <EmptyPage message="Sem Personal Trainer" />}
-        {!listEmpty &&
-          <DefaultInsidePage className={styles.tableContainer}>
+        {listEmpty && (
+          <EmptyPage message="Sem Personal Trainer" />
+        )}
+        {!listEmpty && (
+          <DefaultInsidePage
+            className={styles.tableContainer}>
             <div className={styles.header}>
               <div className={styles.title}>
                 <p>Nome</p>
@@ -102,14 +107,16 @@ export const PersonalTrainer = () => {
                 <p>Email</p>
               </div>
             </div>
-            <PersonalTrainerList personalTrainers={listPersonalTrainer} />
+            <PersonalTrainerList
+              personalTrainers={listPersonalTrainer}
+            />
           </DefaultInsidePage>
-        }
-        <BtnBottomSide btnText="Adicionar Personal Trainer"
+        )}
+        <BtnBottomSide
+          btnText="Adicionar Personal Trainer"
           showHandler={showAddPersonalTrainerHandler}
         />
-
       </DefaultPage>
     </>
-  );
-};
+  )
+}

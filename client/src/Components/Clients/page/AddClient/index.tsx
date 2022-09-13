@@ -11,7 +11,8 @@ import { validPhoneNumber } from '../../../shared/util/validPhoneNumber'
 import { validBirth } from '../../../shared/util/validBirth'
 import { OptionList } from '../../components/OptionList'
 import axios, { Axios, AxiosResponse } from 'axios'
-import { existingEmail } from '../../../shared/util/ExistingEmail'
+
+// not finished
 
 const urlPathGetDiscount =
   'http://localhost:5000/api/discount/all'
@@ -37,6 +38,10 @@ type trainingPlanInfo = {
 type personalTrainerInfo = {
   id: string
   name: string
+  // user:{
+  //   name: string
+    
+  // }
 }
 
 type discountInfo = {
@@ -47,21 +52,6 @@ type discountInfo = {
 type userInfo = {
   email: string
 }
-
-const DUMMY_DATA = [
-  {
-    id: '0',
-    name: 'null',
-  },
-  {
-    id: '1',
-    name: 'teste',
-  },
-  {
-    id: '2',
-    name: 'Teste2',
-  },
-]
 
 export const AddClient = (props: propsType) => {
   // name
@@ -83,6 +73,10 @@ export const AddClient = (props: propsType) => {
   const birthInputRef = useRef<HTMLInputElement>(null)
   const [isBirthOk, setIsBirthOk] = useState(true)
 
+  // CNI
+  const cniInputRef = useRef<HTMLInputElement>(null)
+  const [isCNIOk, setIsCNIOk] = useState(true)
+
   //training Plan
   const [listTrainingPlan, setListTrainingPlan] = useState<
     trainingPlanInfo[]
@@ -91,6 +85,10 @@ export const AddClient = (props: propsType) => {
     useState<String>()
   const [isTrainingChecked, setIsTrainingChecked] =
     useState(false)
+  const [
+    nullTrainingPlanSelect,
+    setNullTrainingPlanSelect,
+  ] = useState<trainingPlanInfo[]>([])
 
   // Personal Trainer
   const [listPersonalTrainer, setListPersonalTrainer] =
@@ -105,12 +103,21 @@ export const AddClient = (props: propsType) => {
     setSelectedPersonalTrainer,
   ] = useState<String>()
 
+  const [
+    nullPersonalTrainerSelect,
+    setNullPersonalTrainerSelect,
+  ] = useState<personalTrainerInfo[]>([])
+
   // Discount
   const [listDiscount, setListDiscount] = useState<
     discountInfo[]
   >([])
   const [isDiscountChecked, setIsDiscountChecked] =
     useState(false)
+  const [nullDiscountSelect, setNullDiscountSelect] =
+    useState<discountInfo[]>([])
+  const [selectedDiscount, setSelectedDiscount] =
+    useState<String>()
 
   /// Have to create useState the data In it -- lomba
 
@@ -177,35 +184,48 @@ export const AddClient = (props: propsType) => {
     (item) => item.name !== 'null',
   )
 
-  const listTrainingPlanNullItem = listTrainingPlan.filter(
-    (item) => item.name === 'null',
-  )
+  // training plan
+
+  useEffect(() => {
+    const listTrainingPlanNullItem =
+      listTrainingPlan.filter(
+        (item) => item.name === 'null',
+      )
+
+    setNullTrainingPlanSelect(listTrainingPlanNullItem)
+  }, [listTrainingPlan])
+
+  // personal Trainer
+  useEffect(() => {
+    const listPersonalTrainerNullItem =
+      listPersonalTrainer.filter(
+        (item) => item.name === 'null',
+      )
+
+    setNullPersonalTrainerSelect(
+      listPersonalTrainerNullItem,
+    )
+  }, [listPersonalTrainer])
+
+  // console.log(listPersonalTrainer)
+  // console.log(nullPersonalTrainerSelect)
 
   // Discount
+  useEffect(() => {
+    const listDiscountNullItem = listDiscount.filter(
+      (item) => item.name === 'null',
+    )
+
+    setNullDiscountSelect(listDiscountNullItem)
+  }, [listDiscount])
+
+  // console.log(nullSelect.at(0)?.id)
 
   const listDiscountFiltered = listDiscount.filter(
     (item) => item.name !== 'null',
   )
 
-  const listDiscountNullItem = listDiscount.filter(
-    (item) => item.name === 'null',
-  )
-
   // UseEffect to Checked the Chosen one
-  useEffect(() => {
-    if (isDiscountChecked === false) {
-      setSelectedDiscount(listDiscountNullItem.at(0)?.id)
-    }
-
-    if (isTrainingChecked === false) {
-      setSelectedTrainingPlan(
-        listTrainingPlanNullItem.at(0)?.id,
-      )
-    }
-  }, [isDiscountChecked, isTrainingChecked])
-
-  const [selectedDiscount, setSelectedDiscount] =
-    useState<String>()
 
   const trainingPlanSelectedHandler = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -224,6 +244,8 @@ export const AddClient = (props: propsType) => {
   ) => {
     return setSelectedDiscount(event?.target.value)
   }
+
+  // console.log(listDiscount)
 
   const hoverHandler = () => {
     setHover(true)
@@ -304,6 +326,10 @@ export const AddClient = (props: propsType) => {
       setIsBirthOk(false)
     }
 
+    // if (!cniIsOk){
+    //   setIsCNIOk(false)
+    // }
+
     if (nameIsOk) {
       setIsNameOk(true)
     }
@@ -320,22 +346,40 @@ export const AddClient = (props: propsType) => {
       setIsBirthOk(true)
     }
 
-    const formOk = nameIsOk && emailIsOk && phoneIsOk && birthIsOk
+    const formOk =
+      nameIsOk && emailIsOk && phoneIsOk && birthIsOk
 
     if (formOk) {
       // console.log(isDiscountChecked)
 
-      console.log('Name: ' + enteredName)
-      console.log('Email: ' + enteredEmail)
-      console.log('Phone: ' + enteredPhone)
-      console.log('Birth: ' + enteredBirth)
-      console.log(
-        'Plano de Treino ID : ' + selectedTrainingPlan,
-      )
-      console.log(
-        'Personal Trainer ID: ' + selectedPersonalTrainer,
-      )
-      console.log('Desconto: ID: ' + selectedDiscount)
+      const urlPost = 'http://localhost:5000/api/client/add'
+
+      const formData = {
+        name: enteredName,
+        email: enteredEmail,
+        phone: enteredPhone,
+        birth: enteredBirth,
+        trainingplanId: isTrainingChecked
+          ? selectedPersonalTrainer
+          : nullTrainingPlanSelect.at(0)?.id,
+        personalTrainerId: isPersonalTrainerChecked
+          ? selectedPersonalTrainer
+          : nullPersonalTrainerSelect.at(0)?.id,
+        discountId: isDiscountChecked
+          ? selectedDiscount
+          : nullDiscountSelect.at(0)?.id,
+      }
+
+      console.log(formData)
+
+      try {
+        await axios.post(urlPost,formData)
+        props.onClose()
+      } catch (error) {
+          console.log(error)
+      }
+
+    
     }
   }
 
@@ -356,6 +400,7 @@ export const AddClient = (props: propsType) => {
   const birthControllerClass = isBirthOk
     ? `${styles.inputValid}`
     : `${styles.inputInvalid}`
+
 
   return (
     <div className={styles.addClientContainer}>
@@ -418,6 +463,27 @@ export const AddClient = (props: propsType) => {
             />
           </div>
         </div>
+        {/* <div>
+          <div className={styles.textInput}>
+            <label>CNI</label>
+            <input
+              type="text"
+              ref={cniInputRef}
+              placeholder="Insira o numero cni do Cliente"
+              className={cniControlloerClass}
+            />
+          </div>
+
+          <div className={styles.textInput}>
+            <label>Data de Nascimento</label>
+            <input
+              type="date"
+              ref={birthInputRef}
+              placeholder="Insira a data de Nascimento do Cliente"
+              className={birthControllerClass}
+            />
+          </div>
+        </div> */}
         <div className={styles.checkboxSelectContainer}>
           <div className={styles.checkInput}>
             <label>Plano de Treino</label>
