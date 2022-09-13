@@ -28,7 +28,7 @@ export class GetAllPersonalTrainersController {
       //   }
       // })
 
-      const personalTrainers =
+      const data =
         await prismaClient.personalTrainer.findMany({
           select: {
             id: true,
@@ -41,6 +41,16 @@ export class GetAllPersonalTrainersController {
             },
           },
         })
+
+   const personalTrainers = data.map( (item) =>{
+    return {
+      id: item.id,
+      name: item.user.name,
+      email: item.user.email,
+      value: item.value
+    }
+   })
+
 
       return response.status(200).json(personalTrainers)
     } catch (e) {

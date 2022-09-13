@@ -32,8 +32,6 @@ export class CreateClientController {
       name,
       email,
       phone,
-      CNI,
-      NIF,
       birth,
       trainingplanId,
       personalTrainerId,
@@ -86,8 +84,6 @@ export class CreateClientController {
           password: hashedPassword,
           phone: phone,
           role: Roles.CLIENT,
-          CNI: CNI,
-          NIF: NIF,
           birth_date: new Date(birth),
           client: {
             create: {

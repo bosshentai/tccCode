@@ -40,8 +40,8 @@ model User {
   birth_date DateTime @db.Date
   role       Roles    @default(UNKNOW)
   phone      String
-  CNI        String
-  NIF        String
+  CNI        String?
+  NIF        String?
   password   String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
