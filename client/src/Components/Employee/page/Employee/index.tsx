@@ -47,17 +47,6 @@ export const Employee = () => {
         setListEmployee(response.data)
       })
 
-      // setListEmployee(DUMMY_DATA);
-      // }, 1000);
-
-      // const { data ,status } =  axios.get<GetEmployeeResponse>(urlPath,
-      //   {
-      //     headers: {
-      //       Accept: "application/json",
-      //     },}
-      //     );
-
-      //     return data;
     } catch (error) {
       console.log('Error: ' + error)
     }
@@ -69,7 +58,7 @@ export const Employee = () => {
     }
   }, [listEmployee.length])
 
-  // const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
+  
 
   const showAddEmployeeHandler = () => {
     setEmployeeIsShown(true)
