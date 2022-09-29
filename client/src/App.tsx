@@ -5,15 +5,22 @@ import { PagesRoutes } from './Components/routes/PagesRoutes'
 import { MainNavigation } from './Components/shared/components/Navigation/MainNavigation'
 
 import { Profile } from './Components/shared/components/Profile'
+import { AuthContext } from './Components/shared/context/auth-context'
+import { useAuth } from './Components/shared/hooks/auth-hook'
 
 // const Client = lazy(() => import ("./pages/Client"));
 
 function App() {
-  const [isLogin, setLogin] = useState(false)
+  // const [isLogin, setLogin] = useState(false)
+  const { token, login, userId } = useAuth()
+
+  // const loginHandler = () => {
+  //   return true
+  // }
 
   return (
     <>
-      {!isLogin && <Login />}
+      {/* {!isLogin && <Login />}
       {isLogin && (
         <>
           <MainNavigation />
@@ -23,8 +30,17 @@ function App() {
             <PagesRoutes />
           </main>
         </>
-      )}
-      
+      )} */}
+
+      <AuthContext.Provider
+        value={{
+          isLoggedIn: !!token,
+          token: token,
+          userId: userId,
+          login: login,
+        }}>
+        <h1>Lomba</h1>
+      </AuthContext.Provider>
     </>
   )
 
