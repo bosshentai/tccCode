@@ -5,9 +5,9 @@ import { prismaClient } from '../../database/prismaClient';
 import { HttpError } from '../../models/http-error';
 import { sign } from 'jsonwebtoken';
 
+const authConfig = require('../../config/auth.json')
 
-
-export class Login {
+export class LoginController {
   async handle(request: Request, response: Response, next: NextFunction) {
 
     const { email, password } = request.body;
@@ -49,7 +49,9 @@ export class Login {
 
     let token;
     try {
-      token = sign({userId: existingUser.id, email: existingUser.email}, "lomba")
+      token = sign({ userId: existingUser.id }, authConfig.secret, {
+        expiresIn: 86400
+      })
       
     } catch (e) {
       const error = new HttpError("Logging in failed,please try again later.",500);

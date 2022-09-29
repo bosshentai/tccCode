@@ -4,6 +4,7 @@ import express from 'express'
 import { HttpError } from './models/http-error'
 import bodyParser from 'body-parser'
 import { router } from './Routes'
+import {userRouter} from './Routes/user'
 
 const app = express()
 
@@ -23,6 +24,8 @@ app.use((req, res, next) => {
 
   next()
 })
+
+app.use('/auth',userRouter)
 
 app.use('/api', router)
 
