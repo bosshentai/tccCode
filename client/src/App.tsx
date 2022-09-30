@@ -11,12 +11,32 @@ import { useAuth } from './Components/shared/hooks/auth-hook'
 // const Client = lazy(() => import ("./pages/Client"));
 
 function App() {
-  // const [isLogin, setLogin] = useState(false)
+  const [isLogin, setLogin] = useState(true)
   const { token, login, userId } = useAuth()
 
   // const loginHandler = () => {
   //   return true
   // }
+
+  let page;
+
+  if(token){
+    page =(
+      <>
+      <MainNavigation/>
+      <main>
+        <Profile/>
+        <PagesRoutes/>
+      </main>
+      </>
+    )
+  }else{
+    page = (
+      <Login/>
+    )
+  }
+
+
 
   return (
     <>
@@ -39,7 +59,7 @@ function App() {
           userId: userId,
           login: login,
         }}>
-        <h1>Lomba</h1>
+       {page}
       </AuthContext.Provider>
     </>
   )

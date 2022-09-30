@@ -1,15 +1,22 @@
 // import { DefaultInsidePage } from '../../shared/components/UIElements/DefaultInsidePage/index';
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import {
   Dispatch,
   SetStateAction,
+  useContext,
   useRef,
   useState,
 } from 'react'
 import { DefaultPage } from '../../shared/components/UIElements/DefaultPage'
+import { AuthContext } from '../../shared/context/auth-context'
 import { validEmail } from '../../shared/util/validEmail'
 
 import styles from './styles.module.scss'
+
+export interface LoginResponse {
+  userId: string
+  token: string
+}
 
 type propsType = {
   // valid: Dispatch<SetStateAction<boolean>>
@@ -17,6 +24,8 @@ type propsType = {
 }
 // Dispatch<SetStateActicon<boolean>
 export const Login = () => {
+  const auth = useContext(AuthContext)
+
   const emailInputRef = useRef<HTMLInputElement>(null)
 
   const passwordInputRef = useRef<HTMLInputElement>(null)
@@ -63,11 +72,17 @@ export const Login = () => {
         }
 
         try {
-          await axios.post(urlPatch, loginData)
-          // props.valid = true;
+          const responseData: AxiosResponse<LoginResponse> =
+            await axios.post(urlPatch, loginData)
+        
+        const  expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60)
 
-          // console.log("Entrou")
-          return true
+          auth.login(
+            responseData.data.userId,
+            responseData.data.token,
+            expirationDate
+          )
+          // return true
         } catch (error) {
           console.log(error)
           return false

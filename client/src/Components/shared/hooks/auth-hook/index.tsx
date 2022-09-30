@@ -10,6 +10,11 @@ export const useAuth = () => {
     (uid: string, token: string, expirationDate: Date) => {
       setToken(token)
       setUserId(uid)
+      // let tokenExperationDate
+      // if (expirationDate === undefined)
+      // {
+      //   tokenExperationDate = new Date(new Date().getTime() + 1000 * 60 * 60)
+      // }
       const tokenExperationDate =
         expirationDate ||
         new Date(new Date().getTime() + 1000 * 60 * 60)
