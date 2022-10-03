@@ -51,7 +51,7 @@ export const Login = () => {
       emailIsNotEmpty && passwordIsNotEmpty
     const formIsValid = emailIsValid
 
-    console.log(formIsEmpty)
+    // console.log(formIsEmpty)
 
     // if(formIsEmpty){
 
@@ -75,7 +75,7 @@ export const Login = () => {
           const responseData: AxiosResponse<LoginResponse> =
             await axios.post(urlPatch, loginData)
         
-        const  expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60)
+        const  expirationDate =  new Date(new Date().getTime() + 1000 * 60 * 60)
 
           auth.login(
             responseData.data.userId,
