@@ -7,13 +7,14 @@ import {
 
 interface AuthContextType {
   isLoggedIn: boolean
-  userId: string | undefined
-  token: string | undefined
+  userId: string | null | undefined
+  token: string | null | undefined
   login: (
     userId: string,
     token: string,
     expirationDate: Date,
   ) => void
+  logout: () => void
 }
 
 export const AuthContext = createContext<AuthContextType>({
