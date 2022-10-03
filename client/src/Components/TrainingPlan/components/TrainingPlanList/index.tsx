@@ -1,9 +1,11 @@
 import { TrainingPlanItem} from "../TrainingPlanItem";
 
+import styles from "./styles.module.scss";
+
 type trainingPlain = {
   id: string;
   name: string;
-  amount: number;
+  value: number;
 }
 
 
@@ -16,13 +18,13 @@ export const TrainingPlanList = (props: trainingPlanProps) => {
   const trainingPlans = props.trainingPlans;
 
   return (
-    <ul className="training-plan-list">
+    <ul className={styles.trainingPlanlist}>
       {trainingPlans.map((trainingPlan: trainingPlain) => (
         <TrainingPlanItem
           key={trainingPlan.id}
           id={trainingPlan.id}
           name={trainingPlan.name}
-          amount={trainingPlan.amount}
+          amount={trainingPlan.value}
         />
       ))}
     </ul>

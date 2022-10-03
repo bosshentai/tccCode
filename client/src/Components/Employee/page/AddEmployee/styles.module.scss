@@ -138,6 +138,10 @@
         &::-webkit-calendar-picker-indicator {
           // adiciona 1 icon la direto
           background: none;
+          background-image: url(../../../../assets/icons/blueDate.svg);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
         }
       }
 
@@ -151,6 +155,14 @@
         }
         &::placeholder {
           color: #ff0000;
+        }
+
+        &::-webkit-calendar-picker-indicator{
+          background: none;
+          background-image: url(../../../../assets/icons/redDate.svg);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
         }
 
         &::-webkit-datetime-edit {

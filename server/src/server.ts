@@ -1,39 +1,39 @@
-import 'reflect-metadata';
-import express from 'express';
-import { employeeRouter } from './User/Routes';
+import 'reflect-metadata'
+import express from 'express'
 
-import {HttpError} from './models/http-error';	
-import bodyParser from 'body-parser';
-import { personalTrainerRouter } from './PersonalTrainer/Routes';
+import { HttpError } from './models/http-error'
+import bodyParser from 'body-parser'
+import { router } from './Routes'
+import {userRouter} from './Routes/user'
 
-
-const app = express();
+const app = express()
 
 // app.use(express.json());
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  )
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PATCH, DELETE',
+  )
 
-  next();
-});
-
-app.use("/api", employeeRouter)
-app.use('/api', personalTrainerRouter)
-
-
-
-
-app.use((req, res, next) => {
-  const error = new HttpError('Not found', 404);
-  throw error;
+  next()
 })
 
+app.use('/auth',userRouter)
 
+app.use('/api', router)
 
-app.listen(5000, () => console.log("server is running on port 5000"));
+app.use((req, res, next) => {
+  const error = new HttpError('Not found', 404)
+  throw error
+})
+
+app.listen(5000, () =>
+  console.log('server is running on port 5000'),
+)

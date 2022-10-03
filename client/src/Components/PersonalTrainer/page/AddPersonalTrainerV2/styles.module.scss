@@ -1,0 +1,286 @@
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.addPersonalTrainerContainer {
+  width: 72.375rem;
+  height: 51.125rem;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #f4f4f4;
+  box-shadow: 0.625rem 0.625rem 1.25rem
+    rgba(36, 110, 227, 0.5);
+  z-index: 30;
+
+  animation-name: fadeUp;
+  animation-duration: 400ms;
+  animation-fill-mode: forwards;
+
+  .headerContainer {
+    display: flex;
+    height: 5.188rem;
+
+    .left {
+      width: 66.625rem;
+      background-color: #4b88e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family: 'Ubuntu', sans-serif;
+      color: white;
+    }
+
+    .right {
+      width: 5.75rem;
+      background: linear-gradient(0deg, #246ee3, #246ee3);
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+      border: none;
+
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(36, 110, 227, 0.006);
+        transition: all 300ms ease-in-out;
+      }
+
+      img {
+        width: 3.438rem;
+        height: 3.438rem;
+      }
+    }
+  }
+
+  .formContainer {
+    width: 50rem;
+    height: 40rem;
+    // background: red;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding-top: 6rem;
+
+    div {
+      display: flex;
+
+      padding-bottom: 2rem;
+
+      // background: red;
+    }
+
+    .textInput {
+      flex-direction: column;
+
+      &:nth-child(2) {
+        margin-left: auto;
+      }
+
+      input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        // border-bottom: 2px solid
+        background-color: transparent;
+        width: 20rem;
+        height: 1.5rem;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .inputValid {
+        border-bottom: 2px solid #4b88e8;
+
+        color: #246ee3;
+        &:hover,
+        &:focus {
+          background-color: rgba(36, 110, 227, 0.06);
+        }
+        &::placeholder {
+          color: #4b88e8;
+        }
+
+        &[type='date'] {
+          cursor: pointer;
+
+          &::-webkit-calendar-picker-indicator {
+            background: none;
+            background-image: url(../../../../assets/icons/blueDate.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+          }
+        }
+      }
+
+      .inputInvalid {
+        background-color: rgba(255, 0, 0, 0.13);
+        border-bottom: 2px solid #ff0000;
+
+        color: #ff0000;
+
+        &:hover,
+        &:focus {
+          background-color: rgba(255, 0, 0, 0.2);
+        }
+
+        &::placeholder {
+          color: #ff0000;
+        }
+
+        &[type='date'] {
+          cursor: pointer;
+
+          &::-webkit-calendar-picker-indicator {
+            background: none;
+            background-image: url(../../../../assets/icons/redDate.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+          }
+        }
+      }
+    }
+
+    .checkboxSelectContainer {
+      display: flex;
+      // background: black;
+      // padding-bottom: 0;
+      justify-content: space-between;
+
+      .checkInput {
+        display: flex;
+        width: 272px;
+        height: auto;
+        align-items: center;
+
+        padding: 0;
+
+        input[type='checkbox'] {
+          appearance: none;
+
+          margin-left: auto;
+          width: 1.563rem;
+          height: 1.563rem;
+          border-width: 2rem;
+          border-radius: 5px;
+
+          &:not(:checked) {
+            border: 3px solid #246ee3;
+          }
+
+          &:checked {
+            background-position: center center;
+            background-color: #246ee3;
+            background-image: url('../../../../assets/icons/whiteCheck.svg');
+            background-repeat: no-repeat;
+          }
+        }
+      }
+
+      .selectContainer {
+        padding: 0;
+
+        width: 20rem;
+
+        .selectItem {
+          display: flex;
+          align-items: center;
+          padding: 0;
+          // background: white;
+          // -webkit-appearance: none;
+          // appearance: none;
+          // background-color: white;
+          background-color: #f4f4f4;
+          // border: none;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom: 2px solid #246ee3;
+          appearance: button;
+
+          width: 100%;
+          margin-right: auto;
+          margin-left: auto;
+          color: #246ee3;
+
+          // option {
+          //   background-color: #246ee3;
+          //   // appearance: none;
+          //   // -moz-backgound-color: #246ee3;
+
+          //   &::selected{
+          //     background-color: #4b88e8;
+          //   }
+
+          // }
+
+          // li {
+          //   background-color: red;
+          // }
+        }
+      }
+    }
+    label {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4b88e8;
+    }
+
+    .btnSubmitContainer {
+      // background-color: red;
+      display: flex;
+  
+      padding: 0;
+   
+      justify-content: center;
+      align-items: center;
+      // justify-items: center;
+
+      width: 100%;
+      height: 100%;
+      button {
+        // background-color: red;
+        border: none;
+        border-radius: 25px;
+        width: 14.563rem;
+        height: 4.813rem;
+        background-color: #246ee3;
+
+        font-family: 'Ubuntu', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.5rem;
+        line-height: 1.75rem;
+        color: white;
+
+
+        cursor: pointer;
+
+        &:hover{
+          background: rgba(36, 110, 227, 0.5);
+          transition: all 300ms ease-in-out;
+        }
+
+        // display: flex;
+        // justify-self: center;
+      }
+    }
+  }
+}

@@ -17,14 +17,27 @@
 
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	"workspaceFolder": "/workspace",
+	// "workspaceFolder": "/workspace",
+	"workspaceFolder": "/app/node/app",
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+		// "[prisma]":{
+		// 	"editor.defaultFormatter": "Prisma.prisma"
+		// }
+	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"Prisma.prisma"
+		"Prisma.prisma",
+		"esbenp.prettier-vscode",
+		"johnpapa.vscode-peacock",
+		"steoates.autoimport",
+		"formulahendry.auto-complete-tag",
+		"ms-vscode.vscode-typescript-tslint-plugin",
+		"streetsidesoftware.code-spell-checker",
+		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-next"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

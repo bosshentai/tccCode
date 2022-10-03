@@ -1,0 +1,109 @@
+@startuml ERDiagram
+
+' hide the spot
+hide circle
+
+
+skinparam linetype ortho
+
+entity "users" as u1 {
+  '* identifying_atrribute
+  * id : string <<generated>>
+  --
+  * name : string
+  * email : string
+  * birth_data : date
+  * role : roles
+  * password : string <<generated>>
+  * created_at : time
+  * updated_at : time
+}
+
+entity "clients" as c1 {
+  * id : String <<generated>>
+  --
+  * user_id : string <<FK>>
+}
+
+entity "training_plans" as t1 {
+  * id : string <<generated>>
+  --
+  * name : string
+  * description : string
+  * value : float
+  * create_at : time
+  * updated_at : time
+}
+
+entity "discounts" as d1 {
+  * id : string <<generated>>
+  --
+  * name : string
+  * value : float
+  * created_at : time
+  * updated_at : time
+}
+
+entity "personal_trainers" as pt {
+  * id : string <<generated>>
+  --
+  * user_id : string <<FK>>
+  * value : float
+}
+
+entity "employee" as e1 {
+  * id : string <<generated>>
+  --
+  * user_id : string <<FK>>
+  * emp_status : status
+}
+
+entity "manager" as m1 {
+  * id : string <<generated>>
+  --
+  user_id : strin <<FK>>
+}
+
+
+entity "Payment" as pay {
+  * id : string <<generated>>
+  --
+  * client_id : string <<FK>>
+  training_plan_name : string
+  training_plan_value : float
+  discount_name : string
+}
+
+entity "client_personal_trainer" as cpt{
+  * client_id : string <<FK>>
+  * personal_trainer_id : string <<FK>>
+}
+
+entity "client_training_plan" as ctp {
+  * client_id : string <<FK>>
+  * training_plan_id : string <<FK>>
+}
+
+entity "client_discount" as cd {
+  * client_id : string <<FK>>
+  * discount_id : string <<FK>>
+}
+
+
+u1 }|--|| c1
+u1 }|--|| m1
+u1 }|--|| e1
+u1 }|--|| pt
+
+
+d1 ||--|| cd
+t1 ||--|| ctp
+
+
+c1 ||--o{ cpt
+c1 ||--o{ cd
+c1 ||--o{ ctp
+c1 ||--o{ pay
+
+
+@enduml

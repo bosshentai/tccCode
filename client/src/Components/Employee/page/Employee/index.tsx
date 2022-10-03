@@ -1,78 +1,72 @@
-import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { EmployeeList } from "../../components/EmployeeList";
-import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
-import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
+import { useEffect, useState } from 'react'
+import ReactDOM from 'react-dom'
+import { EmployeeList } from '../../components/EmployeeList'
+import { DefaultPage } from '../../../shared/components/UIElements/DefaultPage'
+import { Backdrop } from '../../../shared/components/UIElements/Backdrop'
 
-import styles from "./styles.module.scss";
-import { AddEmployee } from "../AddEmployee";
-import axios, { AxiosResponse } from "axios";
-import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
-import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
-import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
+import styles from './styles.module.scss'
+import { AddEmployee } from '../AddEmployee'
+import axios, { AxiosResponse } from 'axios'
+import { EmptyPage } from '../../../shared/components/UIElements/EmptyPage'
+import { BtnBottomSide } from '../../../shared/components/BtnBottomSide'
+import { DefaultInsidePage } from '../../../shared/components/UIElements/DefaultInsidePage'
 
-const portalElement = document.getElementById("overlays") as HTMLElement;
+const portalElement = document.getElementById(
+  'overlays',
+) as HTMLElement
+
+
+const urlPath = 'http://localhost:5000/api/employee/all'
 
 type employee = {
-  id: string;
-  name: string;
-  email: string;
-  status: string;
-};
+  id: string
+  name: string
+  email: string
+  status: string
+}
 
 // type GetEmployeeResponse = {
 //   data: employee[];
 // };
 
-
-
 export const Employee = () => {
-  const [listEmpty, setListEmpty] = useState(true);
+  const [listEmpty, setListEmpty] = useState(true)
 
-  const [addEmployeeIsShown, setEmployeeIsShown] = useState(false);
+  const [addEmployeeIsShown, setEmployeeIsShown] =
+    useState(false)
 
-  const [listEmployee, setListEmployee] = useState<employee[]>([]);
+  const [listEmployee, setListEmployee] = useState<
+    employee[]
+  >([])
 
   useEffect(() => {
-    const urlPath = "http://localhost:5000/api/employee/all";
 
     try {
       // setInterval(() => {
       axios.get(urlPath).then((response: AxiosResponse) => {
-        setListEmployee(response.data);
-      });
+        setListEmployee(response.data)
+      })
 
-      // setListEmployee(DUMMY_DATA);
-      // }, 1000);
-
-      // const { data ,status } =  axios.get<GetEmployeeResponse>(urlPath,
-      //   {
-      //     headers: {
-      //       Accept: "application/json",
-      //     },}
-      //     );
-
-      //     return data;
     } catch (error) {
-      console.log("Error: " + error);
+      console.log('Error: ' + error)
     }
 
     if (listEmployee.length === 0) {
-      setListEmpty(true);
+      setListEmpty(true)
     } else {
-      setListEmpty(false);
+      setListEmpty(false)
     }
-  }, [listEmployee, setListEmployee]);
+  }, [listEmployee.length])
 
-  // const classDefaultController = listEmpty ? `` : `${styles.listEmpty}`;
+  
 
   const showAddEmployeeHandler = () => {
-    setEmployeeIsShown(true);
-  };
+    setEmployeeIsShown(true)
+  }
 
   const closeAddEmployeeHandler = () => {
-    setEmployeeIsShown(false);
-  };
+    setEmployeeIsShown(false)
+  }
 
   return (
     <>
@@ -80,16 +74,21 @@ export const Employee = () => {
         ReactDOM.createPortal(
           <>
             <Backdrop onClose={closeAddEmployeeHandler} />,
-            <AddEmployee onClose={closeAddEmployeeHandler} />
+            <AddEmployee
+              onClose={closeAddEmployeeHandler}
+            />
           </>,
-          portalElement
+          portalElement,
         )}
       <DefaultPage>
         {/* {listEmpty && <p className={styles.p}>Sem funcionários</p>} */}
-        {listEmpty && <EmptyPage message="Sem Funcionários" />}
+        {listEmpty && (
+          <EmptyPage message="Sem Funcionários" />
+        )}
 
         {!listEmpty && (
-          <DefaultInsidePage className={styles.tableContainer}>
+          <DefaultInsidePage
+            className={styles.tableContainer}>
             <div className={styles.header}>
               <div className={styles.title}>
                 <p>Nome</p>
@@ -104,10 +103,11 @@ export const Employee = () => {
             <EmployeeList employees={listEmployee} />
           </DefaultInsidePage>
         )}
-        <BtnBottomSide btnText="Adicionar Funcionário"
+        <BtnBottomSide
+          btnText="Adicionar Funcionário"
           showHandler={showAddEmployeeHandler}
         />
       </DefaultPage>
     </>
-  );
-};
+  )
+}

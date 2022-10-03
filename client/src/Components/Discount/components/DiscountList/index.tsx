@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 type discount = {
   id: string;
   name: string;
-  amount: number;
+  value: number;
   // descrition: string;
 };
 
@@ -23,7 +23,7 @@ export const DiscountList = (props: discountProps) => {
           key={discount.id}
           id={discount.id}
           name={discount.name}
-          amount={discount.amount}
+          amount={discount.value}
         />
       ))}
     </ul>

@@ -61,14 +61,14 @@ const formReducer = (_state: any, action: Action) => {
   }
 };
 
-type AddEmployeetype = {
-  name: string;
-  email: string;
-  CNI: string;
-  NIF: string;
-  Birth: string;
-  tel: string;
-};
+// type AddEmployeetype = {
+//   name: string;
+//   email: string;
+//   CNI: string;
+//   NIF: string;
+//   Birth: string;
+//   tel: string;
+// };
 
 export const useForm = (initialInputs: object, initialIsValid: any) => {
   const [formState, dispatch] = useReducer(formReducer, {
@@ -85,12 +85,12 @@ export const useForm = (initialInputs: object, initialIsValid: any) => {
     });
   }, []);
 
-  const setFormData = useCallback((inputData: any) => {
-    dispatch({
-      type: ActionType.SETDATA,
-      inputs: inputData,
-    });
-  }, []);
+  // const setFormData = useCallback((inputData: any) => {
+  //   dispatch({
+  //     type: ActionType.SETDATA,
+  //     inputs: inputData,
+  //   });
+  // }, []);
 
   return [formState, inputHandler];
 };

@@ -5,10 +5,15 @@ import styles from "./styles.module.scss";
 
 import whiteCross from "../../../../assets/icons/whiteCross.svg";
 import blueCross from "../../../../assets/icons/blueCross.svg";
-import { validName } from "../../../shared/util/validName";
+// import { validName } from "../../../shared/util/validName";
+import axios from "axios";
 
 
-export const AddTrainingPlan = () => {
+type propsType = {
+  onClose: () => void;
+}
+
+export const AddTrainingPlan = (props: propsType) => {
 
   const nameInputRef = useRef<HTMLInputElement>(null);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
@@ -28,14 +33,14 @@ export const AddTrainingPlan = () => {
   }
 
 
-  const formRegisterTrainingPlan = (event: React.FormEvent<HTMLFormElement>) => {
+  const formRegisterTrainingPlan = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const enteredName = nameInputRef.current!.value;
       const nameIsNotEmpty = enteredName.trim().length !== 0;
-      const nameIsValid = validName(enteredName);
+      // const nameIsValid = validName(enteredName);
 
-      const nameIsOk = nameIsNotEmpty && nameIsValid;
+      const nameIsOk = nameIsNotEmpty ;
 
 
       const enteredDescription = descriptionInputRef.current!.value;
@@ -66,9 +71,30 @@ export const AddTrainingPlan = () => {
         setIsAmountOk(true);
         setIsNameOk(true)
 
-        console.log("Nome do Plano de Treino: " +  enteredAmount);
-        console.log("Descrição do Plano de Treino" + enteredDescription);
-        console.log("Montante:" + enteredAmount);
+        // console.log("Nome do Plano de Treino: " +  enteredAmount);
+        // console.log("Descrição do Plano de Treino" + enteredDescription);
+        // console.log("Montante:" + enteredAmount);
+
+        const urlPatch = "http://localhost:5000/api/trainingplan/add";
+
+        const formData = {
+          name: enteredName,
+          description: enteredDescription,
+          value: enteredAmount
+        }
+
+        try {
+
+          await axios.post(urlPatch,formData);
+
+
+          props.onClose();
+          
+        } catch (error) {
+          console.log(error)
+        }
+
+
 
 
       }
@@ -95,7 +121,7 @@ export const AddTrainingPlan = () => {
         className={styles.right}
         onMouseEnter={hoverHandler}
         onMouseLeave={leaveHandler}
-      // onClick={props.onClose}
+      onClick={props.onClose}
       >
         <img src={iconChange} alt="close" />
       </button>

@@ -1,0 +1,42 @@
+
+
+import { Request, Response, NextFunction } from "express";
+import { prismaClient } from "../../database/prismaClient";
+import { HttpError } from "../../models/http-error";
+
+
+
+
+export class CreateDiscountController {
+ 
+  async handle(request: Request, response:Response,next:NextFunction)
+{
+
+
+  if(request.method !== "POST"){
+    const error = new HttpError("Method not allowed", 405);
+    return next(error);
+  }
+
+
+  try{
+
+    const { name, value, description} = request.body;
+
+    const discount = await prismaClient.discount.create({
+      data:{
+        name: name,
+        description: description,
+        value: Number(value)
+      }
+    })
+
+
+    return response.status(201).json(discount);
+
+  }catch(e){
+    const error = new HttpError("Fail to add Discount",500);
+    return next(error);
+  }
+}
+}

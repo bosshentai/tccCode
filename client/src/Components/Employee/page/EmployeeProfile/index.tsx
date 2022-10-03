@@ -8,7 +8,8 @@ import whiteClose from "../../../../assets/icons/whiteLightClose.svg";
 import whiteYes from "../../../../assets/icons/whitEyes.svg";
 
 import styles from "./styles.module.scss";
-// import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
 // import { transpileModule } from "typescript";
 
 
@@ -23,18 +24,18 @@ type employeeInfoType = {
 
 }
 
-const DUMMY_DATA = {
-  id: "1asadas",
-  name: "Hernâni",
-  email: "baptista@gmail.com",
-  birthDate: "01/01/2000",
-  CNI: "123456789",
-  NIF: "123456789",
-  phone: "9541850",
-};
+// const DUMMY_DATA = {
+//   id: "1asadas",
+//   name: "Hernâni",
+//   email: "baptista@gmail.com",
+//   birthDate: "01/01/2000",
+//   CNI: "123456789",
+//   NIF: "123456789",
+//   phone: "9541850",
+// };
 
 export function EmployeeProfile() {
-  // const getEmployeeUrl = `http://localhost:8080/api/employee/`;
+  const getEmployeeUrl = 'http://localhost:5000/api/employee/';
 
 
   const { id } = useParams();
@@ -45,31 +46,36 @@ export function EmployeeProfile() {
   const [verifiedId, setVerifiedId] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  // const [employee, setEmployee] = useState<any>({});
+ 
 
   useEffect(() => {
 
-     setEmployeeInfo(DUMMY_DATA);
 
-    // axios.get(getEmployeeUrl + id).then((response) => {
-    // setEmployee(response.data)
-    // });
+    axios.get(getEmployeeUrl + id).then(
+      (
+        response: AxiosResponse
+      ) => {
+      
+        setEmployeeInfo(response.data)
+      }
+    )
+
     if (id === "1") {
       setVerifiedId(true);
     }
 
     else {
-      // navigate("/employee");
+     
       setVerifiedId(false);
     }
   }, [verifiedId, id, navigate]);
 
-  // const [teleNumber, setTeleNumber] = useState();
+ 
 
   const handleTeleNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // setTeleNumber(event.target.value);
+
   };
 
   const handleDisable = () => {
@@ -77,10 +83,6 @@ export function EmployeeProfile() {
   };
 
   const handleClose = () => {
-    // const savedTelePhoneNumber = DUMMY_DATA.number;
-
-    // setTeleNumber(savedTelePhoneNumber);
-
     setIsOpen(false);
   };
 
@@ -94,6 +96,7 @@ export function EmployeeProfile() {
 
   return (
     <DefaultPage>
+      <DefaultInsidePage>
       <div className={styles.headerContainer}>
         <div className={styles.left}>
           <button
@@ -107,34 +110,44 @@ export function EmployeeProfile() {
         <h1>Informação do Funcionário</h1>
       </div>
       <div className={styles.employeeInfoContainer}>
-        <p>Nome: {id}</p>
+
         <div className={styles.infoContainer}>
           <label>Nome:</label>
-          <p>{DUMMY_DATA.name}</p>
+          <p>
+            {employeeInfo?.name}
+          </p>
         </div>
         <div className={styles.infoContainer}>
           <label>Email:</label>
-          <p>{DUMMY_DATA.email}</p>
+          <p>
+            {employeeInfo?.email}
+          </p>
         </div>
         <div className={styles.infoContainer}>
           <label>Data de Nascimento:</label>
-          <p>{DUMMY_DATA.birthDate}</p>
+          <p>
+            {employeeInfo?.birthDate}
+          </p>
         </div>
         <div className={styles.infoContainer}>
           <label>CNI:</label>
-          <p>{DUMMY_DATA.CNI}</p>
+          <p>
+
+            {employeeInfo?.CNI}
+          </p>
         </div>
         <div className={styles.infoContainer}>
           <label>NIF:</label>
-          <p>{DUMMY_DATA.NIF}</p>
+          <p>
+            {employeeInfo?.NIF}
+          </p>
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.telephoneContainer}>
             <label>Telefone:</label>
-
             <input
               type="text"
-              // value={teleNumber}
+              value={employeeInfo?.phone}
               className={teleNumberCssController}
               onChange={handleTeleNumberChange}
               disabled={!isOpen}
@@ -155,6 +168,7 @@ export function EmployeeProfile() {
           </div>
         </div>
       </div>
+      </DefaultInsidePage>
     </DefaultPage>
   );
 }

@@ -1,5 +1,16 @@
 {
   "cSpell.words": [
-    "nogain"
-  ]
+    "lomba",
+    "nogain",
+    "PERSONALTRAINER",
+    "trainingplan",
+    "trainingplans"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#422c74"
+  },
+  "peacock.remoteColor": "#215732",
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
 }
