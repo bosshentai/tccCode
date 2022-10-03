@@ -50,6 +50,7 @@ export class LoginController {
     let token;
     try {
       token = sign({ userId: existingUser.id }, authConfig.secret, {
+        // expiresIn: '1h'
         expiresIn: 86400
       })
       
