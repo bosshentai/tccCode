@@ -2,6 +2,7 @@ import { Request, Response, NextFunction} from 'express';
 
 import {prismaClient} from "../../database/prismaClient";
 import { HttpError } from '../../models/http-error';
+import { GetPersonalTrainerByIdUseCase } from '../../useCases/PersonalTrainer/GetPersonalTrainerByIdUseCase';
 
 
 
@@ -12,23 +13,25 @@ export const GetPersonalTrainerByIdController = async (request: Request, respons
     return next(error);
   }
 
+
+
   const { id } = request.params;
 
-  try{
-    const personalTrainer = await prismaClient.personalTrainer.findUnique({
-      where:{
-        id: id,
-      }
-    })
+  const getPersonalTrainerByIdUseCase = new GetPersonalTrainerByIdUseCase();
 
-    return response.status(200).json(personalTrainer)
-  } catch(err){
 
-    const error = new HttpError("Fail to Find Personal Trainer by ID",500);
+  try {
+    const selectedPersonalTrainer = await getPersonalTrainerByIdUseCase.handle({id})
 
-    return next(error);
 
+    return response.status(200).json(selectedPersonalTrainer);
+    
+  } catch (e) {
+    return response.status(500).json("Fail to Find Personal Trainer by Id");
   }
+
+
+ 
 
 }
 
