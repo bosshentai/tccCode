@@ -8,10 +8,11 @@ export class CreatePersonalTrainerController {
     request: Request,
     response: Response,
     next: NextFunction,
-  ) {
+  ): Promise<Response> {
     if (request.method !== 'POST') {
-      const error = new HttpError('Method not allowed', 405)
-      return next(error)
+      // const error = new HttpError('Method not allowed', 405)
+      // return next(error)
+      return response.status(405).json("Method not allowed");
     }
 
     const errors = validationResult(request)
@@ -48,7 +49,5 @@ export class CreatePersonalTrainerController {
         .status(400)
         .json('Fail to Create Personal Trainer')
     }
-
-    
   }
 }

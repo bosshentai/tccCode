@@ -14,7 +14,7 @@ export class LoginController {
     request: Request,
     response: Response,
     next: NextFunction,
-  ) {
+  ) :Promise<Response>{
     const { email, password } = request.body
 
 
@@ -25,12 +25,15 @@ export class LoginController {
         email,
         password
       })
-    }catch(e){
-      const error = new HttpError('No internet connection',500)
-     return next(error)
-    }
+
 
     return response.json(token)
+    }catch(e){
+      return response.status(500).json("NO internet")
+    //   const error = new HttpError('No internet connection',500)
+    //  return next(error)
+    }
+
 
     // const loginUseCase = new LoginUseCase();
 

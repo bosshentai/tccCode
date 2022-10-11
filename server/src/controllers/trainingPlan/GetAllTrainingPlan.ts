@@ -6,7 +6,7 @@ export class GetAllTrainingPlansController {
     request: Request,
     response: Response,
     next: NextFunction,
-  ) {
+  ):Promise<Response> {
     if (request.method !== 'GET') {
       return response.status(405).json('Method not allowed')
     }

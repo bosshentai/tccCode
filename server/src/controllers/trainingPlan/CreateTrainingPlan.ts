@@ -3,7 +3,10 @@ import { Request, Response } from 'express'
 import { CreateTrainingPlanUseCase } from '../../useCases/TrainingPlan/CreateTrainingPlanUseCase'
 
 export class CreateTrainingPlanController {
-  async handle(request: Request, response: Response) {
+  async handle(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     if (request.method !== 'POST') {
       return response.status(405).json('Method not allowed')
     }
@@ -23,11 +26,12 @@ export class CreateTrainingPlanController {
     try {
       const createTrainingPlanUseCase =
         new CreateTrainingPlanUseCase()
-      const trainingplan = await createTrainingPlanUseCase.handle({
-        name,
-        description,
-        value: Number(value),
-      })
+      const trainingplan =
+        await createTrainingPlanUseCase.handle({
+          name,
+          description,
+          value: Number(value),
+        })
 
       return response.status(201).json(trainingplan)
     } catch (err) {

@@ -7,13 +7,13 @@ export class GetAllEmailUserController {
     request: Request,
     response: Response,
     next: NextFunction,
-  ) {
+  ):Promise<Response> {
 
     //  allEmail;
 
     if (request.method !== 'GET') {
-      const error = new HttpError('Method not allowed', 405)
-      return next(error)
+      // const error = new HttpError('Method not allowed', 405)
+      // return next(error)
     }
 
     try {
@@ -25,11 +25,12 @@ export class GetAllEmailUserController {
 
       return response.status(200).json(allEmail)
     } catch (err) {
-      const error = new HttpError(
-        "Couldn't get all User Email",
-        404,
-      )
-      return error
+      // const error = new HttpError(
+      //   "Couldn't get all User Email",
+      //   404,
+      // )
+      // return error
+      return response.status(404).json("Couldn't get all User Email")
     }
 
 

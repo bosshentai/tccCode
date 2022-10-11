@@ -33,27 +33,27 @@ app.use('/auth', userRouter)
 
 app.use('/api', router)
 
-app.use(
-  (
-    error: Error,
-    _request: Request,
-    response: Response,
-    _next: NextFunction,
-  ) => {
-    console.log(error)
-    response.status(500).json({
-      status: 'Error',
-      message: error.message,
-    })
-  },
-)
-
 // app.use(
-//   (req: Request, res: Response, next: NextFunction) => {
-//     const error = new HttpError('Not found', 404)
-//     throw error
+//   (
+//     error: Error,
+//     _request: Request,
+//     response: Response,
+//     _next: NextFunction,
+//   ) => {
+//     console.log(error)
+//     response.status(500).json({
+//       status: 'Error',
+//       message: error.message,
+//     })
 //   },
 // )
+
+app.use(
+  (req: Request, res: Response, next: NextFunction) => {
+    const error = new HttpError('Not found', 404)
+    throw error
+  },
+)
 
 app.listen(5000, () =>
   console.log('server is running on port 5000'),
