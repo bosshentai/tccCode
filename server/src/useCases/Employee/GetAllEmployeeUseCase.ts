@@ -15,7 +15,7 @@ export class GetAllEmployeesUseCase {
       },
     })
 
-    const employee = data.map((item) => {
+    const employee =  data.map((item) => {
       return {
         id: item.id,
         status: item.status,

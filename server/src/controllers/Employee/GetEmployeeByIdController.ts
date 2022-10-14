@@ -28,7 +28,7 @@ export class GetEmployeeByIdController {
     } catch (e) {
       return response
         .status(500)
-        .json('Fail to Findo Employee by Id')
+        .json('Fail to Find Employee by Id')
     }
 
     // let employee

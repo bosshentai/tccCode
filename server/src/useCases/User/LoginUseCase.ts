@@ -41,10 +41,10 @@ export class LoginUseCase {
       )
     }
 
-    let isValidPassword = false
+    // let isValidPassword = false
 
     // try {
-    isValidPassword = await compare(
+    const isValidPassword = await compare(
       password,
       existingUser.password,
     )
@@ -93,13 +93,7 @@ export class LoginUseCase {
       await generateRefreshTokenProvider.execute(
         existingUser.id,
       )
-    // } catch (e) {
-    //   const error = new HttpError(
-    //     'Login in failed, please try again later.',
-    //     500,
-    //   )
-    //   return error
-    // }
+
 
     return { token, refreshToken }
   }

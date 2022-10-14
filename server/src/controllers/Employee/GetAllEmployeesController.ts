@@ -25,7 +25,7 @@ export class GetAllEmployeesController {
       new GetAllEmployeesUseCase()
 
     try {
-      const listEmployee = getAllEmployeeUseCase.handle()
+      const listEmployee = await getAllEmployeeUseCase.handle()
 
 
       return response.status(200).json(listEmployee)

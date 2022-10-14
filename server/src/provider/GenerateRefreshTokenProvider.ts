@@ -15,6 +15,8 @@ export class GenerateRefreshTokenProvider {
             expiresIn,
           },
         })
+
+        return generateRefreshToken
     } catch (e) {
       // throw new Error("Can create the Refresh Token")
       const error = new HttpError("Can't create the Refresh Token",500)

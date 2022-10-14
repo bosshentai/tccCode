@@ -19,7 +19,9 @@ export class GetAllDiscountsController {
       new GetAllDiscountUseCase()
 
     try {
-      const listDiscount = getAllDiscountUseCase.handle()
+
+      // not done 
+      const listDiscount = await getAllDiscountUseCase.handle()
 
       return response.status(200).json(listDiscount)
     } catch (e) {
