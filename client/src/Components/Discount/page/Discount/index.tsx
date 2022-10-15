@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { BtnBottomSide } from '../../../shared/components/BtnBottomSide'
 import { Backdrop } from '../../../shared/components/UIElements/Backdrop'
@@ -22,32 +22,69 @@ type discountype = {
 }
 
 export const Discount = () => {
-  const [listEmpty, setListEmpty] = React.useState(true)
+  const [userRole, setUserRole] = useState(false)
+
+  const [listEmpty, setListEmpty] = useState(true)
 
   const [addDiscountIsShown, setDiscountIsShown] =
-    React.useState(false)
+    useState(false)
 
-  const [listDiscount, setListDiscount] = React.useState<
+  const [listDiscount, setListDiscount] = useState<
     discountype[]
   >([])
 
   useEffect(() => {
+    async function loadUserRole() {
+      const { userId } = await JSON.parse(
+        localStorage.getItem('userData') || '',
+      )
+
+      const pathUrl = `http://localhost:5000/api/user/${userId}`
+
+      try {
+        const getInfo = await axios.get(pathUrl)
+
+        if (getInfo.data.role === 'MANAGER') {
+          setUserRole(true)
+        }
+      } catch (e) {
+        return
+      }
+    }
+
+    loadUserRole()
+  }, [])
+
+  useEffect(() => {
     // setListDiscount(DUMMY_Data);
-    const urlPath = 'http://localhost:5000/api/discount/all'
 
-    try {
-      axios.get(urlPath).then((response: AxiosResponse) => {
-        setListDiscount(response.data)
-      })
-    } catch (error) {
-      console.log('Error: ' + error)
-    }
+    async function getDiscountList() {
+      const urlPath =
+        'http://localhost:5000/api/discount/all'
 
-    if (listDiscount.length === 0) {
-      setListEmpty(true)
-    } else {
-      setListEmpty(false)
+      try {
+        const response = await axios.get(urlPath)
+
+        const filteredResponse = await response.data.filter(
+          (item: discountype) => item.name !== 'null',
+        )
+
+        setListDiscount(filteredResponse)
+        // axios.get(urlPath).then((response: AxiosResponse) => {
+        //   setListDiscount(response.data)
+        // })
+      } catch (error) {
+        
+        console.log('Error: ' + error)
+      }
+
+      if (listDiscount.length === 0) {
+        setListEmpty(true)
+      } else {
+        setListEmpty(false)
+      }
     }
+    getDiscountList()
   }, [listDiscount.length])
 
   const showAddDiscountHandler = () => {
@@ -81,11 +118,12 @@ export const Discount = () => {
             <DiscountList discounts={listDiscount} />
           </DefaultInsidePage>
         )}
-
-        <BtnBottomSide
-          btnText="Adicionar Desconto"
-          showHandler={showAddDiscountHandler}
-        />
+        {userRole && (
+          <BtnBottomSide
+            btnText="Adicionar Desconto"
+            showHandler={showAddDiscountHandler}
+          />
+        )}
       </DefaultPage>
     </>
   )

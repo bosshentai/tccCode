@@ -1,21 +1,24 @@
 // import { DefaultInsidePage } from '../../shared/components/UIElements/DefaultInsidePage/index';
 import axios, { AxiosResponse } from 'axios'
 import {
-  Dispatch,
-  SetStateAction,
   useContext,
   useRef,
   useState,
 } from 'react'
-import { DefaultPage } from '../../shared/components/UIElements/DefaultPage'
 import { AuthContext } from '../../shared/context/auth-context'
 import { validEmail } from '../../shared/util/validEmail'
 
 import styles from './styles.module.scss'
 
-export interface LoginResponse {
+export interface refreshToken {
   userId: string
+  expiresIn: number
+}
+
+export interface LoginResponse {
+  // userId: string
   token: string
+  refreshToken: refreshToken
 }
 
 type propsType = {
@@ -74,13 +77,13 @@ export const Login = () => {
         try {
           const responseData: AxiosResponse<LoginResponse> =
             await axios.post(urlPatch, loginData)
-        
-        const  expirationDate =  new Date(new Date().getTime() + 1000 * 60 * 60)
+
+          // const  expirationDate =  new Date(new Date().getTime() + 1000 * 60 * 60)
 
           auth.login(
-            responseData.data.userId,
+            responseData.data.refreshToken.userId,
             responseData.data.token,
-            expirationDate
+            responseData.data.refreshToken.expiresIn,
           )
           // return true
         } catch (error) {

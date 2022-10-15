@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { BtnBottomSide } from '../../../shared/components/BtnBottomSide'
