@@ -80,6 +80,12 @@ export class LoginUseCase {
     token = await generateTokenProvider.execute(
       existingUser.id,
     )
+
+    await prismaClient.refreshToken.deleteMany({
+      where:{
+        userId: existingUser.id
+      }
+    })
     // } catch (e) {
     //   const error = new HttpError(
     //     'Login in failed, please try again later.',
@@ -95,6 +101,6 @@ export class LoginUseCase {
       )
 
 
-    return { token, refreshToken }
+    return { token, refreshToken ,userId: existingUser.id}
   }
 }

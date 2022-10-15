@@ -1,8 +1,6 @@
-import { prisma, PrismaClient } from '@prisma/client'
 import dayjs from 'dayjs'
-import { ClientRequest } from 'http'
 import { prismaClient } from '../../database/prismaClient'
-import { HttpError } from '../../models/http-error'
+
 import { GenerateRefreshTokenProvider } from '../../provider/GenerateRefreshTokenProvider'
 import { GenerateTokenProvider } from '../../provider/GenerateTokenProvider'
 
@@ -43,7 +41,7 @@ export class RefreshTokenUseCase {
           refreshToken.id,
         )
 
-        return {token,newRefreshToken}
+      return { token, refreshToken: newRefreshToken }
     }
 
     return token

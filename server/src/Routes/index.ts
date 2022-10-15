@@ -1,3 +1,4 @@
+import { GetUserByIdController } from './../controllers/User/GetUserbyIdController'
 import { CreatePaymentController } from './../controllers/payment/CreatePaymentController'
 import { GetAllClientController } from './../controllers/Client/controllers/GetAllClientController'
 import { GetAllTrainingPlansController } from './../controllers/trainingPlan/GetAllTrainingPlan'
@@ -20,9 +21,9 @@ const router = Router()
 
 //Controllers
 
-
 //User
-const getAllUserEmail = new GetAllEmailUserController();
+const getAllUserEmail = new GetAllEmailUserController()
+const getUserByIdInfo = new GetUserByIdController()
 
 // Training plan
 const createTrainingPlan =
@@ -87,7 +88,8 @@ router.post('/payment/add', createPayment.handle)
 
 //Get
 
-router.get('/user/allemail',getAllUserEmail.handle)
+router.get('/user/allemail', getAllUserEmail.handle)
+router.get('/user/:id',getUserByIdInfo.handle)
 
 router.get('/trainingplan/all', getAllTrainingPlan.handle)
 
@@ -102,7 +104,7 @@ router.get(
 )
 
 router.get('/client/all', getAllClients.handle)
-router.get("/client/:id",getClientById.handle)
+router.get('/client/:id', getClientById.handle)
 
 // patch
 
