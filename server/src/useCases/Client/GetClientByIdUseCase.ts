@@ -13,6 +13,24 @@ export class GetClientByIdUseCase {
           user: {
             select: {
               name: true,
+              email: true,
+              birth_date: true,
+            },
+          },
+          cpt: {
+            select: {
+              id: true,
+              // personal_trainer_id,
+            },
+          },
+          ctp: {
+            select: {
+              id: true,
+            },
+          },
+          cd: {
+            select: {
+              id: true,
             },
           },
         },
@@ -22,6 +40,15 @@ export class GetClientByIdUseCase {
       throw Error("client don't exist")
     }
 
-    return clientExist
+    const clientInfo = {
+      name: clientExist.user.name,
+      email: clientExist.user.email,
+      birth: clientExist.user.birth_date,
+      personalTrainerID: clientExist.cd?.id,
+      trainingPlanID : clientExist.ctp?.id,
+      discountID: clientExist.cd?.id
+    }
+
+    return clientInfo
   }
 }

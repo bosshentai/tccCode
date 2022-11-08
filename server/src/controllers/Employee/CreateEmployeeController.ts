@@ -1,11 +1,7 @@
 import { validationResult } from 'express-validator'
 
-import { Roles } from '@prisma/client'
 import { Request, Response, NextFunction } from 'express'
 
-import { prismaClient } from '../../database/prismaClient'
-import { HttpError } from '../../models/http-error'
-import { hash } from 'bcryptjs'
 import { CreateEmployeeUseCase } from '../../useCases/Employee/CreateEmployeeUseCase'
 // import
 
@@ -38,7 +34,7 @@ export class CreateEmployeeController {
       new CreateEmployeeUseCase()
 
     try {
-      const newEmployee = createEmployeeUseCase.handle({
+      const newEmployee = await createEmployeeUseCase.handle({
         name,
         email,
         phone,

@@ -16,10 +16,15 @@ import { CreateClientController } from '../controllers/Client/controllers/Create
 import { CreatePersonalTrainerController } from '../controllers/PersonalTrainer/CreatePersonalTrainerController'
 import { GetClientByIdController } from '../controllers/Client/controllers/GetClientByIdController'
 import { GetAllEmailUserController } from '../controllers/User/GetAllEmailController'
+import { CreateManagerController } from '../controllers/Manager/CreateManagerController'
 
 const router = Router()
 
 //Controllers
+
+//Manager
+const createManager = new CreateManagerController();
+
 
 //User
 const getAllUserEmail = new GetAllEmailUserController()
@@ -60,6 +65,9 @@ const getClientById = new GetClientByIdController()
 const createPayment = new CreatePaymentController()
 
 //Post
+
+
+router.post("/manager/add",createManager.handle)
 
 router.post('/trainingplan/add', createTrainingPlan.handle)
 

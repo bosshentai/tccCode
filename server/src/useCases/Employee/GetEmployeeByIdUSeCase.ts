@@ -3,8 +3,8 @@ import { IGetEmployeeByIdDTO } from './../../repositories/dto/Employee/IGetEmplo
 
 export class GetEmployeeByIdUseCase {
   async handle({ id }: IGetEmployeeByIdDTO) {
-    const employee = await prismaClient.employee.findUnique(
-      {
+    const employeeData =
+      await prismaClient.employee.findUnique({
         where: {
           id,
         },
@@ -20,12 +20,21 @@ export class GetEmployeeByIdUseCase {
             },
           },
         },
-      },
-    )
+      })
 
-    if(!employee){
-      throw new Error("Employee ID not found")
+    if (!employeeData) {
+      throw new Error('Employee ID not found')
     }
+
+    const employee = {
+      name : employeeData.user.name,
+      email: employeeData.user.email,
+      birth: employeeData.user.birth_date,
+      phone: employeeData.user.phone,
+      CNI: employeeData.user.CNI,
+      NIF: employeeData.user.NIF
+    }
+
 
 
     return employee
