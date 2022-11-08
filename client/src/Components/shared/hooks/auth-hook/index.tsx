@@ -42,16 +42,16 @@ export const useAuth = () => {
     localStorage.removeItem('userData')
   }, [])
 
-  // useEffect(() => {
-  //   if (token && tokenExpirationDate) {
-  //     console.log(tokenExpirationDate)
-  //     // const remainingTime = new Date(tokenExpirationDate) - new Date().getTime()
-  //     // const remainingTime =  new Date(new Date().getTime() + 1000 * 60 * 60).getTime()
-  //     // logoutTimer = setTimeout(logout,remainingTime)
-  //   } else {
-  //     clearTimeout(logoutTimer)
-  //   }
-  // }, [token, logout, tokenExpirationDate])
+  useEffect(() => {
+    if (token && tokenExpirationDate) {
+      console.log(tokenExpirationDate)
+      // const remainingTime = new Date(tokenExpirationDate) - new Date().getTime()
+      // const remainingTime =  new Date(new Date().getTime() + 1000 * 60 * 60).getTime()
+      // logoutTimer = setTimeout(logout,remainingTime)
+    } else {
+      clearTimeout(logoutTimer)
+    }
+  }, [token, logout, tokenExpirationDate])
 
   useEffect(() => {
     try {
