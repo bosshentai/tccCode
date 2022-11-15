@@ -1,5 +1,6 @@
 
 
+import { NavLink } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 
@@ -17,6 +18,7 @@ export const ClientItem = (props: clientInfo) => {
 
   return (
     <li key={id} id={id} className={styles.clientContainer}>
+      <NavLink to={`Profile/${id}`}>
       <div className={styles.info}>
         <p>{name}</p>
       </div>
@@ -26,6 +28,7 @@ export const ClientItem = (props: clientInfo) => {
       <div className={styles.info}>
         <p>{trainPlan}</p>
       </div>
+      </NavLink>
     </li>
   )
 }

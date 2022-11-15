@@ -16,7 +16,7 @@ type employeeInfoType = {
   id: string
   name: string
   email: string
-  birthDate: string
+  birth: string
   CNI: string
   NIF: string
   phone: string
@@ -103,7 +103,7 @@ export function EmployeeProfile() {
           </div>
           <div className={styles.infoContainer}>
             <label>Data de Nascimento:</label>
-            <p>{employeeInfo?.birthDate}</p>
+            <p>{employeeInfo?.birth}</p>
           </div>
           <div className={styles.infoContainer}>
             <label>CNI:</label>

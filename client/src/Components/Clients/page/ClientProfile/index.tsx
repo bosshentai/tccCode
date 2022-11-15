@@ -7,8 +7,21 @@ import whiteYes from '../../../../assets/icons/whitEyes.svg'
 
 import styles from './styles.module.scss'
 import { useNavigate } from 'react-router-dom'
+import { PersonalTrainer } from '../../../PersonalTrainer/page/PersonalTrainer/index'
+
+type clientProfile = {
+  id: string
+  name: string
+  email: string
+  birth: string
+  personalTrainerID: string
+  trainingPlanID: string
+  discountID: string
+}
 
 export function ClientProfile() {
+  // const {}
+
   const navigate = useNavigate()
   // const
 
@@ -40,23 +53,40 @@ export function ClientProfile() {
           </div>
           <div className={styles.infoContainer}>
             <label>Data de Nascimento:</label>
-            <p>data de nascimento  do cliente</p>
+            <p>data de nascimento do cliente</p>
           </div>
 
           <div className={styles.infoContainer}>
-            <label>Plano de treino</label>
-            <p>Plano de Treino do cliente</p>
+            <div className={styles.chooseContainer}>
+              <label>Plano de treino:</label>
+              <p>Plano de Treino do cliente</p>
+            </div>
+            <div className={styles.btnContainer}>
+              <button>Alterar</button>
+            </div>
           </div>
           <div className={styles.infoContainer}>
-            <label>Personal Trainer</label>
-            <p>Personal Trainer do cliente</p>
+            <div className={styles.chooseContainer}>
+              <label>Personal Trainer:</label>
+              <p>Personal Trainer do cliente</p>
+            </div>
+            <div className={styles.btnContainer}>
+              <button>Alterar</button>
+            </div>
           </div>
           <div className={styles.infoContainer}>
-            <label>Plano de treino</label>
-            <p>Plano de Treino do cliente</p>
+            <div className={styles.chooseContainer}>
+              <label>Plano de treino:</label>
+              <p>Plano de Treino do cliente</p>
+            </div>
+            <div className={styles.btnContainer}>
+              <button>Alterar</button>
+            </div>
           </div>
+          {/* <button>Pagamento</button> */}
         </div>
       </DefaultInsidePage>
+      <button className={styles.btnPay}>Pagamento</button>
     </DefaultPage>
   )
 }
