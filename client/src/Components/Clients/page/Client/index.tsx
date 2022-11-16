@@ -94,7 +94,6 @@ export const Client = () => {
             <ClientList clients={listClient} />
           </DefaultInsidePage>
         )}
-
         <BtnBottomSide
           btnText="Adicionar Cliente"
           showHandler={showAddClientHandler}

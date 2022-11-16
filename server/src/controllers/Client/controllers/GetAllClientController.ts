@@ -1,6 +1,5 @@
-import { NextFunction, Request, Response } from 'express'
-import { prismaClient } from '../../../database/prismaClient'
-import { HttpError } from '../../../models/http-error'
+import { Request, Response } from 'express'
+
 import { GetAllClientUseCase } from '../../../useCases/Client/GelAllClientUseCase'
 
 export class GetAllClientController {
