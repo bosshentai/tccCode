@@ -88,26 +88,34 @@
     }
   }
 }
+.btnPayContainer {
+  display: flex;
+  justify-content: center;
+  
+  align-items: center;
 
-.btnPay {
-  // display: flex;
-  // justify-content: ;
-  // align-items: center;
-  // justify-self: center;
-  width: 233px;
-  height: 77px;
-  background: #246ee3;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
+  height: 7.7rem;
+  width: 100%;
+  .btnPay {
+    // display: flex;
+    // justify-content: ;
+    // align-items: center;
+    // justify-self: center;
+    width: 233px;
+    height: 77px;
+    background: #246ee3;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
 
-  color: white;
-  font-family: 'Ubuntu', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
 
-  &:hover{
-    background-color: #4b88e8;
+    &:hover {
+      background-color: #4b88e8;
+    }
   }
 }

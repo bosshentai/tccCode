@@ -1,13 +1,19 @@
-// import {Loading} from './Loading'
+
 import { BtnBottomSide } from ".";
+import styles from "./styles.module.scss";
 
 
 export default {
-  title: 'Components/Btn',
+  title: 'shared/Components/Btn',
   component: BtnBottomSide
 }
 
 
-export const Default= () =>{
-  
+
+
+export const Primary = () =>{
+//  <div className={styles.btnContainer}>
+//   <button>
+//   </button>
+//  </div>
 }

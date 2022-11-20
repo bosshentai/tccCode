@@ -463,27 +463,6 @@ export const AddClient = (props: propsType) => {
             />
           </div>
         </div>
-        {/* <div>
-          <div className={styles.textInput}>
-            <label>CNI</label>
-            <input
-              type="text"
-              ref={cniInputRef}
-              placeholder="Insira o numero cni do Cliente"
-              className={cniControlloerClass}
-            />
-          </div>
-
-          <div className={styles.textInput}>
-            <label>Data de Nascimento</label>
-            <input
-              type="date"
-              ref={birthInputRef}
-              placeholder="Insira a data de Nascimento do Cliente"
-              className={birthControllerClass}
-            />
-          </div>
-        </div> */}
         <div className={styles.checkboxSelectContainer}>
           <div className={styles.checkInput}>
             <label>Plano de Treino</label>

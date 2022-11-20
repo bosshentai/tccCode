@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { DefaultInsidePage } from '../../../shared/components/UIElements/DefaultInsidePage'
 import { DefaultPage } from '../../../shared/components/UIElements/DefaultPage'
 
@@ -6,8 +7,10 @@ import whiteClose from '../../../../assets/icons/whiteLightClose.svg'
 import whiteYes from '../../../../assets/icons/whitEyes.svg'
 
 import styles from './styles.module.scss'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PersonalTrainer } from '../../../PersonalTrainer/page/PersonalTrainer/index'
+import axios, { AxiosResponse } from 'axios'
+// import AxiosResponse from 'axios';
 
 type clientProfile = {
   id: string
@@ -20,10 +23,23 @@ type clientProfile = {
 }
 
 export function ClientProfile() {
+  const getClientUrl = 'http://localhost:5000/api/client/'
   // const {}
 
+  const { id } = useParams()
   const navigate = useNavigate()
   // const
+
+  const [clientInfo, setClientInfo] =
+    useState<clientProfile>()
+
+  useEffect(() => {
+    axios
+      .get(getClientUrl + id)
+      .then((response: AxiosResponse) => {
+        setClientInfo(response.data)
+      })
+  }, [id, navigate])
 
   return (
     <DefaultPage>
@@ -33,11 +49,9 @@ export function ClientProfile() {
             <button
               onClick={() => {
                 navigate(-1)
-              }}>
-              <img
-                src={whiteBack}
-                alt="Back"
-              />
+              }}
+            >
+              <img src={whiteBack} alt="Back" />
             </button>
           </div>
           <h1>Informação Do Cliente</h1>
@@ -45,21 +59,21 @@ export function ClientProfile() {
         <div className={styles.clientInfoContainer}>
           <div className={styles.infoContainer}>
             <label>Nome:</label>
-            <p>nome do cliente</p>
+            <p>{clientInfo?.name}</p>
           </div>
           <div className={styles.infoContainer}>
             <label>Email:</label>
-            <p>email do cliente</p>
+            <p>{clientInfo?.email}</p>
           </div>
           <div className={styles.infoContainer}>
             <label>Data de Nascimento:</label>
-            <p>data de nascimento do cliente</p>
+            <p>{clientInfo?.birth}</p>
           </div>
 
           <div className={styles.infoContainer}>
             <div className={styles.chooseContainer}>
               <label>Plano de treino:</label>
-              <p>Plano de Treino do cliente</p>
+              <p>{clientInfo?.trainingPlanID}</p>
             </div>
             <div className={styles.btnContainer}>
               <button>Alterar</button>
@@ -68,7 +82,7 @@ export function ClientProfile() {
           <div className={styles.infoContainer}>
             <div className={styles.chooseContainer}>
               <label>Personal Trainer:</label>
-              <p>Personal Trainer do cliente</p>
+              <p>{clientInfo?.personalTrainerID}</p>
             </div>
             <div className={styles.btnContainer}>
               <button>Alterar</button>
@@ -77,7 +91,7 @@ export function ClientProfile() {
           <div className={styles.infoContainer}>
             <div className={styles.chooseContainer}>
               <label>Plano de treino:</label>
-              <p>Plano de Treino do cliente</p>
+              <p>{clientInfo?.discountID}</p>
             </div>
             <div className={styles.btnContainer}>
               <button>Alterar</button>
@@ -86,7 +100,9 @@ export function ClientProfile() {
           {/* <button>Pagamento</button> */}
         </div>
       </DefaultInsidePage>
-      <button className={styles.btnPay}>Pagamento</button>
+      <div className={styles.btnPayContainer}>
+        <button className={styles.btnPay}>Pagamento</button>
+      </div>
     </DefaultPage>
   )
 }
