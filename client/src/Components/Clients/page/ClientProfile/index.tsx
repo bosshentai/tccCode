@@ -10,7 +10,12 @@ import styles from './styles.module.scss'
 import { useNavigate, useParams } from 'react-router-dom'
 import { PersonalTrainer } from '../../../PersonalTrainer/page/PersonalTrainer/index'
 import axios, { AxiosResponse } from 'axios'
+import ReactDOM from 'react-dom'
+import { Backdrop } from '../../../shared/components/UIElements/Backdrop'
+import { Payment } from '../Payment'
 // import AxiosResponse from 'axios';
+
+const portalElement = document.getElementById('overlays') as HTMLElement;
 
 type clientProfile = {
   id: string
@@ -30,6 +35,18 @@ export function ClientProfile() {
   const navigate = useNavigate()
   // const
 
+
+  const [paymentIsShow,setPaymentIsShow] = useState(false);
+
+
+  const showPaymentHandler = () =>{
+    setPaymentIsShow(true);
+  }
+
+  const closePaymentHandler = () =>{
+    setPaymentIsShow(false)
+  }
+
   const [clientInfo, setClientInfo] =
     useState<clientProfile>()
 
@@ -42,6 +59,15 @@ export function ClientProfile() {
   }, [id, navigate])
 
   return (
+    <>
+    {
+      paymentIsShow && ReactDOM.createPortal(
+        <>
+        <Backdrop onClose={closePaymentHandler}/>
+        <Payment onClose={closePaymentHandler}/>
+        </>,portalElement
+      )
+    }
     <DefaultPage>
       <DefaultInsidePage>
         <div className={styles.headerContainer}>
@@ -101,8 +127,9 @@ export function ClientProfile() {
         </div>
       </DefaultInsidePage>
       <div className={styles.btnPayContainer}>
-        <button className={styles.btnPay}>Pagamento</button>
+        <button className={styles.btnPay} onClick={showPaymentHandler}>Pagamento</button>
       </div>
     </DefaultPage>
+    </>
   )
 }
