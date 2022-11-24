@@ -1,3 +1,5 @@
+import { GetTrainingPlanByIdController } from './../controllers/trainingPlan/GetTrainingPlanByIdController'
+import { GetDiscountByIdController } from './../controllers/Discount/GetDiscountByIdController'
 import { GetUserByIdController } from './../controllers/User/GetUserbyIdController'
 import { CreatePaymentController } from './../controllers/payment/CreatePaymentController'
 import { GetAllClientController } from './../controllers/Client/controllers/GetAllClientController'
@@ -23,8 +25,7 @@ const router = Router()
 //Controllers
 
 //Manager
-const createManager = new CreateManagerController();
-
+const createManager = new CreateManagerController()
 
 //User
 const getAllUserEmail = new GetAllEmailUserController()
@@ -35,6 +36,8 @@ const createTrainingPlan =
   new CreateTrainingPlanController()
 const getAllTrainingPlan =
   new GetAllTrainingPlansController()
+const getTrainingPlanById =
+  new GetTrainingPlanByIdController()
 
 // Personal Trainer
 const createPersonalTrainer =
@@ -53,6 +56,7 @@ const updateEmployeePhoneNumber =
 
 const createDiscount = new CreateDiscountController()
 const getDiscount = new GetAllDiscountsController()
+const getDiscountById = new GetDiscountByIdController()
 
 // Client
 
@@ -66,8 +70,7 @@ const createPayment = new CreatePaymentController()
 
 //Post
 
-
-router.post("/manager/add",createManager.handle)
+router.post('/manager/add', createManager.handle)
 
 router.post('/trainingplan/add', createTrainingPlan.handle)
 
@@ -97,14 +100,16 @@ router.post('/payment/add', createPayment.handle)
 //Get
 
 router.get('/user/allemail', getAllUserEmail.handle)
-router.get('/user/:id',getUserByIdInfo.handle)
+router.get('/user/:id', getUserByIdInfo.handle)
 
 router.get('/trainingplan/all', getAllTrainingPlan.handle)
+router.get('/trainingplan/:id',getTrainingPlanById.handle)
 
 router.get('/employee/all', getAllEmployees.handle)
 router.get('/employee/:id', getEmployeeById.handle)
 
 router.get('/discount/all', getDiscount.handle)
+router.get('/discount/:id', getDiscountById.handle)
 
 router.get(
   '/personalTrainer/all',

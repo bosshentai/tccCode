@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from 'express'
-import { prismaClient } from '../../../database/prismaClient'
-import { HttpError } from '../../../models/http-error'
 import { GetClientByIdUseCase } from '../../../useCases/Client/GetClientByIdUseCase'
 
 export class GetClientByIdController {
