@@ -19,6 +19,7 @@ import { CreatePersonalTrainerController } from '../controllers/PersonalTrainer/
 import { GetClientByIdController } from '../controllers/Client/controllers/GetClientByIdController'
 import { GetAllEmailUserController } from '../controllers/User/GetAllEmailController'
 import { CreateManagerController } from '../controllers/Manager/CreateManagerController'
+import { GetPersonalTrainerByIdController } from '../controllers/PersonalTrainer/GetPersonalTrainerByIdController';
 
 const router = Router()
 
@@ -44,6 +45,8 @@ const createPersonalTrainer =
   new CreatePersonalTrainerController()
 const getAllPersonalTrainer =
   new GetAllPersonalTrainersController()
+
+const getPersonalTrainerById = new GetPersonalTrainerByIdController();
 
 // EmployeeRouter
 const createEmployee = new CreateEmployeeController()
@@ -115,6 +118,8 @@ router.get(
   '/personalTrainer/all',
   getAllPersonalTrainer.handle,
 )
+
+router.get('/personalTrainer/:id',getPersonalTrainerById.handle)
 
 router.get('/client/all', getAllClients.handle)
 router.get('/client/:id', getClientById.handle)

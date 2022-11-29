@@ -19,18 +19,39 @@ export class GetClientByIdUseCase {
           },
           cpt: {
             select: {
-              id: true,
-              // personal_trainer_id,
+              // id: true,
+              personal_trainer_id: true,
+              personalTrainer: {
+                select: {
+                  user: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
             },
           },
           ctp: {
             select: {
-              id: true,
+              // id: true,
+              training_plan_id: true,
+              train: {
+                select: {
+                  name: true,
+                },
+              },
             },
           },
           cd: {
             select: {
-              id: true,
+              // id: true,
+              discount_id: true,
+              discount: {
+                select: {
+                  name: true,
+                },
+              },
             },
           },
         },
@@ -44,9 +65,14 @@ export class GetClientByIdUseCase {
       name: clientExist.user.name,
       email: clientExist.user.email,
       birth: clientExist.user.birth_date,
-      personalTrainerID: clientExist.cd?.id,
-      trainingPlanID : clientExist.ctp?.id,
-      discountID: clientExist.cd?.id
+      personalTrainerID:
+        clientExist.cpt?.personal_trainer_id,
+      personalTrainerName:
+        clientExist.cpt?.personalTrainer?.user.name,
+      trainingPlanID: clientExist.ctp?.training_plan_id,
+      trainingPlanName: clientExist.ctp?.train?.name,
+      discountID: clientExist.cd?.discount_id,
+      discountName: clientExist.cd?.discount?.name,
     }
 
     return clientInfo
