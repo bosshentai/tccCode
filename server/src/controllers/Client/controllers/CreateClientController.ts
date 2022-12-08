@@ -5,6 +5,7 @@ import { validationResult } from 'express-validator'
 
 import { prismaClient } from '../../../database/prismaClient'
 import { HttpError } from '../../../models/http-error'
+import { CreateClientUseCase } from '../../../useCases/Client/CreateClientUseCase'
 
 export class CreateClientController {
   async handle(
@@ -38,78 +39,99 @@ export class CreateClientController {
       discountId,
     } = request.body
 
-    let existingUser
+    const createClientUseCase = new CreateClientUseCase()
 
     try {
-      existingUser = await prismaClient.user.findUnique({
-        where: {
-          email: email,
-        },
+
+      const newClient = await createClientUseCase.handle({
+        name,
+        email,
+        phone,
+        birth: new Date(birth),
+        trainingplanId,
+        personalTrainerId,
+        discountId
       })
+
+
+
+      return response.status(201).json(newClient)
+      
     } catch (e) {
-      const error = new HttpError(
-        "Couldn't register the client.",
-        500,
-      )
-
-      return next(error)
+      return response.status(500).json("Fail to create Client")
     }
+    // let existingUser
 
-    if (existingUser) {
-      const error = new HttpError(
-        'User exists already',
-        422,
-      )
-      return next(error)
-    }
+    // try {
+    //   existingUser = await prismaClient.user.findUnique({
+    //     where: {
+    //       email: email,
+    //     },
+    //   })
+    // } catch (e) {
+    //   const error = new HttpError(
+    //     "Couldn't register the client.",
+    //     500,
+    //   )
 
-    let hashedPassword
+    //   return next(error)
+    // }
 
-    try {
-      hashedPassword = await hash('123456', 12)
-    } catch (e) {
-      const error = new HttpError(
-        "Couldn't create Client, please try again",
-        500,
-      )
-      return next(error)
-    }
+    // if (existingUser) {
+    //   const error = new HttpError(
+    //     'User exists already',
+    //     422,
+    //   )
+    //   return next(error)
+    // }
 
-    let createClient
-    try {
-      createClient = await prismaClient.user.create({
-        data: {
-          name: name,
-          email: email,
-          password: hashedPassword,
-          phone: phone,
-          role: Roles.CLIENT,
-          birth_date: new Date(birth),
-          client: {
-            create: {
-              cpt: {
-                create: {
-                  personal_trainer_id: personalTrainerId,
-                },
-              },
-              ctp: {
-                create: {
-                  training_plan_id: trainingplanId,
-                },
-              },
-              cd: {
-                create: {
-                  discount_id: discountId,
-                },
-              },
-            },
-          },
-        },
-      })
-    } catch (e) {
-      const error = new HttpError('Fail to add Client', 500)
-      return next(error)
-    }
-    return response.status(201).json(createClient)
+    // let hashedPassword
+
+    // try {
+    //   hashedPassword = await hash('123456', 12)
+    // } catch (e) {
+    //   const error = new HttpError(
+    //     "Couldn't create Client, please try again",
+    //     500,
+    //   )
+    //   return next(error)
+    // }
+
+    // let createClient
+    // try {
+    //   createClient = await prismaClient.user.create({
+    //     data: {
+    //       name: name,
+    //       email: email,
+    //       password: hashedPassword,
+    //       phone: phone,
+    //       role: Roles.CLIENT,
+    //       birth_date: new Date(birth),
+    //       client: {
+    //         create: {
+    //           cpt: {
+    //             create: {
+    //               personal_trainer_id: personalTrainerId,
+    //             },
+    //           },
+    //           ctp: {
+    //             create: {
+    //               training_plan_id: trainingplanId,
+    //             },
+    //           },
+    //           cd: {
+    //             create: {
+    //               discount_id: discountId,
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   })
+    // } catch (e) {
+    //   const error = new HttpError('Fail to add Client', 500)
+    //   return next(error)
+    // }
+    // return response.status(201).json(createClient)
   }
 }

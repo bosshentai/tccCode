@@ -25,9 +25,7 @@ type employee = {
   status: string
 }
 
-// type GetEmployeeResponse = {
-//   data: employee[];
-// };
+
 
 export const Employee = () => {
   const [listEmpty, setListEmpty] = useState(true)
@@ -81,7 +79,7 @@ export const Employee = () => {
           portalElement,
         )}
       <DefaultPage>
-        {/* {listEmpty && <p className={styles.p}>Sem funcionários</p>} */}
+
         {listEmpty && (
           <EmptyPage message="Sem Funcionários" />
         )}

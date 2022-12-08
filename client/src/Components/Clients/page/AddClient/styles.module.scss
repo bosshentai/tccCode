@@ -198,42 +198,26 @@
 
         width: 20rem;
 
-        .selectItem {
-          display: flex;
-          align-items: center;
-          padding: 0;
-          // background: white;
-          // -webkit-appearance: none;
-          // appearance: none;
-          // background-color: white;
-          background-color: #f4f4f4;
-          // border: none;
-          border-top: none;
-          border-left: none;
-          border-right: none;
-          border-bottom: 2px solid #246ee3;
-          appearance: button;
+        // .selectItem {
+        //   display: flex;
+        //   align-items: center;
+        //   padding: 0;
+       
+        //   background-color: #f4f4f4;
+        //   // border: none;
+        //   border-top: none;
+        //   border-left: none;
+        //   border-right: none;
+        //   border-bottom: 2px solid #246ee3;
+        //   appearance: button;
 
-          width: 100%;
-          margin-right: auto;
-          margin-left: auto;
-          color: #246ee3;
+        //   width: 100%;
+        //   margin-right: auto;
+        //   margin-left: auto;
+        //   color: #246ee3;
 
-          // option {
-          //   background-color: #246ee3;
-          //   // appearance: none;
-          //   // -moz-backgound-color: #246ee3;
-
-          //   &::selected{
-          //     background-color: #4b88e8;
-          //   }
-
-          // }
-
-          // li {
-          //   background-color: red;
-          // }
-        }
+        
+        // }
       }
     }
     label {

@@ -12,7 +12,7 @@ import { useAuth } from './Components/shared/hooks/auth-hook'
 
 function App() {
   const [isLogin, setLogin] = useState(true)
-  const { token, login, userId } = useAuth()
+  const { token, login, logout, userId } = useAuth()
 
   // const loginHandler = () => {
   //   return true
@@ -58,6 +58,7 @@ function App() {
           token: token,
           userId: userId,
           login: login,
+          logout: logout
         }}>
        {page}
       </AuthContext.Provider>

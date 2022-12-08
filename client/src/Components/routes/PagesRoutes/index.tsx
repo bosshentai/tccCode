@@ -9,6 +9,7 @@ import { EmployeeProfile } from '../../Employee/page/EmployeeProfile'
 import { PersonalTrainer } from '../../PersonalTrainer/page/PersonalTrainer'
 import { TrainingPlan } from '../../TrainingPlan/page/TrainingPlan'
 import { Welcome } from '../../Welcome/page/Welcome'
+import { ClientProfile } from '../../Clients/page/ClientProfile/index';
 
 // const test = lazy(() =>  import ("../../Clients/page/Client")).then(module => module.default{
 //   test: module.Client
@@ -34,6 +35,9 @@ export function PagesRoutes() {
         path="/Client"
         element={<Client />}
       />
+      <Route
+      path='/Client/Profile/:id'
+      element={<ClientProfile/>}/>
       <Route
         path="/TrainingPlan"
         element={<TrainingPlan />}

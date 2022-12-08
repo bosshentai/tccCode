@@ -1,0 +1,139 @@
+@keyframes fadeUp {
+  from{
+    opacity: 0;
+    transform: translateX(-50%);
+  }to{
+    opacity: 1;
+  }
+}
+
+
+.addPaymentContainer {
+
+  width: 72.375rem;
+  height: 51.125rem;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 30;
+
+  background-color: #f4f4f4;
+  box-shadow: 0.625rem 0.625rem 1.25rem rgba(36,110,227,0.5);
+
+  animation-name: fadeUp;
+  animation-duration:400ms;
+  animation-fill-mode: forwards;
+
+  .headerContainer{
+    display: flex;
+    height: 5.188rem;
+    // background-color: red;
+
+    .left{
+      width: 66.625rem;
+      background-color: #4b88e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family: 'Ubuntu', sans-serif;
+      color: white;
+    }
+
+    .right{
+      width: 5.75rem;
+
+      background: #246ee3;
+
+      display : flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+
+      cursor: pointer;
+
+      &:hover{
+        background-color: rgba(36,110,227,0.006);
+        transition: all 300ms ease-in-out;
+      }
+
+      img{
+        width: 3.438rem;
+        height: 3.438rem;
+      }
+    }
+
+  }
+
+
+  .formContainer{
+    width: 50rem;
+    height: 40rem;
+   
+    display: flex;
+    flex-direction: column;
+    margin:auto;
+    padding-top: 4rem;
+
+
+    .title{
+      // background: red;
+      display: flex;
+      justify-content: space-between;
+
+      font-family: 'Ubuntu', sans-serif;
+      font-style: bold;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 41.36px;
+    }
+
+    .itemContainer{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+
+      font-family: 'Ubuntu', sans-serif;
+      font-style: bold;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 41.36px;
+    }
+
+    .btnSubmitContainer{
+      // background: red;
+      
+      width: 100%;
+      height: 100%;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button{
+        border:none;
+        border-radius:25px;
+
+        width: 14.563rem;
+        height: 4.813rem;
+        background-color: #246ee3;
+
+        font-family:'Ubuntu', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size:1.5rem;
+        line-height: 1.75rem;
+        color: white;
+
+        cursor:pointer;
+
+        &:hover{
+          background: rgba(36,110,227,0.5);
+        }
+      }
+    }
+
+  }
+}

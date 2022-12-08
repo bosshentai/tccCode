@@ -1,33 +1,26 @@
-import { NextFunction, Request, Response } from "express";
-import { prismaClient } from "../../database/prismaClient";
-import { HttpError } from "../../models/http-error";
-
-
+import { NextFunction, Request, Response } from 'express'
+import { GetAllTrainingPlansUseCase } from '../../useCases/TrainingPlan/GetAllTrainingPlanUseCase'
 
 export class GetAllTrainingPlansController {
-  async handle(request: Request, response: Response, next: NextFunction) {
-
-    if (request.method !== "GET"){
-      const error = new HttpError("Method not allowed",405);
-      return next(error);
+  async handle(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ):Promise<Response> {
+    if (request.method !== 'GET') {
+      return response.status(405).json('Method not allowed')
     }
 
     try {
-
-      const trainingplans = await prismaClient.training_plan.findMany({
-        select: {
-          id: true,
-          name: true,
-          value: true
-        }
-      })
-
-
-      return response.status(200).json(trainingplans);
-
+      const getAllTrainingPLanUseCase =
+        new GetAllTrainingPlansUseCase()
+      const listTrainingPlans =
+        await getAllTrainingPLanUseCase.handle()
+      return response.status(200).json(listTrainingPlans)
     } catch (e) {
-      const error = new HttpError("couldn't get all Training Plans", 500);
-      return next(error);
+      return response
+        .status(500)
+        .json("couldn't get all Training Plans")
     }
   }
 }

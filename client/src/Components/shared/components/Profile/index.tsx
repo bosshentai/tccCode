@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import profileIcon from '../../../../assets/icons/blueProfile.svg'
+import { AuthContext } from '../../context/auth-context'
 
 import styles from './styles.module.scss'
 
 // user Profile
 
 export const Profile = () => {
+  const auth = useContext(AuthContext)
   const [openSettings, setOpenSettings] = useState(false)
 
   const settingHandler = () => {
@@ -23,7 +25,7 @@ export const Profile = () => {
 
       {openSettings && (
         <span className={styles.settings}>
-          <button>Logout</button>
+          <button onClick={auth.logout}>Logout</button>
         </span>
       )}
     </div>

@@ -1,84 +1,107 @@
-import axios, { AxiosResponse } from "axios";
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { BtnBottomSide } from "../../../shared/components/BtnBottomSide";
-import { Backdrop } from "../../../shared/components/UIElements/Backdrop";
-import { DefaultInsidePage } from "../../../shared/components/UIElements/DefaultInsidePage";
-import { DefaultPage } from "../../../shared/components/UIElements/DefaultPage";
-import { EmptyPage } from "../../../shared/components/UIElements/EmptyPage";
-import { TrainingPlanList } from "../../components/TrainingPlanList";
-import { AddTrainingPlan } from "../AddTrainingPlan";
+import axios, { AxiosResponse } from 'axios'
+import React, { useEffect, useState } from 'react'
+import ReactDOM from 'react-dom'
+import { BtnBottomSide } from '../../../shared/components/BtnBottomSide'
+import { Backdrop } from '../../../shared/components/UIElements/Backdrop'
+import { DefaultInsidePage } from '../../../shared/components/UIElements/DefaultInsidePage'
+import { DefaultPage } from '../../../shared/components/UIElements/DefaultPage'
+import { EmptyPage } from '../../../shared/components/UIElements/EmptyPage'
+import { TrainingPlanList } from '../../components/TrainingPlanList'
+import { AddTrainingPlan } from '../AddTrainingPlan'
 
-import styles from "./styles.module.scss";
+import styles from './styles.module.scss'
 
-const portalElement = document.getElementById("overlays") as HTMLElement;
-
-
+const portalElement = document.getElementById(
+  'overlays',
+) as HTMLElement
 
 type trainingplanType = {
-  id: string;
-  name: string;
-  value: number;
+  id: string
+  name: string
+  value: number
 }
 
-// const DUMMY_Data = [
-//   {
-//     id: "1",
-//     name: "plano 1",
-//     amount: 10,
-//   },
-//   {
-//     id: "2",
-//     name: "plano 2",
-//     amount: 20,
-//   },
-//   {
-//     id: "3",
-//     name: "plano 3",
-//     amount: 30,
-//   },
-// ];
-
 export const TrainingPlan = () => {
-  const [listEmpty, setListEmpty] = useState(true);
+  const [userRole, setUserRole] = useState(false)
 
-  const [addTrainingPlan, setAddTrainingPlan] = useState(false);
+  const [listEmpty, setListEmpty] = useState(true)
 
-  const [listPlanningTrain, setListPlanningTrain] = useState<trainingplanType[]>([]);
+  const [addTrainingPlan, setAddTrainingPlan] =
+    useState(false)
+
+  const [listPlanningTrain, setListPlanningTrain] =
+    useState<trainingplanType[]>([])
 
   useEffect(() => {
-    // setListPlanningTrain([]);
+    async function loadUserRole() {
+      const { userId } = await JSON.parse(
+        localStorage.getItem('userData') || '',
+      )
 
-    const urlPath = "http://localhost:5000/api/trainingplan/all"
+      const pathUrl = `http://localhost:5000/api/user/${userId}`
+
+      try {
+        const getInfo = await axios.get(pathUrl)
+
+        if (getInfo.data.role === 'MANAGER') {
+          setUserRole(true)
+        }
+      } catch (e) {
+        return
+      }
+    }
+    loadUserRole()
+  }, [])
+
+  useEffect(() => {
+    async function getTrainingPlan() {
+      const urlPath =
+        'http://localhost:5000/api/trainingplan/all'
+
+      try {
+        const response = await axios.get(urlPath)
+        const filteredResponse = await response.data.filter(
+          (item: trainingplanType) => item.name !== 'null',
+        )
+
+        setListPlanningTrain(filteredResponse)
 
 
-    try {
-      axios.get(urlPath).then((response: AxiosResponse) => {
-        setListPlanningTrain(response.data)
-      })
+        if(listPlanningTrain.length ===0){
+          setListEmpty(true)
 
-
-
-    } catch (error) {
-      console.log("Error: " + error);
+        }else{
+          setListEmpty(false)
+        }
+      } catch (e) {
+        return
+      }
     }
 
+    getTrainingPlan()
 
+    // try {
+    //   axios.get(urlPath).then((response: AxiosResponse) => {
+    //     setListPlanningTrain(response.data)
+    //   })
+    // } catch (error) {
+    //   console.log('Error: ' + error)
+    // }
 
-    if (listPlanningTrain.length === 0) {
-      setListEmpty(true);
-    } else {
-      setListEmpty(false);
-    }
-  },[listPlanningTrain.length]);
+    // if (listPlanningTrain.length === 0) {
+    //   setListEmpty(true)
+    // } else {
+    //   setListEmpty(false)
+    // }
+  }, [listPlanningTrain.length])
 
   const showAddTrainingHandler = () => {
-    setAddTrainingPlan(true);
-  };
+    setAddTrainingPlan(true)
+  }
 
   const closeAddTrainingHandler = () => {
-    setAddTrainingPlan(false);
-  };
+    setAddTrainingPlan(false)
+  }
 
   return (
     <>
@@ -86,24 +109,33 @@ export const TrainingPlan = () => {
         ReactDOM.createPortal(
           <>
             <Backdrop onClose={closeAddTrainingHandler} />
-            <AddTrainingPlan onClose={closeAddTrainingHandler}/>
+            <AddTrainingPlan
+              onClose={closeAddTrainingHandler}
+            />
           </>,
-          portalElement
+          portalElement,
         )}
 
       <DefaultPage>
         {/* {listEmpty && <p className={styles.p}>Sem Plano de Treino</p>} */}
-        {listEmpty && <EmptyPage message="Sem Plano de Treino" />}
+        {listEmpty && (
+          <EmptyPage message="Sem Plano de Treino" />
+        )}
 
-        {!listEmpty && <DefaultInsidePage className={styles.container} >
-          <TrainingPlanList trainingPlans={listPlanningTrain}/>
-        </DefaultInsidePage>}
-
-        <BtnBottomSide
-          btnText="Adicionar Plano Treino"
-          showHandler={showAddTrainingHandler}
-        />
+        {!listEmpty && (
+          <DefaultInsidePage className={styles.container}>
+            <TrainingPlanList
+              trainingPlans={listPlanningTrain}
+            />
+          </DefaultInsidePage>
+        )}
+        {userRole && (
+          <BtnBottomSide
+            btnText="Adicionar Plano Treino"
+            showHandler={showAddTrainingHandler}
+          />
+        )}
       </DefaultPage>
     </>
-  );
-};
+  )
+}
