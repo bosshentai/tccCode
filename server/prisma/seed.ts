@@ -69,6 +69,7 @@ async function runSeed() {
           email: personalTrainer.email,
           password: personalTrainer.password,
           phone: personalTrainer.phone,
+          role: Roles.PERSONALTRAINER,
           birth_date: personalTrainer.birth,
           CNI: personalTrainer.CNI,
           NIF: personalTrainer.NIF,
@@ -102,82 +103,78 @@ async function runSeed() {
   
 }
 
-// async function addClient() {
-//   const listTrainingPLans =
-//     await prismaClient.training_plan.findMany({
-//       select: {
-//         id: true,
-//       },
-//     })
+async function addClient() {
+  const listTrainingPLans =
+    await prismaClient.training_plan.findMany({
+      select: {
+        id: true,
+      },
+    })
 
-//   const listDiscounts =
-//     await prismaClient.discount.findMany({
-//       select: {
-//         id: true,
-//       },
-//     })
+  const listDiscounts =
+    await prismaClient.discount.findMany({
+      select: {
+        id: true,
+      },
+    })
 
-//   const listPersonalTrainer =
-//     await prismaClient.personalTrainer.findMany({
-//       select: {
-//         id: true,
-//       },
-//     })
+  const listPersonalTrainer =
+    await prismaClient.personalTrainer.findMany({
+      select: {
+        id: true,
+      },
+    })
 
-//   clients.map(async (client) => {
-//     await prismaClient.user.create({
-//       data: {
-//         name: client.name,
-//         email: client.email,
-//         phone: client.phone,
-//         password: client.password,
-//         role: Roles.CLIENT,
-//         birth_date: client.birth,
-//         client: {
-//           create: {
-//             cpt: {
-//               create: {
-//                 personal_trainer_id:
-//                   listPersonalTrainer[
-//                     Math.floor(
-//                       Math.random() *
-//                         listPersonalTrainer.length,
-//                     )
-//                   ].toString(),
-//               },
-//             },
-//             ctp: {
-//               create: {
-//                 training_plan_id:
-//                   listTrainingPLans[
-//                     Math.floor(
-//                       Math.random() *
-//                         listTrainingPLans.length,
-//                     )
-//                   ].toString(),
-//               },
-//             },
-//             cd: {
-//               create: {
-//                 discount_id:
-//                   listDiscounts[
-//                     Math.floor(
-//                       Math.random() * listDiscounts.length,
-//                     )
-//                   ].toString(),
-//               },
-//             },
-//           },
-//         },
-//       },
-//     })
-//   })
-  //  await prismaClient.client.create({
-  //   data:{
+  clients.map(async (client) => {
+    await prismaClient.user.create({
+      data: {
+        name: client.name,
+        email: client.email,
+        phone: client.phone,
+        password: client.password,
+        role: Roles.CLIENT,
+        birth_date: client.birth,
+        client: {
+          create: {
+            cpt: {
+              create: {
+                personal_trainer_id:
+                  listPersonalTrainer[
+                    Math.floor(
+                      Math.random() *
+                        listPersonalTrainer.length,
+                    )
+                  ].id,
+              },
+            },
+            ctp: {
+              create: {
+                training_plan_id:
+                  listTrainingPLans[
+                    Math.floor(
+                      Math.random() *
+                        listTrainingPLans.length,
+                    )
+                  ].id,
+              },
+            },
+            cd: {
+              create: {
+                discount_id:
+                  listDiscounts[
+                    Math.floor(
+                      Math.random() * listDiscounts.length,
+                    )
+                  ].id,
+              },
+            },
+          },
+        },
+      },
+    })
+  })
 
-  //   }
-  // })
-// }
+}
 
 runSeed()
   .catch((e) => {
@@ -191,14 +188,14 @@ runSeed()
     await prisma.$disconnect()
   })
 
-// addClient()
-//   .catch((e) => {
-//     console.error(`There was an error while seeding: ${e}`)
-//     process.exit(1)
-//   })
-//   .finally(async () => {
-//     console.log(
-//       'Sucessfully seed database.Closing connection',
-//     )
-//     await prisma.$disconnect()
-//   })
+addClient()
+  .catch((e) => {
+    console.error(`There was an error while seeding: ${e}`)
+    process.exit(1)
+  })
+  .finally(async () => {
+    console.log(
+      'Sucessfully seeded database.Closing connection',
+    )
+    await prisma.$disconnect()
+  })

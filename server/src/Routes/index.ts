@@ -1,3 +1,4 @@
+import { GetPaymentByIdController } from './../controllers/payment/GetPaymentByIdController'
 import { GetTrainingPlanByIdController } from './../controllers/trainingPlan/GetTrainingPlanByIdController'
 import { GetDiscountByIdController } from './../controllers/Discount/GetDiscountByIdController'
 import { GetUserByIdController } from './../controllers/User/GetUserbyIdController'
@@ -19,7 +20,7 @@ import { CreatePersonalTrainerController } from '../controllers/PersonalTrainer/
 import { GetClientByIdController } from '../controllers/Client/controllers/GetClientByIdController'
 import { GetAllEmailUserController } from '../controllers/User/GetAllEmailController'
 import { CreateManagerController } from '../controllers/Manager/CreateManagerController'
-import { GetPersonalTrainerByIdController } from '../controllers/PersonalTrainer/GetPersonalTrainerByIdController';
+import { GetPersonalTrainerByIdController } from '../controllers/PersonalTrainer/GetPersonalTrainerByIdController'
 
 const router = Router()
 
@@ -46,7 +47,8 @@ const createPersonalTrainer =
 const getAllPersonalTrainer =
   new GetAllPersonalTrainersController()
 
-const getPersonalTrainerById = new GetPersonalTrainerByIdController();
+const getPersonalTrainerById =
+  new GetPersonalTrainerByIdController()
 
 // EmployeeRouter
 const createEmployee = new CreateEmployeeController()
@@ -70,6 +72,7 @@ const getClientById = new GetClientByIdController()
 // Payment
 
 const createPayment = new CreatePaymentController()
+const getPaymentById = new GetPaymentByIdController()
 
 //Post
 
@@ -106,7 +109,7 @@ router.get('/user/allemail', getAllUserEmail.handle)
 router.get('/user/:id', getUserByIdInfo.handle)
 
 router.get('/trainingplan/all', getAllTrainingPlan.handle)
-router.get('/trainingplan/:id',getTrainingPlanById.handle)
+router.get('/trainingplan/:id', getTrainingPlanById.handle)
 
 router.get('/employee/all', getAllEmployees.handle)
 router.get('/employee/:id', getEmployeeById.handle)
@@ -119,10 +122,15 @@ router.get(
   getAllPersonalTrainer.handle,
 )
 
-router.get('/personalTrainer/:id',getPersonalTrainerById.handle)
+router.get(
+  '/personalTrainer/:id',
+  getPersonalTrainerById.handle,
+)
 
 router.get('/client/all', getAllClients.handle)
 router.get('/client/:id', getClientById.handle)
+
+router.get('/payment/:id', getPaymentById.handle)
 
 // patch
 
