@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateEmployeeActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="@string/textView_fullName"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textView_newEmployee" />
+
+
+        <EditText
+            android:id="@+id/fullNameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/editView_width_newEmployee"
+            android:height="@dimen/edit_height_newEmployee"
+            android:backgroundTint="@color/blue"
+            android:hint="@string/editView_fullName_hint"
+            android:inputType="textPersonName"
+            android:minHeight="@dimen/edit_height_newEmployee"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/blue"
+            android:textColorLink="@color/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="@string/textView_email"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textView_newEmployee" />
+
+
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/editView_width_newEmployee"
+            android:height="@dimen/edit_height_newEmployee"
+            android:backgroundTint="@color/blue"
+            android:hint="@string/editView_email_hint"
+            android:inputType="textEmailAddress"
+            android:minHeight="@dimen/edit_height_newEmployee"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/blue"
+            android:textColorLink="@color/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="@string/textView_phone"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textView_newEmployee" />
+
+
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/editView_width_newEmployee"
+            android:height="@dimen/edit_height_newEmployee"
+            android:backgroundTint="@color/blue"
+            android:hint="@string/editView_phone_hint"
+            android:inputType="phone"
+            android:minHeight="@dimen/edit_height_newEmployee"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/blue"
+            android:textColorLink="@color/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="@string/textView_cni"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textView_newEmployee" />
+
+
+        <EditText
+            android:id="@+id/cniInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/editView_width_newEmployee"
+            android:height="@dimen/edit_height_newEmployee"
+            android:backgroundTint="@color/blue"
+            android:hint="@string/editView_cni_hint"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/blue"
+            android:textColorLink="@color/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="@string/textView_nif"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textView_newEmployee" />
+
+
+        <EditText
+            android:id="@+id/nifInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/editView_width_newEmployee"
+            android:height="@dimen/edit_height_newEmployee"
+            android:backgroundTint="@color/blue"
+            android:hint="@string/editView_nif_hint"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/blue"
+            android:textColorLink="@color/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alfa_slab_one"
+            android:text="@string/textView_birth"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/textView_newEmployee" />
+
+
+        <EditText
+            android:id="@+id/birthInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/editView_width_newEmployee"
+            android:height="@dimen/edit_height_newEmployee"
+            android:backgroundTint="@color/blue"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            android:hint="@string/editView_birth_hint"
+            android:inputType="date"
+            android:textColor="@color/blue"
+            android:textColorHint="@color/blue"
+            android:textColorLink="@color/blue" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:onClick="cancelHandler"
+                    android:text="@string/btn_cancel"
+                    app:backgroundTint="@color/red" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:onClick="addEmployeeHandler"
+                    android:text="@string/btn_add"
+                    app:backgroundTint="@color/blue" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

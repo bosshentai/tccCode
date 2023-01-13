@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="welcome_Size">40sp</dimen>
+    <dimen name="textView_newEmployee">20sp</dimen>
+    <dimen name="editView_width_newEmployee">280dp</dimen>
+    <dimen name="edit_height_newEmployee">48dp</dimen>
+
+</resources>
