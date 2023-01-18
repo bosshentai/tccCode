@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("");
 
 
 
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.moveToEmployee:
                 Intent moveEmployeeIntent = new Intent(MainActivity.this,EmployeeActivity.class);
                 startActivity(moveEmployeeIntent);
+                return true;
+            case R.id.moveToClient:
+                Intent moveClientIntent = new Intent(MainActivity.this,ClientActivity.class);
+                startActivity(moveClientIntent);
                 return true;
             default:
                 return  super.onOptionsItemSelected(item);

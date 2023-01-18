@@ -18,20 +18,37 @@ export class CreateEmployeeController {
 
     const errors = validationResult(request)
 
-    if (!errors.isEmpty()) {
-  
-      return response
-        .status(422)
-        .json(
-          'Invalid inputs passed,please check our data.',
-        )
-    }
+    // if (!errors.isEmpty()) {
+
+    //   return response
+    //     .status(422)
+    //     .json(
+    //       'Invalid inputs passed,please check our data.',
+    //     )
+    // }
 
     const { name, email, phone, CNI, NIF, birth } =
       request.body
 
+      // console.log(request.body);
+      console.log("name: " + name);
+      console.log("email: " + email);
+      console.log("phone:" + phone);
+      console.log("CNI: " +  CNI);
+      console.log("NIF: " + NIF );
+      console.log("birth " + birth);
+
     const createEmployeeUseCase =
       new CreateEmployeeUseCase()
+
+      // const newEmployee = await createEmployeeUseCase.handle({
+      //   name,
+      //   email,
+      //   phone,
+      //   CNI,
+      //   NIF,
+      //   birth,
+      // })
 
     try {
       const newEmployee = await createEmployeeUseCase.handle({
@@ -46,7 +63,7 @@ export class CreateEmployeeController {
       if(Object.keys(newEmployee).length === 0){
         // const error = new HttpError("Email is already used",500)
         // next(error)
-        return response.status(500).json("Email is already used")
+        return response.status(402).json("Email is already used")
       }
 
       return response.status(201).json(newEmployee)

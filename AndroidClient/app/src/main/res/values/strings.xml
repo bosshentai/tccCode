@@ -16,7 +16,6 @@
     <string name="editView_birth_hint">Insira a tua data de nascimento</string>
 
 
-
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_add">Registrar</string>
 
@@ -27,6 +26,8 @@
     <string name="yes_option">Sim</string>
     <string name="no_option">Não</string>
 
+
+    <string name="fbtn_employee_description">Add Employee</string>
 
 
     <string name="toast_fullName_empty">Nome Completo Vazio</string>
@@ -41,4 +42,7 @@
     <string name="toast_nif_invalid">NIF Invalido</string>
     <string name="toast_birth_empty">Data de Nascimento Vazio</string>
 
+
+    <string name="item_client_option">Cliente</string>
+    <string name="item_employee_option">Funcionario</string>
 </resources>

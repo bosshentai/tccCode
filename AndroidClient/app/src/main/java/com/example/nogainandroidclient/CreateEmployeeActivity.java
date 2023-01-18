@@ -6,13 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.nogainandroidclient.models.Employee;
+import com.example.nogainandroidclient.utils.ClientServices;
+
 import java.util.Calendar;
+import java.util.Date;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateEmployeeActivity extends AppCompatActivity {
 
@@ -22,6 +34,8 @@ public class CreateEmployeeActivity extends AppCompatActivity {
     private EditText cniEditText;
     private EditText nifEditText;
     private EditText birthEditText;
+
+    private final String LOG_TAG = CreateEmployeeActivity.class.getSimpleName();
 
 
     @Override
@@ -52,7 +66,7 @@ public class CreateEmployeeActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month = month + 1;
 
-                        String date = day + "/" + month + "/" + year;
+                        String date = year + "-" + month + "-" + day;
                         birthEditText.setText(date);
                     }
                 }, year, month, day);
@@ -94,11 +108,11 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
 
         fullNameEditText.setText("Hernani Baptista");
-        emailEditText.setText("baptista@gmail.com");
-        phoneEditText.setText("943");
-        cniEditText.setText("1234");
+        emailEditText.setText("baptistasdasdaa@gmail.com");
+        phoneEditText.setText("9432354");
+        cniEditText.setText("19931022M003R");
         nifEditText.setText("123456789");
-        birthEditText.setText("22/10/1993");
+        birthEditText.setText("1993-10-22");
 //        birthDayEditText.setText(R.string.example_birth);
 
 
@@ -194,7 +208,42 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
 
 
-//        if()/
+        if(isFormOK){
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:5000/")
+                    .addConverterFactory(GsonConverterFactory.create());
+
+            Retrofit retrofit = builder.build();
+            ClientServices clientServices = retrofit.create(ClientServices.class);
+//            Log.d(clientServices)
+            Employee newEmployee = new Employee(fullName,email,birth,phone,cni,nif);
+            Call<ResponseBody> call = clientServices.createEmployee(newEmployee);
+
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    if (!response.isSuccessful()){
+                        Log.e(LOG_TAG,"onResponse: "+ response.code());
+
+                    }else{
+                        Log.d(LOG_TAG,"OnResponse: " + response.body());
+                        finish();
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e(LOG_TAG,"OnFailure: " + t.getMessage());
+
+
+
+                }
+            });
+
+        }
 
 
 
@@ -225,11 +274,7 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
 
-//        if (email.matches(".+\\@.+\\..+")) {
-//            return true;
-//        }
-//
-//        return false;
+
     }
 
     protected boolean phoneValid(String phone) {
@@ -309,10 +354,9 @@ public class CreateEmployeeActivity extends AppCompatActivity {
     }
 
     protected boolean validSexCNI(String sex) {
-        if (sex == "M" || sex == "F") {
-            return true;
-        }
-        return false;
+
+        return sex.matches("[M|F]");
+
     }
 
     protected boolean valid3Number(String number) {
@@ -335,6 +379,7 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
     protected boolean validCNI(String cni) {
 
+//        Log.d(LOG_TAG, String.valueOf(cni.length()));
 
         if (cni.length() == 13) {
             int year = Integer.parseInt(cni.substring(0, 4));
@@ -345,10 +390,19 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
             Boolean isDataValid = validBirth(day, month, year);
 
+//            Log.d(LOG_TAG, String.valueOf(isDataValid));
+//            Log.d(LOG_TAG,"SexInput: " + cni.substring(8, 9));
 
             Boolean isSexValid = validSexCNI(cni.substring(8, 9));
             Boolean is3NumberValid = valid3Number(cni.substring(9, 12));
             Boolean isCharacterValid = validCharacter(cni.substring(12, 13));
+
+
+//            Log.d(LOG_TAG, "Date is " +String.valueOf(isDataValid));
+//            Log.d(LOG_TAG, "Sex is  " +  String.valueOf(isSexValid));
+//            Log.d(LOG_TAG,"3Number is " + String.valueOf(is3NumberValid));
+//            Log.d(LOG_TAG,"isCharacterValid is " + String.valueOf(isCharacterValid));
+
 
 
             return isDataValid && isSexValid && is3NumberValid && isCharacterValid;
