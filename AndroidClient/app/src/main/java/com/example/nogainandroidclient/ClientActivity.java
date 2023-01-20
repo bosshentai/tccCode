@@ -1,11 +1,15 @@
 package com.example.nogainandroidclient;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.nogainandroidclient.adapter.ClientRecyclerViewAdapter;
 import com.example.nogainandroidclient.adapter.EmployeeRecyclerViewAdapter;
@@ -41,6 +45,25 @@ public class ClientActivity extends AppCompatActivity {
         setClientData();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.client_menu,menu);
+        return true;
+//        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.moveToEmployee:
+                Intent moveEmployeeIntent = new Intent(ClientActivity.this, EmployeeActivity.class);
+                startActivity(moveEmployeeIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void setClientData() {
         Retrofit.Builder builder = new Retrofit.Builder()

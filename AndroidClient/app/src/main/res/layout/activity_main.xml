@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Bem-vindo"
+        android:text="@string/welcome"
         android:textColor="@color/blue"
         android:textSize="@dimen/welcome_Size"
         android:textStyle="bold"

@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nogainandroidclient.ClientActivity;
+import com.example.nogainandroidclient.ClientProfileActivity;
 import com.example.nogainandroidclient.R;
 import com.example.nogainandroidclient.models.Client;
 import com.example.nogainandroidclient.utils.ClientServices;
@@ -92,6 +93,15 @@ extends RecyclerView.Adapter<ClientRecyclerViewAdapter.ClientViewHolder> {
             trainingType = itemView.findViewById(R.id.clientItemTraining);
 
             itemView.setOnCreateContextMenuListener(this);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent moveToClientInfoIntent = new Intent(context, ClientProfileActivity.class);
+                    moveToClientInfoIntent.putExtra("clientId",""+mClientList.get(getLayoutPosition()).getId() );
+                    context.startActivity(moveToClientInfoIntent);
+                }
+            });
         }
 
 

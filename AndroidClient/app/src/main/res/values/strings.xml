@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">NoGainAndroidClient</string>
+    <string name="welcome">Bem Vindo</string>
 
     <string name="textView_fullName">Nome Completo</string>
     <string name="editView_fullName_hint">Insira o seu  nome completo</string>
@@ -11,6 +12,9 @@
     <string name="editView_cni_hint">Insira o seu cni</string>
     <string name="textView_nif">NIF</string>
     <string name="editView_nif_hint">Insira o seu nif</string>
+
+    <string name="textView_train_plan">Plano de Treino</string>
+    <string name="textView_personal_trainer">Personal Trainer</string>
 
     <string name="textView_birth">Data de Nascimento</string>
     <string name="editView_birth_hint">Insira a tua data de nascimento</string>
@@ -45,4 +49,11 @@
 
     <string name="item_client_option">Cliente</string>
     <string name="item_employee_option">Funcionario</string>
+
+
+    <string name="example_Name">Hernâni Baptista</string>
+    <string name="example_email">baptistamhernani@gmail.com</string>
+    <string name="example_date">YYYY-MM-DD</string>
+    <string name="example_train">Treino 1</string>
+    <string name="example_personal">Personal 1</string>
 </resources>

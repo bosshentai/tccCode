@@ -2,6 +2,7 @@ package com.example.nogainandroidclient.utils;
 
 import com.example.nogainandroidclient.models.Client;
 import com.example.nogainandroidclient.models.Employee;
+import com.example.nogainandroidclient.models.Payment;
 
 import java.util.ArrayList;
 
@@ -31,4 +32,10 @@ public interface ClientServices {
 
     @GET("/api/client/{id}")
     Call<Client> getOneClient(@Path("id") String clientId);
+
+    @GET("/api/payment/{id}")
+    Call<Payment> getOnePayment(@Path("id") String clientId);
+
+    @POST("/api/payment/add")
+    Call<ResponseBody> createPayment(@Body Payment payment);
 }

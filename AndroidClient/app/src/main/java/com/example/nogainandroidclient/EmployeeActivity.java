@@ -1,5 +1,6 @@
 package com.example.nogainandroidclient;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.nogainandroidclient.adapter.EmployeeRecyclerViewAdapter;
@@ -41,6 +44,27 @@ public class EmployeeActivity extends AppCompatActivity {
         setEmployeeData();
 
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.employee_menu,menu);
+        return  true;
+//        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.moveToClient:
+                Intent moveToClientIntent = new Intent(EmployeeActivity.this,ClientActivity.class);
+                startActivity(moveToClientIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     public void newEmployeeHandler(View view) {

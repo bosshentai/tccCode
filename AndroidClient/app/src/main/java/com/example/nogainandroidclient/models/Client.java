@@ -17,9 +17,11 @@ public class Client {
 
     private String phone;
 
+    private String personalTrainerName;
     private String personalTrainerId;
     private String discountId;
 
+    private String trainingPlanName;
     private String trainPlan;
 
 
@@ -43,6 +45,18 @@ public class Client {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public String getPersonalTrainerName() {
+        return personalTrainerName;
+    }
+
+    public String getTrainPlanName() {
+        return trainingPlanName;
     }
 
     public String getTrainPlan() {
