@@ -1,3 +1,59 @@
 <resources>
     <string name="app_name">NoGainAndroidClient</string>
+    <string name="welcome">Bem Vindo</string>
+
+    <string name="textView_fullName">Nome Completo</string>
+    <string name="editView_fullName_hint">Insira o seu  nome completo</string>
+    <string name="textView_email">Email</string>
+    <string name="editView_email_hint">Insira o seu email</string>
+    <string name="textView_phone">Telemóvel</string>
+    <string name="editView_phone_hint">Insira o seu numero de telemovel</string>
+    <string name="textView_cni">CNI</string>
+    <string name="editView_cni_hint">Insira o seu cni</string>
+    <string name="textView_nif">NIF</string>
+    <string name="editView_nif_hint">Insira o seu nif</string>
+
+    <string name="textView_train_plan">Plano de Treino</string>
+    <string name="textView_personal_trainer">Personal Trainer</string>
+
+    <string name="textView_birth">Data de Nascimento</string>
+    <string name="editView_birth_hint">Insira a tua data de nascimento</string>
+
+
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_add">Registrar</string>
+
+    <string name="menu_employees">Funcionarios</string>
+
+    <string name="alert_dialog_title">Alerta</string>
+    <string name="alert_dialog_message">Presente cancelar o registro do Funcionario</string>
+    <string name="yes_option">Sim</string>
+    <string name="no_option">Não</string>
+
+
+    <string name="fbtn_employee_description">Add Employee</string>
+
+
+    <string name="toast_fullName_empty">Nome Completo Vazio</string>
+    <string name="toast_fullName_invalid">Nome Completo Invalido</string>
+    <string name='toast_email_empty'>Email Vazio</string>
+    <string name="toast_email_invalid">Email Invalido</string>
+    <string name="toast_phone_empty">Telemovel Vazio</string>
+    <string name="toast_phone_invalid">Telemovel Invalido</string>
+    <string name="toast_cni_empty">CNI Vazio</string>
+    <string name="toast_cni_invalid">CNI Invalido</string>
+    <string name="toast_nif_empty">NIF Vazio</string>
+    <string name="toast_nif_invalid">NIF Invalido</string>
+    <string name="toast_birth_empty">Data de Nascimento Vazio</string>
+
+
+    <string name="item_client_option">Cliente</string>
+    <string name="item_employee_option">Funcionario</string>
+
+
+    <string name="example_Name">Hernâni Baptista</string>
+    <string name="example_email">baptistamhernani@gmail.com</string>
+    <string name="example_date">YYYY-MM-DD</string>
+    <string name="example_train">Treino 1</string>
+    <string name="example_personal">Personal 1</string>
 </resources>

@@ -12,7 +12,11 @@ import { userRouter } from './Routes/user'
 
 const app = express()
 
-// app.use(express.json());
+
+// app.disable('x-powered-by')
+// app.use(express.urlencoded({extended:true}))
+
+app.use(express.json());
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {

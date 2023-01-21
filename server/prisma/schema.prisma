@@ -7,6 +7,12 @@ generator client {
   previewFeatures = ["interactiveTransactions"]
 }
 
+
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+
 //https://dev.to/sabinthedev/building-a-prisma-schema-61b
 
 // generator erd {

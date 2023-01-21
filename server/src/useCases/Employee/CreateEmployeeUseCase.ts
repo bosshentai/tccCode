@@ -14,13 +14,13 @@ export class CreateEmployeeUseCase {
     NIF,
     birth,
   }: ICreateEmployeeDTO) {
-    const userAlreadyExist = new EmailAlreadyExist()
+    // const userAlreadyExist = new EmailAlreadyExist()
 
-    const emailIsUsed = await userAlreadyExist.handle(email)
+    // const emailIsUsed = await userAlreadyExist.handle(email)
 
-    if (emailIsUsed) {
-     throw new Error('The email have been used ')
-    }
+    // if (emailIsUsed) {
+    //  throw new Error('The email have been used ')
+    // }
 
     const hashedPassword = await hash('123456', 12)
 
