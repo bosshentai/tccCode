@@ -39,7 +39,6 @@ public class ClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_client);
         getSupportActionBar().setTitle("Clientes");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         clientRecycleView = findViewById(R.id.clientRecycleView);
 
         setClientData();
@@ -49,7 +48,6 @@ public class ClientActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.client_menu,menu);
         return true;
-//        return super.onCreateOptionsMenu(menu);
     }
 
 

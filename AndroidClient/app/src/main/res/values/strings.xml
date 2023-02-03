@@ -26,9 +26,11 @@
     <string name="menu_employees">Funcionarios</string>
 
     <string name="alert_dialog_title">Alerta</string>
-    <string name="alert_dialog_message">Presente cancelar o registro do Funcionario</string>
+    <string name="alert_dialog_message">Pretende cancelar o registro do Funcionario?</string>
     <string name="yes_option">Sim</string>
     <string name="no_option">Não</string>
+
+    <string name="btn_pay">PAGAR</string>
 
 
     <string name="fbtn_employee_description">Add Employee</string>
@@ -56,4 +58,5 @@
     <string name="example_date">YYYY-MM-DD</string>
     <string name="example_train">Treino 1</string>
     <string name="example_personal">Personal 1</string>
+
 </resources>

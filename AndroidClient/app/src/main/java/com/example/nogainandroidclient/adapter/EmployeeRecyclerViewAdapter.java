@@ -62,7 +62,7 @@ public class EmployeeRecyclerViewAdapter
 
         holder.fullName.setText(mEmployeeList.get(position).getName());
         holder.email.setText(mEmployeeList.get(position).getEmail());
-        holder.status.setText(mEmployeeList.get(position).getStatus().toString());
+        holder.phone.setText(mEmployeeList.get(position).getPhone());
 
     }
 
@@ -78,7 +78,7 @@ public class EmployeeRecyclerViewAdapter
 
     public  class EmployeeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
-        private TextView fullName, email, status;
+        private TextView fullName, email, phone;
 
 
         public EmployeeViewHolder(@NonNull View itemView) {
@@ -86,7 +86,7 @@ public class EmployeeRecyclerViewAdapter
 
             fullName = itemView.findViewById(R.id.employeeItemFullName);
             email = itemView.findViewById(R.id.employeeItemEmail);
-            status = itemView.findViewById(R.id.employeeItemStatus);
+            phone = itemView.findViewById(R.id.employeeItemPhoneNumber);
 
             // Make The ContextMenu show
             itemView.setOnCreateContextMenuListener(this);

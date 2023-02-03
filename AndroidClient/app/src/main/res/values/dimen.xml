@@ -5,6 +5,8 @@
     <dimen name="editView_width_newEmployee">280dp</dimen>
     <dimen name="edit_height_newEmployee">48dp</dimen>
 
-    <dimen name="textView_Employee">15sp</dimen>
+    <dimen name="textView_Employee">25sp</dimen>
+    <dimen name="textView_Employee_info">20sp</dimen>
+    <dimen name="email_Employee_info">15sp</dimen>
 
 </resources>

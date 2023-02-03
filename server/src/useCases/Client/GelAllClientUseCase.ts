@@ -9,6 +9,7 @@ export class GetAllClientUseCase {
           select: {
             name: true,
             email: true,
+            // phone: true,
           },
         },
         ctp: {
@@ -28,6 +29,7 @@ export class GetAllClientUseCase {
         id: item.id,
         name: item.user.name,
         email: item.user.email,
+        // phone: item.user.phone,
         trainPlan: item.ctp?.train?.name,
       }
     })

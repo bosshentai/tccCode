@@ -56,9 +56,7 @@ extends RecyclerView.Adapter<ClientRecyclerViewAdapter.ClientViewHolder> {
 
 
         return new ClientRecyclerViewAdapter.ClientViewHolder(view);
-//        return new EmployeeRecyclerViewAdapter.EmployeeViewHolder(view);
 
-//        return null;
     }
 
     @Override
@@ -123,7 +121,7 @@ extends RecyclerView.Adapter<ClientRecyclerViewAdapter.ClientViewHolder> {
 
                         ClientServices clientServices = retrofit.create(ClientServices.class);
 
-//                        Log.d(LOG_TAG,mClientList.get(getLayoutPosition()).getId());
+
                         Call<Client> call = clientServices.getOneClient(mClientList.get(getLayoutPosition()).getId());
 
                         call.enqueue(new Callback<Client>() {
