@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/default_16_dp"
         android:backgroundTint="@color/blue"
         android:clickable="true"
         android:contentDescription="@string/fbtn_employee_description"
