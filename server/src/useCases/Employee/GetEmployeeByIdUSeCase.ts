@@ -13,10 +13,10 @@ export class GetEmployeeByIdUseCase {
             select: {
               name: true,
               email: true,
-              birth_date: true,
+              birth: true,
               phone: true,
-              CNI: true,
-              NIF: true,
+              cni: true,
+              nif: true,
             },
           },
         },
@@ -29,10 +29,10 @@ export class GetEmployeeByIdUseCase {
     const employee = {
       name : employeeData.user.name,
       email: employeeData.user.email,
-      birth: employeeData.user.birth_date,
+      birth: employeeData.user.birth.toISOString().slice(0,10),
       phone: employeeData.user.phone,
-      CNI: employeeData.user.CNI,
-      NIF: employeeData.user.NIF
+      CNI: employeeData.user.cni,
+      NIF: employeeData.user.nif
     }
 
 

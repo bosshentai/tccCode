@@ -25,7 +25,7 @@ export const Profile = () => {
 
       {openSettings && (
         <span className={styles.settings}>
-          <button onClick={auth.logout}>Logout</button>
+          <button onClick={auth.logout}><p>Logout</p></button>
         </span>
       )}
     </div>

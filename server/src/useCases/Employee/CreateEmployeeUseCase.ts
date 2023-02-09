@@ -31,9 +31,9 @@ export class CreateEmployeeUseCase {
         password: hashedPassword,
         phone,
         role: Roles.EMPLOYEE,
-        CNI,
-        NIF,
-        birth_date: new Date(birth),
+        cni: CNI,
+        nif: NIF,
+        birth: new Date(birth),
         employee: {
           create: {},
         },

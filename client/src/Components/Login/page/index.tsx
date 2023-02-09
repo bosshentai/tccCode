@@ -21,10 +21,10 @@ export interface LoginResponse {
   refreshToken: refreshToken
 }
 
-type propsType = {
-  // valid: Dispatch<SetStateAction<boolean>>
-  valid: () => {}
-}
+// type propsType = {
+//   // valid: Dispatch<SetStateAction<boolean>>
+//   valid: () => {}
+// }
 // Dispatch<SetStateActicon<boolean>
 export const Login = () => {
   const auth = useContext(AuthContext)

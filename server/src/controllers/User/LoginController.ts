@@ -13,19 +13,21 @@ export class LoginController {
   async handle(
     request: Request,
     response: Response,
-    next: NextFunction,
   ) :Promise<Response>{
     const { email, password } = request.body
 
 
     const loginUseCase = new LoginUseCase()
     let token
+
+
+
     try{
-       token = await loginUseCase.execute({
+
+      token = await loginUseCase.execute({
         email,
         password
       })
-
 
     return response.json(token)
     }catch(e){

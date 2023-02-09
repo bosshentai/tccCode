@@ -23,7 +23,7 @@ type client = {
 }
 
 
-const urlPath = 'http://localhost:5000/api/client/all'
+const urlPath = 'http://localhost:5000/api/client/'
 
 
 export const Client = () => {
@@ -62,7 +62,7 @@ export const Client = () => {
     setClientIsShown(false)
   }
 
-  // console.log("Renderizou")
+
 
   return (
     <>

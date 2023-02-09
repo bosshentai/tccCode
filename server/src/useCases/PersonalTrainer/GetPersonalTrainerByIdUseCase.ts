@@ -1,23 +1,40 @@
-import { prismaClient } from '../../database/prismaClient';
-import { IGetPersonalTrainerByIdDTO } from './../../repositories/dto/PersonalTrainer/IGetPersonalTrainerByIdDTO';
-
-
-
+import { prismaClient } from '../../database/prismaClient'
+import { IGetPersonalTrainerByIdDTO } from './../../repositories/dto/PersonalTrainer/IGetPersonalTrainerByIdDTO'
 
 export class GetPersonalTrainerByIdUseCase {
-  async handle({id}: IGetPersonalTrainerByIdDTO){
-   const personalTrainer = await prismaClient.personalTrainer.findUnique({
-    where:{
-      id
+  async handle({ id }: IGetPersonalTrainerByIdDTO) {
+    const personalTrainerData =
+      await prismaClient.personalTrainer.findUnique({
+        where: {
+          id,
+        },
+        select: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              birth: true,
+              cni: true,
+              nif: true,
+            },
+          },
+          value: true,
+        },
+      })
+
+    if (!personalTrainerData) {
+      throw new Error('Personal Trainer list is empty')
     }
-   })
 
+    const personalTrainer = {
+      name: personalTrainerData.user.name,
+      email: personalTrainerData.user.email,
+      birth: personalTrainerData.user.birth,
+      cni: personalTrainerData.user.cni,
+      nif: personalTrainerData.user.nif,
+      value: personalTrainerData.value
+    }
 
-   if(!personalTrainer){
-    throw new Error("Personal Trainer list is empty");
-   }
-
-
-   return personalTrainer
+    return personalTrainer
   }
 }

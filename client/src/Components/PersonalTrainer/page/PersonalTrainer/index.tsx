@@ -36,12 +36,12 @@ export const PersonalTrainer = () => {
 
   useEffect(() => {
     const urlPath =
-      'http://localhost:5000/api/personalTrainer/all'
+      'http://localhost:5000/api/personalTrainer/'
     // const getData = axios.get(urlPath)
 
     const sendGetRequest = async () => {
       const urlPath =
-        'http://localhost:5000/api/personalTrainer/all'
+        'http://localhost:5000/api/personalTrainer/'
 
       try {
         const response = await axios.get<personalTrainer[]>(

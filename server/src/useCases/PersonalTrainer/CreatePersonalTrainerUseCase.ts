@@ -35,9 +35,9 @@ export class CreatePersonalTrainerUseCase {
         email,
         password: hashedPassword,
         phone,
-        CNI,
-        NIF,
-        birth_date: birth,
+        cni: CNI,
+        nif: NIF,
+        birth: birth,
         personal_trainers:{
           create:{
             value

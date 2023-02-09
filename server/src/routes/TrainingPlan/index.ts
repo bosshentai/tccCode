@@ -13,6 +13,6 @@ const getTrainingPlanById =
 
 trainingPlanRoutes.post('/', createTraining.handle)
 trainingPlanRoutes.get('/', getAllTrainingPlans.handle)
-trainingPlanRoutes.get('/:d', getTrainingPlanById.handle)
+trainingPlanRoutes.get('/:id', getTrainingPlanById.handle)
 
 export { trainingPlanRoutes }

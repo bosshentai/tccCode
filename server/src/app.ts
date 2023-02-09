@@ -10,7 +10,7 @@ import bodyParser from 'body-parser'
 // import { router } from '../../Routes'
 // import { userRouter } from '../../Routes/user'
 import { router } from './routes'
-import { userRouter } from './routes/user'
+import { authRouter } from './routes/auth'
 
 
 
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/auth', userRouter)
+app.use('/auth', authRouter)
 
 app.use('/api', router)
 

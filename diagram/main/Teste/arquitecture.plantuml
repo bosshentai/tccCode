@@ -1,0 +1,46 @@
+@startuml
+title NoGain Architecture
+' left to right direction
+cloud "Front-end CLuster"{
+  package "React App" {
+    ' [Front-end]
+    component "React"
+    ' component "TypeScript"
+    component "Axios"
+  }
+}
+
+cloud "Back-end Cluster"{
+
+  database "PostgreSQL" {
+    [Database]
+  }
+  package "Express API" {
+    ' [Back-end API]
+    component "Express"
+    component "Prisma"
+  }
+
+}
+
+[React] <-> [Axios]
+[Axios] <-> [Express]
+[Express] <-> [Prisma]
+[Prisma] <-> [Database]
+
+@enduml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ import { employeeRoutes } from './Employee'
 import { paymentRoutes } from './Payment'
 import { personalTrainerRoutes } from './PersonalTrainer'
 import { trainingPlanRoutes } from './TrainingPlan'
+import { userRouter } from './user'
 
 const router = Router()
 
@@ -15,6 +16,7 @@ router.use('/employee', employeeRoutes)
 router.use('payment', paymentRoutes)
 router.use('/personalTrainer', personalTrainerRoutes)
 router.use('/trainingPlan', trainingPlanRoutes)
+router.use('/user', userRouter)
 
 
 // /
