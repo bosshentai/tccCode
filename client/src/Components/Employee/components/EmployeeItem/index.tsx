@@ -42,9 +42,9 @@ export const EmployeeItem = (props: employeeInfo) => {
         <div className={styles.info}>
           <p>{email}</p>
         </div>
-        <div>
+        {/* <div>
           <p className={statusClasseControle}>{status}</p>
-        </div>
+        </div> */}
       </NavLink>
     </li>
   );

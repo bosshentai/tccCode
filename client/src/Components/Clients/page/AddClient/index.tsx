@@ -15,13 +15,13 @@ import axios, { Axios, AxiosResponse } from 'axios'
 // not finished
 
 const urlPathGetDiscount =
-  'http://localhost:5000/api/discount/all'
+  'http://localhost:5000/api/discount/'
 
 const urlPathGetTrainingPlan =
-  'http://localhost:5000/api/trainingplan/all'
+  'http://localhost:5000/api/trainingplan/'
 
 const urlPathGetPersonalTrainer =
-  'http://localhost:5000/api/personalTrainer/all'
+  'http://localhost:5000/api/personalTrainer/'
 
 const urlPathGetAllUser =
   'http://localhost:5000/api/user/allemail'
@@ -38,10 +38,6 @@ type trainingPlanInfo = {
 type personalTrainerInfo = {
   id: string
   name: string
-  // user:{
-  //   name: string
-    
-  // }
 }
 
 type discountInfo = {
@@ -143,8 +139,6 @@ export const AddClient = (props: propsType) => {
 
   // PersonalTrainer
   useEffect(() => {
-    //falta so bo
-    // setListPersonalTrainer(DUMMY_DATA)
 
     try {
       axios
@@ -207,8 +201,7 @@ export const AddClient = (props: propsType) => {
     )
   }, [listPersonalTrainer])
 
-  // console.log(listPersonalTrainer)
-  // console.log(nullPersonalTrainerSelect)
+
 
   // Discount
   useEffect(() => {
@@ -219,7 +212,7 @@ export const AddClient = (props: propsType) => {
     setNullDiscountSelect(listDiscountNullItem)
   }, [listDiscount])
 
-  // console.log(nullSelect.at(0)?.id)
+
 
   const listDiscountFiltered = listDiscount.filter(
     (item) => item.name !== 'null',
@@ -245,7 +238,7 @@ export const AddClient = (props: propsType) => {
     return setSelectedDiscount(event?.target.value)
   }
 
-  // console.log(listDiscount)
+
 
   const hoverHandler = () => {
     setHover(true)
@@ -257,7 +250,7 @@ export const AddClient = (props: propsType) => {
 
   const checkTrainingHandler = () => {
     setIsTrainingChecked(!isTrainingChecked)
-    // setIsChecked(!isChecked)
+
   }
 
   const checkPersonalTrainerHandler = () => {
@@ -288,8 +281,7 @@ export const AddClient = (props: propsType) => {
       (item) => item.email === enteredEmail,
     )
 
-    // console.log(emailIsUsed)
-    // console.log(teste)
+
     const emailIsOk =
       emailIsNotEmpty && emailIsValid && !emailIsUsed
 
@@ -326,9 +318,6 @@ export const AddClient = (props: propsType) => {
       setIsBirthOk(false)
     }
 
-    // if (!cniIsOk){
-    //   setIsCNIOk(false)
-    // }
 
     if (nameIsOk) {
       setIsNameOk(true)
@@ -350,7 +339,7 @@ export const AddClient = (props: propsType) => {
       nameIsOk && emailIsOk && phoneIsOk && birthIsOk
 
     if (formOk) {
-      // console.log(isDiscountChecked)
+    
 
       const urlPost = 'http://localhost:5000/api/client/add'
 

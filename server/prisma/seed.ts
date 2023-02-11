@@ -7,6 +7,7 @@ import { personalTrainers } from './dataTest/personalTrainer'
 import { manager } from './dataTest/manager'
 import { GetAllTrainingPlansUseCase } from '../src/useCases/TrainingPlan/GetAllTrainingPlanUseCase'
 import { clients } from './dataTest/client'
+import { hash } from 'bcryptjs'
 // import random
 
 const prisma = new PrismaClient()
@@ -14,18 +15,20 @@ const prisma = new PrismaClient()
 async function runSeed() {
   // Employee
 
+  const hashedPassword = await hash('123456', 12)
   await Promise.all(
+
     employees.map(async (employee) => {
       await prismaClient.user.create({
         data: {
           name: employee.name,
           email: employee.email,
           phone: employee.phone,
-          password: employee.password,
+          password: hashedPassword,
           role: Roles.EMPLOYEE,
-          CNI: employee.CNI,
-          NIF: employee.NIF,
-          birth_date: employee.birth_date,
+          cni: employee.CNI,
+          nif: employee.NIF,
+          birth: employee.birth_date,
           employee: {
             create: {},
           },
@@ -62,17 +65,18 @@ async function runSeed() {
 
   // PersonalTrainer
   await Promise.all(
+
     personalTrainers.map(async (personalTrainer) => {
       await prismaClient.user.create({
         data: {
           name: personalTrainer.name,
           email: personalTrainer.email,
-          password: personalTrainer.password,
+          password: hashedPassword,
           phone: personalTrainer.phone,
           role: Roles.PERSONALTRAINER,
-          birth_date: personalTrainer.birth,
-          CNI: personalTrainer.CNI,
-          NIF: personalTrainer.NIF,
+          birth: personalTrainer.birth,
+          cni: personalTrainer.CNI,
+          nif: personalTrainer.NIF,
           personal_trainers: {
             create: {
               value: Number(personalTrainer.value),
@@ -90,11 +94,11 @@ async function runSeed() {
       name: manager.name,
       email: manager.email,
       phone: manager.phone,
-      password: manager.password,
-      birth_date: manager.birth,
+      password: hashedPassword,
+      birth: manager.birth,
       role: Roles.MANAGER,
-      CNI: manager.CNI,
-      NIF: manager.NIF,
+      cni: manager.CNI,
+      nif: manager.NIF,
       manager: {
         create: {},
       },
@@ -133,7 +137,7 @@ async function addClient() {
         phone: client.phone,
         password: client.password,
         role: Roles.CLIENT,
-        birth_date: client.birth,
+        birth: client.birth,
         client: {
           create: {
             cpt: {
@@ -188,14 +192,14 @@ runSeed()
     await prisma.$disconnect()
   })
 
-addClient()
-  .catch((e) => {
-    console.error(`There was an error while seeding: ${e}`)
-    process.exit(1)
-  })
-  .finally(async () => {
-    console.log(
-      'Sucessfully seeded database.Closing connection',
-    )
-    await prisma.$disconnect()
-  })
+// addClient()
+//   .catch((e) => {
+//     console.error(`There was an error while seeding: ${e}`)
+//     process.exit(1)
+//   })
+//   .finally(async () => {
+//     console.log(
+//       'Sucessfully seeded database.Closing connection',
+//     )
+//     await prisma.$disconnect()
+//   })

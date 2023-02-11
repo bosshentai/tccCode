@@ -67,7 +67,7 @@ export const AddPersonalTrainer = (props: propsType) => {
     event.preventDefault()
 
     const urlPatch =
-      'http://localhost:5000/api/personalTrainer/add'
+      'http://localhost:5000/api/personalTrainer/'
 
     // missing the urlPatch for the backend add the PersonalTrainer
 

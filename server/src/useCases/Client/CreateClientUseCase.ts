@@ -33,7 +33,7 @@ export class CreateClientUseCase {
         password: hashedPassword,
         phone,
         role: Roles.CLIENT,
-        birth_date: birth,
+        birth: birth,
         client: {
           create: {
             cpt: {

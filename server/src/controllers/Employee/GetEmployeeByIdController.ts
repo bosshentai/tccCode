@@ -8,7 +8,7 @@ export class GetEmployeeByIdController {
   async handle(
     request: Request,
     response: Response,
-    next: NextFunction,
+    // next: NextFunction,
   ) {
     if (request.method !== 'GET') {
 

@@ -43,17 +43,15 @@ model User {
   id         String   @id @default(uuid())
   name       String
   email      String   @unique
-  birth_date DateTime @db.Date
+  birth DateTime @db.Date
   role       Roles    @default(UNKNOW)
   phone      String
-  CNI        String?
-  NIF        String?
+  cni        String?
+  nif        String?
   password   String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-
   refresh_token RefreshToken?
-
   client            Client[]
   personal_trainers PersonalTrainer[]
   employee          Employee[]

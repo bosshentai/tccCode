@@ -22,5 +22,31 @@
         android:fontFamily="@font/alfa_slab_one"
         />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+>
+    <Button
+        android:id="@+id/btn_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item_client_option"
+        android:width="@dimen/btn_main_activity_width"
+        android:height="@dimen/btn_main_activity_height"
+        android:onClick="moveToClient"
+        />
+
+    <Button
+        android:id="@+id/btn_employee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item_employee_option"
+        android:width="@dimen/btn_main_activity_width"
+        android:height="@dimen/btn_main_activity_height"
+        android:onClick="moveToEmployee"
+        />
+    </LinearLayout>
 
 </LinearLayout>

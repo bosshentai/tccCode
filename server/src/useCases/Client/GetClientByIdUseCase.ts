@@ -14,7 +14,7 @@ export class GetClientByIdUseCase {
             select: {
               name: true,
               email: true,
-              birth_date: true,
+              birth: true,
             },
           },
           cpt: {
@@ -63,8 +63,9 @@ export class GetClientByIdUseCase {
 
     const clientInfo = {
       name: clientExist.user.name,
+      // name: clientExist.
       email: clientExist.user.email,
-      birth: clientExist.user.birth_date,
+      birth: clientExist.user.birth.toISOString().slice(0,10),
       personalTrainerID:
         clientExist.cpt?.personal_trainer_id,
       personalTrainerName:

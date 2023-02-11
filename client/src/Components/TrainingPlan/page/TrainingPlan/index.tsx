@@ -56,7 +56,7 @@ export const TrainingPlan = () => {
   useEffect(() => {
     async function getTrainingPlan() {
       const urlPath =
-        'http://localhost:5000/api/trainingplan/all'
+        'http://localhost:5000/api/trainingplan/'
 
       try {
         const response = await axios.get(urlPath)
@@ -80,19 +80,7 @@ export const TrainingPlan = () => {
 
     getTrainingPlan()
 
-    // try {
-    //   axios.get(urlPath).then((response: AxiosResponse) => {
-    //     setListPlanningTrain(response.data)
-    //   })
-    // } catch (error) {
-    //   console.log('Error: ' + error)
-    // }
 
-    // if (listPlanningTrain.length === 0) {
-    //   setListEmpty(true)
-    // } else {
-    //   setListEmpty(false)
-    // }
   }, [listPlanningTrain.length])
 
   const showAddTrainingHandler = () => {
@@ -117,7 +105,7 @@ export const TrainingPlan = () => {
         )}
 
       <DefaultPage>
-        {/* {listEmpty && <p className={styles.p}>Sem Plano de Treino</p>} */}
+
         {listEmpty && (
           <EmptyPage message="Sem Plano de Treino" />
         )}

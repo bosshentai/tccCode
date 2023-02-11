@@ -4,39 +4,47 @@
 
   height: 11.25rem;
 
-
   justify-content: flex-end;
 
   align-items: center;
-
-  // cursor: pointer;
 
   img {
     cursor: pointer;
     margin-right: 2rem;
     height: 129px;
     width: 129px;
-    // height: 8.063rem;
-    // width: 8.063rem;
   }
 
-  .settings{
+  .settings {
     position: absolute;
-    // background-color: red;
 
     width: 155px;
-    height: 77px;
-    // margin-top:199px;
-    // margin-
+    height: 57px;
+
     top: 149px;
-    right:17px;
+    right: 17px;
 
     display: flex;
-    // text-align: center;
-    justify-content: center;
 
-    button{
-      width: 100%;
+    justify-content: center;
+    background: #4b88e8;
+    border-radius: 5px;
+
+    button {
+      margin: 0.5rem;
+
+      width: 90%;
+      height: 2.603rem;
+      background: white;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+      p {
+        font-family: 'Ubuntu', sans-serif;
+        color: black;
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -16,8 +17,8 @@ import android.widget.Toast;
 import com.example.nogainandroidclient.models.Employee;
 import com.example.nogainandroidclient.utils.ClientServices;
 
+import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,6 +43,7 @@ public class CreateEmployeeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_employee);
+        getSupportActionBar().setTitle("Registro de Funcionario");
 
 
         fullNameEditText = findViewById(R.id.fullNameInput);
@@ -64,10 +66,19 @@ public class CreateEmployeeActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CreateEmployeeActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        month = month + 1;
 
-                        String date = year + "-" + month + "-" + day;
-                        birthEditText.setText(date);
+                        Calendar currentDate = Calendar.getInstance();
+                        Calendar birthDate = calendar.getInstance();
+                        birthDate.set(year, month, day);
+
+                        if (birthDate.after(currentDate)) {
+                            toastDisplay("Data Invalido");
+                        } else {
+                            month = month + 1;
+                            String date = year + "-" + month + "-" + day;
+                            birthEditText.setText(date);
+                        }
+
                     }
                 }, year, month, day);
 
@@ -106,13 +117,14 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
     public void addEmployeeHandler(View view) {
 
+        Log.d(LOG_TAG, "");
 
-        fullNameEditText.setText("Hernani Baptista");
-        emailEditText.setText("baptistasdasdaa@gmail.com");
-        phoneEditText.setText("9432354");
-        cniEditText.setText("19931022M003R");
-        nifEditText.setText("123456789");
-        birthEditText.setText("1993-10-22");
+//        fullNameEditText.setText("Hernani Baptista");
+//        emailEditText.setText("baptistasdasdaa@gmail.com");
+//        phoneEditText.setText("9432354");
+//        cniEditText.setText("19931022M003R");
+//        nifEditText.setText("123456789");
+//        birthEditText.setText("1993-10-22");
 //        birthDayEditText.setText(R.string.example_birth);
 
 
@@ -132,8 +144,8 @@ public class CreateEmployeeActivity extends AppCompatActivity {
         Boolean isNIFEmpty = nif.isEmpty();
         Boolean isBirthEmpty = birth.isEmpty();
 
-        //
-        Boolean isFullNameSize = fullName.length() >= 8 ;
+        // size
+        Boolean isFullNameSize = fullName.length() >= 8;
 
         // Valid
         Boolean isFullNameValid = fullNameValid(fullName);
@@ -142,9 +154,7 @@ public class CreateEmployeeActivity extends AppCompatActivity {
         Boolean isCNIValid = validCNI(cni);
         Boolean isNIFValid = nifValid(nif);
 
-//
-//        Boolean isNotEmpty = !isFullNameEmpty && !isEmailEmpty && !isPhoneEmpty && !isCNIEmpty &&
-//                !isNIFEmpty && !isBirthEmpty;
+
 
         Boolean isFormOK = !isFullNameEmpty && isFullNameValid && !isEmailEmpty && isEmailValid
                 && !isPhoneEmpty && isPhoneNumberValid && !isCNIEmpty && isCNIValid && !isNIFEmpty &&
@@ -178,37 +188,36 @@ public class CreateEmployeeActivity extends AppCompatActivity {
             return;
         }
 
-        if(!isFullNameSize){
+        if (!isFullNameSize) {
             toastDisplay("Nome minimo 8 caracteres");
             return;
         }
 
-        if(!isFullNameValid){
+        if (!isFullNameValid) {
             toastDisplay("Nome Completo Invalido");
             return;
         }
 
-        if(!isEmailValid){
+        if (!isEmailValid) {
             toastDisplay("Email Invalido");
             return;
         }
-        if(!isPhoneNumberValid){
+        if (!isPhoneNumberValid) {
             toastDisplay("Telemovel Invalido");
             return;
         }
-        if(!isCNIValid){
+        if (!isCNIValid) {
             toastDisplay("CNI Invalido");
             return;
         }
 
-        if(!isNIFValid){
+        if (!isNIFValid) {
             toastDisplay("NIF Invalido");
             return;
         }
 
 
-
-        if(isFormOK){
+        if (isFormOK) {
             Retrofit.Builder builder = new Retrofit.Builder()
                     .baseUrl("http://10.0.2.2:5000/")
                     .addConverterFactory(GsonConverterFactory.create());
@@ -216,18 +225,18 @@ public class CreateEmployeeActivity extends AppCompatActivity {
             Retrofit retrofit = builder.build();
             ClientServices clientServices = retrofit.create(ClientServices.class);
 //            Log.d(clientServices)
-            Employee newEmployee = new Employee(fullName,email,birth,phone,cni,nif);
+            Employee newEmployee = new Employee(fullName, email, birth, phone, cni, nif);
             Call<ResponseBody> call = clientServices.createEmployee(newEmployee);
 
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                    if (!response.isSuccessful()){
-                        Log.e(LOG_TAG,"onResponse: "+ response.code());
+                    if (!response.isSuccessful()) {
+                        Log.e(LOG_TAG, "onResponse: " + response.code());
 
-                    }else{
-                        Log.d(LOG_TAG,"OnResponse: " + response.body());
+                    } else {
+                        Log.d(LOG_TAG, "OnResponse: " + response.body());
                         finish();
 
                     }
@@ -236,15 +245,13 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e(LOG_TAG,"OnFailure: " + t.getMessage());
-
+                    Log.e(LOG_TAG, "OnFailure: " + t.getMessage());
 
 
                 }
             });
 
         }
-
 
 
 //        if (isNotEmpty) {
@@ -404,7 +411,6 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 //            Log.d(LOG_TAG,"isCharacterValid is " + String.valueOf(isCharacterValid));
 
 
-
             return isDataValid && isSexValid && is3NumberValid && isCharacterValid;
 
         }
@@ -416,4 +422,6 @@ public class CreateEmployeeActivity extends AppCompatActivity {
 
     }
 
+
 }
+

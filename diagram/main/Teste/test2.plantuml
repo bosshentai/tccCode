@@ -1,0 +1,18 @@
+@startuml
+package "Front-End" {
+  [ReactJS App w/ TypeScript]
+}
+package "Back-End" {
+  [ExpressJS API]
+  [Prisma]
+}
+database "PostgreSQL" as post {
+
+}
+[ReactJS App w/ TypeScript] -> [Axios]
+[Axios] -> [ExpressJS API]
+[ExpressJS API] -> [Prisma]
+' [Prisma] -> [PostgreSQL]
+
+[Prisma] -> post
+@enduml

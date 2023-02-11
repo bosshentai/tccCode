@@ -2,7 +2,7 @@ import { RefreshTokenUserController } from './../../controllers/token/RefreshTok
 import express from 'express'
 import { LoginController } from '../../controllers/User/LoginController'
 
-const userRouter = express.Router()
+const authRouter = express.Router()
 
 const login = new LoginController()
 
@@ -11,11 +11,11 @@ const refreshToken = new RefreshTokenUserController()
 // const getUserByIdInfo = new GetUserByIdController()
 
 
-userRouter.post('/login', login.handle)
+authRouter.post('/login', login.handle)
 
 
-userRouter.post('/refreshToken',refreshToken.handle)
+authRouter.post('/refreshToken',refreshToken.handle)
 
 // userRouter.post('/:id',getUserByIdInfo.handle)
 
-export { userRouter }
+export { authRouter }

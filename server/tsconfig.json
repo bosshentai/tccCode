@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-
     "outDir": "dist/js",
-    // "routDir": "src",
-
     "strict": true,
-
     "lib": ["esnext"],
+    "esModuleInterop": true,
 
-    "esModuleInterop": true
+  },
+  "typedocOptions":{
+    "entryPoints": ["src/server.ts"],
+    "out": "docs"
   }
 }

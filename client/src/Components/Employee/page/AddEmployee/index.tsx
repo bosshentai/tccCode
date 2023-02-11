@@ -67,7 +67,7 @@ export const AddEmployee = (props: propsType) => {
   const formRegisterEmployeeHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const urlPath = "http://localhost:5000/api/employee/add";
+    const urlPath = "http://localhost:5000/api/employee/";
 
     if (formState.isValid === true) {
       const formData = {

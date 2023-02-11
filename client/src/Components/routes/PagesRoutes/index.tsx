@@ -9,7 +9,8 @@ import { EmployeeProfile } from '../../Employee/page/EmployeeProfile'
 import { PersonalTrainer } from '../../PersonalTrainer/page/PersonalTrainer'
 import { TrainingPlan } from '../../TrainingPlan/page/TrainingPlan'
 import { Welcome } from '../../Welcome/page/Welcome'
-import { ClientProfile } from '../../Clients/page/ClientProfile/index';
+import { ClientProfile } from '../../Clients/page/ClientProfile/index'
+import { PersonalTrainerProfile } from '../../PersonalTrainer/page/PersonalTrainerProfile'
 
 // const test = lazy(() =>  import ("../../Clients/page/Client")).then(module => module.default{
 //   test: module.Client
@@ -26,30 +27,19 @@ import { ClientProfile } from '../../Clients/page/ClientProfile/index';
 export function PagesRoutes() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<Welcome />}
-      />
+      <Route path="/" element={<Welcome />} />
       {/* <Route path="/Client" element={<Client />} /> */}
+      <Route path="/Client" element={<Client />} />
       <Route
-        path="/Client"
-        element={<Client />}
+        path="/Client/Profile/:id"
+        element={<ClientProfile />}
       />
-      <Route
-      path='/Client/Profile/:id'
-      element={<ClientProfile/>}/>
       <Route
         path="/TrainingPlan"
         element={<TrainingPlan />}
       />
-      <Route
-        path="/Discount"
-        element={<Discount />}
-      />
-      <Route
-        path="/Employee"
-        element={<Employee />}
-      />
+      <Route path="/Discount" element={<Discount />} />
+      <Route path="/Employee" element={<Employee />} />
       <Route
         path="/Employee/Profile/:id"
         element={<EmployeeProfile />}
@@ -61,6 +51,12 @@ export function PagesRoutes() {
         path="/PersonalTrainer"
         element={<PersonalTrainer />}
       />
+
+      <Route
+        path="/PersonalTrainer/Profile/:id"
+        element={<PersonalTrainerProfile />}
+      />
+
       {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>
   )

@@ -64,14 +64,10 @@ export const AddDiscount = (props: propsType) => {
 
     if (nameIsOk && amountIsOk) {
       setIsNameOk(true)
-      // setIsNumberOk(true);
 
-      // console.log( "Nome do Desconto " + enteredName);
-      // console.log("A Descrição :" + enteredDescription);
-      // console.log("O valor: " + enteredAmount);
 
       const urlPatch =
-        'http://localhost:5000/api/discount/add'
+        'http://localhost:5000/api/discount/'
 
       const formData = {
         name: enteredName,
@@ -87,14 +83,13 @@ export const AddDiscount = (props: propsType) => {
         console.log(error)
       }
 
-      // console.log("Discount added");
-      // props.onClose();
+
     }
 
     return
   }
 
-  // const iconChange = !isHover ? <WhiteCross/> : <BlueCross/>;
+  
   const iconChange = !isHover ? whiteCross : blueCross
 
   const nameControllerClass = isNameOk

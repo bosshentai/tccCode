@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -7,42 +8,50 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="@dimen/cardView_height"
+        android:layout_margin="@dimen/cardView_margin"
+        app:cardBackgroundColor="@color/test"
+        app:cardCornerRadius="@dimen/cardView_radius">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
-                android:minWidth="200dp"
+                android:layout_marginLeft="@dimen/default_dp"
+                android:minWidth="@dimen/employee_profile_min_width"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/clientItemFullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_16_dp"
+                    android:layout_marginTop="@dimen/default_dp"
                     android:text="Hernani Baptista"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/textView_Employee" />
 
                 <TextView
                     android:id="@+id/clientItemEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_16_dp"
+                    android:layout_marginTop="@dimen/default_dp"
                     android:text="baptistamhernani@gmail.com"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/textView_Employee" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/email_Employee_info" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -51,20 +60,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tipo de Treino"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/textView_Employee" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/blue" />
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="3dp"-->
+    <!--        android:background="@color/blue" />-->
 
 </LinearLayout>

@@ -38,7 +38,7 @@ export const AddTrainingPlan = (props: propsType) => {
 
       const enteredName = nameInputRef.current!.value;
       const nameIsNotEmpty = enteredName.trim().length !== 0;
-      // const nameIsValid = validName(enteredName);
+
 
       const nameIsOk = nameIsNotEmpty ;
 
@@ -71,11 +71,9 @@ export const AddTrainingPlan = (props: propsType) => {
         setIsAmountOk(true);
         setIsNameOk(true)
 
-        // console.log("Nome do Plano de Treino: " +  enteredAmount);
-        // console.log("Descrição do Plano de Treino" + enteredDescription);
-        // console.log("Montante:" + enteredAmount);
 
-        const urlPatch = "http://localhost:5000/api/trainingplan/add";
+
+        const urlPatch = "http://localhost:5000/api/trainingplan/";
 
         const formData = {
           name: enteredName,

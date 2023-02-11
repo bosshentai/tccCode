@@ -10,6 +10,7 @@ export class GetAllEmployeesUseCase {
           select: {
             name: true,
             email: true,
+            phone: true,
           },
         },
       },
@@ -21,6 +22,7 @@ export class GetAllEmployeesUseCase {
         status: item.status,
         name: item.user.name,
         email: item.user.email,
+        phone: item.user.phone,
       }
     })
 

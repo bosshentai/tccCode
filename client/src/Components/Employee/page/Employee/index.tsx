@@ -16,7 +16,7 @@ const portalElement = document.getElementById(
 ) as HTMLElement
 
 
-const urlPath = 'http://localhost:5000/api/employee/all'
+const urlPath = 'http://localhost:5000/api/employee/'
 
 type employee = {
   id: string
@@ -94,9 +94,9 @@ export const Employee = () => {
               <div className={styles.title}>
                 <p>Email</p>
               </div>
-              <div className={styles.title}>
+              {/* <div className={styles.title}>
                 <p>Status</p>
-              </div>
+              </div> */}
             </div>
             <EmployeeList employees={listEmployee} />
           </DefaultInsidePage>

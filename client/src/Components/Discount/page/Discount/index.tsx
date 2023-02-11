@@ -60,7 +60,7 @@ export const Discount = () => {
 
     async function getDiscountList() {
       const urlPath =
-        'http://localhost:5000/api/discount/all'
+        'http://localhost:5000/api/discount/'
 
       try {
         const response = await axios.get(urlPath)
@@ -70,11 +70,9 @@ export const Discount = () => {
         )
 
         setListDiscount(filteredResponse)
-        // axios.get(urlPath).then((response: AxiosResponse) => {
-        //   setListDiscount(response.data)
-        // })
+      
       } catch (error) {
-        
+
         console.log('Error: ' + error)
       }
 

@@ -15,6 +15,7 @@ export const personalTrainers = [
     phone: '9511553',
     birth: new Date('1995-03-03'),
     CNI: '19950303M005R',
+    NIF: '123562342341',
     password: '123456',
     value: "500.00"
   },

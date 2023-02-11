@@ -23,14 +23,11 @@ export class LoginUseCase {
       throw new Error(
         'Logging in failed please try again later. ',
       )
-      // const error = new HttpError(
-      //   'Logging in failed, please try again later.',
-      //   500,
-      // )
-      // return error
     }
 
-    if (!existingUser) {
+    // console.log(existingUser)
+
+    if (existingUser === null) {
       // const error = new HttpError(
       //   'Invalid credential, could not log you in.',
       //   403,
@@ -42,6 +39,9 @@ export class LoginUseCase {
     }
 
     // let isValidPassword = false
+
+    console.log(password)
+    console.log(existingUser.password)
 
     // try {
     const isValidPassword = await compare(
@@ -56,6 +56,8 @@ export class LoginUseCase {
     //   return error
     // }
 
+    console.log(isValidPassword)
+
     if (!isValidPassword) {
       // const error = new HttpError(
       //   'Invalid credentials, could not log you in.',
@@ -63,7 +65,7 @@ export class LoginUseCase {
       // )
       // return error
       throw new Error(
-        'Invalid credentials,could not log you in.',
+        'Invalid password, could not log you in.',
       )
     }
 

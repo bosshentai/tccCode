@@ -39,6 +39,8 @@ export function EmployeeProfile() {
   const { id } = useParams()
   const navigate = useNavigate()
 
+  // console.log(id)
+
   const [employeeInfo, setEmployeeInfo] =
     useState<employeeInfoType>()
   const [verifiedId, setVerifiedId] = useState(false)

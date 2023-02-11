@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,28 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_menu,menu);
-        return true;
-//        return super.onCreateOptionsMenu(menu);
+    public void moveToClient(View view) {
+        Intent moveToClientIntent = new Intent(MainActivity.this,ClientActivity.class);
+        startActivity(moveToClientIntent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.moveToEmployee:
-                Intent moveEmployeeIntent = new Intent(MainActivity.this,EmployeeActivity.class);
-                startActivity(moveEmployeeIntent);
-                return true;
-            case R.id.moveToClient:
-                Intent moveClientIntent = new Intent(MainActivity.this,ClientActivity.class);
-                startActivity(moveClientIntent);
-                return true;
-            default:
-                return  super.onOptionsItemSelected(item);
-        }
-//        return super.onOptionsItemSelected(item);
+    public void moveToEmployee(View view) {
+        Intent moveToEmployeeIntent = new Intent(MainActivity.this,EmployeeActivity.class);
+        startActivity(moveToEmployeeIntent);
     }
+
+
+
 }
