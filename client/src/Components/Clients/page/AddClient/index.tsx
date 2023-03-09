@@ -70,8 +70,8 @@ export const AddClient = (props: propsType) => {
   const [isBirthOk, setIsBirthOk] = useState(true)
 
   // CNI
-  const cniInputRef = useRef<HTMLInputElement>(null)
-  const [isCNIOk, setIsCNIOk] = useState(true)
+  // const cniInputRef = useRef<HTMLInputElement>(null)
+  // const [isCNIOk, setIsCNIOk] = useState(true)
 
   //training Plan
   const [listTrainingPlan, setListTrainingPlan] = useState<
@@ -341,7 +341,7 @@ export const AddClient = (props: propsType) => {
     if (formOk) {
     
 
-      const urlPost = 'http://localhost:5000/api/client/add'
+      const urlPost = 'http://localhost:5000/api/client/'
 
       const formData = {
         name: enteredName,
@@ -349,7 +349,7 @@ export const AddClient = (props: propsType) => {
         phone: enteredPhone,
         birth: enteredBirth,
         trainingplanId: isTrainingChecked
-          ? selectedPersonalTrainer
+          ? selectedTrainingPlan
           : nullTrainingPlanSelect.at(0)?.id,
         personalTrainerId: isPersonalTrainerChecked
           ? selectedPersonalTrainer

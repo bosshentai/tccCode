@@ -52,7 +52,7 @@ export const Client = () => {
     } else {
       setListEmpty(false)
     }
-  }, [listClient.length])
+  }, [listClient])
 
   const showAddClientHandler = () => {
     setClientIsShown(true)

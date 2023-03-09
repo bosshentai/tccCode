@@ -27,11 +27,11 @@ type PaymentInfo = {
 export const Payment = (props: propsType) => {
   const getPaymentUrl = 'http://localhost:5000/api/payment/'
 
-  const postPaymentUrl = "http://localhost:5000/api/payment/add"
+  const postPaymentUrl = "http://localhost:5000/api/payment/"
 
   const { id } = useParams()
 
-  // console.log(id);
+  console.log(id);
 
   const [paymentInfo, setPaymentInfo] =
     useState<PaymentInfo>()
@@ -94,6 +94,11 @@ export const Payment = (props: propsType) => {
     ? whiteCross
     : blueCross
 
+  const trainingPlanNameIsNull = paymentInfo?.trainingPlanName === 'null'
+  const personalTrainerNameIsNull = paymentInfo?.personalTrainerName === 'null'
+  const discountNameIsNull = paymentInfo?.discountName === 'null'
+
+
   return (
     <div className={styles.addPaymentContainer}>
       <div className={styles.headerContainer}>
@@ -120,21 +125,24 @@ export const Payment = (props: propsType) => {
         <div className={styles.itemContainer}>
           <p>
             <strong>Plano de Treino:</strong>
-            {paymentInfo?.trainingPlanName}
+            {trainingPlanNameIsNull ? '---' : paymentInfo?.trainingPlanName}
+            {/* {paymentInfo?.trainingPlanName} */}
           </p>
           <p>{paymentInfo?.trainingPlanValue}$00</p>
         </div>
         <div className={styles.itemContainer}>
           <p>
             <strong>Personal Trainer:</strong>
-            {paymentInfo?.personalTrainerName}
+            {personalTrainerNameIsNull ? '---' : paymentInfo?.personalTrainerName}
+            {/* {paymentInfo?.personalTrainerName} */}
           </p>
           <p>{paymentInfo?.persontalTrainerValue}$00</p>
         </div>
         <div className={styles.itemContainer}>
           <p>
             <strong>Desconto:</strong>
-            {paymentInfo?.discountName}
+            {discountNameIsNull ? '---' : paymentInfo?.discountName}
+            {/* {paymentInfo?.discountName} */}
           </p>
           <p>{paymentInfo?.discountValue}$00</p>
         </div>

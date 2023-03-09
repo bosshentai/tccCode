@@ -62,6 +62,11 @@ export function ClientProfile() {
     loadClient()
   }, [id, navigate])
 
+  const trainPlanIsNull =
+    clientInfo?.trainingPlanName === 'null'
+  const personalTrainerIsNull =
+    clientInfo?.personalTrainerName === 'null'
+  const discountIsNull = clientInfo?.discountName === 'null'
   return (
     <>
       {paymentIsShow &&
@@ -88,23 +93,32 @@ export function ClientProfile() {
           </div>
           <div className={styles.clientInfoContainer}>
             <div className={styles.infoContainer}>
-              <label>Nome:</label>
-              <p>{clientInfo?.name}</p>
+              <div className={styles.chooseContainer}>
+                <label>Nome:</label>
+                <p>{clientInfo?.name}</p>
+              </div>
             </div>
             <div className={styles.infoContainer}>
-              <label>Email:</label>
-              <p>{clientInfo?.email}</p>
+              <div className={styles.chooseContainer}>
+                <label>Email:</label>
+                <p>{clientInfo?.email}</p>
+              </div>
             </div>
             <div className={styles.infoContainer}>
-              <label>Data de Nascimento:</label>
-              <p>{clientInfo?.birth}</p>
+              <div className={styles.chooseContainer}>
+                <label>Data de Nascimento:</label>
+                <p>{clientInfo?.birth}</p>
+              </div>
             </div>
 
             <div className={styles.infoContainer}>
               <div className={styles.chooseContainer}>
                 <label>Plano de treino:</label>
                 <p>
-                  {clientInfo?.trainingPlanName}
+                  {trainPlanIsNull
+                    ? '---'
+                    : clientInfo?.trainingPlanName}
+                  {/* {clientInfo?.trainingPlanName} */}
                   {/* {trainingPlanName} */}
                 </p>
               </div>
@@ -115,7 +129,14 @@ export function ClientProfile() {
             <div className={styles.infoContainer}>
               <div className={styles.chooseContainer}>
                 <label>Personal Trainer:</label>
-                <p>{clientInfo?.personalTrainerName}</p>
+                <p>
+                  {
+                    personalTrainerIsNull
+                      ? '---'
+                      : clientInfo?.personalTrainerName
+                    // clientInfo?.personalTrainerName
+                  }
+                </p>
               </div>
               <div className={styles.btnContainer}>
                 {/* <button>Alterar</button> */}
@@ -124,7 +145,14 @@ export function ClientProfile() {
             <div className={styles.infoContainer}>
               <div className={styles.chooseContainer}>
                 <label>Desconto:</label>
-                <p>{clientInfo?.discountName}</p>
+                <p>
+                  {
+                    discountIsNull
+                      ? '---'
+                      : clientInfo?.discountName
+                    // clientInfo?.discountName
+                  }
+                </p>
               </div>
               <div className={styles.btnContainer}>
                 {/* <button>Alterar</button> */}

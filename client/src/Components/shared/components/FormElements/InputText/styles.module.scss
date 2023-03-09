@@ -2,7 +2,9 @@
   color: #4b88e8;
   padding-bottom: 2rem;
 
- 
+  display: flex;
+  flex-direction: column;
+
 
   &:nth-child(2) {
     padding-left: 5rem;

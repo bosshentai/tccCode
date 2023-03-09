@@ -65,9 +65,7 @@ export const AddDiscount = (props: propsType) => {
     if (nameIsOk && amountIsOk) {
       setIsNameOk(true)
 
-
-      const urlPatch =
-        'http://localhost:5000/api/discount/'
+      const urlPatch = 'http://localhost:5000/api/discount/'
 
       const formData = {
         name: enteredName,
@@ -82,14 +80,11 @@ export const AddDiscount = (props: propsType) => {
       } catch (error) {
         console.log(error)
       }
-
-
     }
 
     return
   }
 
-  
   const iconChange = !isHover ? whiteCross : blueCross
 
   const nameControllerClass = isNameOk
@@ -110,18 +105,17 @@ export const AddDiscount = (props: propsType) => {
           className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
-          onClick={props.onClose}>
+          onClick={props.onClose}
+        >
           {/* {iconChange} */}
-          <img
-            src={iconChange}
-            alt="close"
-          />
+          <img src={iconChange} alt="close" />
         </button>
       </div>
       {/* Form  */}
       <form
         onSubmit={formRegisterDiscountHandler}
-        className={styles.formContainer}>
+        className={styles.formContainer}
+      >
         <div>
           <label>Nome</label>
           <input

@@ -24,7 +24,7 @@
       // background: red;
 
       display: flex;
-      width: 34rem;
+      width: 54rem;
       // border: 2px solid var(--blue);
 
       text-align: center;
@@ -32,7 +32,7 @@
       justify-content: space-around;
     }
 
-    .title:nth-child(-n + 2) {
+    .title:nth-child(-n + 1) {
       border-right: 2px solid var(--blue);
     }
   }

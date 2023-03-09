@@ -81,7 +81,7 @@ export const TrainingPlan = () => {
     getTrainingPlan()
 
 
-  }, [listPlanningTrain.length])
+  }, [listPlanningTrain])
 
   const showAddTrainingHandler = () => {
     setAddTrainingPlan(true)

@@ -42,7 +42,8 @@
     font-size: 24px;
     line-height: 28px;
 
-    width: 100%;
+    // width: 100%;
+    // background: red;
     height: fit-content;
 
     display: flex;
@@ -55,8 +56,15 @@
       padding-top: 2rem;
     }
 
-    .chooseCotainer {
+    .chooseContainer {
       display: flex;
+      // background: red;
+      width: 100%;
+
+      p{
+        margin-left: 1rem;
+        // background: red;
+      }
     }
     .btnContainer {
       width: 100%;

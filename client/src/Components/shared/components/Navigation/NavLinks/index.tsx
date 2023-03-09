@@ -35,7 +35,7 @@ export const NavLinks = () => {
   return (
     <ul className={styles.navLinksContainer}>
       <NavLinkItem
-        name="Client"
+        name="Cliente"
         to="/Client"
       />
       <NavLinkItem
