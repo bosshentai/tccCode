@@ -1,0 +1,79 @@
+@startuml Add Employee
+
+
+' partition "Manager" {
+|Manager|
+start
+:Enter email and password;
+' }
+
+' partition "System" {
+|System|
+:Verify email and password;
+if  (<b>email and password Correct ?)  then
+
+  |System|
+
+  end
+else
+  |New Employee|
+  :Provide details;
+
+  |Manager|
+  repeat
+  
+  :Enter new Employee Details;
+  |System|
+  :Verify new Employee Details;
+
+  repeatWhile(<b>Details are correct ?) is (No) not (Yes)
+
+  :Register the new employee;
+  end
+
+endif
+' }
+
+' partition Manager {
+'   (*) --> "Login: Enter manager email and password"
+
+' }
+
+
+' partition System {
+'   --> Verify manager email and password
+
+'   if "Is email and password Correct" then
+
+
+' }
+
+' partition FrontEnd {
+
+'   (*) --> "Login: Enter user email and password"
+
+' }
+' partition BackEnd {
+'   --> Check if user is registered
+
+'   if "" then
+'   --> [registered] "Log-in the user"
+' }
+
+' partition FrontEnd {
+
+'   partition employee {
+'     --> Provide Employee Details
+'   }
+
+'   partition Manager {
+'   --> Enter Employee Details
+'   }
+'   ' --> (*)
+' }
+' partition BackEnd {
+'   else
+'   -right-> [not registered] "Message: permission denied"
+'   --> [ending process] (*)
+' }
+' @enduml

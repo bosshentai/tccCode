@@ -21,11 +21,11 @@ export class CreateManagerController {
       return response
         .status(422)
         .json(
-          'Invalid inputs passed, please chech our data. ',
+          'Invalid inputs passed, please check our data. ',
         )
     }
 
-    const { name, email, phone, CNI, NIF, birth } =
+    const { name, email, phone, cni, nif, birth } =
       request.body
 
     const createManagerUseCase = new CreateManagerUseCase()
@@ -35,8 +35,8 @@ export class CreateManagerController {
         name,
         email,
         phone,
-        CNI,
-        NIF,
+        cni,
+        nif,
         birth,
       })
 

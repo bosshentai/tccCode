@@ -35,6 +35,7 @@ export class CreatePersonalTrainerUseCase {
         email,
         password: hashedPassword,
         phone,
+        role: 'PERSONALTRAINER',
         cni: CNI,
         nif: NIF,
         birth: birth,

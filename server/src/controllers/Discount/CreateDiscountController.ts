@@ -34,7 +34,7 @@ export class CreateDiscountController {
 
     try {
 
-      const newDiscount = createDiscountUseCase.handle({
+      const newDiscount = await createDiscountUseCase.handle({
         name,
         description,
         value: Number(value)

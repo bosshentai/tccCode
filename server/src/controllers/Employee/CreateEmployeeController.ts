@@ -31,12 +31,12 @@ export class CreateEmployeeController {
       request.body
 
       // console.log(request.body);
-      console.log("name: " + name);
-      console.log("email: " + email);
-      console.log("phone:" + phone);
-      console.log("CNI: " +  CNI);
-      console.log("NIF: " + NIF );
-      console.log("birth " + birth);
+      // console.log("name: " + name);
+      // console.log("email: " + email);
+      // console.log("phone:" + phone);
+      // console.log("CNI: " +  CNI);
+      // console.log("NIF: " + NIF );
+      // console.log("birth " + birth);
 
     const createEmployeeUseCase =
       new CreateEmployeeUseCase()

@@ -29,10 +29,12 @@ export class GetPersonalTrainerByIdUseCase {
     const personalTrainer = {
       name: personalTrainerData.user.name,
       email: personalTrainerData.user.email,
-      birth: personalTrainerData.user.birth,
+      birth: personalTrainerData.user.birth
+        .toISOString()
+        .slice(0, 10),
       cni: personalTrainerData.user.cni,
       nif: personalTrainerData.user.nif,
-      value: personalTrainerData.value
+      value: personalTrainerData.value,
     }
 
     return personalTrainer

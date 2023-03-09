@@ -2,66 +2,83 @@
 
 ' hide the spot
 hide circle
-
+' left to right direction
 
 skinparam linetype ortho
 
 entity "users" as u1 {
   '* identifying_atrribute
-  * id : string <<generated>>
+  * id : string <<generated>> <<PK>>
   --
   * name : string
   * email : string
   * birth_data : date
   * role : roles
   * password : string <<generated>>
-  * created_at : time
-  * updated_at : time
+  * phone: string
+    cni : string
+    nif : string
+  * created_at : timestamp
+  * updated_at : timestamp
+}
+
+
+entity "refresh_token" as token {
+  id : string <<PK>>
+  expiresIn : integer
+  userId: string
 }
 
 entity "clients" as c1 {
-  * id : String <<generated>>
+  * id : String <<generated>> <<PK>>
   --
   * user_id : string <<FK>>
 }
 
 entity "training_plans" as t1 {
-  * id : string <<generated>>
+  * id : string <<generated>> <<PK>>
   --
   * name : string
-  * description : string
+    description : string
   * value : float
-  * create_at : time
-  * updated_at : time
+  * create_at : timestamp
+  * updated_at : timestamp
 }
 
 entity "discounts" as d1 {
-  * id : string <<generated>>
+  * id : string <<generated>> <<PK>>
   --
   * name : string
+    description: string
   * value : float
-  * created_at : time
-  * updated_at : time
+  * created_at : timestamp
+  * updated_at : timestamp
 }
 
 entity "personal_trainers" as pt {
-  * id : string <<generated>>
+  * id : string <<generated>> <<PK>>
   --
   * user_id : string <<FK>>
   * value : float
+  * created_at : timestamp
+  * updated_at : timestamp
 }
 
-entity "employee" as e1 {
-  * id : string <<generated>>
+entity "employees" as e1 {
+  * id : string <<generated>> <<PK>>
   --
   * user_id : string <<FK>>
-  * emp_status : status
+  * create_at : timestamp
+  * updated_at : timestamp
+
 }
 
 entity "manager" as m1 {
-  * id : string <<generated>>
+  * id : string <<generated>> <<PK>>
   --
-  user_id : strin <<FK>>
+  * user_id : string <<FK>>
+  * create_at : timestamp
+  * updated_at : timestamp
 }
 
 
@@ -72,6 +89,11 @@ entity "Payment" as pay {
   training_plan_name : string
   training_plan_value : float
   discount_name : string
+  discount_value: float
+  personal_trainer_name : string
+  personal_trainer_value: float
+  * create_at: timestamp
+  * updated_at: timestamp
 }
 
 entity "client_personal_trainer" as cpt{
@@ -94,6 +116,8 @@ u1 }|--|| c1
 u1 }|--|| m1
 u1 }|--|| e1
 u1 }|--|| pt
+u1 |o--o| token
+
 
 
 d1 ||--|| cd

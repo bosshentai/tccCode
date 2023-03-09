@@ -5,7 +5,6 @@ import { discounts } from './dataTest/discount'
 import { trainingPlans } from './dataTest/trainingPlan'
 import { personalTrainers } from './dataTest/personalTrainer'
 import { manager } from './dataTest/manager'
-import { GetAllTrainingPlansUseCase } from '../src/useCases/TrainingPlan/GetAllTrainingPlanUseCase'
 import { clients } from './dataTest/client'
 import { hash } from 'bcryptjs'
 // import random
@@ -16,26 +15,26 @@ async function runSeed() {
   // Employee
 
   const hashedPassword = await hash('123456', 12)
-  await Promise.all(
+  // await Promise.all(
 
-    employees.map(async (employee) => {
-      await prismaClient.user.create({
-        data: {
-          name: employee.name,
-          email: employee.email,
-          phone: employee.phone,
-          password: hashedPassword,
-          role: Roles.EMPLOYEE,
-          cni: employee.CNI,
-          nif: employee.NIF,
-          birth: employee.birth_date,
-          employee: {
-            create: {},
-          },
-        },
-      })
-    }),
-  )
+  //   employees.map(async (employee) => {
+  //     await prismaClient.user.create({
+  //       data: {
+  //         name: employee.name,
+  //         email: employee.email,
+  //         phone: employee.phone,
+  //         password: hashedPassword,
+  //         role: Roles.EMPLOYEE,
+  //         cni: employee.CNI,
+  //         nif: employee.NIF,
+  //         birth: employee.birth_date,
+  //         employee: {
+  //           create: {},
+  //         },
+  //       },
+  //     })
+  //   }),
+  // )
 
   // Discount
   await Promise.all(
@@ -89,21 +88,21 @@ async function runSeed() {
 
   // manager
   // await Promise
-  await prismaClient.user.create({
-    data: {
-      name: manager.name,
-      email: manager.email,
-      phone: manager.phone,
-      password: hashedPassword,
-      birth: manager.birth,
-      role: Roles.MANAGER,
-      cni: manager.CNI,
-      nif: manager.NIF,
-      manager: {
-        create: {},
-      },
-    },
-  })
+  // await prismaClient.user.create({
+  //   data: {
+  //     name: manager.name,
+  //     email: manager.email,
+  //     phone: manager.phone,
+  //     password: hashedPassword,
+  //     birth: manager.birth,
+  //     role: Roles.MANAGER,
+  //     cni: manager.CNI,
+  //     nif: manager.NIF,
+  //     manager: {
+  //       create: {},
+  //     },
+  //   },
+  // })
   
 }
 
