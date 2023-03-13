@@ -1,13 +1,10 @@
 // import { DefaultInsidePage } from '../../shared/components/UIElements/DefaultInsidePage/index';
 import axios, { AxiosResponse } from 'axios'
-import {
-  useContext,
-  useRef,
-  useState,
-} from 'react'
+import { useContext, useRef, useState } from 'react'
 import { AuthContext } from '../../shared/context/auth-context'
 import { validEmail } from '../../shared/util/validEmail'
-
+import logo from '../../../assets/blueLogo.svg'
+import loginImag from '../../../assets/images/LoginImage.png'
 import styles from './styles.module.scss'
 
 export interface refreshToken {
@@ -95,35 +92,73 @@ export const Login = () => {
   }
 
   return (
-    <form onSubmit={authSubmitHandler}>
-      <div className={styles.formContainer}>
-        <h1>Login</h1>
-        {!isFormEmpty && (
-          <span className={styles.invalidForm}>
-            Login Vazio
-          </span>
-        )}
-        {}
-        <div className={styles.labelInputContainer}>
-          <label>Email</label>
-          <input
-            type="text"
-            ref={emailInputRef}
-            placeholder="Insira o email"
-          />
-        </div>
+    <div className={styles.loginPage}>
+      <div className={styles.leftSide}>
+        <img src={logo} alt="" />
+        <form>
+          <h1>Login</h1>
+          {!isFormEmpty && (
+            <span className={styles.invalidForm}>
+              <p>
+              Login Vazio
+              </p>
+            </span>
+          )}
 
-        <div className={styles.labelInputContainer}>
-          <label>Palavra-passe</label>
-          <input
+          <div className={styles.labelInputContainer}>
+            <label>Email</label>
+            <input
+              type="text"
+              ref={emailInputRef}
+              placeholder="Insira o email"
+            />
+          </div>
+          <div className={styles.labelInputContainer}>
+            <label>Password</label>
+            <input
             type="text"
             ref={passwordInputRef}
-            placeholder="Insira a palavra-passe"
-          />
-        </div>
-
-        <button>Logar</button>
+            placeholder='Insira a palavra-passe'
+            />
+          </div>
+          <button>Logar</button>
+        </form>
       </div>
-    </form>
+      <div className={styles.rightSide}>
+        <img src={loginImag} alt=""/>
+      </div>
+    </div>
+
+    // <form onSubmit={authSubmitHandler}>
+
+    //   <div className={styles.formContainer}>
+    //     <h1>Login</h1>
+    //     {!isFormEmpty && (
+    //       <span className={styles.invalidForm}>
+    //         Login Vazio
+    //       </span>
+    //     )}
+
+    //     <div className={styles.labelInputContainer}>
+    //       <label>Email</label>
+    //       <input
+    //         type="text"
+    //         ref={emailInputRef}
+    //         placeholder="Insira o email"
+    //       />
+    //     </div>
+
+    //     <div className={styles.labelInputContainer}>
+    //       <label>Palavra-passe</label>
+    //       <input
+    //         type="text"
+    //         ref={passwordInputRef}
+    //         placeholder="Insira a palavra-passe"
+    //       />
+    //     </div>
+
+    //     <button>Logar</button>
+    //   </div>
+    // </form>
   )
 }
