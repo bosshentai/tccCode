@@ -433,11 +433,11 @@ export const AddClient = (props: propsType) => {
         </div>
         <div>
           <div className={styles.textInput}>
-            <label>Telemovel</label>
+            <label>Telemóvel</label>
             <input
               type="text"
               ref={phoneInputRef}
-              placeholder="Insira o numero telemovel do Cliente"
+              placeholder="Insira o numero telemóvel do Cliente"
               className={phoneControllerClass}
             />
           </div>

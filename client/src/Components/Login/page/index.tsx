@@ -95,7 +95,7 @@ export const Login = () => {
     <div className={styles.loginPage}>
       <div className={styles.leftSide}>
         <img src={logo} alt="" />
-        <form>
+        <form onSubmit={authSubmitHandler}>
           <h1>Login</h1>
           {!isFormEmpty && (
             <span className={styles.invalidForm}>

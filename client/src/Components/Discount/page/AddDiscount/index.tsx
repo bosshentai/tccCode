@@ -119,6 +119,7 @@ export const AddDiscount = (props: propsType) => {
         <div>
           <label>Nome</label>
           <input
+            data-testid="nameInput"
             type="text"
             ref={nameInputRef}
             placeholder="Insira o nome de Desconto"
@@ -128,11 +129,14 @@ export const AddDiscount = (props: propsType) => {
 
         <div>
           <label>Descrição</label>
-          <textarea ref={areaInputRef} />
+          <textarea
+          data-testid="descriptionInput"
+          ref={areaInputRef} />
         </div>
         <div>
           <label>Montante</label>
           <input
+          data-testid="amountInput"
             className={numberControllerClass}
             type="number"
             onWheel={(event) => event.currentTarget.blur()}
@@ -140,7 +144,9 @@ export const AddDiscount = (props: propsType) => {
           />
         </div>
 
-        <button className={styles.btnSubmit}>
+        <button
+        data-testid="submitBtn"
+        type="submit" className={styles.btnSubmit}>
           Registrar
         </button>
       </form>
