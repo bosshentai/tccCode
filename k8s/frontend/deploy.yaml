@@ -1,7 +1,7 @@
-apiVersion: app/v1
 kind: Deployment
+apiVersion: app/v1
 metadata:
-  name: client
+  name: client-frontend
 spec:
   replicas: 1
   selector:
@@ -17,3 +17,4 @@ spec:
           image: bosshentai/client-fronted:latest
           ports:
             - containerPort: 80
+      restartPolicy: Always

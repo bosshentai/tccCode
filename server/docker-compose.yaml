@@ -11,16 +11,11 @@ services:
       - .:/app
     depends_on:
       - db
-    # environment:
-    #   DATA_URL: 'postgresql://postgres:postgres@postgres:5432/postgres?schema=public'
-    # extra_hosts:
-    #   - "host.docker.internal:172.17.0.1"
     networks:
       - tcc-network
 
   db:
     build: .docker/postgres
-    # image: postgres
     container_name: backend-db
     restart: always
     tty: true
