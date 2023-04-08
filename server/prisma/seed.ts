@@ -15,26 +15,25 @@ async function runSeed() {
   // Employee
 
   const hashedPassword = await hash('123456', 12)
-  // await Promise.all(
-
-  //   employees.map(async (employee) => {
-  //     await prismaClient.user.create({
-  //       data: {
-  //         name: employee.name,
-  //         email: employee.email,
-  //         phone: employee.phone,
-  //         password: hashedPassword,
-  //         role: Roles.EMPLOYEE,
-  //         cni: employee.CNI,
-  //         nif: employee.NIF,
-  //         birth: employee.birth_date,
-  //         employee: {
-  //           create: {},
-  //         },
-  //       },
-  //     })
-  //   }),
-  // )
+  await Promise.all(
+    employees.map(async (employee) => {
+      await prismaClient.user.create({
+        data: {
+          name: employee.name,
+          email: employee.email,
+          phone: employee.phone,
+          password: hashedPassword,
+          role: Roles.EMPLOYEE,
+          cni: employee.CNI,
+          nif: employee.NIF,
+          birth: employee.birth_date,
+          employee: {
+            create: {},
+          },
+        },
+      })
+    }),
+  )
 
   // Discount
   await Promise.all(
@@ -64,7 +63,6 @@ async function runSeed() {
 
   // PersonalTrainer
   await Promise.all(
-
     personalTrainers.map(async (personalTrainer) => {
       await prismaClient.user.create({
         data: {
@@ -88,25 +86,22 @@ async function runSeed() {
 
   // manager
   // await Promise
-  // await prismaClient.user.create({
-  //   data: {
-  //     name: manager.name,
-  //     email: manager.email,
-  //     phone: manager.phone,
-  //     password: hashedPassword,
-  //     birth: manager.birth,
-  //     role: Roles.MANAGER,
-  //     cni: manager.CNI,
-  //     nif: manager.NIF,
-  //     manager: {
-  //       create: {},
-  //     },
-  //   },
-  // })
-  
-}
+  await prismaClient.user.create({
+    data: {
+      name: manager.name,
+      email: manager.email,
+      phone: manager.phone,
+      password: hashedPassword,
+      birth: manager.birth,
+      role: Roles.MANAGER,
+      cni: manager.CNI,
+      nif: manager.NIF,
+      manager: {
+        create: {},
+      },
+    },
+  })
 
-async function addClient() {
   const listTrainingPLans =
     await prismaClient.training_plan.findMany({
       select: {
@@ -128,55 +123,57 @@ async function addClient() {
       },
     })
 
-  clients.map(async (client) => {
-    await prismaClient.user.create({
-      data: {
-        name: client.name,
-        email: client.email,
-        phone: client.phone,
-        password: client.password,
-        role: Roles.CLIENT,
-        birth: client.birth,
-        client: {
-          create: {
-            cpt: {
-              create: {
-                personal_trainer_id:
-                  listPersonalTrainer[
-                    Math.floor(
-                      Math.random() *
-                        listPersonalTrainer.length,
-                    )
-                  ].id,
+  await Promise.all(
+    clients.map(async (client) => {
+      await prismaClient.user.create({
+        data: {
+          name: client.name,
+          email: client.email,
+          phone: client.phone,
+          password: client.password,
+          role: Roles.CLIENT,
+          birth: client.birth,
+          client: {
+            create: {
+              cpt: {
+                create: {
+                  personal_trainer_id:
+                    listPersonalTrainer[
+                      Math.floor(
+                        Math.random() *
+                          listPersonalTrainer.length,
+                      )
+                    ].id,
+                },
               },
-            },
-            ctp: {
-              create: {
-                training_plan_id:
-                  listTrainingPLans[
-                    Math.floor(
-                      Math.random() *
-                        listTrainingPLans.length,
-                    )
-                  ].id,
+              ctp: {
+                create: {
+                  training_plan_id:
+                    listTrainingPLans[
+                      Math.floor(
+                        Math.random() *
+                          listTrainingPLans.length,
+                      )
+                    ].id,
+                },
               },
-            },
-            cd: {
-              create: {
-                discount_id:
-                  listDiscounts[
-                    Math.floor(
-                      Math.random() * listDiscounts.length,
-                    )
-                  ].id,
+              cd: {
+                create: {
+                  discount_id:
+                    listDiscounts[
+                      Math.floor(
+                        Math.random() *
+                          listDiscounts.length,
+                      )
+                    ].id,
+                },
               },
             },
           },
         },
-      },
-    })
-  })
-
+      })
+    }),
+  )
 }
 
 runSeed()
@@ -190,15 +187,3 @@ runSeed()
     )
     await prisma.$disconnect()
   })
-
-// addClient()
-//   .catch((e) => {
-//     console.error(`There was an error while seeding: ${e}`)
-//     process.exit(1)
-//   })
-//   .finally(async () => {
-//     console.log(
-//       'Sucessfully seeded database.Closing connection',
-//     )
-//     await prisma.$disconnect()
-//   })
