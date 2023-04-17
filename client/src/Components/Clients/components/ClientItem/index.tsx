@@ -16,6 +16,9 @@ export const ClientItem = (props: clientInfo) => {
   const { id, name, email, trainPlan } = props;
 
 
+  const trainPlanIsNull = trainPlan === "null"
+
+
   return (
     <li key={id} id={id} className={styles.clientContainer}>
       <NavLink to={`Profile/${id}`}>
@@ -26,7 +29,8 @@ export const ClientItem = (props: clientInfo) => {
         <p>{email}</p>
       </div>
       <div className={styles.info}>
-        <p>{trainPlan}</p>
+        {/* <p>{trainPlan}</p> */}
+        <p>{trainPlanIsNull ? "---": trainPlan}</p>
       </div>
       </NavLink>
     </li>

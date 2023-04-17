@@ -7,7 +7,6 @@ import { DefaultInsidePage } from '../../../shared/components/UIElements/Default
 import { DefaultPage } from '../../../shared/components/UIElements/DefaultPage'
 import { EmptyPage } from '../../../shared/components/UIElements/EmptyPage'
 import { PersonalTrainerList } from '../../Components/PersonalTrainerList'
-import { AddPersonalTrainer } from '../AddPersonalTrainer'
 import { AddPersonalTrainerV2 } from '../AddPersonalTrainerV2'
 
 import styles from './styles.module.scss'
@@ -66,7 +65,7 @@ export const PersonalTrainer = () => {
     } else {
       setListEmpty(false)
     }
-  }, [listPersonalTrainer.length])
+  }, [listPersonalTrainer])
 
   const showAddPersonalTrainerHandler = () => {
     setPersonalTrainerIsShow(true)

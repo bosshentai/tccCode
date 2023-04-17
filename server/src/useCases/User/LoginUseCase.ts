@@ -40,8 +40,8 @@ export class LoginUseCase {
 
     // let isValidPassword = false
 
-    console.log(password)
-    console.log(existingUser.password)
+    // console.log(password)
+    // console.log(existingUser.password)
 
     // try {
     const isValidPassword = await compare(

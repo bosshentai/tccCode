@@ -19,4 +19,14 @@ export const personalTrainers = [
     password: '123456',
     value: "500.00"
   },
+
+  {
+    name: 'null',
+    email: 'null@null.null',
+    phone: '9000000',
+    CNI: '000000000',
+    NIF: '000000000',
+    birth: new Date('1000-01-01'),
+    value: '0',
+  },
 ]

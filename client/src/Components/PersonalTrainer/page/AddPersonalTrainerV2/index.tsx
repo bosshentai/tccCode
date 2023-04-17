@@ -8,10 +8,11 @@ import { validPhoneNumber } from '../../../shared/util/validPhoneNumber/index'
 import { validCNI } from '../../../shared/util/validCNI'
 import { validNIF } from '../../../shared/util/validNIF'
 import { validBirth } from '../../../shared/util/validBirth'
+import { validNumber } from '../../../shared/util/validNumber'
+import axios from 'axios'
 
-
-
-const urlPathGetAllUser = 'http://localhost:5000/api/user/allemail'
+const urlPathGetAllUser =
+  'http://localhost:5000/api/user/allemail'
 
 type propsType = {
   onClose: () => void
@@ -54,7 +55,11 @@ export const AddPersonalTrainerV2 = (props: propsType) => {
   const birthInputRef = useRef<HTMLInputElement>(null)
   const [isBirthOk, setIsBirthOk] = useState(true)
 
-  const formAddPersonalTrainerHandler = (
+  // Amount
+  const amountInputRef = useRef<HTMLInputElement>(null)
+  const [isAmountOk, setIsAmountOk] = useState(true)
+
+  const formAddPersonalTrainerHandler = async (
     event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault()
@@ -100,6 +105,13 @@ export const AddPersonalTrainerV2 = (props: propsType) => {
     )
     const birthIsOk = birthIsNotEmpty && birthIsValid
 
+    // Amount
+    const enteredAmount = amountInputRef.current!.value
+    const amountIsNotEmpty =
+      enteredAmount.trim().length !== 0
+    const amountIsValid = validNumber(enteredAmount)
+    const amountIsOk = amountIsNotEmpty && amountIsValid
+
     if (!nameIsOk) {
       setIsNameOk(false)
     }
@@ -121,6 +133,10 @@ export const AddPersonalTrainerV2 = (props: propsType) => {
 
     if (!birthIsOk) {
       setIsBirthOk(false)
+    }
+
+    if (!amountIsOk) {
+      setIsAmountOk(false)
     }
 
     // true
@@ -147,6 +163,10 @@ export const AddPersonalTrainerV2 = (props: propsType) => {
       setIsBirthOk(true)
     }
 
+    if (amountIsOk) {
+      setIsAmountOk(true)
+    }
+
     const formOk =
       nameIsOk &&
       emailIsOk &&
@@ -156,119 +176,158 @@ export const AddPersonalTrainerV2 = (props: propsType) => {
       birthIsOk
 
     if (formOk) {
+      const urlPath =
+        'http://localhost:5000/api/personalTrainer/'
+
+      const formData = {
+        name: enteredName,
+        email: enteredEmail,
+        phone: enteredPhone,
+        CNI: enteredCNI,
+        NIF: enteredNIF,
+        birth: enteredBirth,
+        value: enteredAmount,
+      }
+
+      try {
+        // const
+
+        await axios.post(urlPath, formData)
+
+        props.onClose()
+      } catch (error) {
+        console.log(error)
+      }
+      return
     }
   }
 
-  const nameControllerClass = isNameOK
-    ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    const nameControllerClass = isNameOK
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
 
-  const emailControllerClass = isEmailOk
-    ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    const emailControllerClass = isEmailOk
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
 
-  const phoneControllerClass = isPhoneOk
-    ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    const phoneControllerClass = isPhoneOk
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
 
-  const cniControllerClass = isCNIOk
-    ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    const cniControllerClass = isCNIOk
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
 
-  const nifControllerClass = isNIFOk
-    ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    const nifControllerClass = isNIFOk
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
 
-  const birthControllerClass = isBirthOk
-    ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    const birthControllerClass = isBirthOk
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
 
-  return (
-    <>
-      <div className={styles.addPersonalTrainerContainer}>
-        <div className={styles.headerContainer}>
-          <div className={styles.left}>
-            <h1>Registrar Personal Trainer</h1>
+    const amountControllerClass = isAmountOk
+      ? `${styles.inputValid}`
+      : `${styles.inputInvalid}`
+
+    return (
+      <>
+        <div className={styles.addPersonalTrainerContainer}>
+          <div className={styles.headerContainer}>
+            <div className={styles.left}>
+              <h1>Registrar Personal Trainer</h1>
+            </div>
+            <button
+              onMouseEnter={hoverHandler}
+              onMouseLeave={leaveHandler}
+              className={styles.right}
+              onClick={props.onClose}
+            >
+              <img src={iconChange} alt="close" />
+            </button>
           </div>
-          <button
-            onMouseEnter={hoverHandler}
-            onMouseLeave={leaveHandler}
-            className={styles.right}
-            onClick={props.onClose}>
-            <img
-              src={iconChange}
-              alt="close"
-            />
-          </button>
+          <form
+            onSubmit={formAddPersonalTrainerHandler}
+            className={styles.formContainer}
+          >
+            <div>
+              <div className={styles.textInput}>
+                <label>Nome Completo</label>
+                <input
+                  type="text"
+                  ref={nameInputRef}
+                  placeholder="Insira o nome do Personal Trainer"
+                  className={nameControllerClass}
+                />
+              </div>
+              <div className={styles.textInput}>
+                <label>Email</label>
+                <input
+                  type="email"
+                  ref={emailInputRef}
+                  placeholder="Insira o email do Personal Trainer"
+                  className={emailControllerClass}
+                />
+              </div>
+            </div>
+            <div>
+              <div className={styles.textInput}>
+                <label>Telemóvel</label>
+                <input
+                  type="text"
+                  ref={phoneInputRef}
+                  placeholder="Insira o numero do Telemóvel do Personal Trainer"
+                  className={phoneControllerClass}
+                />
+              </div>
+              <div className={styles.textInput}>
+                <label>CNI</label>
+                <input
+                  type="text"
+                  ref={cniInputRef}
+                  placeholder="Insira o CNI do Personal Trainer"
+                  className={cniControllerClass}
+                />
+              </div>
+            </div>
+            <div>
+              <div className={styles.textInput}>
+                <label>NIF</label>
+                <input
+                  type="text"
+                  ref={nifInputRef}
+                  placeholder="Insira o nif do Personal Trainer"
+                  className={nifControllerClass}
+                />
+              </div>
+              <div className={styles.textInput}>
+                <label>Data de Nascimento</label>
+                <input
+                  type="date"
+                  ref={birthInputRef}
+                  className={birthControllerClass}
+                />
+              </div>
+            </div>
+            <div className={styles.textInput}>
+              <label>Montante</label>
+              <input
+                type="number"
+                ref={amountInputRef}
+                placeholder="Insira a mensalidade do Personal Trainer"
+                onWheel={(event) =>
+                  event.currentTarget.blur()
+                }
+                className={amountControllerClass}
+              />
+            </div>
+
+            <div className={styles.btnSubmitContainer}>
+              <button>Inscrever</button>
+            </div>
+          </form>
         </div>
-        <form
-          onSubmit={formAddPersonalTrainerHandler}
-          className={styles.formContainer}>
-          <div>
-            <div className={styles.textInput}>
-              <label>Nome Completo</label>
-              <input
-                type="text"
-                ref={nameInputRef}
-                placeholder="Insira o nome do Personal Trainer"
-                className={nameControllerClass}
-              />
-            </div>
-            <div className={styles.textInput}>
-              <label>Email</label>
-              <input
-                type="email"
-                ref={emailInputRef}
-                placeholder="Insira o email do Personal Trainer"
-                className={emailControllerClass}
-              />
-            </div>
-          </div>
-          <div>
-            <div className={styles.textInput}>
-              <label>Telemóvel</label>
-              <input
-                type="text"
-                ref={phoneInputRef}
-                placeholder="Insira o numero do Telemóvel do Personal Trainer"
-                className={phoneControllerClass}
-              />
-            </div>
-            <div className={styles.textInput}>
-              <label>CNI</label>
-              <input
-                type="text"
-                ref={cniInputRef}
-                placeholder="Insira o CNI do Personal Trainer"
-                className={cniControllerClass}
-              />
-            </div>
-          </div>
-          <div>
-            <div className={styles.textInput}>
-              <label>NIF</label>
-              <input
-                type="text"
-                ref={nifInputRef}
-                placeholder="Insira o nif do Personal Trainer"
-                className={nifControllerClass}
-              />
-            </div>
-            <div className={styles.textInput}>
-              <label>Data de Nascimento</label>
-              <input
-                type="text"
-                ref={birthInputRef}
-                placeholder="Insira a data de Nascimento do Personal Trainer"
-                className={birthControllerClass}
-              />
-            </div>
-          </div>
-          <div className={styles.btnSubmitContainer}>
-            <button>Inscrever</button>
-          </div>
-        </form>
-      </div>
-    </>
-  )
-}
+      </>
+    )
+  }
+

@@ -136,7 +136,7 @@ export const InputText = (props: inputProps) => {
 
   useEffect(() => {
     onInput(id, value, isValid);
-  }, [id, value, onInput, value]);
+  }, [id, value, onInput,isValid]);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({

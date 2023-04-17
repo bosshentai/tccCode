@@ -1,19 +1,44 @@
-
-import { BtnBottomSide } from ".";
-import styles from "./styles.module.scss";
-
+import React from "react";
+import {ComponentStory,ComponentMeta} from "@storybook/react"
+// import {Title}
+import { BtnBottomSide  } from ".";
+// import BtnBottomSideDocumentation from './BtnBottomSideDocumentation.mdx'
 
 export default {
-  title: 'shared/Components/Btn',
-  component: BtnBottomSide
+
+  /**
+   *  Component teste
+   */
+  title: 'shared/Components/ButtonBottomSide',
+  component: BtnBottomSide,
+  // parameters:{
+  //   docs:{
+  //     page: BtnBottomSideDocumentation
+  //   }
+  // }
+} as ComponentMeta<typeof BtnBottomSide>
+
+
+
+
+const Template: ComponentStory<typeof BtnBottomSide> = (args) => {
+
+  return <BtnBottomSide {...args} />;
+
 }
-
-
-
-
-export const Primary = () =>{
-//  <div className={styles.btnContainer}>
+  //  <div className={styles.btnContainer}>
 //   <button>
+
 //   </button>
 //  </div>
+// }
+
+
+export const Primary = Template.bind({})
+
+
+Primary.args = {
+  btnText: "Butao",
+  showHandler: ()=>{},
 }
+

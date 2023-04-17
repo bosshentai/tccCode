@@ -9,8 +9,8 @@ export class CreateManagerUseCase {
     name,
     email,
     phone,
-    CNI,
-    NIF,
+    cni,
+    nif,
     birth,
   }: ICreateManagerDTO) {
     const emailAlreadyExist = new EmailAlreadyExist()
@@ -32,9 +32,9 @@ export class CreateManagerUseCase {
         password: hashedPassword,
         phone,
         role: Roles.MANAGER,
-        CNI,
-        NIF,
-        birth_date: new Date(birth),
+        cni,
+        nif,
+        birth: new Date(birth),
         manager: {
           create: {},
         },

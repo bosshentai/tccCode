@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: app/v1
+metadata:
+  name: client-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: bosshentai/client-fronted:latest
+          ports:
+            - containerPort: 80
+      restartPolicy: Always

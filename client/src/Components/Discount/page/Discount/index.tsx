@@ -83,7 +83,7 @@ export const Discount = () => {
       }
     }
     getDiscountList()
-  }, [listDiscount.length])
+  }, [listDiscount])
 
   const showAddDiscountHandler = () => {
     setDiscountIsShown(true)

@@ -65,9 +65,7 @@ export const AddDiscount = (props: propsType) => {
     if (nameIsOk && amountIsOk) {
       setIsNameOk(true)
 
-
-      const urlPatch =
-        'http://localhost:5000/api/discount/'
+      const urlPatch = 'http://localhost:5000/api/discount/'
 
       const formData = {
         name: enteredName,
@@ -82,14 +80,11 @@ export const AddDiscount = (props: propsType) => {
       } catch (error) {
         console.log(error)
       }
-
-
     }
 
     return
   }
 
-  
   const iconChange = !isHover ? whiteCross : blueCross
 
   const nameControllerClass = isNameOk
@@ -110,21 +105,21 @@ export const AddDiscount = (props: propsType) => {
           className={styles.right}
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
-          onClick={props.onClose}>
+          onClick={props.onClose}
+        >
           {/* {iconChange} */}
-          <img
-            src={iconChange}
-            alt="close"
-          />
+          <img src={iconChange} alt="close" />
         </button>
       </div>
       {/* Form  */}
       <form
         onSubmit={formRegisterDiscountHandler}
-        className={styles.formContainer}>
+        className={styles.formContainer}
+      >
         <div>
           <label>Nome</label>
           <input
+            data-testid="nameInput"
             type="text"
             ref={nameInputRef}
             placeholder="Insira o nome de Desconto"
@@ -134,11 +129,14 @@ export const AddDiscount = (props: propsType) => {
 
         <div>
           <label>Descrição</label>
-          <textarea ref={areaInputRef} />
+          <textarea
+          data-testid="descriptionInput"
+          ref={areaInputRef} />
         </div>
         <div>
           <label>Montante</label>
           <input
+          data-testid="amountInput"
             className={numberControllerClass}
             type="number"
             onWheel={(event) => event.currentTarget.blur()}
@@ -146,7 +144,9 @@ export const AddDiscount = (props: propsType) => {
           />
         </div>
 
-        <button className={styles.btnSubmit}>
+        <button
+        data-testid="submitBtn"
+        type="submit" className={styles.btnSubmit}>
           Registrar
         </button>
       </form>

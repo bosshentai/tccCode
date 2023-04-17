@@ -14,4 +14,10 @@ export const trainingPlans = [
     description: '1 vezes por semana',
     value: '200.00',
   },
+  {
+    name: "null",
+    description: "nao escolheu nenhum plano de treino",
+    value: "0.0"
+  }
+
 ]

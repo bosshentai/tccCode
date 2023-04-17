@@ -5,7 +5,6 @@ import { discounts } from './dataTest/discount'
 import { trainingPlans } from './dataTest/trainingPlan'
 import { personalTrainers } from './dataTest/personalTrainer'
 import { manager } from './dataTest/manager'
-import { GetAllTrainingPlansUseCase } from '../src/useCases/TrainingPlan/GetAllTrainingPlanUseCase'
 import { clients } from './dataTest/client'
 import { hash } from 'bcryptjs'
 // import random
@@ -17,7 +16,6 @@ async function runSeed() {
 
   const hashedPassword = await hash('123456', 12)
   await Promise.all(
-
     employees.map(async (employee) => {
       await prismaClient.user.create({
         data: {
@@ -65,7 +63,6 @@ async function runSeed() {
 
   // PersonalTrainer
   await Promise.all(
-
     personalTrainers.map(async (personalTrainer) => {
       await prismaClient.user.create({
         data: {
@@ -104,10 +101,7 @@ async function runSeed() {
       },
     },
   })
-  
-}
 
-async function addClient() {
   const listTrainingPLans =
     await prismaClient.training_plan.findMany({
       select: {
@@ -129,55 +123,57 @@ async function addClient() {
       },
     })
 
-  clients.map(async (client) => {
-    await prismaClient.user.create({
-      data: {
-        name: client.name,
-        email: client.email,
-        phone: client.phone,
-        password: client.password,
-        role: Roles.CLIENT,
-        birth: client.birth,
-        client: {
-          create: {
-            cpt: {
-              create: {
-                personal_trainer_id:
-                  listPersonalTrainer[
-                    Math.floor(
-                      Math.random() *
-                        listPersonalTrainer.length,
-                    )
-                  ].id,
+  await Promise.all(
+    clients.map(async (client) => {
+      await prismaClient.user.create({
+        data: {
+          name: client.name,
+          email: client.email,
+          phone: client.phone,
+          password: client.password,
+          role: Roles.CLIENT,
+          birth: client.birth,
+          client: {
+            create: {
+              cpt: {
+                create: {
+                  personal_trainer_id:
+                    listPersonalTrainer[
+                      Math.floor(
+                        Math.random() *
+                          listPersonalTrainer.length,
+                      )
+                    ].id,
+                },
               },
-            },
-            ctp: {
-              create: {
-                training_plan_id:
-                  listTrainingPLans[
-                    Math.floor(
-                      Math.random() *
-                        listTrainingPLans.length,
-                    )
-                  ].id,
+              ctp: {
+                create: {
+                  training_plan_id:
+                    listTrainingPLans[
+                      Math.floor(
+                        Math.random() *
+                          listTrainingPLans.length,
+                      )
+                    ].id,
+                },
               },
-            },
-            cd: {
-              create: {
-                discount_id:
-                  listDiscounts[
-                    Math.floor(
-                      Math.random() * listDiscounts.length,
-                    )
-                  ].id,
+              cd: {
+                create: {
+                  discount_id:
+                    listDiscounts[
+                      Math.floor(
+                        Math.random() *
+                          listDiscounts.length,
+                      )
+                    ].id,
+                },
               },
             },
           },
         },
-      },
-    })
-  })
-
+      })
+    }),
+  )
 }
 
 runSeed()
@@ -191,15 +187,3 @@ runSeed()
     )
     await prisma.$disconnect()
   })
-
-// addClient()
-//   .catch((e) => {
-//     console.error(`There was an error while seeding: ${e}`)
-//     process.exit(1)
-//   })
-//   .finally(async () => {
-//     console.log(
-//       'Sucessfully seeded database.Closing connection',
-//     )
-//     await prisma.$disconnect()
-//   })

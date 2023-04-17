@@ -87,6 +87,17 @@ export const validBirth = (day: number, month: number, year: number): boolean =>
    * @returns {boolean}  true if the date is valid, false otherwise
    */
 
+  const currentDate = new Date()
+
+  const selectedDate = new Date(year, month, day)
+
+  // console.log("SelectedDate: " +selectedDate)
+  // console.log("CurrentDate: " + currentDate)
+
+  // if(currentDate.getTime() > selectedDate.getTime() ){
+  //   return false;
+  // }
+
   if (year > 0) {
     switch (month) {
       case 1:
