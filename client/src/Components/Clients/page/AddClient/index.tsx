@@ -1,123 +1,107 @@
-import styles from './styles.module.scss'
+import styles from "./styles.module.scss";
 
-import whiteCross from '../../../../assets/icons/whiteCross.svg'
-import blueCross from '../../../../assets/icons/blueCross.svg'
+import whiteCross from "../../../../assets/icons/whiteCross.svg";
+import blueCross from "../../../../assets/icons/blueCross.svg";
 // import whiteCheck from '../../../../assets/icons/whiteCheck.svg'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from "react";
 // import { RecordWithTtl } from 'dns'
-import { validName } from '../../../shared/util/validName'
-import { validEmail } from '../../../shared/util/validEmail'
-import { validPhoneNumber } from '../../../shared/util/validPhoneNumber'
-import { validBirth } from '../../../shared/util/validBirth'
-import { OptionList } from '../../components/OptionList'
-import axios, { Axios, AxiosResponse } from 'axios'
+import { validName } from "../../../shared/util/validName";
+import { validEmail } from "../../../shared/util/validEmail";
+import { validPhoneNumber } from "../../../shared/util/validPhoneNumber";
+import { validBirth } from "../../../shared/util/validBirth";
+import { OptionList } from "../../components/OptionList";
+import axios, { Axios, AxiosResponse } from "axios";
 
 // not finished
 
-const urlPathGetDiscount =
-  'http://localhost:5000/api/discount/'
+const urlPathGetDiscount = "http://localhost:5000/api/discount/";
 
-const urlPathGetTrainingPlan =
-  'http://localhost:5000/api/trainingplan/'
+const urlPathGetTrainingPlan = "http://localhost:5000/api/trainingplan/";
 
-const urlPathGetPersonalTrainer =
-  'http://localhost:5000/api/personalTrainer/'
+const urlPathGetPersonalTrainer = "http://localhost:5000/api/personalTrainer/";
 
-const urlPathGetAllUser =
-  'http://localhost:5000/api/user/allemail'
+const urlPathGetAllUser = "http://localhost:5000/api/user/allemail";
 
 type propsType = {
-  onClose: () => void
-}
+  onClose: () => void;
+};
 
 type trainingPlanInfo = {
-  id: string
-  name: string
-}
+  id: string;
+  name: string;
+};
 
 type personalTrainerInfo = {
-  id: string
-  name: string
-}
+  id: string;
+  name: string;
+};
 
 type discountInfo = {
-  id: string
-  name: string
-}
+  id: string;
+  name: string;
+};
 
 type userInfo = {
-  email: string
-}
+  email: string;
+};
 
 export const AddClient = (props: propsType) => {
   // name
-  const nameInputRef = useRef<HTMLInputElement>(null)
-  const [isNameOk, setIsNameOk] = useState(true)
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const [isNameOk, setIsNameOk] = useState(true);
 
   // email
-  const emailInputRef = useRef<HTMLInputElement>(null)
-  const [isEmailOk, setIsEmailOk] = useState(true)
-  const [listUserEmail, setListUserEmail] = useState<
-    userInfo[]
-  >([])
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const [isEmailOk, setIsEmailOk] = useState(true);
+  const [listUserEmail, setListUserEmail] = useState<userInfo[]>([]);
 
   //phone number
-  const phoneInputRef = useRef<HTMLInputElement>(null)
-  const [isNumberOk, setIsNumberOk] = useState(true)
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  const [isNumberOk, setIsNumberOk] = useState(true);
 
   // Birth
-  const birthInputRef = useRef<HTMLInputElement>(null)
-  const [isBirthOk, setIsBirthOk] = useState(true)
+  const birthInputRef = useRef<HTMLInputElement>(null);
+  const [isBirthOk, setIsBirthOk] = useState(true);
 
   // CNI
   // const cniInputRef = useRef<HTMLInputElement>(null)
   // const [isCNIOk, setIsCNIOk] = useState(true)
 
   //training Plan
-  const [listTrainingPlan, setListTrainingPlan] = useState<
+  const [listTrainingPlan, setListTrainingPlan] = useState<trainingPlanInfo[]>(
+    []
+  );
+  const [selectedTrainingPlan, setSelectedTrainingPlan] = useState<String>();
+  const [isTrainingChecked, setIsTrainingChecked] = useState(false);
+  const [nullTrainingPlanSelect, setNullTrainingPlanSelect] = useState<
     trainingPlanInfo[]
-  >([])
-  const [selectedTrainingPlan, setSelectedTrainingPlan] =
-    useState<String>()
-  const [isTrainingChecked, setIsTrainingChecked] =
-    useState(false)
-  const [
-    nullTrainingPlanSelect,
-    setNullTrainingPlanSelect,
-  ] = useState<trainingPlanInfo[]>([])
+  >([]);
 
   // Personal Trainer
-  const [listPersonalTrainer, setListPersonalTrainer] =
-    useState<personalTrainerInfo[]>([])
-  const [
-    isPersonalTrainerChecked,
-    setIsPersonalTrainerChecked,
-  ] = useState(false)
+  const [listPersonalTrainer, setListPersonalTrainer] = useState<
+    personalTrainerInfo[]
+  >([]);
+  const [isPersonalTrainerChecked, setIsPersonalTrainerChecked] =
+    useState(false);
 
-  const [
-    selectedPersonalTrainer,
-    setSelectedPersonalTrainer,
-  ] = useState<String>()
+  const [selectedPersonalTrainer, setSelectedPersonalTrainer] =
+    useState<String>();
 
-  const [
-    nullPersonalTrainerSelect,
-    setNullPersonalTrainerSelect,
-  ] = useState<personalTrainerInfo[]>([])
+  const [nullPersonalTrainerSelect, setNullPersonalTrainerSelect] = useState<
+    personalTrainerInfo[]
+  >([]);
 
   // Discount
-  const [listDiscount, setListDiscount] = useState<
-    discountInfo[]
-  >([])
-  const [isDiscountChecked, setIsDiscountChecked] =
-    useState(false)
-  const [nullDiscountSelect, setNullDiscountSelect] =
-    useState<discountInfo[]>([])
-  const [selectedDiscount, setSelectedDiscount] =
-    useState<String>()
+  const [listDiscount, setListDiscount] = useState<discountInfo[]>([]);
+  const [isDiscountChecked, setIsDiscountChecked] = useState(false);
+  const [nullDiscountSelect, setNullDiscountSelect] = useState<discountInfo[]>(
+    []
+  );
+  const [selectedDiscount, setSelectedDiscount] = useState<String>();
 
   /// Have to create useState the data In it -- lomba
 
-  const [isHover, setHover] = useState(false)
+  const [isHover, setHover] = useState(false);
 
   // console.log('Renderizou')
 
@@ -127,221 +111,199 @@ export const AddClient = (props: propsType) => {
     // setListTrainingPlan(DUMMY_DATA)
 
     try {
-      axios
-        .get(urlPathGetTrainingPlan)
-        .then((response: AxiosResponse) => {
-          setListTrainingPlan(response.data)
-        })
+      axios.get(urlPathGetTrainingPlan).then((response: AxiosResponse) => {
+        setListTrainingPlan(response.data);
+      });
     } catch (error) {
-      console.log('Error' + error)
+      console.log("Error" + error);
     }
-  }, [])
+  }, []);
 
   // PersonalTrainer
   useEffect(() => {
-
     try {
-      axios
-        .get(urlPathGetPersonalTrainer)
-        .then((response: AxiosResponse) => {
-          setListPersonalTrainer(response.data)
-        })
+      axios.get(urlPathGetPersonalTrainer).then((response: AxiosResponse) => {
+        setListPersonalTrainer(response.data);
+      });
     } catch (error) {
-      console.log('Error: ' + error)
+      console.log("Error: " + error);
     }
-  }, [])
+  }, []);
 
   // Discount
   useEffect(() => {
     try {
-      axios
-        .get(urlPathGetDiscount)
-        .then((response: AxiosResponse) => {
-          setListDiscount(response.data)
-        })
+      axios.get(urlPathGetDiscount).then((response: AxiosResponse) => {
+        setListDiscount(response.data);
+      });
     } catch (error) {
-      console.log('Error: ' + error)
+      console.log("Error: " + error);
     }
-  }, [])
+  }, []);
 
   // email
   useEffect(() => {
-    axios
-      .get(urlPathGetAllUser)
-      .then((response: AxiosResponse) => {
-        setListUserEmail(response.data)
-      })
-  }, [])
+    axios.get(urlPathGetAllUser).then((response: AxiosResponse) => {
+      setListUserEmail(response.data);
+    });
+  }, []);
   // Training PLan
 
   const listTrainingPlanFiltered = listTrainingPlan.filter(
-    (item) => item.name !== 'null',
-  )
+    (item) => item.name !== "null"
+  );
 
   // training plan
 
   useEffect(() => {
-    const listTrainingPlanNullItem =
-      listTrainingPlan.filter(
-        (item) => item.name === 'null',
-      )
+    const listTrainingPlanNullItem = listTrainingPlan.filter(
+      (item) => item.name === "null"
+    );
 
-    setNullTrainingPlanSelect(listTrainingPlanNullItem)
-  }, [listTrainingPlan])
+    setNullTrainingPlanSelect(listTrainingPlanNullItem);
+  }, [listTrainingPlan]);
 
   // personal Trainer
   useEffect(() => {
-    const listPersonalTrainerNullItem =
-      listPersonalTrainer.filter(
-        (item) => item.name === 'null',
-      )
+    const listPersonalTrainerNullItem = listPersonalTrainer.filter(
+      (item) => item.name === "null"
+    );
 
-    setNullPersonalTrainerSelect(
-      listPersonalTrainerNullItem,
-    )
-  }, [listPersonalTrainer])
+    setNullPersonalTrainerSelect(listPersonalTrainerNullItem);
+  }, [listPersonalTrainer]);
 
-
+  const listPersonalTrainerFiltered = listPersonalTrainer.filter(
+    (item) => item.name !== "null"
+  );
 
   // Discount
   useEffect(() => {
     const listDiscountNullItem = listDiscount.filter(
-      (item) => item.name === 'null',
-    )
+      (item) => item.name === "null"
+    );
 
-    setNullDiscountSelect(listDiscountNullItem)
-  }, [listDiscount])
-
-
+    setNullDiscountSelect(listDiscountNullItem);
+  }, [listDiscount]);
 
   const listDiscountFiltered = listDiscount.filter(
-    (item) => item.name !== 'null',
-  )
+    (item) => item.name !== "null"
+  );
 
   // UseEffect to Checked the Chosen one
 
   const trainingPlanSelectedHandler = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedTrainingPlan(event.target.value)
-  }
+    setSelectedTrainingPlan(event.target.value);
+  };
 
   const personalTrainerSelectedHandler = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedPersonalTrainer(event.target.value)
-  }
+    setSelectedPersonalTrainer(event.target.value);
+  };
 
   const discountSelectedHandler = (
-    event: React.ChangeEvent<HTMLSelectElement>,
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    return setSelectedDiscount(event?.target.value)
-  }
-
-
+    return setSelectedDiscount(event?.target.value);
+  };
 
   const hoverHandler = () => {
-    setHover(true)
-  }
+    setHover(true);
+  };
 
   const leaveHandler = () => {
-    setHover(false)
-  }
+    setHover(false);
+  };
 
   const checkTrainingHandler = () => {
-    setIsTrainingChecked(!isTrainingChecked)
-
-  }
+    setIsTrainingChecked(!isTrainingChecked);
+  };
 
   const checkPersonalTrainerHandler = () => {
-    setIsPersonalTrainerChecked(!isPersonalTrainerChecked)
-  }
+    setIsPersonalTrainerChecked(!isPersonalTrainerChecked);
+  };
 
   const checkDiscountHandler = () => {
-    setIsDiscountChecked(!isDiscountChecked)
-  }
+    setIsDiscountChecked(!isDiscountChecked);
+  };
 
   const formAddClientHandler = async (
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>
   ) => {
-    event.preventDefault()
+    event.preventDefault();
 
     //name
-    const enteredName = nameInputRef.current!.value
-    const nameIsNotEmpty = enteredName.trim().length !== 0
-    const nameIsValid = validName(enteredName)
-    const nameIsOk = nameIsNotEmpty && nameIsValid
+    const enteredName = nameInputRef.current!.value;
+    const nameIsNotEmpty = enteredName.trim().length !== 0;
+    const nameIsValid = validName(enteredName);
+    const nameIsOk = nameIsNotEmpty && nameIsValid;
 
     //email
-    const enteredEmail = emailInputRef.current!.value
-    const emailIsNotEmpty = enteredEmail.trim().length !== 0
-    const emailIsValid = validEmail(enteredEmail)
+    const enteredEmail = emailInputRef.current!.value;
+    const emailIsNotEmpty = enteredEmail.trim().length !== 0;
+    const emailIsValid = validEmail(enteredEmail);
 
     const emailIsUsed = listUserEmail.some(
-      (item) => item.email === enteredEmail,
-    )
+      (item) => item.email === enteredEmail
+    );
 
-
-    const emailIsOk =
-      emailIsNotEmpty && emailIsValid && !emailIsUsed
+    const emailIsOk = emailIsNotEmpty && emailIsValid && !emailIsUsed;
 
     // phone
-    const enteredPhone = phoneInputRef.current!.value
-    const phoneIsNotEmpty = enteredPhone.trim().length !== 0
-    const phoneIsValid = validPhoneNumber(enteredPhone)
-    const phoneIsOk = phoneIsNotEmpty && phoneIsValid
+    const enteredPhone = phoneInputRef.current!.value;
+    const phoneIsNotEmpty = enteredPhone.trim().length !== 0;
+    const phoneIsValid = validPhoneNumber(enteredPhone);
+    const phoneIsOk = phoneIsNotEmpty && phoneIsValid;
 
     // birth
-    const enteredBirth = birthInputRef.current!.value
-    const birthIsNotEmpty = enteredBirth.trim().length !== 0
+    const enteredBirth = birthInputRef.current!.value;
+    const birthIsNotEmpty = enteredBirth.trim().length !== 0;
     const birthIsValid = validBirth(
       Number(enteredBirth.slice(8, 10)),
       Number(enteredBirth.slice(5, 7)),
-      Number(enteredBirth.slice(0, 4)),
-    )
+      Number(enteredBirth.slice(0, 4))
+    );
 
-    const birthIsOk = birthIsNotEmpty && birthIsValid
+    const birthIsOk = birthIsNotEmpty && birthIsValid;
 
     if (!nameIsOk) {
-      setIsNameOk(false)
+      setIsNameOk(false);
     }
 
     if (!emailIsOk) {
-      setIsEmailOk(false)
+      setIsEmailOk(false);
     }
 
     if (!phoneIsOk) {
-      setIsNumberOk(false)
+      setIsNumberOk(false);
     }
 
     if (!birthIsOk) {
-      setIsBirthOk(false)
+      setIsBirthOk(false);
     }
 
-
     if (nameIsOk) {
-      setIsNameOk(true)
+      setIsNameOk(true);
     }
 
     if (emailIsOk) {
-      setIsEmailOk(true)
+      setIsEmailOk(true);
     }
 
     if (phoneIsOk) {
-      setIsNumberOk(true)
+      setIsNumberOk(true);
     }
 
     if (birthIsOk) {
-      setIsBirthOk(true)
+      setIsBirthOk(true);
     }
 
-    const formOk =
-      nameIsOk && emailIsOk && phoneIsOk && birthIsOk
+    const formOk = nameIsOk && emailIsOk && phoneIsOk && birthIsOk;
 
     if (formOk) {
-    
-
-      const urlPost = 'http://localhost:5000/api/client/'
+      const urlPost = "http://localhost:5000/api/client/";
 
       const formData = {
         name: enteredName,
@@ -357,39 +319,36 @@ export const AddClient = (props: propsType) => {
         discountId: isDiscountChecked
           ? selectedDiscount
           : nullDiscountSelect.at(0)?.id,
-      }
+      };
 
-      console.log(formData)
+      console.log(formData);
 
       try {
-        await axios.post(urlPost,formData)
-        props.onClose()
+        await axios.post(urlPost, formData);
+        props.onClose();
       } catch (error) {
-          console.log(error)
+        console.log(error);
       }
-
-    
     }
-  }
+  };
 
-  const iconChange = !isHover ? whiteCross : blueCross
+  const iconChange = !isHover ? whiteCross : blueCross;
 
   const nameControllerClass = isNameOk
     ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    : `${styles.inputInvalid}`;
 
   const emailControllerClass = isEmailOk
     ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    : `${styles.inputInvalid}`;
 
   const phoneControllerClass = isNumberOk
     ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
+    : `${styles.inputInvalid}`;
 
   const birthControllerClass = isBirthOk
     ? `${styles.inputValid}`
-    : `${styles.inputInvalid}`
-
+    : `${styles.inputInvalid}`;
 
   return (
     <div className={styles.addClientContainer}>
@@ -401,16 +360,12 @@ export const AddClient = (props: propsType) => {
           onMouseEnter={hoverHandler}
           onMouseLeave={leaveHandler}
           className={styles.right}
-          onClick={props.onClose}>
-          <img
-            src={iconChange}
-            alt="close"
-          />
+          onClick={props.onClose}
+        >
+          <img src={iconChange} alt="close" />
         </button>
       </div>
-      <form
-        onSubmit={formAddClientHandler}
-        className={styles.formContainer}>
+      <form onSubmit={formAddClientHandler} className={styles.formContainer}>
         <div>
           <div className={styles.textInput}>
             <label>Nome Completo</label>
@@ -482,7 +437,7 @@ export const AddClient = (props: propsType) => {
           {isPersonalTrainerChecked && (
             <div className={styles.selectContainer}>
               <OptionList
-                select={listPersonalTrainer}
+                select={listPersonalTrainerFiltered}
                 onChange={personalTrainerSelectedHandler}
               />
             </div>
@@ -511,5 +466,5 @@ export const AddClient = (props: propsType) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};

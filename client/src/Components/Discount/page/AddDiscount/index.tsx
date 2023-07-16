@@ -1,99 +1,98 @@
-import { useRef, useState } from 'react'
-import axios from 'axios'
-import whiteCross from '../../../../assets/icons/whiteCross.svg'
+import { useRef, useState } from "react";
+import axios from "axios";
+import whiteCross from "../../../../assets/icons/whiteCross.svg";
 // import { WhiteCross } from '../../../../assets/icons/WhitCross'
-import blueCross from '../../../../assets/icons/blueCross.svg'
+import blueCross from "../../../../assets/icons/blueCross.svg";
 // import { BlueCross } from '../../../../assets/icons/BlueCross'
-import styles from './styles.module.scss'
+import styles from "./styles.module.scss";
 
 type propsType = {
-  onClose: () => void
-}
+  onClose: () => void;
+};
 
 export const AddDiscount = (props: propsType) => {
-  const nameInputRef = useRef<HTMLInputElement>(null)
-  const areaInputRef = useRef<HTMLTextAreaElement>(null)
-  const amountInputRef = useRef<HTMLInputElement>(null)
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const areaInputRef = useRef<HTMLTextAreaElement>(null);
+  const amountInputRef = useRef<HTMLInputElement>(null);
   // const cniInputRef = useRef<HTMLInputElement>(null)
 
-  const [isHover, setHover] = useState(false)
+  const [isHover, setHover] = useState(false);
 
-  const [isNameOk, setIsNameOk] = useState(true)
-  const [isNumberOk, setIsNumberOk] = useState(true)
+  const [isNameOk, setIsNameOk] = useState(true);
+  const [isNumberOk, setIsNumberOk] = useState(true);
 
   const hoverHandler = () => {
-    setHover(true)
-  }
+    setHover(true);
+  };
 
   const leaveHandler = () => {
-    setHover(false)
-  }
+    setHover(false);
+  };
 
   const formRegisterDiscountHandler = async (
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>
   ) => {
-    event.preventDefault()
+    event.preventDefault();
 
     // console.log(areaInputRef.current!.value);
 
     // Name
-    const enteredName = nameInputRef.current!.value
-    const nameIsNotEmpty = enteredName.trim().length !== 0
+    const enteredName = nameInputRef.current!.value;
+    const nameIsNotEmpty = enteredName.trim().length !== 0;
     // const nameIsValid = validName(enteredName);
     // mínimo 6 letras
 
-    const nameIsOk = nameIsNotEmpty
+    const nameIsOk = nameIsNotEmpty;
 
     // Description
-    const enteredDescription = areaInputRef.current!.value
+    const enteredDescription = areaInputRef.current!.value;
 
     // Amount
-    const enteredAmount = amountInputRef.current!.value
-    const amountIsNotEmpty =
-      enteredAmount.trim().length !== 0
+    const enteredAmount = amountInputRef.current!.value;
+    const amountIsNotEmpty = enteredAmount.trim().length !== 0;
 
-    const amountIsOk = amountIsNotEmpty
+    const amountIsOk = amountIsNotEmpty;
 
     if (!nameIsOk) {
-      setIsNameOk(false)
+      setIsNameOk(false);
     }
 
     if (!amountIsOk) {
-      setIsNumberOk(false)
+      setIsNumberOk(false);
     }
 
     if (nameIsOk && amountIsOk) {
-      setIsNameOk(true)
+      setIsNameOk(true);
 
-      const urlPatch = 'http://localhost:5000/api/discount/'
+      const urlPatch = "http://localhost:5000/api/discount/";
 
       const formData = {
         name: enteredName,
         description: enteredDescription,
         value: enteredAmount,
-      }
+      };
 
       try {
-        await axios.post(urlPatch, formData)
+        await axios.post(urlPatch, formData);
 
-        props.onClose()
+        props.onClose();
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
 
-    return
-  }
+    return;
+  };
 
-  const iconChange = !isHover ? whiteCross : blueCross
+  const iconChange = !isHover ? whiteCross : blueCross;
 
   const nameControllerClass = isNameOk
     ? `${styles.nameValid}`
-    : `${styles.nameInvalid}`
+    : `${styles.nameInvalid}`;
 
   const numberControllerClass = isNumberOk
     ? `${styles.numberValid}`
-    : `${styles.numberInvalid}`
+    : `${styles.numberInvalid}`;
 
   return (
     <div className={styles.addDiscountContainer}>
@@ -129,27 +128,44 @@ export const AddDiscount = (props: propsType) => {
 
         <div>
           <label>Descrição</label>
-          <textarea
-          data-testid="descriptionInput"
-          ref={areaInputRef} />
+          <textarea data-testid="descriptionInput" ref={areaInputRef} />
         </div>
         <div>
           <label>Montante</label>
           <input
-          data-testid="amountInput"
+            data-testid="amountInput"
             className={numberControllerClass}
             type="number"
-            onWheel={(event) => event.currentTarget.blur()}
+            onWheel={(event) => {
+              event.currentTarget.blur(); // Remove focus from the input field
+              event.preventDefault(); // Prevent scrolling on wheel event
+
+              const value = parseInt(event.currentTarget.value); // Parse the current value as an integer
+
+              if (value < 0) {
+                // If the value is negative, set it to 0
+                event.currentTarget.value = "0";
+              }
+            }}
+            onChange={(event) => {
+              const value = parseInt(event.currentTarget.value); // Parse the current value as an integer
+
+              if (value < 0) {
+                event.currentTarget.value = ""; // Clear the input field if a negative value is entered
+              }
+            }}
             ref={amountInputRef}
           />
         </div>
 
         <button
-        data-testid="submitBtn"
-        type="submit" className={styles.btnSubmit}>
+          data-testid="submitBtn"
+          type="submit"
+          className={styles.btnSubmit}
+        >
           Registrar
         </button>
       </form>
     </div>
-  )
-}
+  );
+};

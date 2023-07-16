@@ -1,183 +1,175 @@
-import { useState, useRef } from 'react'
-import styles from './styles.module.scss'
-import whiteCross from '../../../../assets/icons/whiteCross.svg'
-import blueCross from '../../../../assets/icons/blueCross.svg'
-import { validName } from '../../../shared/util/validName'
-import { validEmail } from '../../../shared/util/validEmail'
-import { validPhoneNumber } from '../../../shared/util/validPhoneNumber/index'
-import { validCNI } from '../../../shared/util/validCNI'
-import { validNIF } from '../../../shared/util/validNIF'
-import { validBirth } from '../../../shared/util/validBirth'
-import { validNumber } from '../../../shared/util/validNumber'
-import axios from 'axios'
+import { useState, useRef } from "react";
+import styles from "./styles.module.scss";
+import whiteCross from "../../../../assets/icons/whiteCross.svg";
+import blueCross from "../../../../assets/icons/blueCross.svg";
+import { validName } from "../../../shared/util/validName";
+import { validEmail } from "../../../shared/util/validEmail";
+import { validPhoneNumber } from "../../../shared/util/validPhoneNumber/index";
+import { validCNI } from "../../../shared/util/validCNI";
+import { validNIF } from "../../../shared/util/validNIF";
+import { validBirth } from "../../../shared/util/validBirth";
+import { validNumber } from "../../../shared/util/validNumber";
+import axios from "axios";
 
-const urlPathGetAllUser =
-  'http://localhost:5000/api/user/allemail'
+const urlPathGetAllUser = "http://localhost:5000/api/user/allemail";
 
 type propsType = {
-  onClose: () => void
-}
+  onClose: () => void;
+};
 
 export const AddPersonalTrainerV2 = (props: propsType) => {
-  const [isHover, setHover] = useState(false)
+  const [isHover, setHover] = useState(false);
 
   const hoverHandler = () => {
-    setHover(true)
-  }
+    setHover(true);
+  };
 
   const leaveHandler = () => {
-    setHover(false)
-  }
+    setHover(false);
+  };
 
-  const iconChange = !isHover ? whiteCross : blueCross
+  const iconChange = !isHover ? whiteCross : blueCross;
 
   // name
-  const nameInputRef = useRef<HTMLInputElement>(null)
-  const [isNameOK, setIsNameOk] = useState(true)
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const [isNameOK, setIsNameOk] = useState(true);
 
   // email
-  const emailInputRef = useRef<HTMLInputElement>(null)
-  const [isEmailOk, setIsEmailOk] = useState(true)
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const [isEmailOk, setIsEmailOk] = useState(true);
 
   // phone
-  const phoneInputRef = useRef<HTMLInputElement>(null)
-  const [isPhoneOk, setIsPhoneOk] = useState(true)
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  const [isPhoneOk, setIsPhoneOk] = useState(true);
 
   // CNI
-  const cniInputRef = useRef<HTMLInputElement>(null)
-  const [isCNIOk, setIsCNIOk] = useState(true)
+  const cniInputRef = useRef<HTMLInputElement>(null);
+  const [isCNIOk, setIsCNIOk] = useState(true);
 
   // NIF
-  const nifInputRef = useRef<HTMLInputElement>(null)
-  const [isNIFOk, setIsNIFOk] = useState(true)
+  const nifInputRef = useRef<HTMLInputElement>(null);
+  const [isNIFOk, setIsNIFOk] = useState(true);
 
   // Birth
-  const birthInputRef = useRef<HTMLInputElement>(null)
-  const [isBirthOk, setIsBirthOk] = useState(true)
+  const birthInputRef = useRef<HTMLInputElement>(null);
+  const [isBirthOk, setIsBirthOk] = useState(true);
 
   // Amount
-  const amountInputRef = useRef<HTMLInputElement>(null)
-  const [isAmountOk, setIsAmountOk] = useState(true)
+  const amountInputRef = useRef<HTMLInputElement>(null);
+  const [isAmountOk, setIsAmountOk] = useState(true);
 
   const formAddPersonalTrainerHandler = async (
-    event: React.FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>
   ) => {
-    event.preventDefault()
+    event.preventDefault();
 
     // name
-    const enteredName = nameInputRef.current!.value
-    const nameIsNotEmpty = enteredName.trim().length !== 0
-    const nameIsValid = validName(enteredName)
-    const nameIsOk = nameIsNotEmpty && nameIsValid
+    const enteredName = nameInputRef.current!.value;
+    const nameIsNotEmpty = enteredName.trim().length !== 0;
+    const nameIsValid = validName(enteredName);
+    const nameIsOk = nameIsNotEmpty && nameIsValid;
 
     // email - not finished
-    const enteredEmail = emailInputRef.current!.value
-    const emailIsNotEmpty = enteredEmail.trim().length !== 0
-    const emailIsValid = validEmail(enteredEmail)
+    const enteredEmail = emailInputRef.current!.value;
+    const emailIsNotEmpty = enteredEmail.trim().length !== 0;
+    const emailIsValid = validEmail(enteredEmail);
 
-    const emailIsOk = emailIsNotEmpty && emailIsValid
+    const emailIsOk = emailIsNotEmpty && emailIsValid;
 
     // phone
-    const enteredPhone = phoneInputRef.current!.value
-    const phoneIsNotEmpty = enteredPhone.trim().length !== 0
-    const phoneIsValid = validPhoneNumber(enteredPhone)
-    const phoneIsOk = phoneIsNotEmpty && phoneIsValid
+    const enteredPhone = phoneInputRef.current!.value;
+    const phoneIsNotEmpty = enteredPhone.trim().length !== 0;
+    const phoneIsValid = validPhoneNumber(enteredPhone);
+    const phoneIsOk = phoneIsNotEmpty && phoneIsValid;
 
     // CNI
-    const enteredCNI = cniInputRef.current!.value
-    const cniIsNotEmpty = enteredCNI.trim().length !== 0
-    const cniIsValid = validCNI(enteredCNI)
-    const cniIsOk = cniIsNotEmpty && cniIsValid
+    const enteredCNI = cniInputRef.current!.value;
+    const cniIsNotEmpty = enteredCNI.trim().length !== 0;
+    const cniIsValid = validCNI(enteredCNI);
+    const cniIsOk = cniIsNotEmpty && cniIsValid;
 
     // NIF
-    const enteredNIF = nifInputRef.current!.value
-    const nifIsNotEmpty = enteredNIF.trim().length !== 0
-    const nifIsValid = validNIF(enteredNIF)
-    const nifIsOk = nifIsNotEmpty && nifIsValid
+    const enteredNIF = nifInputRef.current!.value;
+    const nifIsNotEmpty = enteredNIF.trim().length !== 0;
+    const nifIsValid = validNIF(enteredNIF);
+    const nifIsOk = nifIsNotEmpty && nifIsValid;
 
     // Birth
-    const enteredBirth = birthInputRef.current!.value
-    const birthIsNotEmpty = enteredBirth.trim().length !== 0
+    const enteredBirth = birthInputRef.current!.value;
+    const birthIsNotEmpty = enteredBirth.trim().length !== 0;
     const birthIsValid = validBirth(
       Number(enteredBirth.slice(8, 10)),
       Number(enteredBirth.slice(5, 7)),
-      Number(enteredBirth.slice(0, 4)),
-    )
-    const birthIsOk = birthIsNotEmpty && birthIsValid
+      Number(enteredBirth.slice(0, 4))
+    );
+    const birthIsOk = birthIsNotEmpty && birthIsValid;
 
     // Amount
-    const enteredAmount = amountInputRef.current!.value
-    const amountIsNotEmpty =
-      enteredAmount.trim().length !== 0
-    const amountIsValid = validNumber(enteredAmount)
-    const amountIsOk = amountIsNotEmpty && amountIsValid
+    const enteredAmount = amountInputRef.current!.value;
+    const amountIsNotEmpty = enteredAmount.trim().length !== 0;
+    const amountIsValid = validNumber(enteredAmount);
+    const amountIsOk = amountIsNotEmpty && amountIsValid;
 
     if (!nameIsOk) {
-      setIsNameOk(false)
+      setIsNameOk(false);
     }
 
     if (!emailIsOk) {
-      setIsEmailOk(false)
+      setIsEmailOk(false);
     }
 
     if (!phoneIsOk) {
-      setIsPhoneOk(false)
+      setIsPhoneOk(false);
     }
 
     if (!cniIsOk) {
-      setIsCNIOk(false)
+      setIsCNIOk(false);
     }
     if (!nifIsOk) {
-      setIsNIFOk(false)
+      setIsNIFOk(false);
     }
 
     if (!birthIsOk) {
-      setIsBirthOk(false)
+      setIsBirthOk(false);
     }
 
     if (!amountIsOk) {
-      setIsAmountOk(false)
+      setIsAmountOk(false);
     }
 
     // true
     if (nameIsOk) {
-      setIsNameOk(true)
+      setIsNameOk(true);
     }
 
     if (emailIsOk) {
-      setIsEmailOk(true)
+      setIsEmailOk(true);
     }
 
     if (phoneIsOk) {
-      setIsPhoneOk(true)
+      setIsPhoneOk(true);
     }
 
     if (cniIsOk) {
-      setIsCNIOk(true)
+      setIsCNIOk(true);
     }
     if (nifIsOk) {
-      setIsNIFOk(true)
+      setIsNIFOk(true);
     }
 
     if (birthIsOk) {
-      setIsBirthOk(true)
+      setIsBirthOk(true);
     }
 
     if (amountIsOk) {
-      setIsAmountOk(true)
+      setIsAmountOk(true);
     }
 
     const formOk =
-      nameIsOk &&
-      emailIsOk &&
-      phoneIsOk &&
-      cniIsOk &&
-      nifIsOk &&
-      birthIsOk
+      nameIsOk && emailIsOk && phoneIsOk && cniIsOk && nifIsOk && birthIsOk;
 
     if (formOk) {
-      const urlPath =
-        'http://localhost:5000/api/personalTrainer/'
+      const urlPath = "http://localhost:5000/api/personalTrainer/";
 
       const formData = {
         name: enteredName,
@@ -187,147 +179,151 @@ export const AddPersonalTrainerV2 = (props: propsType) => {
         NIF: enteredNIF,
         birth: enteredBirth,
         value: enteredAmount,
-      }
+      };
 
       try {
         // const
 
-        await axios.post(urlPath, formData)
+        await axios.post(urlPath, formData);
 
-        props.onClose()
+        props.onClose();
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-      return
+      return;
     }
-  }
+  };
 
-    const nameControllerClass = isNameOK
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const nameControllerClass = isNameOK
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    const emailControllerClass = isEmailOk
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const emailControllerClass = isEmailOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    const phoneControllerClass = isPhoneOk
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const phoneControllerClass = isPhoneOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    const cniControllerClass = isCNIOk
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const cniControllerClass = isCNIOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    const nifControllerClass = isNIFOk
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const nifControllerClass = isNIFOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    const birthControllerClass = isBirthOk
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const birthControllerClass = isBirthOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    const amountControllerClass = isAmountOk
-      ? `${styles.inputValid}`
-      : `${styles.inputInvalid}`
+  const amountControllerClass = isAmountOk
+    ? `${styles.inputValid}`
+    : `${styles.inputInvalid}`;
 
-    return (
-      <>
-        <div className={styles.addPersonalTrainerContainer}>
-          <div className={styles.headerContainer}>
-            <div className={styles.left}>
-              <h1>Registrar Personal Trainer</h1>
-            </div>
-            <button
-              onMouseEnter={hoverHandler}
-              onMouseLeave={leaveHandler}
-              className={styles.right}
-              onClick={props.onClose}
-            >
-              <img src={iconChange} alt="close" />
-            </button>
+  return (
+    <>
+      <div className={styles.addPersonalTrainerContainer}>
+        <div className={styles.headerContainer}>
+          <div className={styles.left}>
+            <h1>Registrar Personal Trainer</h1>
           </div>
-          <form
-            onSubmit={formAddPersonalTrainerHandler}
-            className={styles.formContainer}
+          <button
+            onMouseEnter={hoverHandler}
+            onMouseLeave={leaveHandler}
+            className={styles.right}
+            onClick={props.onClose}
           >
-            <div>
-              <div className={styles.textInput}>
-                <label>Nome Completo</label>
-                <input
-                  type="text"
-                  ref={nameInputRef}
-                  placeholder="Insira o nome do Personal Trainer"
-                  className={nameControllerClass}
-                />
-              </div>
-              <div className={styles.textInput}>
-                <label>Email</label>
-                <input
-                  type="email"
-                  ref={emailInputRef}
-                  placeholder="Insira o email do Personal Trainer"
-                  className={emailControllerClass}
-                />
-              </div>
-            </div>
-            <div>
-              <div className={styles.textInput}>
-                <label>Telemóvel</label>
-                <input
-                  type="text"
-                  ref={phoneInputRef}
-                  placeholder="Insira o numero do Telemóvel do Personal Trainer"
-                  className={phoneControllerClass}
-                />
-              </div>
-              <div className={styles.textInput}>
-                <label>CNI</label>
-                <input
-                  type="text"
-                  ref={cniInputRef}
-                  placeholder="Insira o CNI do Personal Trainer"
-                  className={cniControllerClass}
-                />
-              </div>
-            </div>
-            <div>
-              <div className={styles.textInput}>
-                <label>NIF</label>
-                <input
-                  type="text"
-                  ref={nifInputRef}
-                  placeholder="Insira o nif do Personal Trainer"
-                  className={nifControllerClass}
-                />
-              </div>
-              <div className={styles.textInput}>
-                <label>Data de Nascimento</label>
-                <input
-                  type="date"
-                  ref={birthInputRef}
-                  className={birthControllerClass}
-                />
-              </div>
-            </div>
+            <img src={iconChange} alt="close" />
+          </button>
+        </div>
+        <form
+          onSubmit={formAddPersonalTrainerHandler}
+          className={styles.formContainer}
+        >
+          <div>
             <div className={styles.textInput}>
-              <label>Montante</label>
+              <label>Nome Completo</label>
               <input
-                type="number"
-                ref={amountInputRef}
-                placeholder="Insira a mensalidade do Personal Trainer"
-                onWheel={(event) =>
-                  event.currentTarget.blur()
-                }
-                className={amountControllerClass}
+                type="text"
+                ref={nameInputRef}
+                placeholder="Insira o nome do Personal Trainer"
+                className={nameControllerClass}
               />
             </div>
-
-            <div className={styles.btnSubmitContainer}>
-              <button>Inscrever</button>
+            <div className={styles.textInput}>
+              <label>Email</label>
+              <input
+                type="email"
+                ref={emailInputRef}
+                placeholder="Insira o email do Personal Trainer"
+                className={emailControllerClass}
+              />
             </div>
-          </form>
-        </div>
-      </>
-    )
-  }
+          </div>
+          <div>
+            <div className={styles.textInput}>
+              <label>Telemóvel</label>
+              <input
+                type="text"
+                ref={phoneInputRef}
+                placeholder="Insira o numero do Telemóvel do Personal Trainer"
+                className={phoneControllerClass}
+              />
+            </div>
+            <div className={styles.textInput}>
+              <label>CNI</label>
+              <input
+                type="text"
+                ref={cniInputRef}
+                placeholder="Insira o CNI do Personal Trainer"
+                className={cniControllerClass}
+              />
+            </div>
+          </div>
+          <div>
+            <div className={styles.textInput}>
+              <label>NIF</label>
+              <input
+                type="text"
+                ref={nifInputRef}
+                placeholder="Insira o nif do Personal Trainer"
+                className={nifControllerClass}
+              />
+            </div>
+            <div className={styles.textInput}>
+              <label>Data de Nascimento</label>
+              <input
+                type="date"
+                ref={birthInputRef}
+                className={birthControllerClass}
+              />
+            </div>
+          </div>
+          <div className={styles.textInput}>
+            <label>Montante</label>
+            <input
+              type="number"
+              ref={amountInputRef}
+              placeholder="Insira a mensalidade do Personal Trainer"
+              onWheel={(event) => event.currentTarget.blur()}
+              onChange={(event) => {
+                const value = parseInt(event.currentTarget.value); // Parse the current value as an integer
 
+                if (value < 0) {
+                  event.currentTarget.value = ""; // Clear the input field if a negative value is entered
+                }
+              }}
+              className={amountControllerClass}
+            />
+          </div>
+
+          <div className={styles.btnSubmitContainer}>
+            <button>Inscrever</button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
+};
